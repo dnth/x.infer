@@ -110,6 +110,7 @@ list_models()
   </tbody>
 </table>
 
+See [example.ipynb](example.ipynb) for more examples.
 
 
 ## Adding New Models
