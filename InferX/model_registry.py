@@ -16,7 +16,6 @@ class ModelRegistry:
 
     @classmethod
     def get_model(cls, model_type: str, implementation: str, **kwargs) -> BaseModel:
-        print(cls._registry)
         if implementation not in cls._registry:
             raise ValueError(f"Unsupported implementation: {implementation}")
         if model_type not in cls._registry[implementation]:
