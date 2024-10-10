@@ -1,7 +1,7 @@
 # Usage
 
-To use InferX in a project:
+To use xinfer in a project:
 
 ```
-import InferX
+import xinfer
 ```

@@ -1,4 +1,0 @@
- 
-# InferX module
-
-::: InferX.InferX
