@@ -37,7 +37,7 @@ jobs:
                   gdalinfo --version
             - name: Install dependencies
               run: |
-                  pip install --user -r requirements.txt
+                  pip install --user -r requirements_dev.txt
                   pip install .
             - name: PKG-TEST
               run: |
