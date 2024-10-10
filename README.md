@@ -81,6 +81,22 @@ Transformers:
 - [Salesforce/blip2-opt-2.7b](https://huggingface.co/Salesforce/blip2-opt-2.7b)
 - [sashakunitsyn/vlrm-blip2-opt-2.7b](https://huggingface.co/sashakunitsyn/vlrm-blip2-opt-2.7b)
 
+Get a list of available models:
+```python
+from InferX import list_models
+
+list_models()
+```
+
+Available Models                   
+┏━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Implementation ┃ Model Type                        ┃
+┡━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ transformers   │ Salesforce/blip2-opt-2.7b         │
+│ transformers   │ sashakunitsyn/vlrm-blip2-opt-2.7b │
+└────────────────┴───────────────────────────────────┘
+
+
 
 ## Adding New Models
 
