@@ -1,8 +1,8 @@
-site_name: InferX
+site_name: xinfer
 site_description: A unified interface to run inference on machine learning libraries.
 site_author: dnth
-site_url: https://dnth.github.io/InferX
-repo_url: https://github.com/dnth/InferX
+site_url: https://dnth.github.io/xinfer
+repo_url: https://github.com/dnth/xinfer
 
 copyright: "Copyright &copy; 2024 - 2024 Dickson Neoh"
 
@@ -78,9 +78,9 @@ nav:
     - Contributing: contributing.md
     - FAQ: faq.md
     - Changelog: changelog.md
-    - Report Issues: https://github.com/dnth/InferX/issues
+    - Report Issues: https://github.com/dnth/xinfer/issues
     - Examples:
         - examples/intro.ipynb
     - API Reference:
-          - InferX module: InferX.md
+          - xinfer module: xinfer.md
           - common module: common.md

@@ -1,5 +1,5 @@
 [project]
-name = "InferX"
+name = "xinfer"
 version = "0.0.1"
 dynamic = [
     "dependencies",
@@ -8,7 +8,7 @@ description = "A unified interface to run inference on machine learning librarie
 readme = "README.md"
 requires-python = ">=3.11"
 keywords = [
-    "InferX",
+    "xinfer",
 ]
 license = {text = "Apache Software License 2.0"}
 authors = [
@@ -26,11 +26,11 @@ classifiers = [
 ]
 
 [project.entry-points."console_scripts"]
-InferX = "InferX.cli:main"
+xinfer = "xinfer.cli:main"
 
 [project.optional-dependencies]
 all = [
-    "InferX[extra]",
+    "xinfer[extra]",
 ]
 
 extra = [
@@ -45,7 +45,7 @@ transformers = [
 
 [tool]
 [tool.setuptools.packages.find]
-include = ["InferX*"]
+include = ["xinfer*"]
 exclude = ["docs*"]
 
 [tool.setuptools.dynamic]
@@ -67,7 +67,7 @@ search = 'version = "{current_version}"'
 replace = 'version = "{new_version}"'
 
 [[tool.bumpversion.files]]
-filename = "InferX/__init__.py"
+filename = "xinfer/__init__.py"
 search = '__version__ = "{current_version}"'
 replace = '__version__ = "{new_version}"'
 
@@ -80,7 +80,7 @@ max-line-length = 88
 
 
 [project.urls]
-Homepage = "https://github.com/dnth/InferX"
+Homepage = "https://github.com/dnth/xinfer"
 
 [build-system]
 requires = ["setuptools>=64", "setuptools_scm>=8"]

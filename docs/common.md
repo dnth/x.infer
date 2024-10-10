@@ -1,3 +1,3 @@
 # common module
 
-::: InferX.common
+::: xinfer.common

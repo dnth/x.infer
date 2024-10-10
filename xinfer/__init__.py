@@ -1,4 +1,4 @@
-"""Top-level package for InferX."""
+"""Top-level package for xinfer."""
 
 __author__ = """Dickson Neoh"""
 __email__ = "dickson.neoh@gmail.com"

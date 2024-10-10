@@ -1,1 +1,1 @@
-"""Unit test package for InferX."""
+"""Unit test package for xinfer."""

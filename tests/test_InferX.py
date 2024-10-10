@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 
-"""Tests for `InferX` package."""
+"""Tests for `xinfer` package."""
 
 
 import unittest
 
-from InferX import InferX
+from xinfer import xinfer
 
 
-class TestInferx(unittest.TestCase):
-    """Tests for `InferX` package."""
+class Testxinfer(unittest.TestCase):
+    """Tests for `xinfer` package."""
 
     def setUp(self):
         """Set up test fixtures, if any."""

@@ -1,4 +1,4 @@
  
-# InferX module
+# xinfer module
 
-::: InferX.InferX
+::: xinfer.xinfer

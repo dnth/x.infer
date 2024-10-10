@@ -28,4 +28,4 @@ jobs:
             - name: Install package
               run: pip install .
             - name: Test import
-              run: python -c "import InferX; print('InferX import successful')"
+              run: python -c "import xinfer; print('xinfer import successful')"

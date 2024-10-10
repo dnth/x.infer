@@ -8,7 +8,7 @@ labels: bug
 
 ### Environment Information
 
--   InferX version:
+-   xinfer version:
 -   Python version:
 -   Operating System:
 

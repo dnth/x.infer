@@ -1,9 +1,9 @@
-# InferX
+# xinfer
 A unified interface (with focus on computer vision models) to run inference on machine learning libraries.
 
 
 ## Overview
-InferX is a modular Python framework that provides a unified interface for performing inference across a variety of machine learning models and libraries. Designed to simplify and standardize the inference process, InferX allows developers to work seamlessly with models from Hugging Face Transformers, Ultralytics YOLO, and custom-built models using a consistent and easy-to-use API.
+xinfer is a modular Python framework that provides a unified interface for performing inference across a variety of machine learning models and libraries. Designed to simplify and standardize the inference process, xinfer allows developers to work seamlessly with models from Hugging Face Transformers, Ultralytics YOLO, and custom-built models using a consistent and easy-to-use API.
 
 ## Key Features
 - Unified Interface: Interact with different machine learning models through a single, consistent API.
@@ -21,9 +21,9 @@ InferX is a modular Python framework that provides a unified interface for perfo
 
 
 ## Installation
-Install InferX using pip:
+Install xinfer using pip:
 ```bash
-pip install InferX
+pip install xinfer
 ```
 
 Or locally:
@@ -35,10 +35,10 @@ Install PyTorch and transformers in your environment.
 
 ## Getting Started
 
-Here's a quick example demonstrating how to use InferX with a Transformers model:
+Here's a quick example demonstrating how to use xinfer with a Transformers model:
 
 ```python
-from InferX import get_model
+from xinfer import get_model
 
 # Instantiate a Transformers model
 model = get_model("Salesforce/blip2-opt-2.7b", implementation="transformers")
@@ -80,7 +80,7 @@ Transformers:
 
 Get a list of available models:
 ```python
-from InferX import list_models
+from xinfer import list_models
 
 list_models()
 ```
