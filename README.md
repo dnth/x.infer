@@ -1,5 +1,5 @@
 # InferX
-A unified interface to run inference on machine learning libraries.
+A unified interface (with focus on computer vision models) to run inference on machine learning libraries.
 
 
 ## Overview
