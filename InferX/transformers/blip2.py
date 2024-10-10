@@ -19,10 +19,9 @@ class BLIP2(BaseModel):
         ).to(self.device, torch.bfloat16)
 
         self.model = torch.compile(self.model, mode="max-autotune")
-
         self.model.eval()
 
-    def preprocess(self, image, prompt=None):
+    def preprocess(self, image: str | Image.Image, prompt: str = None):
         if isinstance(image, str):
             if image.startswith(("http://", "https://")):
                 image = Image.open(requests.get(image, stream=True).raw).convert("RGB")

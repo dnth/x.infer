@@ -46,12 +46,12 @@ from InferX import get_model
 # Instantiate a Transformers model
 model = get_model("Salesforce/blip2-opt-2.7b", implementation="transformers")
 
-# Input data (can be text, image URL, or PIL Image)
-input_data = "https://img.freepik.com/free-photo/adorable-black-white-kitty-with-monochrome-wall-her_23-2148955182.jpg"
-question = "What's in this image? Answer:"
+# Input data
+image = "https://img.freepik.com/free-photo/adorable-black-white-kitty-with-monochrome-wall-her_23-2148955182.jpg"
+prompt = "What's in this image? Answer:"
 
 # Run inference
-processed_input = model.preprocess(image=input_data, prompt=question)
+processed_input = model.preprocess(image, prompt)
 
 prediction = model.predict(processed_input)
 output = model.postprocess(prediction)
