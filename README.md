@@ -115,13 +115,13 @@ See [example.ipynb](example.ipynb) for more examples.
 
 ## Adding New Models
 
-Step 1: Create a new model class that implements the `BaseModel` interface.
++ Step 1: Create a new model class that implements the `BaseModel` interface.
 
-Step 2: Implement the required abstract methods: 
++ Step 2: Implement the required abstract methods: 
 - `load_model`
 - `preprocess`
 - `predict`
 - `postprocess`
 
-Step 3: Update `register_models` in `model_factory.py` to import the new model class and register it.
++ Step 3: Update `register_models` in `model_factory.py` to import the new model class and register it.
 
