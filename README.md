@@ -23,7 +23,7 @@ InferX is a modular Python framework that provides a unified interface for perfo
 ## Installation
 Install InferX using pip:
 ```bash
-pip install inferx
+pip install InferX
 ```
 
 If using transformers, install the extra dependency:
