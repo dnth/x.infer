@@ -64,9 +64,9 @@ print(output)
 image = "https://img.freepik.com/free-photo/adorable-black-white-kitty-with-monochrome-wall-her_23-2148955182.jpg"
 prompt = "Describe this image in concise detail. Answer:"
 
-
 processed_input = model.preprocess(image, prompt)
 
+# Change the max_new_tokens to 200
 prediction = model.predict(processed_input, max_new_tokens=200)
 output = model.postprocess(prediction)
 
