@@ -74,3 +74,9 @@ print(output)
 >>> a black and white cat sitting on a table looking up at the camera
 
 ```
+
+
+## Supported Models
+Transformers:
+- [Salesforce/blip2-opt-2.7b](https://huggingface.co/Salesforce/blip2-opt-2.7b)
+- [sashakunitsyn/vlrm-blip2-opt-2.7b](https://huggingface.co/sashakunitsyn/vlrm-blip2-opt-2.7b)
