@@ -36,11 +36,11 @@ class BLIP2(BaseModel):
             self.device
         )
 
-    def predict(self, processed_data):
+    def predict(self, processed_data, **generate_kwargs):
         with torch.inference_mode(), torch.amp.autocast(
             device_type=self.device, dtype=torch.bfloat16
         ):
-            return self.model.generate(**processed_data)
+            return self.model.generate(**processed_data, **generate_kwargs)
 
     def postprocess(self, prediction):
         return self.processor.batch_decode(prediction, skip_special_tokens=True)[0]
