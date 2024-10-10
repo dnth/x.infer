@@ -31,10 +31,7 @@ Or locally:
 pip install -e .
 ```
 
-If using transformers, install the extra dependency:
-```bash
-pip install -e ".[transformers]"
-```
+Install PyTorch and transformers in your environment.
 
 ## Getting Started
 
@@ -110,7 +107,7 @@ list_models()
   </tbody>
 </table>
 
-See [example.ipynb](example.ipynb) for more examples.
+See [example.ipynb](nbs/example.ipynb) for more examples.
 
 
 ## Adding New Models

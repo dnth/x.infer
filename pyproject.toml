@@ -6,7 +6,7 @@ dynamic = [
 ]
 description = "A unified interface to run inference on machine learning libraries."
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.11"
 keywords = [
     "InferX",
 ]
@@ -34,7 +34,7 @@ all = [
 ]
 
 extra = [
-    "pandas",
+    "rich",
 ]
 
 transformers = [
