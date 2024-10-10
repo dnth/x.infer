@@ -26,6 +26,11 @@ Install InferX using pip:
 pip install InferX
 ```
 
+Or locally:
+```bash
+pip install -e .
+```
+
 If using transformers, install the extra dependency:
 ```bash
 pip install -e ".[transformers]"
