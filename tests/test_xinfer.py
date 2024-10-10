@@ -2,10 +2,9 @@
 
 """Tests for `xinfer` package."""
 
-
 import unittest
 
-from xinfer import xinfer
+from xinfer import get_model
 
 
 class Testxinfer(unittest.TestCase):
