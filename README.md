@@ -26,6 +26,11 @@ Install InferX using pip:
 pip install inferx
 ```
 
+If using transformers, install the extra dependency:
+```bash
+pip install -e ".[transformers]"
+```
+
 ## Getting Started
 
 Here's a quick example demonstrating how to use InferX with a Transformers model:

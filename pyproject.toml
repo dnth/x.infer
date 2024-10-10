@@ -37,6 +37,11 @@ extra = [
     "pandas",
 ]
 
+transformers = [
+    "transformers",
+    
+]
+
 
 [tool]
 [tool.setuptools.packages.find]
