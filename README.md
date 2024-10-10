@@ -88,13 +88,27 @@ from InferX import list_models
 list_models()
 ```
 
-Available Models                   
-┏━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃ Implementation ┃ Model Type                        ┃
-┡━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
-│ transformers   │ Salesforce/blip2-opt-2.7b         │
-│ transformers   │ sashakunitsyn/vlrm-blip2-opt-2.7b │
-└────────────────┴───────────────────────────────────┘
+<table>
+  <thead>
+    <tr>
+      <th colspan="2">Available Models</th>
+    </tr>
+    <tr>
+      <th>Implementation</th>
+      <th>Model Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>transformers</td>
+      <td>Salesforce/blip2-opt-2.7b</td>
+    </tr>
+    <tr>
+      <td>transformers</td>
+      <td>sashakunitsyn/vlrm-blip2-opt-2.7b</td>
+    </tr>
+  </tbody>
+</table>
 
 
 
