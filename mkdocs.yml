@@ -83,4 +83,4 @@ nav:
         - examples/intro.ipynb
     - API Reference:
           - xinfer module: xinfer.md
-          - common module: common.md
+        #   - common module: common.md
