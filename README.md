@@ -80,3 +80,17 @@ print(output)
 Transformers:
 - [Salesforce/blip2-opt-2.7b](https://huggingface.co/Salesforce/blip2-opt-2.7b)
 - [sashakunitsyn/vlrm-blip2-opt-2.7b](https://huggingface.co/sashakunitsyn/vlrm-blip2-opt-2.7b)
+
+
+## Adding New Models
+
+Step 1: Create a new model class that implements the `BaseModel` interface.
+
+Step 2: Implement the required abstract methods: 
+- `load_model`
+- `preprocess`
+- `predict`
+- `postprocess`
+
+Step 3: Update `register_models` in `model_factory.py` to import the new model class and register it.
+
