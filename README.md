@@ -36,23 +36,22 @@ pip install -e ".[transformers]"
 Here's a quick example demonstrating how to use InferX with a Transformers model:
 
 ```python
-
-
-from inferx import ModelFactory
+from InferX import get_model
 
 # Instantiate a Transformers model
-model = ModelFactory.get_model(
-    model_type='transformers',
-    model_name_or_path='distilbert-base-uncased'
-)
+model = get_model("Salesforce/blip2-opt-2.7b", implementation="transformers")
 
-# Input data
-input_text = "Hello, world!"
+# Input data (can be text, image URL, or PIL Image)
+input_data = "https://img.freepik.com/free-photo/adorable-black-white-kitty-with-monochrome-wall-her_23-2148955182.jpg"
+question = "What's in this image? Answer:"
 
 # Run inference
-processed_input = model.preprocess(input_text)
+processed_input = model.preprocess(image=input_data, prompt=question)
+
 prediction = model.predict(processed_input)
 output = model.postprocess(prediction)
 
 print(output)
+
+>>>  A cat on a yellow background
 ```
