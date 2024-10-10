@@ -1,4 +1,4 @@
  
 # xinfer module
 
-::: xinfer.xinfer
+::: xinfer.list_models
