@@ -1,11 +1,17 @@
+from .model_registry import ModelRegistry
 from .transformers.blip2 import BLIP2, VLRMBlip2
 
 
+def register_models():
+    ModelRegistry.register("transformers", "Salesforce/blip2-opt-2.7b", BLIP2)
+    ModelRegistry.register(
+        "transformers", "sashakunitsyn/vlrm-blip2-opt-2.7b", VLRMBlip2
+    )
+
+
 def get_model(model_type: str, implementation: str, **kwargs):
-    if implementation == "transformers":
-        if model_type == "Salesforce/blip2-opt-2.7b":
-            return BLIP2(model_name="Salesforce/blip2-opt-2.7b", **kwargs)
-        elif model_type == "sashakunitsyn/vlrm-blip2-opt-2.7b":
-            return VLRMBlip2(model_name="sashakunitsyn/vlrm-blip2-opt-2.7b", **kwargs)
-    else:
-        raise ValueError(f"Unsupported model type: {model_type}")
+    return ModelRegistry.get_model(model_type, implementation, **kwargs)
+
+
+def list_models():
+    return ModelRegistry.list_models()
