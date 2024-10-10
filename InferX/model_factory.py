@@ -1,3 +1,6 @@
+from rich.console import Console
+from rich.table import Table
+
 from .model_registry import ModelRegistry
 from .transformers.blip2 import BLIP2, VLRMBlip2
 
@@ -14,4 +17,12 @@ def get_model(model_type: str, implementation: str, **kwargs):
 
 
 def list_models():
-    return ModelRegistry.list_models()
+    console = Console()
+    table = Table(title="Available Models")
+    table.add_column("Implementation", style="cyan")
+    table.add_column("Model Type", style="magenta")
+
+    for model in ModelRegistry.list_models():
+        table.add_row(model["implementation"], model["model_type"])
+
+    console.print(table)
