@@ -3,6 +3,7 @@ from rich.table import Table
 
 from .model_registry import InputOutput, ModelRegistry
 from .transformers.blip2 import BLIP2, VLRMBlip2
+from .transformers.moondream import Moondream
 
 
 def register_models():
@@ -16,6 +17,13 @@ def register_models():
         "transformers",
         "sashakunitsyn/vlrm-blip2-opt-2.7b",
         VLRMBlip2,
+        input_output=InputOutput.IMAGE_TEXT_TO_TEXT,
+    )
+
+    ModelRegistry.register(
+        "transformers",
+        "vikhyatk/moondream2",
+        Moondream,
         input_output=InputOutput.IMAGE_TEXT_TO_TEXT,
     )
 

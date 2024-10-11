@@ -45,87 +45,74 @@ Install PyTorch and transformers in your environment.
 Here's a quick example demonstrating how to use xinfer with a Transformers model:
 
 ```python
-from xinfer import get_model
+import xinfer
 
 # Instantiate a Transformers model
-model = get_model("Salesforce/blip2-opt-2.7b", backend="transformers")
+model = xinfer.create_model("vikhyatk/moondream2", "transformers")
 
 # Input data
-image = "https://img.freepik.com/free-photo/adorable-black-white-kitty-with-monochrome-wall-her_23-2148955182.jpg"
-prompt = "What's in this image? Answer:"
+image = "https://raw.githubusercontent.com/vikhyat/moondream/main/assets/demo-1.jpg"
+prompt = "Describe this image. "
 
 # Run inference
-processed_input = model.preprocess(image, prompt)
-
-prediction = model.predict(processed_input)
-output = model.postprocess(prediction)
+output = model.inference(image, prompt, max_new_tokens=50)
 
 print(output)
 
->>>  A cat on a yellow background
-
-
-image = "https://img.freepik.com/free-photo/adorable-black-white-kitty-with-monochrome-wall-her_23-2148955182.jpg"
-prompt = "Describe this image in concise detail. Answer:"
-
-processed_input = model.preprocess(image, prompt)
-
-# Change the max_new_tokens to 200
-prediction = model.predict(processed_input, max_new_tokens=200)
-output = model.postprocess(prediction)
-
-print(output)
->>> a black and white cat sitting on a table looking up at the camera
-
+>>> An animated character with long hair and a serious expression is eating a large burger at a table, with other characters in the background.
 ```
+
+See [example.ipynb](nbs/example.ipynb) for more examples.
 
 
 ## Supported Models
 Transformers:
 - [Salesforce/blip2-opt-2.7b](https://huggingface.co/Salesforce/blip2-opt-2.7b)
 - [sashakunitsyn/vlrm-blip2-opt-2.7b](https://huggingface.co/sashakunitsyn/vlrm-blip2-opt-2.7b)
+- [vikhyatk/moondream2](https://huggingface.co/vikhyatk/moondream2)
 
 Get a list of available models:
 ```python
-from xinfer import list_models
+import xinfer
 
-list_models()
+xinfer.list_models()
 ```
 
 <table>
   <thead>
     <tr>
-      <th colspan="2">Available Models</th>
+      <th colspan="3">Available Models</th>
     </tr>
     <tr>
-      <th>backend</th>
-      <th>Model Type</th>
+      <th>Backend</th>
+      <th>Model ID</th>
+      <th>Input/Output</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>transformers</td>
       <td>Salesforce/blip2-opt-2.7b</td>
+      <td>image-text --> text</td>
     </tr>
     <tr>
       <td>transformers</td>
       <td>sashakunitsyn/vlrm-blip2-opt-2.7b</td>
+      <td>image-text --> text</td>
+    </tr>
+    <tr>
+      <td>transformers</td>
+      <td>vikhyatk/moondream2</td>
+      <td>image-text --> text</td>
     </tr>
   </tbody>
 </table>
-
-See [example.ipynb](nbs/example.ipynb) for more examples.
-
 
 ## Adding New Models
 
 + Step 1: Create a new model class that implements the `BaseModel` interface.
 
-+ Step 2: Implement the required abstract methods: 
-- `load_model`
-- `preprocess`
-- `predict`
-- `postprocess`
++ Step 2: Implement the required abstract methods `load_model` and `inference`.
 
 + Step 3: Update `register_models` in `model_factory.py` to import the new model class and register it.
 

@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
 
+from PIL import Image
+
 
 class BaseModel(ABC):
     @abstractmethod
@@ -7,13 +9,5 @@ class BaseModel(ABC):
         pass
 
     @abstractmethod
-    def preprocess(self, input_data):
-        pass
-
-    @abstractmethod
-    def predict(self, processed_data):
-        pass
-
-    @abstractmethod
-    def postprocess(self, prediction):
+    def inference(self, image, prompt):
         pass

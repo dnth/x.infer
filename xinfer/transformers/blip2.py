@@ -43,7 +43,13 @@ class BLIP2(BaseModel):
             return self.model.generate(**preprocessed_input, **generate_kwargs)
 
     def postprocess(self, prediction):
-        return self.processor.batch_decode(prediction, skip_special_tokens=True)[0]
+        output = self.processor.batch_decode(prediction, skip_special_tokens=True)[0]
+        return output.replace("\n", "").strip()
+
+    def inference(self, image, prompt, **generate_kwargs):
+        preprocessed_input = self.preprocess(image, prompt)
+        prediction = self.predict(preprocessed_input, **generate_kwargs)
+        return self.postprocess(prediction)
 
 
 class VLRMBlip2(BLIP2):
