@@ -3,5 +3,5 @@
 
 ::: xinfer.list_models
 
-::: xinfer.get_model
+::: xinfer.create_model
 
