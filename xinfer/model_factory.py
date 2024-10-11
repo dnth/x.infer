@@ -1,28 +1,19 @@
-from huggingface_hub import HfApi
 from rich.console import Console
 from rich.table import Table
 
 from .model_registry import InputOutput, ModelRegistry
 from .timm import TimmModel, timm_models
+from .transformers import TransformerVision2SeqModel, vision2seq_models
 from .transformers.moondream import Moondream
-from .transformers.transformers_model import TransformerVisionLanguageModel
 from .ultralytics import UltralyticsYoloModel, ultralytics_models
 
 
-def get_vision_language_models():
-    api = HfApi()
-    models = api.list_models(filter="image-to-text")
-    return [model.modelId for model in models]
-
-
 def register_models():
-    hf_vision_language_models = get_vision_language_models()
-
-    for model in hf_vision_language_models:
+    for model in vision2seq_models:
         ModelRegistry.register(
             "transformers",
             model,
-            TransformerVisionLanguageModel,
+            TransformerVision2SeqModel,
             input_output=InputOutput.IMAGE_TEXT_TO_TEXT,
         )
 

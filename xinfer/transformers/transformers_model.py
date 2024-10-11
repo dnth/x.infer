@@ -1,12 +1,15 @@
 import requests
 import torch
 from PIL import Image
-from transformers import AutoModelForVision2Seq, AutoProcessor
+from transformers import (
+    AutoModelForVision2Seq,
+    AutoProcessor,
+)
 
 from ..base_model import BaseModel
 
 
-class TransformerVisionLanguageModel(BaseModel):
+class TransformerVision2SeqModel(BaseModel):
     def __init__(self, model_name: str, **kwargs):
         self.model_name = model_name
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -48,25 +51,3 @@ class TransformerVisionLanguageModel(BaseModel):
         preprocessed_input = self.preprocess(image, prompt)
         prediction = self.predict(preprocessed_input, **generate_kwargs)
         return self.postprocess(prediction)
-
-
-# class BLIP2(TransformerVisionLanguageModel):
-#     def __init__(self, model_name: str = "Salesforce/blip2-opt-2.7b", **kwargs):
-#         super().__init__(model_name, **kwargs)
-
-
-class VLRMBlip2(TransformerVisionLanguageModel):
-    def __init__(self, model_name: str = "sashakunitsyn/vlrm-blip2-opt-2.7b", **kwargs):
-        super().__init__(model_name, **kwargs)
-        self.load_vlrm_weights()
-
-    def load_vlrm_weights(self):
-        from huggingface_hub import hf_hub_download
-
-        finetuned_weights_state_dict = torch.load(
-            hf_hub_download(
-                repo_id="sashakunitsyn/vlrm-blip2-opt-2.7b",
-                filename="vlrm-blip2-opt-2.7b.pt",
-            )
-        )
-        self.model.load_state_dict(finetuned_weights_state_dict, strict=False)
