@@ -28,16 +28,16 @@ xinfer = "xinfer.cli:main"
 
 [project.optional-dependencies]
 all = [
-    "xinfer[extra]",
-]
-
-extra = [
-    "rich",
+    "xinfer[transformers]",
+    "xinfer[ultralytics]",
 ]
 
 transformers = [
     "transformers",
-    
+]
+
+ultralytics = [
+    "ultralytics",
 ]
 
 
