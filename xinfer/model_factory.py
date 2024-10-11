@@ -30,7 +30,18 @@ def register_models():
         input_output=InputOutput.IMAGE_TEXT_TO_TEXT,
     )
 
-    ultralytics_models = ["yolov8n", "yolov8s", "yolov8l", "yolov8m", "yolov8x"]
+    ultralytics_models = [
+        "yolov8n",
+        "yolov8s",
+        "yolov8l",
+        "yolov8m",
+        "yolov8x",
+        "yolo11n",
+        "yolo11s",
+        "yolo11m",
+        "yolo11l",
+        "yolo11x",
+    ]
     for model in ultralytics_models:
         ModelRegistry.register(
             "ultralytics",
