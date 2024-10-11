@@ -4,7 +4,7 @@
 
 import unittest
 
-from xinfer import get_model
+from xinfer import create_model
 
 
 class Testxinfer(unittest.TestCase):

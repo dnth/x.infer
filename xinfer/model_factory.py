@@ -38,7 +38,7 @@ def list_models():
     table = Table(title="Available Models")
     table.add_column("Backend", style="cyan")
     table.add_column("Model ID", style="magenta")
-    table.add_column("Input/Output", style="green")
+    table.add_column("Input --> Output", style="green")
 
     for model in ModelRegistry.list_models():
         table.add_row(
