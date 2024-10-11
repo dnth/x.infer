@@ -2,11 +2,10 @@ from rich.console import Console
 from rich.table import Table
 
 from .model_registry import InputOutput, ModelRegistry
-from .timm.list_models import download_model_list
-from .timm.timm_model import TimmModel
+from .timm import TimmModel, timm_models
 from .transformers.blip2 import BLIP2, VLRMBlip2
 from .transformers.moondream import Moondream
-from .ultralytics.ultralytics_model import UltralyticsYoloModel
+from .ultralytics import UltralyticsYoloModel, ultralytics_models
 
 
 def register_models():
@@ -30,23 +29,6 @@ def register_models():
         input_output=InputOutput.IMAGE_TEXT_TO_TEXT,
     )
 
-    ultralytics_models = [
-        "yolov8n",
-        "yolov8s",
-        "yolov8l",
-        "yolov8m",
-        "yolov8x",
-        "yolov10n",
-        "yolov10s",
-        "yolov10m",
-        "yolov10l",
-        "yolov10x",
-        "yolo11n",
-        "yolo11s",
-        "yolo11m",
-        "yolo11l",
-        "yolo11x",
-    ]
     for model in ultralytics_models:
         ModelRegistry.register(
             "ultralytics",
@@ -55,7 +37,6 @@ def register_models():
             input_output=InputOutput.IMAGE_TO_OBJECTS,
         )
 
-    timm_models = download_model_list()
     for model in timm_models:
         ModelRegistry.register(
             "timm",
