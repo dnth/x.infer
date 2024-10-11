@@ -1,20 +1,20 @@
 import requests
 import torch
 from PIL import Image
-from transformers import Blip2ForConditionalGeneration, Blip2Processor
+from transformers import AutoModelForVision2Seq, AutoProcessor
 
 from ..base_model import BaseModel
 
 
-class BLIP2(BaseModel):
-    def __init__(self, model_name: str = "Salesforce/blip2-opt-2.7b", **kwargs):
+class TransformerVisionLanguageModel(BaseModel):
+    def __init__(self, model_name: str, **kwargs):
         self.model_name = model_name
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         self.load_model(**kwargs)
 
     def load_model(self, **kwargs):
-        self.processor = Blip2Processor.from_pretrained(self.model_name, **kwargs)
-        self.model = Blip2ForConditionalGeneration.from_pretrained(
+        self.processor = AutoProcessor.from_pretrained(self.model_name, **kwargs)
+        self.model = AutoModelForVision2Seq.from_pretrained(
             self.model_name, **kwargs
         ).to(self.device, torch.bfloat16)
 
@@ -26,11 +26,9 @@ class BLIP2(BaseModel):
             if image.startswith(("http://", "https://")):
                 image = Image.open(requests.get(image, stream=True).raw).convert("RGB")
             else:
-                raise ValueError("Input string must be an image URL for BLIP2")
-        else:
-            raise ValueError(
-                "Input must be either an image URL or a PIL Image for BLIP2"
-            )
+                raise ValueError("Input string must be an image URL")
+        elif not isinstance(image, Image.Image):
+            raise ValueError("Input must be either an image URL or a PIL Image")
 
         return self.processor(images=image, text=prompt, return_tensors="pt").to(
             self.device
@@ -52,7 +50,12 @@ class BLIP2(BaseModel):
         return self.postprocess(prediction)
 
 
-class VLRMBlip2(BLIP2):
+# class BLIP2(TransformerVisionLanguageModel):
+#     def __init__(self, model_name: str = "Salesforce/blip2-opt-2.7b", **kwargs):
+#         super().__init__(model_name, **kwargs)
+
+
+class VLRMBlip2(TransformerVisionLanguageModel):
     def __init__(self, model_name: str = "sashakunitsyn/vlrm-blip2-opt-2.7b", **kwargs):
         super().__init__(model_name, **kwargs)
         self.load_vlrm_weights()

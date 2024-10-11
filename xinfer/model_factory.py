@@ -1,29 +1,33 @@
+from huggingface_hub import HfApi
 from rich.console import Console
 from rich.table import Table
 
 from .model_registry import InputOutput, ModelRegistry
 from .timm import TimmModel, timm_models
-from .transformers.blip2 import BLIP2, VLRMBlip2
 from .transformers.moondream import Moondream
+from .transformers.transformers_model import TransformerVisionLanguageModel
 from .ultralytics import UltralyticsYoloModel, ultralytics_models
 
 
+def get_vision_language_models():
+    api = HfApi()
+    models = api.list_models(filter="image-to-text")
+    return [model.modelId for model in models]
+
+
 def register_models():
-    ModelRegistry.register(
-        "transformers",
-        "Salesforce/blip2-opt-2.7b",
-        BLIP2,
-        input_output=InputOutput.IMAGE_TEXT_TO_TEXT,
-    )
-    ModelRegistry.register(
-        "transformers",
-        "sashakunitsyn/vlrm-blip2-opt-2.7b",
-        VLRMBlip2,
-        input_output=InputOutput.IMAGE_TEXT_TO_TEXT,
-    )
+    hf_vision_language_models = get_vision_language_models()
+
+    for model in hf_vision_language_models:
+        ModelRegistry.register(
+            "transformers",
+            model,
+            TransformerVisionLanguageModel,
+            input_output=InputOutput.IMAGE_TEXT_TO_TEXT,
+        )
 
     ModelRegistry.register(
-        "transformers",
+        "custom-transformers",
         "vikhyatk/moondream2",
         Moondream,
         input_output=InputOutput.IMAGE_TEXT_TO_TEXT,
@@ -51,10 +55,12 @@ def create_model(model_id: str, backend: str, **kwargs):
         kwargs["model_name"] = model_id
     if backend == "ultralytics":
         kwargs["model_name"] = model_id + ".pt"
+    if backend == "transformers":
+        kwargs["model_name"] = model_id
     return ModelRegistry.get_model(model_id, backend, **kwargs)
 
 
-def list_models(wildcard: str = None, limit: int = 20):
+def list_models(wildcard: str = None, backend: str = None, limit: int = 20):
     console = Console()
     table = Table(title="Available Models")
     table.add_column("Backend", style="cyan")
@@ -63,7 +69,9 @@ def list_models(wildcard: str = None, limit: int = 20):
 
     rows = []
     for model in ModelRegistry.list_models():
-        if wildcard is None or wildcard.lower() in model["model_id"].lower():
+        if (wildcard is None or wildcard.lower() in model["model_id"].lower()) and (
+            backend is None or backend.lower() == model["backend"].lower()
+        ):
             rows.append(
                 (
                     model["backend"],
