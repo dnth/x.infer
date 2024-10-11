@@ -30,3 +30,5 @@ pymdown-extensions
 
 torch
 transformers
+timm
+ultralytics

@@ -40,6 +40,10 @@ ultralytics = [
     "ultralytics",
 ]
 
+timm = [
+    "timm",
+]
+
 
 
 [tool]
