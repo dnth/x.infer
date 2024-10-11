@@ -46,7 +46,7 @@ Here's a quick example demonstrating how to use xinfer with a Transformers model
 from xinfer import get_model
 
 # Instantiate a Transformers model
-model = get_model("Salesforce/blip2-opt-2.7b", implementation="transformers")
+model = get_model("Salesforce/blip2-opt-2.7b", backend="transformers")
 
 # Input data
 image = "https://img.freepik.com/free-photo/adorable-black-white-kitty-with-monochrome-wall-her_23-2148955182.jpg"
@@ -96,7 +96,7 @@ list_models()
       <th colspan="2">Available Models</th>
     </tr>
     <tr>
-      <th>Implementation</th>
+      <th>backend</th>
       <th>Model Type</th>
     </tr>
   </thead>

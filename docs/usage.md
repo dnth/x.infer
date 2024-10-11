@@ -15,12 +15,12 @@ from xinfer import list_models
 list_models()
 ```
 
-This will display a table of available models and their implementations.
+This will display a table of available models and their backends.
 
 ```
                    Available Models                   
 ┏━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃ Implementation ┃ Model Type                        ┃
+┃ backend ┃ Model Type                        ┃
 ┡━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
 │ transformers   │ Salesforce/blip2-opt-2.7b         │
 │ transformers   │ sashakunitsyn/vlrm-blip2-opt-2.7b │
@@ -37,7 +37,7 @@ Here's an example of how to load and use the BLIP2 model:
 from xinfer import get_model
 
 # Instantiate a Transformers model
-model = get_model("Salesforce/blip2-opt-2.7b", implementation="transformers")
+model = get_model("Salesforce/blip2-opt-2.7b", backend="transformers")
 
 # Input data
 image = "https://example.com/path/to/image.jpg"
@@ -62,7 +62,7 @@ prediction = model.predict(processed_input, max_new_tokens=200)
 Similarly, you can use the VLRM-finetuned BLIP2 model:
 
 ```python
-model = get_model("sashakunitsyn/vlrm-blip2-opt-2.7b", implementation="transformers")
+model = get_model("sashakunitsyn/vlrm-blip2-opt-2.7b", backend="transformers")
 
 # Use the model in the same way as the BLIP2 model
 ```

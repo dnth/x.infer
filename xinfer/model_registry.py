@@ -1,35 +1,54 @@
+from dataclasses import dataclass, field
 from typing import Dict, List, Type
 
 from .base_model import BaseModel
 
 
+@dataclass
+class ModelInfo:
+    model_class: Type[BaseModel]
+    input_output: str = ""
+
+
+@dataclass
+class BackendRegistry:
+    backend_name: str
+    models: Dict[str, ModelInfo] = field(default_factory=dict)
+
+
 class ModelRegistry:
-    _registry: Dict[str, Dict[str, Type[BaseModel]]] = {}
+    _registry: Dict[str, BackendRegistry] = {}
 
     @classmethod
     def register(
-        cls, implementation: str, model_type: str, model_class: Type[BaseModel]
+        cls,
+        backend: str,
+        model_id: str,
+        model_class: Type[BaseModel],
+        input_output: str = "",
     ):
-        if implementation not in cls._registry:
-            cls._registry[implementation] = {}
-        cls._registry[implementation][model_type] = model_class
+        if backend not in cls._registry:
+            cls._registry[backend] = BackendRegistry(backend_name=backend)
+        cls._registry[backend].models[model_id] = ModelInfo(
+            model_class=model_class, input_output=input_output
+        )
 
     @classmethod
-    def get_model(cls, model_type: str, implementation: str, **kwargs) -> BaseModel:
-        if implementation not in cls._registry:
-            raise ValueError(f"Unsupported implementation: {implementation}")
-        if model_type not in cls._registry[implementation]:
-            raise ValueError(
-                f"Unsupported model type for {implementation}: {model_type}"
-            )
-        return cls._registry[implementation][model_type](**kwargs)
+    def get_model(cls, model_id: str, backend: str, **kwargs) -> BaseModel:
+        if backend not in cls._registry:
+            raise ValueError(f"Unsupported backend: {backend}")
+        if model_id not in cls._registry[backend].models:
+            raise ValueError(f"Unsupported model type for {backend}: {model_id}")
+        return cls._registry[backend].models[model_id].model_class(**kwargs)
 
     @classmethod
     def list_models(cls) -> List[Dict[str, str]]:
-        models = []
-        for implementation, model_types in cls._registry.items():
-            for model_type in model_types:
-                models.append(
-                    {"implementation": implementation, "model_type": model_type}
-                )
-        return models
+        return [
+            {
+                "backend": backend,
+                "model_id": model_id,
+                "input_output": model_info.input_output,
+            }
+            for backend, backend_registry in cls._registry.items()
+            for model_id, model_info in backend_registry.models.items()
+        ]
