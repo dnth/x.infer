@@ -24,6 +24,8 @@ xinfer is a modular Python framework that provides a unified interface for perfo
 - Ultralytics YOLO: State-of-the-art real-time object detection models.
 - Custom Models: Support for your own machine learning models and architectures.
 
+## Prerequisites
+Install [PyTorch](https://pytorch.org/get-started/locally/).
 
 ## Installation
 Install xinfer using pip:

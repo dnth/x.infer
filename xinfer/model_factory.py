@@ -1,18 +1,8 @@
-from enum import Enum
-
 from rich.console import Console
 from rich.table import Table
 
-from .model_registry import ModelRegistry
+from .model_registry import InputOutput, ModelRegistry
 from .transformers.blip2 import BLIP2, VLRMBlip2
-
-
-class InputOutput(Enum):
-    IMAGE_TO_TEXT = "image --> text"
-    IMAGE_TEXT_TO_TEXT = "image-text --> text"
-    TEXT_TO_TEXT = "text --> text"
-    IMAGE_TO_BBOX = "image --> bbox"
-    IMAGE_TO_CLASS = "image --> class"
 
 
 def register_models():
@@ -34,6 +24,7 @@ def create_model(model_id: str, backend: str, **kwargs):
     return ModelRegistry.get_model(model_id, backend, **kwargs)
 
 
+# TODO: list by backend or wildcard
 def list_models():
     console = Console()
     table = Table(title="Available Models")

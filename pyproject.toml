@@ -41,6 +41,7 @@ ultralytics = [
 ]
 
 
+
 [tool]
 [tool.setuptools.packages.find]
 include = ["xinfer*"]

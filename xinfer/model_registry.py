@@ -1,13 +1,22 @@
 from dataclasses import dataclass, field
+from enum import Enum
 from typing import Dict, List, Type
 
 from .base_model import BaseModel
 
 
+class InputOutput(Enum):
+    IMAGE_TO_TEXT = "image --> text"
+    IMAGE_TEXT_TO_TEXT = "image-text --> text"
+    TEXT_TO_TEXT = "text --> text"
+    IMAGE_TO_BBOX = "image --> bbox"
+    IMAGE_TO_CLASS = "image --> class"
+
+
 @dataclass
 class ModelInfo:
     model_class: Type[BaseModel]
-    input_output: str = ""
+    input_output: InputOutput
 
 
 @dataclass
@@ -25,7 +34,7 @@ class ModelRegistry:
         backend: str,
         model_id: str,
         model_class: Type[BaseModel],
-        input_output: str = "",
+        input_output: InputOutput,
     ):
         if backend not in cls._registry:
             cls._registry[backend] = BackendRegistry(backend_name=backend)
