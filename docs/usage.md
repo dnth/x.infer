@@ -23,45 +23,39 @@ This will display a table of available models and their backends and input/outpu
 ┡━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
 │ transformers │ Salesforce/blip2-opt-2.7b         │ image-text --> text │
 │ transformers │ sashakunitsyn/vlrm-blip2-opt-2.7b │ image-text --> text │
+│ transformers │ vikhyatk/moondream2               │ image-text --> text │
 └──────────────┴───────────────────────────────────┴─────────────────────┘
 ```
 
 ## Loading and Using a Model
 
-### BLIP2 Model
-
-Here's an example of how to load and use the BLIP2 model:
+You can load and use any of the available models. Here's an example using the Moondream2 model:
 
 ```python
 # Instantiate a Transformers model
-model = xinfer.create_model("Salesforce/blip2-opt-2.7b", backend="transformers")
+model = xinfer.create_model("vikhyatk/moondream2", backend="transformers")
 
 # Input data
-image = "https://example.com/path/to/image.jpg"
-prompt = "What's in this image? Answer:"
+image = "https://raw.githubusercontent.com/vikhyat/moondream/main/assets/demo-1.jpg"
+prompt = "Describe this image."
 
 # Run inference
-processed_input = model.preprocess(image, prompt)
-prediction = model.predict(processed_input)
-output = model.postprocess(prediction)
+output = model.inference(image, prompt, max_new_tokens=50)
 
 print(output)
 ```
 
-You can also customize the generation parameters:
+This will produce a description of the image, such as:
+"An animated character with long hair and a serious expression is eating a large burger at a table, with other characters in the background."
+
+You can use the same pattern for other models like BLIP2 or VLRM-finetuned BLIP2:
 
 ```python
-prediction = model.predict(processed_input, max_new_tokens=200)
-```
+# For BLIP2
+model = xinfer.create_model("Salesforce/blip2-opt-2.7b", backend="transformers")
 
-### VLRM-finetuned BLIP2 Model
-
-Similarly, you can use the VLRM-finetuned BLIP2 model:
-
-```python
+# For VLRM-finetuned BLIP2
 model = xinfer.create_model("sashakunitsyn/vlrm-blip2-opt-2.7b", backend="transformers")
-
-# Use the model in the same way as the BLIP2 model
 ```
 
-Both models can be used for tasks like image description and visual question answering.
+Use the models in the same way as demonstrated with the Moondream2 model.
