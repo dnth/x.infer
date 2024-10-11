@@ -54,19 +54,30 @@ def create_model(model_id: str, backend: str, **kwargs):
     return ModelRegistry.get_model(model_id, backend, **kwargs)
 
 
-def list_models(wildcard: str = None):
+def list_models(wildcard: str = None, limit: int = 20):
     console = Console()
     table = Table(title="Available Models")
     table.add_column("Backend", style="cyan")
     table.add_column("Model ID", style="magenta")
     table.add_column("Input --> Output", style="green")
 
+    rows = []
     for model in ModelRegistry.list_models():
         if wildcard is None or wildcard.lower() in model["model_id"].lower():
-            table.add_row(
-                model["backend"],
-                model["model_id"],
-                model["input_output"].value,
+            rows.append(
+                (
+                    model["backend"],
+                    model["model_id"],
+                    model["input_output"].value,
+                )
             )
+
+    if len(rows) > limit:
+        rows = rows[:limit]
+        rows.append(("...", "...", "..."))
+        rows.append(("...", "...", "..."))
+
+    for row in rows:
+        table.add_row(*row)
 
     console.print(table)
