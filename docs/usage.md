@@ -11,20 +11,19 @@ import xinfer
 You can list the available models using the `list_models()` function:
 
 ```python
-from xinfer import list_models
-list_models()
+xinfer.list_models()
 ```
 
-This will display a table of available models and their backends.
+This will display a table of available models and their backends and input/output types.
 
 ```
-                   Available Models                   
-┏━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃ backend ┃ Model Type                        ┃
-┡━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
-│ transformers   │ Salesforce/blip2-opt-2.7b         │
-│ transformers   │ sashakunitsyn/vlrm-blip2-opt-2.7b │
-└────────────────┴───────────────────────────────────┘
+                             Available Models                             
+┏━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
+┃ Backend      ┃ Model ID                          ┃ Input/Output        ┃
+┡━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
+│ transformers │ Salesforce/blip2-opt-2.7b         │ image-text --> text │
+│ transformers │ sashakunitsyn/vlrm-blip2-opt-2.7b │ image-text --> text │
+└──────────────┴───────────────────────────────────┴─────────────────────┘
 ```
 
 ## Loading and Using a Model
@@ -34,10 +33,8 @@ This will display a table of available models and their backends.
 Here's an example of how to load and use the BLIP2 model:
 
 ```python
-from xinfer import get_model
-
 # Instantiate a Transformers model
-model = get_model("Salesforce/blip2-opt-2.7b", backend="transformers")
+model = xinfer.create_model("Salesforce/blip2-opt-2.7b", backend="transformers")
 
 # Input data
 image = "https://example.com/path/to/image.jpg"
@@ -62,7 +59,7 @@ prediction = model.predict(processed_input, max_new_tokens=200)
 Similarly, you can use the VLRM-finetuned BLIP2 model:
 
 ```python
-model = get_model("sashakunitsyn/vlrm-blip2-opt-2.7b", backend="transformers")
+model = xinfer.create_model("sashakunitsyn/vlrm-blip2-opt-2.7b", backend="transformers")
 
 # Use the model in the same way as the BLIP2 model
 ```
