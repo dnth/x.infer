@@ -9,7 +9,7 @@ class InputOutput(Enum):
     IMAGE_TO_TEXT = "image --> text"
     IMAGE_TEXT_TO_TEXT = "image-text --> text"
     TEXT_TO_TEXT = "text --> text"
-    IMAGE_TO_BBOX = "image --> bbox"
+    IMAGE_TO_OBJECTS = "image --> objects"
     IMAGE_TO_CLASS = "image --> class"
 
 

@@ -4,6 +4,7 @@ from rich.table import Table
 from .model_registry import InputOutput, ModelRegistry
 from .transformers.blip2 import BLIP2, VLRMBlip2
 from .transformers.moondream import Moondream
+from .ultralytics.yolov8 import YOLOv8
 
 
 def register_models():
@@ -25,6 +26,13 @@ def register_models():
         "vikhyatk/moondream2",
         Moondream,
         input_output=InputOutput.IMAGE_TEXT_TO_TEXT,
+    )
+
+    ModelRegistry.register(
+        "ultralytics",
+        "yolov8",
+        YOLOv8,
+        input_output=InputOutput.IMAGE_TO_OBJECTS,
     )
 
 
