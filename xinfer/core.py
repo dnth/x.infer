@@ -4,15 +4,18 @@ from rich.table import Table
 from .model_registry import model_registry
 from .timm.timm_model import TimmModel
 from .transformers.auto import Vision2SeqModel
+from .ultralytics.ultralytics_model import UltralyticsModel
 
 
-def create_model(model_id: str | TimmModel, **kwargs):
-    if isinstance(model_id, TimmModel):
-        return model_id
-    elif isinstance(model_id, Vision2SeqModel):
-        return model_id
+def create_model(model: str | TimmModel | Vision2SeqModel | UltralyticsModel, **kwargs):
+    if isinstance(model, TimmModel):
+        return model
+    elif isinstance(model, Vision2SeqModel):
+        return model
+    elif isinstance(model, UltralyticsModel):
+        return model
     else:
-        return model_registry.get_model(model_id, **kwargs)
+        return model_registry.get_model(model, **kwargs)
 
 
 def list_models(wildcard: str = None, limit: int = 20):
