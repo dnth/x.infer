@@ -71,19 +71,22 @@ Transformers:
 - Moondream2
 
 
-Note - You can load any [Vision2Seq model](https://huggingface.co/docs/transformers/main/en/model_doc/auto#transformers.AutoModelForVision2Seq) from Transformers by using the `Vision2SeqModel` class.
+[!NOTE]
+> You can load any [Vision2Seq model](https://huggingface.co/docs/transformers/main/en/model_doc/auto#transformers.AutoModelForVision2Seq) from Transformers by using the `Vision2SeqModel` class.
 
 TIMM:
 - EVA02 Series
 
-Note - You can load any model from TIMM by using the `TIMMModel` class.
+> [!NOTE]
+> You can load any model from TIMM by using the `TIMMModel` class.
 
 Ultralytics:
 - YOLOv8 Series
 - YOLOv10 Series
 - YOLOv11 Series
 
-Note - You can load any model from Ultralytics by using the `UltralyticsModel` class.
+> [!NOTE]
+> You can load any model from Ultralytics by using the `UltralyticsModel` class.
 
 Get a list of available models:
 ```python
