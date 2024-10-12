@@ -6,9 +6,10 @@
 # xinfer
 A unified interface (with focus on computer vision models) to run inference on machine learning libraries.
 
+## Why xinfer?
+If you'd like to run many models from different libraries without having to rewrite your inference code, xinfer is for you. It has a simple API and is easy to extend. Currently supports Transformers, Ultralytics, and TIMM.
 
-## Overview
-xinfer is a modular Python framework that provides a unified interface for performing inference across a variety of machine learning models and libraries. Designed to simplify and standardize the inference process, xinfer allows developers to work seamlessly with models from Hugging Face Transformers, Ultralytics YOLO, and custom-built models using a consistent and easy-to-use API.
+Have a custom machine learning model? Create a class that implements the `BaseModel` interface and register it with xinfer. See [Adding New Models](#adding-new-models) for more details.
 
 ## Key Features
 - Unified Interface: Interact with different machine learning models through a single, consistent API.
@@ -48,8 +49,6 @@ pip install -e ."[ultralytics]"
 pip install -e ."[timm]"
 ```
 
-Install PyTorch and transformers in your environment.
-
 ## Getting Started
 
 Here's a quick example demonstrating how to use xinfer with a Transformers model:
@@ -58,7 +57,7 @@ Here's a quick example demonstrating how to use xinfer with a Transformers model
 import xinfer
 
 # Instantiate a Transformers model
-model = xinfer.create_model("vikhyatk/moondream2", "transformers")
+model = xinfer.create_model("vikhyatk/moondream2")
 
 # Input data
 image = "https://raw.githubusercontent.com/vikhyat/moondream/main/assets/demo-1.jpg"
