@@ -72,7 +72,8 @@ Transformers:
 
 
 [!NOTE]
-> You can load any [Vision2Seq model](https://huggingface.co/docs/transformers/main/en/model_doc/auto#transformers.AutoModelForVision2Seq) from Transformers by using the `Vision2SeqModel` class.
+> You can load any [Vision2Seq model](https://huggingface.co/docs/transformers/main/en/model_doc/auto#transformers.AutoModelForVision2Seq) 
+> from Transformers by using the `Vision2SeqModel` class.
 
 TIMM:
 - EVA02 Series
