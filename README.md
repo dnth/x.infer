@@ -31,9 +31,21 @@ Install xinfer using pip:
 pip install xinfer
 ```
 
+With specific libraries:
+```bash
+pip install "xinfer[transformers]"
+pip install "xinfer[ultralytics]"
+pip install "xinfer[timm]"
+```
 Or locally:
 ```bash
 pip install -e .
+```
+With specific libraries:
+```bash
+pip install -e ."[transformers]"
+pip install -e ."[ultralytics]"
+pip install -e ."[timm]"
 ```
 
 Install PyTorch and transformers in your environment.
