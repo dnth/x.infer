@@ -82,7 +82,7 @@ model = xinfer.create_model("vikhyatk/moondream2")
 > from Transformers by using the `Vision2SeqModel` class.
 
 ```python
-from xinfer.transformers.auto import Vision2SeqModel
+from xinfer.transformers import Vision2SeqModel
 
 model = Vision2SeqModel("facebook/chameleon-7b")
 model = xinfer.create_model(model)
@@ -100,7 +100,7 @@ model = xinfer.create_model("eva02_small_patch14_336.mim_in22k_ft_in1k")
 > You can load any model from TIMM by using the `TIMMModel` class.
 
 ```python
-from xinfer.timm.timm_model import TimmModel
+from xinfer.timm import TimmModel
 
 model = TimmModel("resnet18")
 model = xinfer.create_model(model)
@@ -131,7 +131,7 @@ model = xinfer.create_model("yolov11s")
 > You can load any model from Ultralytics by using the `UltralyticsModel` class.
 
 ```python
-from xinfer.ultralytics.ultralytics_model import UltralyticsModel
+from xinfer.ultralytics import UltralyticsModel
 
 model = UltralyticsModel("yolov5n6u")
 model = xinfer.create_model(model)
