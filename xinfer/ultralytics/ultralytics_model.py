@@ -5,13 +5,13 @@ from ultralytics import YOLO
 from ..base_model import BaseModel
 
 
-class UltralyticsYoloModel(BaseModel):
-    def __init__(self, model_name: str, **kwargs):
-        self.model_name = model_name
+class UltralyticsModel(BaseModel):
+    def __init__(self, model_id: str, **kwargs):
+        self.model_id = model_id
         self.load_model(**kwargs)
 
     def load_model(self, **kwargs):
-        self.model = YOLO(self.model_name)
+        self.model = YOLO(self.model_id)
 
     def inference(self, images: str | List[str], **kwargs) -> List[List[Dict]]:
         results = self.model.predict(images, **kwargs)
