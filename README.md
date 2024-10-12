@@ -10,7 +10,7 @@
 <div align="center">
     <img src="assets/xinfer.png" alt="xinfer" width="250"/>
     <h2 align="center">xinfer</h2>
-    <h3 align="center">Run computer vision inference with X framework of your choice.</h3>
+    <h3 align="center">Run computer vision inference with X model framework of your choice.</h3>
 </div>
 
 
