@@ -1,6 +1,7 @@
 ![PyPI version](https://img.shields.io/pypi/v/xinfer.svg?style=for-the-badge&logo=pypi&logoColor=white&label=PyPI&color=blue)
 ![Downloads](https://img.shields.io/pypi/dm/xinfer.svg?style=for-the-badge&logo=pypi&logoColor=white&label=Downloads&color=purple)
 ![License](https://img.shields.io/badge/License-Apache%202.0-green.svg?style=for-the-badge&logo=apache&logoColor=white)
+![Documentation](https://img.shields.io/badge/docs-latest-orange.svg?style=for-the-badge&logo=readthedocs&logoColor=white)
 
 
 # xinfer
