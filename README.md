@@ -9,8 +9,8 @@
 
 <div align="center">
     <img src="assets/xinfer.png" alt="xinfer" width="250"/>
-    <h3 align="center">xinfer</h3>
-    <h2 align="center">A unified interface to run inference on computer vision inference.</h2>
+    <h2 align="center">xinfer</h2>
+    <h3 align="center">A unified interface to run inference on computer vision inference.</h3>
 </div>
 
 
