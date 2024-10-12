@@ -12,11 +12,9 @@ xinfer is a modular Python framework that provides a unified interface for perfo
 
 ## Key Features
 - Unified Interface: Interact with different machine learning models through a single, consistent API.
-- Modular Design: Easily integrate and swap out models without altering the core framework.
-- Flexible Architecture: Built using design patterns like Factory, Adapter, and Strategy for extensibility and maintainability.
+- Modular Design: Integrate and swap out models without altering the core framework.
 - Ease of Use: Simplifies model loading, input preprocessing, inference execution, and output postprocessing.
 - Extensibility: Add support for new models and libraries with minimal code changes.
-- Robust Error Handling: Provides meaningful error messages and gracefully handles exceptions.
 
 
 ## Supported Libraries
