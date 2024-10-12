@@ -12,16 +12,14 @@ from .imagenet1k_classes import IMAGENET2012_CLASSES
 
 
 class TimmModel(BaseModel):
-    def __init__(self, model_name: str, **kwargs):
-        self.model_name = model_name
-        logger.info(f"Loading model: {self.model_name}")
+    def __init__(self, model_id: str, **kwargs):
+        self.model_id = model_id
+        logger.info(f"Loading model: {self.model_id}")
         self.load_model(**kwargs)
 
     def load_model(self, **kwargs):
-        logger.info(f"Loading model: {self.model_name}")
-        self.model = timm.create_model(
-            self.model_name, pretrained=True, **kwargs
-        ).eval()
+        logger.info(f"Loading model: {self.model_id}")
+        self.model = timm.create_model(self.model_id, pretrained=True, **kwargs).eval()
 
     def inference(self, image_url: str, top_k: int = 5) -> List[List[Dict]]:
         logger.info(f"Running inference on {image_url}")

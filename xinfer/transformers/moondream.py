@@ -4,8 +4,12 @@ from PIL import Image
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 from ..base_model import BaseModel
+from ..model_registry import ModelInputOutput, register_model
 
 
+@register_model(
+    "vikhyatk/moondream2", "transformers", ModelInputOutput.IMAGE_TEXT_TO_TEXT
+)
 class Moondream(BaseModel):
     def __init__(
         self,

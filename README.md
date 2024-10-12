@@ -12,11 +12,9 @@ xinfer is a modular Python framework that provides a unified interface for perfo
 
 ## Key Features
 - Unified Interface: Interact with different machine learning models through a single, consistent API.
-- Modular Design: Easily integrate and swap out models without altering the core framework.
-- Flexible Architecture: Built using design patterns like Factory, Adapter, and Strategy for extensibility and maintainability.
+- Modular Design: Integrate and swap out models without altering the core framework.
 - Ease of Use: Simplifies model loading, input preprocessing, inference execution, and output postprocessing.
 - Extensibility: Add support for new models and libraries with minimal code changes.
-- Robust Error Handling: Provides meaningful error messages and gracefully handles exceptions.
 
 
 ## Supported Libraries
@@ -33,9 +31,21 @@ Install xinfer using pip:
 pip install xinfer
 ```
 
+With specific libraries:
+```bash
+pip install "xinfer[transformers]"
+pip install "xinfer[ultralytics]"
+pip install "xinfer[timm]"
+```
 Or locally:
 ```bash
 pip install -e .
+```
+With specific libraries:
+```bash
+pip install -e ."[transformers]"
+pip install -e ."[ultralytics]"
+pip install -e ."[timm]"
 ```
 
 Install PyTorch and transformers in your environment.
@@ -67,9 +77,75 @@ See [example.ipynb](nbs/example.ipynb) for more examples.
 
 ## Supported Models
 Transformers:
-- [Salesforce/blip2-opt-2.7b](https://huggingface.co/Salesforce/blip2-opt-2.7b)
-- [sashakunitsyn/vlrm-blip2-opt-2.7b](https://huggingface.co/sashakunitsyn/vlrm-blip2-opt-2.7b)
-- [vikhyatk/moondream2](https://huggingface.co/vikhyatk/moondream2)
+- BLIP2 Series
+```python
+model = xinfer.create_model("Salesforce/blip2-opt-2.7b")
+```
+- Moondream2
+```python
+model = xinfer.create_model("vikhyatk/moondream2")
+```
+
+> [!NOTE]
+> Wish to load an unlisted model?
+> You can load any [Vision2Seq model](https://huggingface.co/docs/transformers/main/en/model_doc/auto#transformers.AutoModelForVision2Seq) 
+> from Transformers by using the `Vision2SeqModel` class.
+
+```python
+from xinfer.transformers import Vision2SeqModel
+
+model = Vision2SeqModel("facebook/chameleon-7b")
+model = xinfer.create_model(model)
+```
+
+TIMM:
+- EVA02 Series
+
+```python
+model = xinfer.create_model("eva02_small_patch14_336.mim_in22k_ft_in1k")
+```
+
+> [!NOTE]
+> Wish to load an unlisted model?
+> You can load any model from TIMM by using the `TIMMModel` class.
+
+```python
+from xinfer.timm import TimmModel
+
+model = TimmModel("resnet18")
+model = xinfer.create_model(model)
+```
+
+
+Ultralytics:
+- YOLOv8 Series
+
+```python
+model = xinfer.create_model("yolov8n")
+```
+
+- YOLOv10 Series
+
+```python
+model = xinfer.create_model("yolov10x")
+```
+
+- YOLOv11 Series
+
+```python
+model = xinfer.create_model("yolov11s")
+```
+
+> [!NOTE]
+> Wish to load an unlisted model?
+> You can load any model from Ultralytics by using the `UltralyticsModel` class.
+
+```python
+from xinfer.ultralytics import UltralyticsModel
+
+model = UltralyticsModel("yolov5n6u")
+model = xinfer.create_model(model)
+```
 
 Get a list of available models:
 ```python
@@ -81,15 +157,70 @@ xinfer.list_models()
 <table>
   <thead>
     <tr>
-      <th colspan="3">Available Models</th>
+      <th colspan="3" style="text-align: center;">Available Models</th>
     </tr>
     <tr>
-      <th>Backend</th>
+      <th>Implementation</th>
       <th>Model ID</th>
-      <th>Input/Output</th>
+      <th>Input --> Output</th>
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td>timm</td>
+      <td>eva02_large_patch14_448.mim_m38m_ft_in22k_in1k</td>
+      <td>image --> class</td>
+    </tr>
+    <tr>
+      <td>timm</td>
+      <td>eva02_large_patch14_448.mim_m38m_ft_in1k</td>
+      <td>image --> class</td>
+    </tr>
+    <tr>
+      <td>timm</td>
+      <td>eva02_large_patch14_448.mim_in22k_ft_in22k_in1k</td>
+      <td>image --> class</td>
+    </tr>
+    <tr>
+      <td>timm</td>
+      <td>eva02_large_patch14_448.mim_in22k_ft_in1k</td>
+      <td>image --> class</td>
+    </tr>
+    <tr>
+      <td>timm</td>
+      <td>eva02_base_patch14_448.mim_in22k_ft_in22k_in1k</td>
+      <td>image --> class</td>
+    </tr>
+    <tr>
+      <td>timm</td>
+      <td>eva02_base_patch14_448.mim_in22k_ft_in1k</td>
+      <td>image --> class</td>
+    </tr>
+    <tr>
+      <td>timm</td>
+      <td>eva02_small_patch14_336.mim_in22k_ft_in1k</td>
+      <td>image --> class</td>
+    </tr>
+    <tr>
+      <td>timm</td>
+      <td>eva02_tiny_patch14_336.mim_in22k_ft_in1k</td>
+      <td>image --> class</td>
+    </tr>
+    <tr>
+      <td>transformers</td>
+      <td>Salesforce/blip2-opt-6.7b-coco</td>
+      <td>image-text --> text</td>
+    </tr>
+    <tr>
+      <td>transformers</td>
+      <td>Salesforce/blip2-flan-t5-xxl</td>
+      <td>image-text --> text</td>
+    </tr>
+    <tr>
+      <td>transformers</td>
+      <td>Salesforce/blip2-opt-6.7b</td>
+      <td>image-text --> text</td>
+    </tr>
     <tr>
       <td>transformers</td>
       <td>Salesforce/blip2-opt-2.7b</td>
@@ -97,13 +228,49 @@ xinfer.list_models()
     </tr>
     <tr>
       <td>transformers</td>
-      <td>sashakunitsyn/vlrm-blip2-opt-2.7b</td>
+      <td>vikhyatk/moondream2</td>
       <td>image-text --> text</td>
     </tr>
     <tr>
-      <td>transformers</td>
-      <td>vikhyatk/moondream2</td>
-      <td>image-text --> text</td>
+      <td>ultralytics</td>
+      <td>yolov8x</td>
+      <td>image --> objects</td>
+    </tr>
+    <tr>
+      <td>ultralytics</td>
+      <td>yolov8m</td>
+      <td>image --> objects</td>
+    </tr>
+    <tr>
+      <td>ultralytics</td>
+      <td>yolov8l</td>
+      <td>image --> objects</td>
+    </tr>
+    <tr>
+      <td>ultralytics</td>
+      <td>yolov8s</td>
+      <td>image --> objects</td>
+    </tr>
+    <tr>
+      <td>ultralytics</td>
+      <td>yolov8n</td>
+      <td>image --> objects</td>
+    </tr>
+    <tr>
+      <td>ultralytics</td>
+      <td>yolov10x</td>
+      <td>image --> objects</td>
+    </tr>
+    <tr>
+      <td>ultralytics</td>
+      <td>yolov10m</td>
+      <td>image --> objects</td>
+    </tr>
+    <tr>
+      <td colspan="3">...</td>
+    </tr>
+    <tr>
+      <td colspan="3">...</td>
     </tr>
   </tbody>
 </table>
@@ -114,5 +281,5 @@ xinfer.list_models()
 
 + Step 2: Implement the required abstract methods `load_model` and `inference`.
 
-+ Step 3: Update `register_models` in `model_factory.py` to import the new model class and register it.
++ Step 3: Decorate your class with the `register_model` decorator, specifying the model ID, backend, and input/output.
 

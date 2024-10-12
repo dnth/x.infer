@@ -1,11 +1,11 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from enum import Enum
 from typing import Dict, List, Type
 
 from .base_model import BaseModel
 
 
-class InputOutput(Enum):
+class ModelInputOutput(Enum):
     IMAGE_TO_TEXT = "image --> text"
     IMAGE_TEXT_TO_TEXT = "image-text --> text"
     TEXT_TO_TEXT = "text --> text"
@@ -15,49 +15,45 @@ class InputOutput(Enum):
 
 @dataclass
 class ModelInfo:
-    model_class: Type[BaseModel]
-    input_output: InputOutput
-
-
-@dataclass
-class BackendRegistry:
-    backend_name: str
-    models: Dict[str, ModelInfo] = field(default_factory=dict)
+    id: str
+    implementation: str
+    input_output: ModelInputOutput
 
 
 class ModelRegistry:
-    _registry: Dict[str, BackendRegistry] = {}
+    def __init__(self):
+        self._models: Dict[str, ModelInfo] = {}
 
-    @classmethod
-    def register(
-        cls,
-        backend: str,
-        model_id: str,
-        model_class: Type[BaseModel],
-        input_output: InputOutput,
-    ):
-        if backend not in cls._registry:
-            cls._registry[backend] = BackendRegistry(backend_name=backend)
-        cls._registry[backend].models[model_id] = ModelInfo(
-            model_class=model_class, input_output=input_output
-        )
+    def register(self, model_info: ModelInfo, model_class: Type[BaseModel]):
+        if model_info.id in self._models:
+            raise ValueError(
+                f"Model {model_info.id} already registered. Pick another id."
+            )
+        self._models[model_info.id] = (model_info, model_class)
 
-    @classmethod
-    def get_model(cls, model_id: str, backend: str, **kwargs) -> BaseModel:
-        if backend not in cls._registry:
-            raise ValueError(f"Unsupported backend: {backend}")
-        if model_id not in cls._registry[backend].models:
-            raise ValueError(f"Unsupported model type for {backend}: {model_id}")
-        return cls._registry[backend].models[model_id].model_class(**kwargs)
+    def get_model(self, model_id: str, **kwargs) -> BaseModel:
+        model_info, model_class = self._models.get(model_id, (None, None))
+        if model_class is None:
+            raise ValueError(f"Unsupported model: {model_id}")
+        return model_class(model_id, **kwargs)
 
-    @classmethod
-    def list_models(cls) -> List[Dict[str, str]]:
-        return [
-            {
-                "backend": backend,
-                "model_id": model_id,
-                "input_output": model_info.input_output,
-            }
-            for backend, backend_registry in cls._registry.items()
-            for model_id, model_info in backend_registry.models.items()
-        ]
+    def list_models(self) -> List[ModelInfo]:
+        return [model_info for model_info, _ in self._models.values()]
+
+    def get_model_info(self, name: str) -> ModelInfo:
+        model_info, _ = self._models.get(name, (None, None))
+        if model_info is None:
+            raise ValueError(f"Unsupported model: {name}")
+        return model_info
+
+
+# Create a global instance of the registry
+model_registry = ModelRegistry()
+
+
+def register_model(model_id: str, implementation: str, input_output: ModelInputOutput):
+    def decorator(cls: Type[BaseModel]):
+        model_registry.register(ModelInfo(model_id, implementation, input_output), cls)
+        return cls
+
+    return decorator

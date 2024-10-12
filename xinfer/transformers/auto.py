@@ -9,9 +9,9 @@ from transformers import (
 from ..base_model import BaseModel
 
 
-class TransformerVision2SeqModel(BaseModel):
-    def __init__(self, model_name: str, **kwargs):
-        self.model_name = model_name
+class Vision2SeqModel(BaseModel):
+    def __init__(self, model_id: str, **kwargs):
+        self.model_name = model_id
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         self.load_model(**kwargs)
 
