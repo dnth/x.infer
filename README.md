@@ -91,6 +91,10 @@ model = xinfer.create_model(model)
 TIMM:
 - EVA02 Series
 
+```python
+model = xinfer.create_model("eva02_small_patch14_336.mim_in22k_ft_in1k")
+```
+
 > [!NOTE]
 > Wish to load an unlisted model?
 > You can load any model from TIMM by using the `TIMMModel` class.
@@ -105,8 +109,22 @@ model = xinfer.create_model(model)
 
 Ultralytics:
 - YOLOv8 Series
+
+```python
+model = xinfer.create_model("yolov8n")
+```
+
 - YOLOv10 Series
+
+```python
+model = xinfer.create_model("yolov10x")
+```
+
 - YOLOv11 Series
+
+```python
+model = xinfer.create_model("yolov11s")
+```
 
 > [!NOTE]
 > Wish to load an unlisted model?
