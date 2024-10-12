@@ -8,14 +8,9 @@ from .ultralytics.ultralytics_model import UltralyticsModel
 
 
 def create_model(model: str | TimmModel | Vision2SeqModel | UltralyticsModel, **kwargs):
-    if isinstance(model, TimmModel):
+    if isinstance(model, (TimmModel, Vision2SeqModel, UltralyticsModel)):
         return model
-    elif isinstance(model, Vision2SeqModel):
-        return model
-    elif isinstance(model, UltralyticsModel):
-        return model
-    else:
-        return model_registry.get_model(model, **kwargs)
+    return model_registry.get_model(model, **kwargs)
 
 
 def list_models(wildcard: str = None, limit: int = 20):
