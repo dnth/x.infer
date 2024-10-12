@@ -68,18 +68,40 @@ See [example.ipynb](nbs/example.ipynb) for more examples.
 ## Supported Models
 Transformers:
 - BLIP2 Series
+```python
+model = xinfer.create_model("Salesforce/blip2-opt-2.7b")
+```
 - Moondream2
-
+```python
+model = xinfer.create_model("vikhyatk/moondream2")
+```
 
 > [!NOTE]
+> Wish to load an unlisted model?
 > You can load any [Vision2Seq model](https://huggingface.co/docs/transformers/main/en/model_doc/auto#transformers.AutoModelForVision2Seq) 
 > from Transformers by using the `Vision2SeqModel` class.
+
+```python
+from xinfer.transformers.auto import Vision2SeqModel
+
+model = Vision2SeqModel("facebook/chameleon-7b")
+model = xinfer.create_model(model)
+```
 
 TIMM:
 - EVA02 Series
 
 > [!NOTE]
+> Wish to load an unlisted model?
 > You can load any model from TIMM by using the `TIMMModel` class.
+
+```python
+from xinfer.timm.timm_model import TimmModel
+
+model = TimmModel("resnet18")
+model = xinfer.create_model(model)
+```
+
 
 Ultralytics:
 - YOLOv8 Series
@@ -87,7 +109,15 @@ Ultralytics:
 - YOLOv11 Series
 
 > [!NOTE]
+> Wish to load an unlisted model?
 > You can load any model from Ultralytics by using the `UltralyticsModel` class.
+
+```python
+from xinfer.ultralytics.ultralytics_model import UltralyticsModel
+
+model = UltralyticsModel("yolov5n6u")
+model = xinfer.create_model(model)
+```
 
 Get a list of available models:
 ```python
