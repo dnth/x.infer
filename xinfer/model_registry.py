@@ -25,6 +25,10 @@ class ModelRegistry:
         self._models: Dict[str, ModelInfo] = {}
 
     def register(self, model_info: ModelInfo, model_class: Type[BaseModel]):
+        if model_info.id in self._models:
+            raise ValueError(
+                f"Model {model_info.id} already registered. Pick another id."
+            )
         self._models[model_info.id] = (model_info, model_class)
 
     def get_model(self, model_id: str, **kwargs) -> BaseModel:
