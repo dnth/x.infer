@@ -2,10 +2,14 @@ from rich.console import Console
 from rich.table import Table
 
 from .model_registry import model_registry
+from .timm.timm_model import TimmModel
 
 
-def create_model(model_id: str, **kwargs):
-    return model_registry.get_model(model_id, **kwargs)
+def create_model(model_id: str | TimmModel, **kwargs):
+    if isinstance(model_id, TimmModel):
+        return model_id
+    else:
+        return model_registry.get_model(model_id, **kwargs)
 
 
 def list_models(wildcard: str = None, limit: int = 20):
