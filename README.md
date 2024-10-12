@@ -1,3 +1,4 @@
+![Python](https://img.shields.io/badge/Python-3.10%20|%203.11%20|%203.12-brightgreen?style=for-the-badge)
 ![PyPI version](https://img.shields.io/pypi/v/xinfer.svg?style=for-the-badge&logo=pypi&logoColor=white&label=PyPI&color=blue)
 ![Downloads](https://img.shields.io/pypi/dm/xinfer.svg?style=for-the-badge&logo=pypi&logoColor=white&label=Downloads&color=purple)
 ![License](https://img.shields.io/badge/License-Apache%202.0-green.svg?style=for-the-badge&logo=apache&logoColor=white)
@@ -7,8 +8,8 @@
 # xinfer
 
 <div align="center">
-    <img src="assets/xinfer.png" alt="xinfer" width="500"/>
-    <h3 align="center"A unified interface (with focus on computer vision models) to run inference on machine learning libraries.</h3>
+    <img src="assets/xinfer.png" alt="xinfer" width="250"/>
+    <h3 align="center">A unified interface to run inference on computer vision inference.</h3>
 </div>
 
 
