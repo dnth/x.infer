@@ -5,7 +5,12 @@
 
 
 # xinfer
-A unified interface (with focus on computer vision models) to run inference on machine learning libraries.
+
+<div align="center">
+    <img src="assets/xinfer.png" alt="xinfer" width="500"/>
+    <h3 align="center"A unified interface (with focus on computer vision models) to run inference on machine learning libraries.</h3>
+</div>
+
 
 ## Why xinfer?
 If you'd like to run many models from different libraries without having to rewrite your inference code, xinfer is for you. It has a simple API and is easy to extend. Currently supports Transformers, Ultralytics, and TIMM.
