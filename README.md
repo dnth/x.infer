@@ -71,6 +71,20 @@ Transformers:
 - [sashakunitsyn/vlrm-blip2-opt-2.7b](https://huggingface.co/sashakunitsyn/vlrm-blip2-opt-2.7b)
 - [vikhyatk/moondream2](https://huggingface.co/vikhyatk/moondream2)
 
+Note - You can load any [Vision2Seq model](https://huggingface.co/docs/transformers/main/en/model_doc/auto#transformers.AutoModelForVision2Seq) from Transformers by using the `Vision2SeqModel` class.
+
+TIMM:
+- EVA02 Series
+
+Note - You can load any model from TIMM by using the `TIMMModel` class.
+
+Ultralytics:
+- YOLOv8 Series
+- YOLOv10 Series
+- YOLOv11 Series
+
+Note - You can load any model from Ultralytics by using the `UltralyticsModel` class.
+
 Get a list of available models:
 ```python
 import xinfer
@@ -114,5 +128,5 @@ xinfer.list_models()
 
 + Step 2: Implement the required abstract methods `load_model` and `inference`.
 
-+ Step 3: Update `register_models` in `model_factory.py` to import the new model class and register it.
++ Step 3: Decorate your class with the `register_model` decorator, specifying the model ID, backend, and input/output.
 
