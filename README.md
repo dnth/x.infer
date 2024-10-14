@@ -5,7 +5,7 @@
 
 
 <div align="center">
-    <img src="https://raw.githubusercontent.com/dnth/xinfer/refs/heads/main/assets/xinfer.jpg" alt="xinfer" width="600"/>
+    <img src="https://raw.githubusercontent.com/dnth/xinfer/refs/heads/main/assets/xinfer.jpg" alt="xinfer" width="500"/>
     <br />
     <br />
     <a href="https://dnth.github.io/xinfer" target="_blank" rel="noopener noreferrer"><strong>Explore the docs »</strong></a>
@@ -296,7 +296,7 @@ xinfer.list_models()
 
 + **Step 2:** Implement the required abstract methods `load_model`, `infer`, and `infer_batch`.
 
-+ **Step 3:** Decorate your class with the `register_model` decorator, specifying the model ID, backend, and input/output.
++ **Step 3:** Decorate your class with the `register_model` decorator, specifying the model ID, implementation, and input/output.
 
 For example:
 ```python
