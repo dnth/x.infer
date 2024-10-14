@@ -1,5 +1,8 @@
+import time
+
 import requests
 import torch
+from loguru import logger
 from PIL import Image
 from transformers import (
     AutoModelForVision2Seq,
@@ -64,12 +67,24 @@ class Vision2SeqModel(BaseModel):
         outputs = self.processor.batch_decode(predictions, skip_special_tokens=True)
         return [output.replace("\n", "").strip() for output in outputs]
 
-    def infer(self, image, prompt, **generate_kwargs):
+    def infer(self, image, prompt, verbose=False, **generate_kwargs):
+        start_time = time.perf_counter()
         preprocessed_input = self.preprocess(image, prompt)
         prediction = self.predict(preprocessed_input, **generate_kwargs)
-        return self.postprocess(prediction)[0]
+        result = self.postprocess(prediction)[0]
+        end_time = time.perf_counter()
+        inference_time = end_time - start_time
+        if verbose:
+            logger.info(f"Inference time: {inference_time*1000:.4f} ms")
+        return result
 
-    def infer_batch(self, images, prompts, **generate_kwargs):
+    def infer_batch(self, images, prompts, verbose=False, **generate_kwargs):
+        start_time = time.perf_counter()
         preprocessed_input = self.preprocess(images, prompts)
         predictions = self.predict(preprocessed_input, **generate_kwargs)
-        return self.postprocess(predictions)
+        results = self.postprocess(predictions)
+        end_time = time.perf_counter()
+        inference_time = end_time - start_time
+        if verbose:
+            logger.info(f"Inference time: {inference_time*1000:.4f} ms")
+        return results
