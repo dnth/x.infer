@@ -10,9 +10,9 @@ class BaseModel(ABC):
         pass
 
     @abstractmethod
-    def infer(self, image, prompt):
+    def infer(self, image: str, prompt: str):
         pass
 
     @abstractmethod
-    def infer_batch(self, images, prompts):
+    def infer_batch(self, images: list[str], prompts: list[str]):
         pass

@@ -29,7 +29,7 @@ class Vision2SeqModel(BaseModel):
 
     def preprocess(
         self,
-        images: str | Image.Image | list[str | Image.Image],
+        images: str | list[str],
         prompts: str | list[str],
     ):
         if not isinstance(images, list):
@@ -41,16 +41,21 @@ class Vision2SeqModel(BaseModel):
             raise ValueError("The number of images and prompts must be the same")
 
         processed_images = []
-        for image in images:
-            if isinstance(image, str):
-                if image.startswith(("http://", "https://")):
-                    image = Image.open(requests.get(image, stream=True).raw).convert(
-                        "RGB"
-                    )
-                else:
-                    raise ValueError("Input string must be an image URL")
-            elif not isinstance(image, Image.Image):
-                raise ValueError("Input must be either an image URL or a PIL Image")
+        for image_path in images:
+            if not isinstance(image_path, str):
+                raise ValueError("Input must be a string (local path or URL)")
+
+            if image_path.startswith(("http://", "https://")):
+                image = Image.open(requests.get(image_path, stream=True).raw).convert(
+                    "RGB"
+                )
+            else:
+                # Assume it's a local path
+                try:
+                    image = Image.open(image_path).convert("RGB")
+                except FileNotFoundError:
+                    raise ValueError(f"Local file not found: {image_path}")
+
             processed_images.append(image)
 
         return self.processor(
