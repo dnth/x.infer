@@ -12,3 +12,7 @@ class BaseModel(ABC):
     @abstractmethod
     def inference(self, image, prompt):
         pass
+
+    @abstractmethod
+    def inference_batch(self, images, prompts):
+        pass

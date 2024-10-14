@@ -13,18 +13,18 @@ from ..model_registry import ModelInputOutput, register_model
 class Moondream(BaseModel):
     def __init__(
         self,
-        model_name: str = "vikhyatk/moondream2",
+        model_id: str = "vikhyatk/moondream2",
         revision: str = "2024-08-26",
         **kwargs,
     ):
-        self.model_name = model_name
+        self.model_id = model_id
         self.revision = revision
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         self.load_model(**kwargs)
 
     def load_model(self, **kwargs):
         self.model = AutoModelForCausalLM.from_pretrained(
-            self.model_name, trust_remote_code=True, revision=self.revision
+            self.model_id, trust_remote_code=True, revision=self.revision
         )
 
         if self.device == "cuda":
@@ -32,7 +32,7 @@ class Moondream(BaseModel):
 
         self.model = torch.compile(self.model, mode="max-autotune")
         self.model.eval()
-        self.tokenizer = AutoTokenizer.from_pretrained(self.model_name)
+        self.tokenizer = AutoTokenizer.from_pretrained(self.model_id)
 
     def inference(self, image: str, prompt: str = None, **generate_kwargs):
         if isinstance(image, str):
@@ -54,3 +54,16 @@ class Moondream(BaseModel):
         )
 
         return output
+
+    def inference_batch(self, images: list[str], prompts: list[str], **generate_kwargs):
+        images = [
+            Image.open(requests.get(image, stream=True).raw).convert("RGB")
+            for image in images
+        ]
+        prompts = [prompt for prompt in prompts]
+
+        outputs = self.model.batch_answer(
+            images, prompts, self.tokenizer, **generate_kwargs
+        )
+
+        return outputs
