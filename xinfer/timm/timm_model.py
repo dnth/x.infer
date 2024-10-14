@@ -1,3 +1,4 @@
+import time
 from io import BytesIO
 from typing import Dict, List
 
@@ -67,8 +68,8 @@ class TimmModel(BaseModel):
 
         return tensor_images
 
-    def infer(self, image: str, top_k: int = 5) -> List[Dict]:
-        logger.info(f"Running inference on {image}")
+    def infer(self, image: str, top_k: int = 5, verbose: bool = False) -> List[Dict]:
+        start_time = time.perf_counter()
         img = self.preprocess(image)
 
         with torch.inference_mode(), torch.amp.autocast(
@@ -83,6 +84,13 @@ class TimmModel(BaseModel):
         im_classes = list(IMAGENET2012_CLASSES.values())
         class_names = [im_classes[i] for i in topk_class_indices[0]]
 
+        end_time = time.perf_counter()
+        inference_time = end_time - start_time
+        if verbose:
+            logger.info(f"Inference time: {inference_time*1000:.4f} ms")
+            logger.info(f"Device: {self.device}")
+            logger.info(f"Dtype: {self.dtype}")
+
         return [
             {"class": class_name, "id": int(class_idx), "confidence": float(prob)}
             for class_name, class_idx, prob in zip(
@@ -90,7 +98,10 @@ class TimmModel(BaseModel):
             )
         ]
 
-    def infer_batch(self, images: List[str], top_k: int = 5) -> List[List[Dict]]:
+    def infer_batch(
+        self, images: List[str], top_k: int = 5, verbose: bool = False
+    ) -> List[List[Dict]]:
+        start_time = time.perf_counter()
         images = self.preprocess(images)
 
         with torch.inference_mode(), torch.amp.autocast(
@@ -103,6 +114,13 @@ class TimmModel(BaseModel):
         )
 
         im_classes = list(IMAGENET2012_CLASSES.values())
+
+        end_time = time.perf_counter()
+        inference_time = end_time - start_time
+        if verbose:
+            logger.info(f"Inference time: {inference_time*1000:.4f} ms")
+            logger.info(f"Device: {self.device}")
+            logger.info(f"Dtype: {self.dtype}")
 
         results = []
         for i in range(len(images)):
