@@ -8,7 +8,7 @@
 
 
 <div align="center">
-    <img src="assets/xinfer.jpg" alt="xinfer" width="400"/>
+    <img src="assets/xinfer.jpg" alt="xinfer" width="500"/>
 </div>
 
 
