@@ -60,11 +60,10 @@ class TimmModel(BaseModel):
         data_config = timm.data.resolve_model_data_config(self.model)
         transforms = timm.data.create_transform(**data_config, is_training=False)
 
-        # Apply transforms to all images and stack them into a single tensor
-        tensor_images = torch.stack([transforms(img) for img in processed_images])
-        tensor_images = tensor_images.to(device=self.device, dtype=self.dtype)
+        images_tensor = torch.stack([transforms(img) for img in processed_images])
+        images_tensor = images_tensor.to(device=self.device, dtype=self.dtype)
 
-        return tensor_images
+        return images_tensor
 
     def infer(self, image: str, top_k: int = 5, verbose: bool = False) -> List[Dict]:
         start_time = time.perf_counter()
