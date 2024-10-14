@@ -88,7 +88,9 @@ pip install -e ."[timm]"
 See [example.ipynb](nbs/example.ipynb) for more examples.
 
 
-## Supported Models
+## Usage
+
+### Supported Models
 Transformers:
 - BLIP2 Series
 ```python
@@ -160,7 +162,7 @@ model = UltralyticsModel("yolov5n6u")
 model = xinfer.create_model(model)
 ```
 
-Get a list of available models:
+### List Models
 ```python
 import xinfer
 
@@ -288,11 +290,27 @@ xinfer.list_models()
   </tbody>
 </table>
 
-## Adding New Models
+### Adding New Models
 
-+ Step 1: Create a new model class that implements the `BaseModel` interface.
++ **Step 1:** Create a new model class that implements the `BaseModel` interface.
 
-+ Step 2: Implement the required abstract methods `load_model` and `inference`.
++ **Step 2:** Implement the required abstract methods `load_model`, `infer`, and `infer_batch`.
 
-+ Step 3: Decorate your class with the `register_model` decorator, specifying the model ID, backend, and input/output.
++ **Step 3:** Decorate your class with the `register_model` decorator, specifying the model ID, backend, and input/output.
 
+For example:
+```python
+@xinfer.register_model("my-model", "custom", ModelInputOutput.IMAGE_TEXT_TO_TEXT)
+class MyModel(BaseModel):
+    def load_model(self):
+        # Load your model here
+        pass
+
+    def infer(self, image, prompt):
+        # Run single inference 
+        pass
+
+    def infer_batch(self, images, prompts):
+        # Run batch inference here
+        pass
+```
