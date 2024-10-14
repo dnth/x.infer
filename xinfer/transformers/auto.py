@@ -13,15 +13,30 @@ from ..base_model import BaseModel
 
 
 class Vision2SeqModel(BaseModel):
-    def __init__(self, model_id: str, **kwargs):
-        self.model_id = model_id
-        self.device = "cuda" if torch.cuda.is_available() else "cpu"
+    def __init__(
+        self, model_id: str, device: str = "auto", dtype: str = "float16", **kwargs
+    ):
+        device = "cuda" if device == "auto" and torch.cuda.is_available() else "cpu"
+
+        logger.info(f"Using device: {device}")
+        logger.info(f"Using dtype: {dtype}")
+
+        dtype_map = {
+            "float32": torch.float32,
+            "float16": torch.float16,
+            "bfloat16": torch.bfloat16,
+        }
+        if dtype not in dtype_map:
+            raise ValueError("dtype must be one of 'float32', 'float16', or 'bfloat16'")
+        dtype = dtype_map[dtype]
+
+        super().__init__(model_id, device, dtype)
         self.load_model(**kwargs)
 
     def load_model(self, **kwargs):
         self.processor = AutoProcessor.from_pretrained(self.model_id, **kwargs)
         self.model = AutoModelForVision2Seq.from_pretrained(self.model_id, **kwargs).to(
-            self.device, torch.bfloat16
+            self.device, self.dtype
         )
 
         self.model = torch.compile(self.model, mode="max-autotune")
@@ -60,11 +75,11 @@ class Vision2SeqModel(BaseModel):
 
         return self.processor(
             images=processed_images, text=prompts, return_tensors="pt"
-        ).to(self.device, torch.bfloat16)
+        ).to(self.device, self.dtype)
 
     def predict(self, preprocessed_input, **generate_kwargs):
         with torch.inference_mode(), torch.amp.autocast(
-            device_type=self.device, dtype=torch.bfloat16
+            device_type=self.device, dtype=self.dtype
         ):
             return self.model.generate(**preprocessed_input, **generate_kwargs)
 
@@ -81,6 +96,8 @@ class Vision2SeqModel(BaseModel):
         inference_time = end_time - start_time
         if verbose:
             logger.info(f"Inference time: {inference_time*1000:.4f} ms")
+            logger.info(f"Device: {self.device}")
+            logger.info(f"Dtype: {self.dtype}")
         return result
 
     def infer_batch(self, images, prompts, verbose=False, **generate_kwargs):
@@ -92,4 +109,7 @@ class Vision2SeqModel(BaseModel):
         inference_time = end_time - start_time
         if verbose:
             logger.info(f"Inference time: {inference_time*1000:.4f} ms")
+            logger.info(f"Batch size: {len(images)}")
+            logger.info(f"Device: {self.device}")
+            logger.info(f"Dtype: {self.dtype}")
         return results

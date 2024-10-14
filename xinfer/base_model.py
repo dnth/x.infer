@@ -2,8 +2,10 @@ from abc import ABC, abstractmethod
 
 
 class BaseModel(ABC):
-    def __init__(self, model_id: str):
-        pass
+    def __init__(self, model_id: str, device: str, dtype: str):
+        self.model_id = model_id
+        self.device = device
+        self.dtype = dtype
 
     @abstractmethod
     def load_model(self):
