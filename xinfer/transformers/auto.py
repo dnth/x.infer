@@ -14,10 +14,8 @@ from ..base_model import BaseModel
 
 class Vision2SeqModel(BaseModel):
     def __init__(
-        self, model_id: str, device: str = "auto", dtype: str = "float32", **kwargs
+        self, model_id: str, device: str = "cpu", dtype: str = "float32", **kwargs
     ):
-        device = "cuda" if device == "auto" and torch.cuda.is_available() else "cpu"
-
         logger.info(f"Model: {model_id}")
         logger.info(f"Device: {device}")
         logger.info(f"Dtype: {dtype}")
