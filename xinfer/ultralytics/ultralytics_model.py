@@ -13,7 +13,7 @@ class UltralyticsModel(BaseModel):
     def load_model(self, **kwargs):
         self.model = YOLO(self.model_id)
 
-    def infer(self, images: str | List[str], **kwargs) -> List[List[Dict]]:
+    def infer_batch(self, images: str | List[str], **kwargs) -> List[List[Dict]]:
         results = self.model.predict(images, **kwargs)
         batch_results = []
         for result in results:
@@ -33,3 +33,7 @@ class UltralyticsModel(BaseModel):
                 )
             batch_results.append(coco_format_results)
         return batch_results
+
+    def infer(self, image: str, **kwargs) -> List[List[Dict]]:
+        results = self.infer_batch([image], **kwargs)
+        return results[0]
