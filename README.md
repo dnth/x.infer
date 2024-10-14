@@ -43,7 +43,7 @@ model = xinfer.create_model("vikhyatk/moondream2")
 image = "https://raw.githubusercontent.com/vikhyat/moondream/main/assets/demo-1.jpg"
 prompt = "Describe this image. "
 
-output = model.infer(image, prompt, max_new_tokens=50)
+output = model.infer(image, prompt)
 
 >>> An animated character with long hair and a serious expression is eating a large burger at a table, with other characters in the background.
 ```
