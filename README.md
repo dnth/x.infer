@@ -26,6 +26,10 @@ If you'd like to run many models from different libraries without having to rewr
 Have a custom machine learning model? Create a class that implements the `BaseModel` interface and register it with xinfer. See [Adding New Models](#adding-new-models) for more details.
 
 ## Key Features
+<div align="center">
+  <img src="https://raw.githubusercontent.com/dnth/xinfer/refs/heads/main/assets/flowchart.gif" alt="xinfer" width="500"/>
+</div>
+
 - Unified Interface: Interact with different machine learning models through a single, consistent API.
 - Modular Design: Integrate and swap out models without altering the core framework.
 - Ease of Use: Simplifies model loading, input preprocessing, inference execution, and output postprocessing.
