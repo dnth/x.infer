@@ -47,12 +47,12 @@ class Vision2SeqModel(BaseModel):
         output = self.processor.batch_decode(prediction, skip_special_tokens=True)[0]
         return output.replace("\n", "").strip()
 
-    def inference(self, image, prompt, **generate_kwargs):
+    def infer(self, image, prompt, **generate_kwargs):
         preprocessed_input = self.preprocess(image, prompt)
         prediction = self.predict(preprocessed_input, **generate_kwargs)
         return self.postprocess(prediction)
 
-    def inference_batch(self, images, prompts):
+    def infer_batch(self, images, prompts):
         raise NotImplementedError(
             f"Batch inference not implemented for {self.model_id}"
         )

@@ -13,7 +13,7 @@ class UltralyticsModel(BaseModel):
     def load_model(self, **kwargs):
         self.model = YOLO(self.model_id)
 
-    def inference(self, images: str | List[str], **kwargs) -> List[List[Dict]]:
+    def infer(self, images: str | List[str], **kwargs) -> List[List[Dict]]:
         results = self.model.predict(images, **kwargs)
         batch_results = []
         for result in results:

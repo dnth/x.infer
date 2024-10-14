@@ -34,7 +34,7 @@ class Moondream(BaseModel):
         self.model.eval()
         self.tokenizer = AutoTokenizer.from_pretrained(self.model_id)
 
-    def inference(self, image: str, prompt: str = None, **generate_kwargs):
+    def infer(self, image: str, prompt: str = None, **generate_kwargs):
         if isinstance(image, str):
             if image.startswith(("http://", "https://")):
                 image = Image.open(requests.get(image, stream=True).raw).convert("RGB")
@@ -55,7 +55,7 @@ class Moondream(BaseModel):
 
         return output
 
-    def inference_batch(self, images: list[str], prompts: list[str], **generate_kwargs):
+    def infer_batch(self, images: list[str], prompts: list[str], **generate_kwargs):
         images = [
             Image.open(requests.get(image, stream=True).raw).convert("RGB")
             for image in images
