@@ -5,7 +5,7 @@
 
 
 <div align="center">
-    <img src="assets/xinfer.jpg" alt="xinfer" width="500"/>
+    <img src="https://raw.githubusercontent.com/dnth/xinfer/refs/heads/main/assets/xinfer.jpg" alt="xinfer" width="500"/>
     <br />
     <br />
     <a href="https://dnth.github.io/xinfer" target="_blank" rel="noopener noreferrer"><strong>Explore the docs »</strong></a>
@@ -26,11 +26,31 @@ If you'd like to run many models from different libraries without having to rewr
 Have a custom machine learning model? Create a class that implements the `BaseModel` interface and register it with xinfer. See [Adding New Models](#adding-new-models) for more details.
 
 ## Key Features
+<div align="center">
+  <img src="https://raw.githubusercontent.com/dnth/xinfer/refs/heads/main/assets/flowchart.gif" alt="xinfer" width="500"/>
+</div>
+
 - Unified Interface: Interact with different machine learning models through a single, consistent API.
 - Modular Design: Integrate and swap out models without altering the core framework.
 - Ease of Use: Simplifies model loading, input preprocessing, inference execution, and output postprocessing.
 - Extensibility: Add support for new models and libraries with minimal code changes.
 
+## Quickstart
+
+Here's a quick example demonstrating how to use xinfer with a Transformers model:
+
+```python
+import xinfer
+
+model = xinfer.create_model("vikhyatk/moondream2")
+
+image = "https://raw.githubusercontent.com/vikhyat/moondream/main/assets/demo-1.jpg"
+prompt = "Describe this image. "
+
+model.infer(image, prompt)
+
+>>> An animated character with long hair and a serious expression is eating a large burger at a table, with other characters in the background.
+```
 
 ## Supported Libraries
 - Hugging Face Transformers: Natural language processing models for tasks like text classification, translation, and summarization.
@@ -63,27 +83,7 @@ pip install -e ."[ultralytics]"
 pip install -e ."[timm]"
 ```
 
-## Getting Started
 
-Here's a quick example demonstrating how to use xinfer with a Transformers model:
-
-```python
-import xinfer
-
-# Instantiate a Transformers model
-model = xinfer.create_model("vikhyatk/moondream2")
-
-# Input data
-image = "https://raw.githubusercontent.com/vikhyat/moondream/main/assets/demo-1.jpg"
-prompt = "Describe this image. "
-
-# Run inference
-output = model.inference(image, prompt, max_new_tokens=50)
-
-print(output)
-
->>> An animated character with long hair and a serious expression is eating a large burger at a table, with other characters in the background.
-```
 
 See [example.ipynb](nbs/example.ipynb) for more examples.
 
