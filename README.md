@@ -54,7 +54,7 @@ model.infer(image, prompt)
 
 ## Supported Libraries
 - Hugging Face Transformers: Natural language processing models for tasks like text classification, translation, and summarization.
-- Ultralytics YOLO: State-of-the-art real-time object detection models.
+- Ultralytics: State-of-the-art real-time object detection models.
 - Custom Models: Support for your own machine learning models and architectures.
 
 ## Prerequisites
