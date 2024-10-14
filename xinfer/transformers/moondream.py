@@ -24,10 +24,10 @@ class Moondream(BaseModel):
     ):
         device = "cuda" if device == "auto" and torch.cuda.is_available() else "cpu"
 
-        logger.info(f"Using model: {model_id}")
-        logger.info(f"Using revision: {revision}")
-        logger.info(f"Using device: {device}")
-        logger.info(f"Using dtype: {dtype}")
+        logger.info(f"Model: {model_id}")
+        logger.info(f"Revision: {revision}")
+        logger.info(f"Device: {device}")
+        logger.info(f"Dtype: {dtype}")
 
         dtype_map = {
             "float32": torch.float32,
@@ -40,7 +40,7 @@ class Moondream(BaseModel):
 
         super().__init__(model_id, device, dtype)
         self.revision = revision
-        self.load_model(**kwargs)
+        self.load_model()
 
     def preprocess(
         self,
@@ -69,7 +69,7 @@ class Moondream(BaseModel):
 
         return processed_images
 
-    def load_model(self, **kwargs):
+    def load_model(self):
         self.model = AutoModelForCausalLM.from_pretrained(
             self.model_id, trust_remote_code=True, revision=self.revision
         ).to(self.device, self.dtype)

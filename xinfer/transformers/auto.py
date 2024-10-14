@@ -18,8 +18,9 @@ class Vision2SeqModel(BaseModel):
     ):
         device = "cuda" if device == "auto" and torch.cuda.is_available() else "cpu"
 
-        logger.info(f"Using device: {device}")
-        logger.info(f"Using dtype: {dtype}")
+        logger.info(f"Model: {model_id}")
+        logger.info(f"Device: {device}")
+        logger.info(f"Dtype: {dtype}")
 
         dtype_map = {
             "float32": torch.float32,
