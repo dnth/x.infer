@@ -11,31 +11,48 @@ from ..base_model import BaseModel
 
 class Vision2SeqModel(BaseModel):
     def __init__(self, model_id: str, **kwargs):
-        self.model_name = model_id
+        self.model_id = model_id
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         self.load_model(**kwargs)
 
     def load_model(self, **kwargs):
-        self.processor = AutoProcessor.from_pretrained(self.model_name, **kwargs)
-        self.model = AutoModelForVision2Seq.from_pretrained(
-            self.model_name, **kwargs
-        ).to(self.device, torch.bfloat16)
+        self.processor = AutoProcessor.from_pretrained(self.model_id, **kwargs)
+        self.model = AutoModelForVision2Seq.from_pretrained(self.model_id, **kwargs).to(
+            self.device, torch.bfloat16
+        )
 
         self.model = torch.compile(self.model, mode="max-autotune")
         self.model.eval()
 
-    def preprocess(self, image: str | Image.Image, prompt: str = None):
-        if isinstance(image, str):
-            if image.startswith(("http://", "https://")):
-                image = Image.open(requests.get(image, stream=True).raw).convert("RGB")
-            else:
-                raise ValueError("Input string must be an image URL")
-        elif not isinstance(image, Image.Image):
-            raise ValueError("Input must be either an image URL or a PIL Image")
+    def preprocess(
+        self,
+        images: str | Image.Image | list[str | Image.Image],
+        prompts: str | list[str],
+    ):
+        if not isinstance(images, list):
+            images = [images]
+        if not isinstance(prompts, list):
+            prompts = [prompts]
 
-        return self.processor(images=image, text=prompt, return_tensors="pt").to(
-            self.device
-        )
+        if len(images) != len(prompts):
+            raise ValueError("The number of images and prompts must be the same")
+
+        processed_images = []
+        for image in images:
+            if isinstance(image, str):
+                if image.startswith(("http://", "https://")):
+                    image = Image.open(requests.get(image, stream=True).raw).convert(
+                        "RGB"
+                    )
+                else:
+                    raise ValueError("Input string must be an image URL")
+            elif not isinstance(image, Image.Image):
+                raise ValueError("Input must be either an image URL or a PIL Image")
+            processed_images.append(image)
+
+        return self.processor(
+            images=processed_images, text=prompts, return_tensors="pt"
+        ).to(self.device, torch.bfloat16)
 
     def predict(self, preprocessed_input, **generate_kwargs):
         with torch.inference_mode(), torch.amp.autocast(
@@ -43,16 +60,16 @@ class Vision2SeqModel(BaseModel):
         ):
             return self.model.generate(**preprocessed_input, **generate_kwargs)
 
-    def postprocess(self, prediction):
-        output = self.processor.batch_decode(prediction, skip_special_tokens=True)[0]
-        return output.replace("\n", "").strip()
+    def postprocess(self, predictions):
+        outputs = self.processor.batch_decode(predictions, skip_special_tokens=True)
+        return [output.replace("\n", "").strip() for output in outputs]
 
     def infer(self, image, prompt, **generate_kwargs):
         preprocessed_input = self.preprocess(image, prompt)
         prediction = self.predict(preprocessed_input, **generate_kwargs)
-        return self.postprocess(prediction)
+        return self.postprocess(prediction)[0]
 
-    def infer_batch(self, images, prompts):
-        raise NotImplementedError(
-            f"Batch inference not implemented for {self.model_id}"
-        )
+    def infer_batch(self, images, prompts, **generate_kwargs):
+        preprocessed_input = self.preprocess(images, prompts)
+        predictions = self.predict(preprocessed_input, **generate_kwargs)
+        return self.postprocess(predictions)

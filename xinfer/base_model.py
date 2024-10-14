@@ -2,11 +2,11 @@ from abc import ABC, abstractmethod
 
 
 class BaseModel(ABC):
-    def __init__(self, model_id: str, **kwargs):
-        self.model_id = model_id
+    def __init__(self, model_id: str):
+        pass
 
     @abstractmethod
-    def load_model(self, **kwargs):
+    def load_model(self):
         pass
 
     @abstractmethod
