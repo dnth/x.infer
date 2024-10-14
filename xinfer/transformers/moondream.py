@@ -19,7 +19,7 @@ class Moondream(BaseModel):
         model_id: str = "vikhyatk/moondream2",
         revision: str = "2024-08-26",
         device: str = "auto",
-        dtype: str = "float16",
+        dtype: str = "float32",
         **kwargs,
     ):
         device = "cuda" if device == "auto" and torch.cuda.is_available() else "cpu"
