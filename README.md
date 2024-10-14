@@ -5,7 +5,7 @@
 
 
 <div align="center">
-    <img src="https://raw.githubusercontent.com/dnth/xinfer/refs/heads/main/assets/xinfer.jpg" alt="xinfer" width="500"/>
+    <img src="https://raw.githubusercontent.com/dnth/xinfer/refs/heads/main/assets/xinfer.jpg" alt="xinfer" width="600"/>
     <br />
     <br />
     <a href="https://dnth.github.io/xinfer" target="_blank" rel="noopener noreferrer"><strong>Explore the docs »</strong></a>
