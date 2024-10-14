@@ -20,7 +20,7 @@
 </div>
 
 
-## Why xinfer?
+## Why x.infer?
 If you'd like to run many models from different libraries without having to rewrite your inference code, xinfer is for you. It has a simple API and is easy to extend. Currently supports Transformers, Ultralytics, and TIMM.
 
 Have a custom machine learning model? Create a class that implements the `BaseModel` interface and register it with xinfer. See [Adding New Models](#adding-new-models) for more details.
@@ -37,7 +37,7 @@ Have a custom machine learning model? Create a class that implements the `BaseMo
 
 ## Quickstart
 
-Here's a quick example demonstrating how to use xinfer with a Transformers model:
+Here's a quick example demonstrating how to use x.infer with a Transformers model:
 
 ```python
 import xinfer
@@ -61,7 +61,7 @@ model.infer(image, prompt)
 Install [PyTorch](https://pytorch.org/get-started/locally/).
 
 ## Installation
-Install xinfer using pip:
+Install x.infer using pip:
 ```bash
 pip install xinfer
 ```
