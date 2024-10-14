@@ -24,6 +24,8 @@ class Moondream(BaseModel):
     ):
         device = "cuda" if device == "auto" and torch.cuda.is_available() else "cpu"
 
+        logger.info(f"Using model: {model_id}")
+        logger.info(f"Using revision: {revision}")
         logger.info(f"Using device: {device}")
         logger.info(f"Using dtype: {dtype}")
 
