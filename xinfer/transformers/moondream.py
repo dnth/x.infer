@@ -18,11 +18,9 @@ class Moondream(BaseModel):
         self,
         model_id: str = "vikhyatk/moondream2",
         revision: str = "2024-08-26",
-        device: str = "auto",
+        device: str = "cpu",
         dtype: str = "float32",
     ):
-        device = "cuda" if device == "auto" and torch.cuda.is_available() else "cpu"
-
         logger.info(f"Model: {model_id}")
         logger.info(f"Revision: {revision}")
         logger.info(f"Device: {device}")
