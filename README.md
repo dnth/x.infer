@@ -2,13 +2,21 @@
 ![PyPI version](https://img.shields.io/pypi/v/xinfer.svg?style=for-the-badge&logo=pypi&logoColor=white&label=PyPI&color=blue)
 ![Downloads](https://img.shields.io/pypi/dm/xinfer.svg?style=for-the-badge&logo=pypi&logoColor=white&label=Downloads&color=purple)
 ![License](https://img.shields.io/badge/License-Apache%202.0-green.svg?style=for-the-badge&logo=apache&logoColor=white)
-![Documentation](https://img.shields.io/badge/docs-latest-orange.svg?style=for-the-badge&logo=readthedocs&logoColor=white)
-
-
 
 
 <div align="center">
     <img src="assets/xinfer.jpg" alt="xinfer" width="500"/>
+    <br />
+    <br />
+    <a href="https://dnth.github.io/xinfer" target="_blank" rel="noopener noreferrer"><strong>Explore the docs »</strong></a>
+    <br />
+    <a href="https://github.com/dnth/xinfer/issues/new?assignees=&labels=Feature+Request&projects=&template=feature_request.md" target="_blank" rel="noopener noreferrer">Feature Request</a>
+    ·
+    <a href="https://github.com/dnth/xinfer/issues/new?assignees=&labels=bug&projects=&template=bug_report.md" target="_blank" rel="noopener noreferrer">Report Bug</a>
+    ·
+    <a href="https://github.com/dnth/xinfer/discussions" target="_blank" rel="noopener noreferrer">Discussions</a>
+    ·
+    <a href="https://dicksonneoh.com/" target="_blank" rel="noopener noreferrer">About me</a>
 </div>
 
 
