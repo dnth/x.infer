@@ -57,6 +57,40 @@ model.infer(image, prompt)
 >>> An animated character with long hair and a serious expression is eating a large burger at a table, with other characters in the background.
 ```
 
+Get a list of models:
+```python
+xinfer.list_models()
+```
+
+```
+┏━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
+┃ Implementation ┃ Model ID                                        ┃ Input --> Output    ┃
+┡━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
+│ timm           │ eva02_large_patch14_448.mim_m38m_ft_in22k_in1k  │ image --> class     │
+│ timm           │ eva02_large_patch14_448.mim_m38m_ft_in1k        │ image --> class     │
+│ timm           │ eva02_large_patch14_448.mim_in22k_ft_in22k_in1k │ image --> class     │
+│ timm           │ eva02_large_patch14_448.mim_in22k_ft_in1k       │ image --> class     │
+│ timm           │ eva02_base_patch14_448.mim_in22k_ft_in22k_in1k  │ image --> class     │
+│ timm           │ eva02_base_patch14_448.mim_in22k_ft_in1k        │ image --> class     │
+│ timm           │ eva02_small_patch14_336.mim_in22k_ft_in1k       │ image --> class     │
+│ timm           │ eva02_tiny_patch14_336.mim_in22k_ft_in1k        │ image --> class     │
+│ transformers   │ Salesforce/blip2-opt-6.7b-coco                  │ image-text --> text │
+│ transformers   │ Salesforce/blip2-flan-t5-xxl                    │ image-text --> text │
+│ transformers   │ Salesforce/blip2-opt-6.7b                       │ image-text --> text │
+│ transformers   │ Salesforce/blip2-opt-2.7b                       │ image-text --> text │
+│ transformers   │ vikhyatk/moondream2                             │ image-text --> text │
+│ ultralytics    │ yolov8x                                         │ image --> objects   │
+│ ultralytics    │ yolov8m                                         │ image --> objects   │
+│ ultralytics    │ yolov8l                                         │ image --> objects   │
+│ ultralytics    │ yolov8s                                         │ image --> objects   │
+│ ultralytics    │ yolov8n                                         │ image --> objects   │
+│ ultralytics    │ yolov10x                                        │ image --> objects   │
+│ ultralytics    │ yolov10m                                        │ image --> objects   │
+│ ...            │ ...                                             │ ...                 │
+│ ...            │ ...                                             │ ...                 │
+└────────────────┴─────────────────────────────────────────────────┴─────────────────────┘
+```
+
 
 ## Prerequisites
 Install [PyTorch](https://pytorch.org/get-started/locally/).
@@ -171,133 +205,6 @@ model = UltralyticsModel("yolov5n6u")
 model = xinfer.create_model(model)
 ```
 
-### List Models
-```python
-import xinfer
-
-xinfer.list_models()
-```
-
-<table>
-  <thead>
-    <tr>
-      <th colspan="3" style="text-align: center;">Available Models</th>
-    </tr>
-    <tr>
-      <th>Implementation</th>
-      <th>Model ID</th>
-      <th>Input --> Output</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>timm</td>
-      <td>eva02_large_patch14_448.mim_m38m_ft_in22k_in1k</td>
-      <td>image --> class</td>
-    </tr>
-    <tr>
-      <td>timm</td>
-      <td>eva02_large_patch14_448.mim_m38m_ft_in1k</td>
-      <td>image --> class</td>
-    </tr>
-    <tr>
-      <td>timm</td>
-      <td>eva02_large_patch14_448.mim_in22k_ft_in22k_in1k</td>
-      <td>image --> class</td>
-    </tr>
-    <tr>
-      <td>timm</td>
-      <td>eva02_large_patch14_448.mim_in22k_ft_in1k</td>
-      <td>image --> class</td>
-    </tr>
-    <tr>
-      <td>timm</td>
-      <td>eva02_base_patch14_448.mim_in22k_ft_in22k_in1k</td>
-      <td>image --> class</td>
-    </tr>
-    <tr>
-      <td>timm</td>
-      <td>eva02_base_patch14_448.mim_in22k_ft_in1k</td>
-      <td>image --> class</td>
-    </tr>
-    <tr>
-      <td>timm</td>
-      <td>eva02_small_patch14_336.mim_in22k_ft_in1k</td>
-      <td>image --> class</td>
-    </tr>
-    <tr>
-      <td>timm</td>
-      <td>eva02_tiny_patch14_336.mim_in22k_ft_in1k</td>
-      <td>image --> class</td>
-    </tr>
-    <tr>
-      <td>transformers</td>
-      <td>Salesforce/blip2-opt-6.7b-coco</td>
-      <td>image-text --> text</td>
-    </tr>
-    <tr>
-      <td>transformers</td>
-      <td>Salesforce/blip2-flan-t5-xxl</td>
-      <td>image-text --> text</td>
-    </tr>
-    <tr>
-      <td>transformers</td>
-      <td>Salesforce/blip2-opt-6.7b</td>
-      <td>image-text --> text</td>
-    </tr>
-    <tr>
-      <td>transformers</td>
-      <td>Salesforce/blip2-opt-2.7b</td>
-      <td>image-text --> text</td>
-    </tr>
-    <tr>
-      <td>transformers</td>
-      <td>vikhyatk/moondream2</td>
-      <td>image-text --> text</td>
-    </tr>
-    <tr>
-      <td>ultralytics</td>
-      <td>yolov8x</td>
-      <td>image --> objects</td>
-    </tr>
-    <tr>
-      <td>ultralytics</td>
-      <td>yolov8m</td>
-      <td>image --> objects</td>
-    </tr>
-    <tr>
-      <td>ultralytics</td>
-      <td>yolov8l</td>
-      <td>image --> objects</td>
-    </tr>
-    <tr>
-      <td>ultralytics</td>
-      <td>yolov8s</td>
-      <td>image --> objects</td>
-    </tr>
-    <tr>
-      <td>ultralytics</td>
-      <td>yolov8n</td>
-      <td>image --> objects</td>
-    </tr>
-    <tr>
-      <td>ultralytics</td>
-      <td>yolov10x</td>
-      <td>image --> objects</td>
-    </tr>
-    <tr>
-      <td>ultralytics</td>
-      <td>yolov10m</td>
-      <td>image --> objects</td>
-    </tr>
-    <tr>
-      <td colspan="3">...</td>
-    </tr>
-    <tr>
-      <td colspan="3">...</td>
-    </tr>
-  </tbody>
-</table>
 
 ### Adding New Models
 
