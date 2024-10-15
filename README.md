@@ -102,36 +102,25 @@ To install x.infer, run:
 ```bash
 pip install xinfer
 ```
+x.infer can be used with multiple optional libraries. You'll just need to install one or more of the following:
 
-With specific libraries:
 ```bash
 pip install "xinfer[transformers]"
 pip install "xinfer[ultralytics]"
 pip install "xinfer[timm]"
 ```
 
-Install all optional dependencies:
+To install all libraries, run:
 ```bash
 pip install "xinfer[all]"
 ```
 
-Or install locally:
+To install from a local directory, run:
 ```bash
+git clone https://github.com/dnth/x.infer.git
+cd x.infer
 pip install -e .
 ```
-
-With specific libraries (local installation):
-```bash
-pip install -e ".[transformers]"
-pip install -e ".[ultralytics]"
-pip install -e ".[timm]"
-```
-
-Install all optional dependencies (local installation):
-```bash
-pip install -e ".[all]"
-```
-
 
 ## Usage
 
