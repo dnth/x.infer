@@ -1,41 +1,8 @@
-from __future__ import annotations
-
-import importlib
-
 from rich.console import Console
 from rich.table import Table
 
 from .model_registry import model_registry
-
-
-def soft_import(name: str):
-    try:
-        importlib.import_module(name)
-        return True
-    except ModuleNotFoundError as e:
-        if str(e) != f"No module named '{name}'":
-            raise e
-        return False
-
-
-timm_available = soft_import("timm")
-transformers_available = soft_import("transformers")
-ultralytics_available = soft_import("ultralytics")
-
-if timm_available:
-    from .timm.timm_model import TimmModel
-else:
-    TimmModel = type("TimmModel", (), {})
-
-if transformers_available:
-    from .transformers.auto import Vision2SeqModel
-else:
-    Vision2SeqModel = type("Vision2SeqModel", (), {})
-
-if ultralytics_available:
-    from .ultralytics.ultralytics_model import UltralyticsModel
-else:
-    UltralyticsModel = type("UltralyticsModel", (), {})
+from .utils import TimmModel, UltralyticsModel, Vision2SeqModel
 
 
 def create_model(model: str | TimmModel | Vision2SeqModel | UltralyticsModel, **kwargs):
