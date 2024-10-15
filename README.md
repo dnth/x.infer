@@ -57,10 +57,6 @@ model.infer(image, prompt)
 >>> An animated character with long hair and a serious expression is eating a large burger at a table, with other characters in the background.
 ```
 
-## Supported Libraries
-- Hugging Face Transformers: Natural language processing models for tasks like text classification, translation, and summarization.
-- Ultralytics: State-of-the-art real-time object detection models.
-- Custom Models: Support for your own machine learning models and architectures.
 
 ## Prerequisites
 Install [PyTorch](https://pytorch.org/get-started/locally/).
