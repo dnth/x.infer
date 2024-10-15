@@ -72,18 +72,28 @@ pip install "xinfer[transformers]"
 pip install "xinfer[ultralytics]"
 pip install "xinfer[timm]"
 ```
-Or locally:
+
+Install all optional dependencies:
+```bash
+pip install "xinfer[all]"
+```
+
+Or install locally:
 ```bash
 pip install -e .
 ```
-With specific libraries:
+
+With specific libraries (local installation):
 ```bash
-pip install -e ."[transformers]"
-pip install -e ."[ultralytics]"
-pip install -e ."[timm]"
+pip install -e ".[transformers]"
+pip install -e ".[ultralytics]"
+pip install -e ".[timm]"
 ```
 
-
+Install all optional dependencies (local installation):
+```bash
+pip install -e ".[all]"
+```
 
 See [example.ipynb](nbs/example.ipynb) for more examples.
 
