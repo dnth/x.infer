@@ -27,24 +27,9 @@ classifiers = [
 xinfer = "xinfer.cli:main"
 
 [project.optional-dependencies]
-all = [
-    "xinfer[transformers]",
-    "xinfer[ultralytics]",
-]
-
-transformers = [
-    "transformers",
-]
-
-ultralytics = [
-    "ultralytics",
-]
-
-timm = [
-    "timm",
-]
-
-
+timm = ["timm"]
+ultralytics = ["ultralytics"]
+transformers = ["transformers"]
 
 [tool]
 [tool.setuptools.packages.find]
