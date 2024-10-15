@@ -100,8 +100,6 @@ Install all optional dependencies (local installation):
 pip install -e ".[all]"
 ```
 
-See [example.ipynb](nbs/example.ipynb) for more examples.
-
 
 ## Usage
 
