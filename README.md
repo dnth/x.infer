@@ -39,6 +39,9 @@ Have a custom model? Create a class that implements the `BaseModel` interface an
 
 Here's a quick example demonstrating how to use x.infer with a Transformers model:
 
+[![Open In Colab](https://img.shields.io/badge/Open%20In-Colab-blue?style=for-the-badge&logo=google-colab)](https://colab.research.google.com/github/dnth/x.infer/blob/main/nbs/quickstart.ipynb)
+
+
 ```python
 import xinfer
 
