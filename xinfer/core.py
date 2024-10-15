@@ -1,3 +1,4 @@
+from loguru import logger
 from rich.console import Console
 from rich.table import Table
 
@@ -28,6 +29,13 @@ def list_models(wildcard: str = None, limit: int = 20):
                     model_info.input_output.value,
                 )
             )
+
+    if not rows:
+        logger.warning(
+            "No models found matching the criteria.\n"
+            "Perhaps install the relevant dependencies? For example, `pip install xinfer[timm]`"
+        )
+        return
 
     if len(rows) > limit:
         rows = rows[:limit]
