@@ -10,15 +10,15 @@
     <br />
     <a href="https://dnth.github.io/x.infer" target="_blank" rel="noopener noreferrer"><strong>Explore the docs »</strong></a>
     <br />
-    <a href="https://github.com/dnth/x.infer/issues/new?assignees=&labels=Feature+Request&projects=&template=feature_request.md" target="_blank" rel="noopener noreferrer">Feature Request</a>
-    ·
     <a href="#quickstart" target="_blank" rel="noopener noreferrer">Quickstart</a>
+    ·
+    <a href="https://github.com/dnth/x.infer/issues/new?assignees=&labels=Feature+Request&projects=&template=feature_request.md" target="_blank" rel="noopener noreferrer">Feature Request</a>
     ·
     <a href="https://github.com/dnth/x.infer/issues/new?assignees=&labels=bug&projects=&template=bug_report.md" target="_blank" rel="noopener noreferrer">Report Bug</a>
     ·
     <a href="https://github.com/dnth/x.infer/discussions" target="_blank" rel="noopener noreferrer">Discussions</a>
     ·
-    <a href="https://dicksonneoh.com/" target="_blank" rel="noopener noreferrer">About me</a>
+    <a href="https://dicksonneoh.com/" target="_blank" rel="noopener noreferrer">About</a>
 </div>
 
 
