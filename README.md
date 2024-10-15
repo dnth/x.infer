@@ -95,7 +95,7 @@ xinfer.list_models()
 
 
 ## Installation
-> [!NOTE]
+> [!WARNING]
 > You must have [PyTorch](https://pytorch.org/get-started/locally/) installed to use x.infer.
 
 To install x.infer, run:
