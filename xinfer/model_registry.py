@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from enum import Enum
 from typing import Dict, List, Type
 
-from .base_model import BaseModel
+from .models import BaseModel
 
 
 class ModelInputOutput(Enum):
