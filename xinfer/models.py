@@ -2,6 +2,7 @@ import time
 from abc import ABC, abstractmethod
 from contextlib import contextmanager
 
+import gradio as gr
 from rich import box
 from rich.console import Console
 from rich.table import Table
@@ -26,6 +27,33 @@ class BaseModel(ABC):
     @abstractmethod
     def infer_batch(self, images: list[str], prompts: list[str]):
         pass
+
+    def launch_gradio(self):
+        def inference(image):
+            if hasattr(self, "infer"):
+                result = self.infer(image)
+                if isinstance(result, list):
+                    return str(result)  # Convert list to string for display
+                return result
+            else:
+                return "Infer method not implemented for this model."
+
+        inputs = [gr.Image(type="filepath")]
+        outputs = gr.Textbox()
+
+        # Add prompt input if the model's infer method accepts it
+        if "prompt" in self.infer.__code__.co_varnames:
+            inputs.append(gr.Textbox(label="Prompt"))
+            inference = lambda image, prompt: self.infer(image, prompt)
+
+        iface = gr.Interface(
+            fn=inference,
+            inputs=inputs,
+            outputs=outputs,
+            title=f"{self.model_id} Inference",
+            description="Upload an image to get the model's output.",
+        )
+        iface.launch()
 
 
 class ModelStats:
