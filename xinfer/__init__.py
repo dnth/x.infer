@@ -2,11 +2,11 @@
 
 __author__ = """Dickson Neoh"""
 __email__ = "dickson.neoh@gmail.com"
-__version__ = "0.0.5"
+__version__ = "0.0.6"
 
-from .base_model import BaseModel
 from .core import create_model, list_models
 from .model_registry import ModelInputOutput, register_model
+from .models import BaseModel
 from .utils import timm_available, transformers_available, ultralytics_available
 
 if timm_available:

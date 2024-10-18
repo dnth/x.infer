@@ -9,7 +9,7 @@ from transformers import (
     AutoProcessor,
 )
 
-from ..base_model import BaseModel
+from ..models import BaseModel
 
 
 class Vision2SeqModel(BaseModel):
@@ -86,29 +86,20 @@ class Vision2SeqModel(BaseModel):
         outputs = self.processor.batch_decode(predictions, skip_special_tokens=True)
         return [output.replace("\n", "").strip() for output in outputs]
 
-    def infer(self, image, prompt, verbose=False, **generate_kwargs):
-        start_time = time.perf_counter()
-        preprocessed_input = self.preprocess(image, prompt)
-        prediction = self.predict(preprocessed_input, **generate_kwargs)
-        result = self.postprocess(prediction)[0]
-        end_time = time.perf_counter()
-        inference_time = end_time - start_time
-        if verbose:
-            logger.info(f"Inference time: {inference_time*1000:.4f} ms")
-            logger.info(f"Device: {self.device}")
-            logger.info(f"Dtype: {self.dtype}")
+    def infer(self, image, prompt, **generate_kwargs):
+        with self.stats.track_inference_time():
+            preprocessed_input = self.preprocess(image, prompt)
+            prediction = self.predict(preprocessed_input, **generate_kwargs)
+            result = self.postprocess(prediction)[0]
+
+        self.stats.update_inference_count(1)
         return result
 
-    def infer_batch(self, images, prompts, verbose=False, **generate_kwargs):
-        start_time = time.perf_counter()
-        preprocessed_input = self.preprocess(images, prompts)
-        predictions = self.predict(preprocessed_input, **generate_kwargs)
-        results = self.postprocess(predictions)
-        end_time = time.perf_counter()
-        inference_time = end_time - start_time
-        if verbose:
-            logger.info(f"Inference time: {inference_time*1000:.4f} ms")
-            logger.info(f"Batch size: {len(images)}")
-            logger.info(f"Device: {self.device}")
-            logger.info(f"Dtype: {self.dtype}")
+    def infer_batch(self, images, prompts, **generate_kwargs):
+        with self.stats.track_inference_time():
+            preprocessed_input = self.preprocess(images, prompts)
+            predictions = self.predict(preprocessed_input, **generate_kwargs)
+            results = self.postprocess(predictions)
+
+        self.stats.update_inference_count(len(images))
         return results

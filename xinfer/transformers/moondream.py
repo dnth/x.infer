@@ -6,8 +6,8 @@ from loguru import logger
 from PIL import Image
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-from ..base_model import BaseModel
 from ..model_registry import ModelInputOutput, register_model
+from ..models import BaseModel
 
 
 @register_model(
@@ -75,38 +75,28 @@ class Moondream(BaseModel):
         self.model.eval()
         self.tokenizer = AutoTokenizer.from_pretrained(self.model_id)
 
-    def infer(self, image: str, prompt: str = None, verbose=False, **generate_kwargs):
-        start_time = time.perf_counter()
-        image = self.preprocess(image)
-        encoded_image = self.model.encode_image(image)
-        output = self.model.answer_question(
-            question=prompt,
-            image_embeds=encoded_image,
-            tokenizer=self.tokenizer,
-            **generate_kwargs,
-        )
-        end_time = time.perf_counter()
-        inference_time = end_time - start_time
-        if verbose:
-            logger.info(f"Inference time: {inference_time*1000:.4f} ms")
-            logger.info(f"Device: {self.device}")
-            logger.info(f"Dtype: {self.dtype}")
+    def infer(self, image: str, prompt: str = None, **generate_kwargs):
+        with self.stats.track_inference_time():
+            image = self.preprocess(image)
+            encoded_image = self.model.encode_image(image)
+            output = self.model.answer_question(
+                question=prompt,
+                image_embeds=encoded_image,
+                tokenizer=self.tokenizer,
+                **generate_kwargs,
+            )
+
+        self.stats.update_inference_count(1)
         return output
 
-    def infer_batch(
-        self, images: list[str], prompts: list[str], verbose=False, **generate_kwargs
-    ):
-        start_time = time.perf_counter()
-        images = self.preprocess(images)
-        prompts = [prompt for prompt in prompts]
+    def infer_batch(self, images: list[str], prompts: list[str], **generate_kwargs):
+        with self.stats.track_inference_time():
+            images = self.preprocess(images)
+            prompts = [prompt for prompt in prompts]
 
-        outputs = self.model.batch_answer(
-            images, prompts, self.tokenizer, **generate_kwargs
-        )
-        end_time = time.perf_counter()
-        inference_time = end_time - start_time
-        if verbose:
-            logger.info(f"Inference time: {inference_time*1000:.4f} ms")
-            logger.info(f"Device: {self.device}")
-            logger.info(f"Dtype: {self.dtype}")
+            outputs = self.model.batch_answer(
+                images, prompts, self.tokenizer, **generate_kwargs
+            )
+
+        self.stats.update_inference_count(len(images))
         return outputs

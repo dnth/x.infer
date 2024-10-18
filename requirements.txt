@@ -3,3 +3,4 @@ requests
 loguru
 einops
 pillow
+gradio
