@@ -74,7 +74,7 @@ markdown_extensions:
 nav:
     - Home: index.md
     - Installation: installation.md
-    - Usage: usage.md
+    # - Usage: usage.md
     - Quickstart: examples/quickstart.md
     # - Contributing: contributing.md
     # - FAQ: faq.md
