@@ -130,26 +130,42 @@ pip install -e .
 
 ## Usage
 
+
 ### Supported Models
+
+
 Transformers:
-- [BLIP2 Series](https://huggingface.co/Salesforce/blip2-opt-2.7b)
-```python
-model = xinfer.create_model("Salesforce/blip2-opt-2.7b")
-```
-- [Moondream2](https://github.com/vikhyat/moondream)
-```python
-model = xinfer.create_model("vikhyatk/moondream2")
-```
-
-- [VLRM-BLIP2](https://huggingface.co/sashakunitsyn/vlrm-blip2-opt-2.7b)
-```python
-model = xinfer.create_model("sashakunitsyn/vlrm-blip2-opt-2.7b")
-```
-
-- [JoyCaption](https://github.com/fpgaminer/joycaption)
-```python
-model = xinfer.create_model("fancyfeast/llama-joycaption-alpha-two-hf-llava")
-```
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Model</th>
+                <th>Usage</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><a href="https://huggingface.co/Salesforce/blip2-opt-2.7b">BLIP2 Series</a></td>
+                <td><code>xinfer.create_model("Salesforce/blip2-opt-2.7b")</code></td>
+            </tr>
+            <tr>
+                <td><a href="https://github.com/vikhyat/moondream">Moondream2</a></td>
+                <td><code>xinfer.create_model("vikhyatk/moondream2")</code></td>
+            </tr>
+            <tr>
+                <td><a href="https://huggingface.co/sashakunitsyn/vlrm-blip2-opt-2.7b">VLRM-BLIP2</a></td>
+                <td><code>xinfer.create_model("sashakunitsyn/vlrm-blip2-opt-2.7b")</code></td>
+            </tr>
+            <tr>
+                <td><a href="https://github.com/fpgaminer/joycaption">JoyCaption</a></td>
+                <td><code>xinfer.create_model("fancyfeast/llama-joycaption-alpha-two-hf-llava")</code></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
 
 > [!NOTE]
 > Wish to load an unlisted model?
