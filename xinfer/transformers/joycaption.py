@@ -119,5 +119,94 @@ class JoyCaption(BaseModel):
 
         return caption
 
+    def preprocess_batch(self, images: list[str], prompts: list[str]):
+        processed_images = []
+        input_ids_list = []
+        attention_masks = []
+
+        for image, prompt in zip(images, prompts):
+            image = Image.open(image).convert("RGB")
+            image = TVF.resize(image, (384, 384), Image.LANCZOS)
+            image = TVF.pil_to_tensor(image)
+            image = image / 255.0
+            image = TVF.normalize(image, [0.5], [0.5])
+            image = image.to(self.dtype)
+            processed_images.append(image)
+
+            convo = [
+                {"role": "system", "content": "You are a helpful image captioner."},
+                {"role": "user", "content": prompt},
+            ]
+            convo_string = self.tokenizer.apply_chat_template(
+                convo, tokenize=False, add_generation_prompt=True
+            )
+            convo_tokens = self.tokenizer.encode(
+                convo_string, add_special_tokens=False, truncation=False
+            )
+
+            input_tokens = []
+            for token in convo_tokens:
+                if token == self.model.config.image_token_index:
+                    input_tokens.extend(
+                        [self.model.config.image_token_index]
+                        * self.model.config.image_seq_length
+                    )
+                else:
+                    input_tokens.append(token)
+
+            input_ids = torch.tensor(input_tokens, dtype=torch.long)
+            input_ids_list.append(input_ids)
+
+        # Pad input_ids to the same length
+        max_length = max(ids.size(0) for ids in input_ids_list)
+        padded_input_ids = torch.zeros(
+            (len(input_ids_list), max_length), dtype=torch.long
+        )
+        for i, ids in enumerate(input_ids_list):
+            padded_input_ids[i, : ids.size(0)] = ids
+            attention_masks.append(torch.ones(max_length, dtype=torch.long))
+            attention_masks[-1][ids.size(0) :] = 0
+
+        images_tensor = torch.stack(processed_images)
+        attention_mask_tensor = torch.stack(attention_masks)
+
+        return images_tensor, padded_input_ids, attention_mask_tensor
+
     def infer_batch(self, images: list[str], prompts: list[str], **generate_kwargs):
-        raise NotImplementedError("Pending implementation")
+        with self.stats.track_inference_time():
+            with torch.inference_mode(), torch.amp.autocast(
+                device_type=self.device, dtype=self.dtype
+            ):
+                images, input_ids, attention_mask = self.preprocess_batch(
+                    images, prompts
+                )
+
+                if "max_new_tokens" not in generate_kwargs:
+                    generate_kwargs["max_new_tokens"] = 300
+
+                generate_ids = self.model.generate(
+                    input_ids=input_ids.to(self.device),
+                    pixel_values=images.to(self.device),
+                    attention_mask=attention_mask.to(self.device),
+                    do_sample=True,
+                    suppress_tokens=None,
+                    use_cache=True,
+                    **generate_kwargs,
+                )
+
+            captions = []
+            for i, gen_ids in enumerate(generate_ids):
+                # Trim off the prompt
+                gen_ids = gen_ids[input_ids.shape[1] :]
+
+                # Decode the caption
+                caption = self.tokenizer.decode(
+                    gen_ids,
+                    skip_special_tokens=True,
+                    clean_up_tokenization_spaces=False,
+                )
+                captions.append(caption.strip())
+
+        self.stats.update_inference_count(len(images))
+
+        return captions
