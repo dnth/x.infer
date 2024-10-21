@@ -1,8 +1,8 @@
-site_name: xinfer
-site_description: A unified interface to run inference on machine learning libraries.
+site_name: x.infer
+site_description: Framework agnostic computer vision inference.
 site_author: dnth
-site_url: https://dnth.github.io/xinfer
-repo_url: https://github.com/dnth/xinfer
+site_url: https://dnth.github.io/x.infer
+repo_url: https://github.com/dnth/x.infer
 
 copyright: "Copyright &copy; 2024 - 2024 Dickson Neoh"
 
@@ -23,7 +23,7 @@ theme:
     name: material
     icon:
         repo: fontawesome/brands/github
-    # logo: assets/logo.png
+    # logo: assets/xinfer.jpg
     # favicon: assets/favicon.png
     features:
         - navigation.instant
@@ -79,8 +79,8 @@ nav:
     # - FAQ: faq.md
     # - Changelog: changelog.md
     # - Report Issues: https://github.com/dnth/xinfer/issues
-    # - Examples:
-    #     - examples/intro.ipynb
+    - Examples:
+        - examples/quickstart.ipynb
     # - API Reference:
     #       - xinfer module: xinfer.md
         #   - common module: common.md
