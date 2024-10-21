@@ -180,11 +180,20 @@ model = xinfer.create_model(model)
 ```
 
 TIMM:
-- EVA02 Series
-
-```python
-model = xinfer.create_model("eva02_small_patch14_336.mim_in22k_ft_in1k")
-```
+<table>
+    <thead>
+        <tr>
+            <th>Model</th>
+            <th>Usage</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><a href="https://github.com/baaivision/EVA/tree/master/EVA-02">EVA02 Series</a></td>
+            <td><code>xinfer.create_model("eva02_small_patch14_336.mim_in22k_ft_in1k")</code></td>
+        </tr>
+    </tbody>
+</table>
 
 > [!NOTE]
 > Wish to load an unlisted model?
@@ -199,23 +208,28 @@ model = xinfer.create_model(model)
 
 
 Ultralytics:
-- YOLOv8 Series
-
-```python
-model = xinfer.create_model("yolov8n")
-```
-
-- YOLOv10 Series
-
-```python
-model = xinfer.create_model("yolov10x")
-```
-
-- YOLOv11 Series
-
-```python
-model = xinfer.create_model("yolov11s")
-```
+<table>
+    <thead>
+        <tr>
+            <th>Model</th>
+            <th>Usage</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><a href="https://github.com/ultralytics/ultralytics">YOLOv8 Series</a></td>
+            <td><code>xinfer.create_model("yolov8n")</code></td>
+        </tr>
+        <tr>
+            <td><a href="https://github.com/ultralytics/ultralytics">YOLOv10 Series</a></td>
+            <td><code>xinfer.create_model("yolov10x")</code></td>
+        </tr>
+        <tr>
+            <td><a href="https://github.com/ultralytics/ultralytics">YOLOv11 Series</a></td>
+            <td><code>xinfer.create_model("yolov11s")</code></td>
+        </tr>
+    </tbody>
+</table>
 
 > [!NOTE]
 > Wish to load an unlisted model?
