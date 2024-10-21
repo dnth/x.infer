@@ -75,12 +75,13 @@ nav:
     - Home: index.md
     - Installation: installation.md
     - Usage: usage.md
+    - Quickstart: examples/quickstart.md
     # - Contributing: contributing.md
     # - FAQ: faq.md
     # - Changelog: changelog.md
     # - Report Issues: https://github.com/dnth/xinfer/issues
-    - Examples:
-        - examples/quickstart.ipynb
+    # - Examples:
+    #     - examples/quickstart.ipynb
     # - API Reference:
     #       - xinfer module: xinfer.md
         #   - common module: common.md

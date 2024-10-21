@@ -34,6 +34,9 @@ jobs:
             - name: PKG-TEST
               run: |
                   python -m unittest discover tests/
+            - name: Convert Jupyter notebook to markdown
+              run: |
+                  jupyter nbconvert nbs/quickstart.ipynb --to markdown --output-dir docs/examples/
             - name: Build docs
               run: |
                   mkdocs build
@@ -52,4 +55,3 @@ jobs:
             #       NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
             #       NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
             #   timeout-minutes: 10
-
