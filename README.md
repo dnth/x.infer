@@ -132,21 +132,21 @@ pip install -e .
 
 ### Supported Models
 Transformers:
-- BLIP2 Series
+- [BLIP2 Series](https://huggingface.co/Salesforce/blip2-opt-2.7b)
 ```python
 model = xinfer.create_model("Salesforce/blip2-opt-2.7b")
 ```
-- Moondream2
+- [Moondream2](https://github.com/vikhyat/moondream)
 ```python
 model = xinfer.create_model("vikhyatk/moondream2")
 ```
 
-- VLRM-BLIP2
+- [VLRM-BLIP2](https://huggingface.co/sashakunitsyn/vlrm-blip2-opt-2.7b)
 ```python
 model = xinfer.create_model("sashakunitsyn/vlrm-blip2-opt-2.7b")
 ```
 
-- JoyCaption
+- [JoyCaption](https://github.com/fpgaminer/joycaption)
 ```python
 model = xinfer.create_model("fancyfeast/llama-joycaption-alpha-two-hf-llava")
 ```
