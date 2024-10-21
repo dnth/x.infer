@@ -91,7 +91,13 @@ xinfer.list_models()
 └────────────────┴─────────────────────────────────────────────────┴─────────────────────┘
 ```
 
+## Launch Gradio Interface
 
+```python
+model.launch_gradio()
+```
+
+![Gradio Interface](https://raw.githubusercontent.com/dnth/x.infer/refs/heads/main/assets/gradio.png)
 
 
 ## Installation
@@ -133,6 +139,16 @@ model = xinfer.create_model("Salesforce/blip2-opt-2.7b")
 - Moondream2
 ```python
 model = xinfer.create_model("vikhyatk/moondream2")
+```
+
+- VLRM-BLIP2
+```python
+model = xinfer.create_model("sashakunitsyn/vlrm-blip2-opt-2.7b")
+```
+
+- JoyCaption
+```python
+model = xinfer.create_model("fancyfeast/llama-joycaption-alpha-two-hf-llava")
 ```
 
 > [!NOTE]
