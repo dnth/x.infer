@@ -22,12 +22,12 @@
 </div>
 
 
-## Why x.infer?
+## 🤔 Why x.infer?
 If you'd like to run many models from different libraries without having to rewrite your inference code, x.infer is for you. It has a simple API and is easy to extend. Currently supports Transformers, Ultralytics, and TIMM.
 
 Have a custom model? Create a class that implements the `BaseModel` interface and register it with x.infer. See [Adding New Models](#adding-new-models) for more details.
 
-## Key Features
+## 🌟 Key Features
 <div align="center">
   <img src="https://raw.githubusercontent.com/dnth/x.infer/refs/heads/main/assets/flowchart.gif" alt="x.infer" width="500"/>
 </div>
@@ -37,7 +37,7 @@ Have a custom model? Create a class that implements the `BaseModel` interface an
 - **Ease of Use:** Simplifies model loading, input preprocessing, inference execution, and output postprocessing.
 - **Extensibility:** Add support for new models and libraries with minimal code changes.
 
-## Quickstart
+## 🚀 Quickstart
 
 Here's a quick example demonstrating how to use x.infer with a Transformers model:
 
@@ -91,7 +91,7 @@ xinfer.list_models()
 └────────────────┴─────────────────────────────────────────────────┴─────────────────────┘
 ```
 
-## Launch Gradio Interface
+## 🖥️ Launch Gradio Interface
 
 ```python
 model.launch_gradio()
@@ -100,7 +100,7 @@ model.launch_gradio()
 ![Gradio Interface](https://raw.githubusercontent.com/dnth/x.infer/refs/heads/main/assets/gradio.png)
 
 
-## Installation
+## 📦 Installation
 > [!IMPORTANT]
 > You must have [PyTorch](https://pytorch.org/get-started/locally/) installed to use x.infer.
 
@@ -128,7 +128,7 @@ cd x.infer
 pip install -e .
 ```
 
-## Usage
+## 🛠️ Usage
 
 
 ### Supported Models
@@ -245,7 +245,7 @@ model = xinfer.create_model(model)
 ```
 
 
-### Adding New Models
+### 🔧 Adding New Models
 
 + **Step 1:** Create a new model class that implements the `BaseModel` interface.
 
