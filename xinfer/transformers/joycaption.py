@@ -91,14 +91,18 @@ class JoyCaption(BaseModel):
                 device_type=self.device, dtype=self.dtype
             ):
                 image, input_ids, attention_mask = self.preprocess(image, prompt)
+
+                if "max_new_tokens" not in generate_kwargs:
+                    generate_kwargs["max_new_tokens"] = 300
+
                 generate_ids = self.model.generate(
                     input_ids=input_ids.to(self.device),
                     pixel_values=image.to(self.device),
                     attention_mask=attention_mask.to(self.device),
-                    max_new_tokens=300,
                     do_sample=True,
                     suppress_tokens=None,
                     use_cache=True,
+                    **generate_kwargs,
                 )[0]
 
             # Trim off the prompt
