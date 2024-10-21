@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#welcome-to-xinfer" class="md-skip">
+        <a href="#why-xinfer" class="md-skip">
           Skip to content
         </a>
       
@@ -270,8 +270,6 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
-        
-      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
@@ -300,8 +298,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -310,9 +306,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#features" class="md-nav__link">
+  <a href="#why-xinfer" class="md-nav__link">
     <span class="md-ellipsis">
-      Features
+      Why x.infer?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Features
     </span>
   </a>
   
@@ -383,8 +388,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -393,9 +396,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#features" class="md-nav__link">
+  <a href="#why-xinfer" class="md-nav__link">
     <span class="md-ellipsis">
-      Features
+      Why x.infer?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Features
     </span>
   </a>
   
@@ -422,18 +434,42 @@
   
 
 
-<h1 id="welcome-to-xinfer">Welcome to xinfer<a class="headerlink" href="#welcome-to-xinfer" title="Permanent link">&para;</a></h1>
-<p><img alt="PyPI version" src="https://img.shields.io/pypi/v/xinfer.svg?style=for-the-badge&amp;logo=pypi&amp;logoColor=white&amp;label=PyPI&amp;color=blue" />
-<img alt="Downloads" src="https://img.shields.io/pypi/dm/xinfer.svg?style=for-the-badge&amp;logo=pypi&amp;logoColor=white&amp;label=Downloads&amp;color=purple" />
+  <h1>Home</h1>
+
+<p><img alt="Python" src="https://img.shields.io/badge/Python-3.10%20|%203.11%20|%203.12-brightgreen?style=for-the-badge" />
+<a href="https://pypi.org/project/xinfer/"><img alt="PyPI version" src="https://img.shields.io/pypi/v/xinfer.svg?style=for-the-badge&amp;logo=pypi&amp;logoColor=white&amp;label=PyPI&amp;color=blue" /></a>
+<a href="https://pypi.org/project/xinfer/"><img alt="Downloads" src="https://img.shields.io/pypi/dm/xinfer.svg?style=for-the-badge&amp;logo=pypi&amp;logoColor=white&amp;label=Downloads&amp;color=purple" /></a>
 <img alt="License" src="https://img.shields.io/badge/License-Apache%202.0-green.svg?style=for-the-badge&amp;logo=apache&amp;logoColor=white" /></p>
-<p><strong>A unified interface to run inference on computer vision libraries.</strong></p>
+<div align="center">
+    <img src="https://raw.githubusercontent.com/dnth/x.infer/refs/heads/main/assets/xinfer.jpg" alt="x.infer" width="500"/>
+    <br />
+    <br />
+    <a href="https://dnth.github.io/x.infer" target="_blank" rel="noopener noreferrer"><strong>Explore the docs »</strong></a>
+    <br />
+    <a href="#quickstart" target="_blank" rel="noopener noreferrer">Quickstart</a>
+    ·
+    <a href="https://github.com/dnth/x.infer/issues/new?assignees=&labels=Feature+Request&projects=&template=feature_request.md" target="_blank" rel="noopener noreferrer">Feature Request</a>
+    ·
+    <a href="https://github.com/dnth/x.infer/issues/new?assignees=&labels=bug&projects=&template=bug_report.md" target="_blank" rel="noopener noreferrer">Report Bug</a>
+    ·
+    <a href="https://github.com/dnth/x.infer/discussions" target="_blank" rel="noopener noreferrer">Discussions</a>
+    ·
+    <a href="https://dicksonneoh.com/" target="_blank" rel="noopener noreferrer">About</a>
+</div>
+
+<h2 id="why-xinfer">Why x.infer?<a class="headerlink" href="#why-xinfer" title="Permanent link">&para;</a></h2>
+<p>If you'd like to run many models from different libraries without having to rewrite your inference code, x.infer is for you. It has a simple API and is easy to extend. Currently supports Transformers, Ultralytics, and TIMM.</p>
+<p>Have a custom model? Create a class that implements the <code>BaseModel</code> interface and register it with x.infer. See <a href="#adding-new-models">Adding New Models</a> for more details.</p>
+<h2 id="key-features">Key Features<a class="headerlink" href="#key-features" title="Permanent link">&para;</a></h2>
+<div align="center">
+  <img src="https://raw.githubusercontent.com/dnth/x.infer/refs/heads/main/assets/flowchart.gif" alt="x.infer" width="500"/>
+</div>
+
 <ul>
-<li>Free software: Apache Software License 2.0</li>
-<li>Documentation: <a href="https://dnth.github.io/xinfer">https://dnth.github.io/xinfer</a></li>
-</ul>
-<h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">&para;</a></h2>
-<ul>
-<li>TODO</li>
+<li><strong>Unified Interface:</strong> Interact with different machine learning models through a single, consistent API.</li>
+<li><strong>Modular Design:</strong> Integrate and swap out models without altering the core framework.</li>
+<li><strong>Ease of Use:</strong> Simplifies model loading, input preprocessing, inference execution, and output postprocessing.</li>
+<li><strong>Extensibility:</strong> Add support for new models and libraries with minimal code changes.</li>
 </ul>
 
 
@@ -457,7 +493,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-10-11T01:47:07+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-10-11</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-10-21T15:31:57+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-10-21</span>
   </span>
 
     
