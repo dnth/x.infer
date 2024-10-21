@@ -34,4 +34,5 @@ Have a custom model? Create a class that implements the `BaseModel` interface an
 
 - **Unified Interface:** Interact with different machine learning models through a single, consistent API.
 - **Modular Design:** Integrate and swap out models without altering the core framework.
-- **Ease of Use:** Simplifies model loading, input preprocessing, inference execution, and outpu
+- **Ease of Use:** Simplifies model loading, input preprocessing, inference execution, and output postprocessing.
+- **Extensibility:** Add support for new models and libraries with minimal code changes.
