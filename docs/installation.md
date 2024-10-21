@@ -1,21 +1,27 @@
 # Installation
 
-## Stable release
+You must have [PyTorch](https://pytorch.org/get-started/locally/) installed to use x.infer.
 
-To install xinfer, run this command in your terminal:
-
-```
+To install the barebones x.infer (without any optional dependencies), run:
+```bash
 pip install xinfer
 ```
+x.infer can be used with multiple optional libraries. You'll just need to install one or more of the following:
 
-This is the preferred method to install xinfer, as it will always install the most recent stable release.
-
-If you don't have [pip](https://pip.pypa.io) installed, this [Python installation guide](http://docs.python-guide.org/en/latest/starting/installation/) can guide you through the process.
-
-## From sources
-
-To install xinfer from sources, run this command in your terminal:
-
+```bash
+pip install "xinfer[transformers]"
+pip install "xinfer[ultralytics]"
+pip install "xinfer[timm]"
 ```
-pip install git+https://github.com/dnth/xinfer
+
+To install all libraries, run:
+```bash
+pip install "xinfer[all]"
+```
+
+To install from a local directory, run:
+```bash
+git clone https://github.com/dnth/x.infer.git
+cd x.infer
+pip install -e .
 ```
