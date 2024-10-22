@@ -2,6 +2,7 @@ import time
 from abc import ABC, abstractmethod
 from contextlib import contextmanager
 
+from loguru import logger
 from rich import box
 from rich.console import Console
 from rich.table import Table
@@ -14,6 +15,10 @@ class BaseModel(ABC):
         self.dtype = dtype
 
         self.stats = ModelStats(model_id, device, dtype)
+
+        logger.info(f"Model: {model_id}")
+        logger.info(f"Device: {device}")
+        logger.info(f"Dtype: {dtype}")
 
     @abstractmethod
     def load_model(self):

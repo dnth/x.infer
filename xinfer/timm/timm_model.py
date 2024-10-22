@@ -1,11 +1,9 @@
-import time
 from io import BytesIO
 from typing import Dict, List
 
 import requests
 import timm
 import torch
-from loguru import logger
 from PIL import Image
 
 from ..models import BaseModel
@@ -16,10 +14,6 @@ class TimmModel(BaseModel):
     def __init__(
         self, model_id: str, device: str = "cpu", dtype: str = "float32", **kwargs
     ):
-        logger.info(f"Model: {model_id}")
-        logger.info(f"Device: {device}")
-        logger.info(f"Dtype: {dtype}")
-
         dtype_map = {
             "float32": torch.float32,
             "float16": torch.float16,
@@ -33,7 +27,6 @@ class TimmModel(BaseModel):
         self.load_model(**kwargs)
 
     def load_model(self, **kwargs):
-        logger.info(f"Loading model: {self.model_id}")
         self.model = timm.create_model(self.model_id, pretrained=True, **kwargs).to(
             self.device, self.dtype
         )

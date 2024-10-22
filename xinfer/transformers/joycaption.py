@@ -1,6 +1,5 @@
 import torch
 import torchvision.transforms.functional as TVF
-from loguru import logger
 from PIL import Image
 from transformers import AutoTokenizer, LlavaForConditionalGeneration
 
@@ -15,10 +14,6 @@ from ..models import BaseModel
 )
 class JoyCaption(BaseModel):
     def __init__(self, model_id: str, device: str, dtype: str, **kwargs):
-        logger.info(f"Model: {model_id}")
-        logger.info(f"Device: {device}")
-        logger.info(f"Dtype: {dtype}")
-
         dtype_map = {
             "float32": torch.float32,
             "float16": torch.float16,

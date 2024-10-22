@@ -1,7 +1,6 @@
 from typing import Dict, List
 
 import torch
-from loguru import logger
 from ultralytics import YOLO
 
 from ..models import BaseModel
@@ -14,10 +13,6 @@ class UltralyticsModel(BaseModel):
         self.model_id = model_id
         self.device = device
         self.dtype = dtype
-
-        logger.info(f"Model: {model_id}")
-        logger.info(f"Device: {device}")
-        logger.info(f"Dtype: {dtype}")
 
         dtype_map = {
             "float32": torch.float32,

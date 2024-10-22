@@ -1,8 +1,5 @@
-import time
-
 import requests
 import torch
-from loguru import logger
 from PIL import Image
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
@@ -21,11 +18,6 @@ class Moondream(BaseModel):
         device: str = "cpu",
         dtype: str = "float32",
     ):
-        logger.info(f"Model: {model_id}")
-        logger.info(f"Revision: {revision}")
-        logger.info(f"Device: {device}")
-        logger.info(f"Dtype: {dtype}")
-
         dtype_map = {
             "float32": torch.float32,
             "float16": torch.float16,
