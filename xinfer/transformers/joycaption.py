@@ -14,15 +14,6 @@ from ..models import BaseModel
 )
 class JoyCaption(BaseModel):
     def __init__(self, model_id: str, device: str, dtype: str, **kwargs):
-        dtype_map = {
-            "float32": torch.float32,
-            "float16": torch.float16,
-            "bfloat16": torch.bfloat16,
-        }
-        if dtype not in dtype_map:
-            raise ValueError("dtype must be one of 'float32', 'float16', or 'bfloat16'")
-        dtype = dtype_map[dtype]
-
         super().__init__(model_id, device, dtype)
         self.load_model(**kwargs)
 

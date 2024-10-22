@@ -2,6 +2,7 @@ import time
 from abc import ABC, abstractmethod
 from contextlib import contextmanager
 
+import torch
 from loguru import logger
 from rich import box
 from rich.console import Console
@@ -20,6 +21,15 @@ class BaseModel(ABC):
         logger.info(f"Model: {model_id}")
         logger.info(f"Device: {device}")
         logger.info(f"Dtype: {dtype}")
+
+        dtype_map = {
+            "float32": torch.float32,
+            "float16": torch.float16,
+            "bfloat16": torch.bfloat16,
+        }
+        if dtype not in dtype_map:
+            raise ValueError("dtype must be one of 'float32', 'float16', or 'bfloat16'")
+        self.dtype = dtype_map[dtype]
 
     @abstractmethod
     def load_model(self):

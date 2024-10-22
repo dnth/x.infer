@@ -10,24 +10,11 @@ class UltralyticsModel(BaseModel):
     def __init__(
         self, model_id: str, device: str = "cpu", dtype: str = "float32", **kwargs
     ):
-        self.model_id = model_id
-        self.device = device
-        self.dtype = dtype
-
-        dtype_map = {
-            "float32": torch.float32,
-            "float16": torch.float16,
-            "bfloat16": torch.bfloat16,
-        }
-        if dtype not in dtype_map:
-            raise ValueError("dtype must be one of 'float32', 'float16', or 'bfloat16'")
-        dtype = dtype_map[dtype]
-
         super().__init__(model_id, device, dtype)
-        self.load_model()
+        self.load_model(**kwargs)
 
-    def load_model(self):
-        self.model = YOLO(self.model_id)
+    def load_model(self, **kwargs):
+        self.model = YOLO(self.model_id, **kwargs)
 
     def infer_batch(self, images: str | List[str], **kwargs) -> List[List[Dict]]:
         with self.track_inference_time():
