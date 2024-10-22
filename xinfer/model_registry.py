@@ -9,8 +9,8 @@ class ModelInputOutput(Enum):
     IMAGE_TO_TEXT = "image --> text"
     IMAGE_TEXT_TO_TEXT = "image-text --> text"
     TEXT_TO_TEXT = "text --> text"
-    IMAGE_TO_OBJECTS = "image --> objects"
-    IMAGE_TO_CLASS = "image --> class"
+    IMAGE_TO_BOXES = "image --> boxes"
+    IMAGE_TO_CATEGORIES = "image --> categories"
 
 
 @dataclass

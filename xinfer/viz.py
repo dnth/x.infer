@@ -24,7 +24,7 @@ def launch_gradio(model: BaseModel):
             description="Upload an image and provide a prompt to generate a description.",
         )
 
-    elif model_info.input_output == ModelInputOutput.IMAGE_TO_OBJECTS:
+    elif model_info.input_output == ModelInputOutput.IMAGE_TO_BOXES:
         iface = gr.Interface(
             fn=infer,
             inputs=gr.Image(type="filepath"),
@@ -33,7 +33,7 @@ def launch_gradio(model: BaseModel):
             description="Upload an image to detect objects.",
         )
 
-    elif model_info.input_output == ModelInputOutput.IMAGE_TO_CLASS:
+    elif model_info.input_output == ModelInputOutput.IMAGE_TO_CATEGORIES:
         iface = gr.Interface(
             fn=infer,
             inputs=gr.Image(type="filepath"),

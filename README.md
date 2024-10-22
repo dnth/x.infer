@@ -63,32 +63,33 @@ xinfer.list_models()
 ```
 
 ```
-┏━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
-┃ Implementation ┃ Model ID                                        ┃ Input --> Output    ┃
-┡━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
-│ timm           │ eva02_large_patch14_448.mim_m38m_ft_in22k_in1k  │ image --> class     │
-│ timm           │ eva02_large_patch14_448.mim_m38m_ft_in1k        │ image --> class     │
-│ timm           │ eva02_large_patch14_448.mim_in22k_ft_in22k_in1k │ image --> class     │
-│ timm           │ eva02_large_patch14_448.mim_in22k_ft_in1k       │ image --> class     │
-│ timm           │ eva02_base_patch14_448.mim_in22k_ft_in22k_in1k  │ image --> class     │
-│ timm           │ eva02_base_patch14_448.mim_in22k_ft_in1k        │ image --> class     │
-│ timm           │ eva02_small_patch14_336.mim_in22k_ft_in1k       │ image --> class     │
-│ timm           │ eva02_tiny_patch14_336.mim_in22k_ft_in1k        │ image --> class     │
-│ transformers   │ Salesforce/blip2-opt-6.7b-coco                  │ image-text --> text │
-│ transformers   │ Salesforce/blip2-flan-t5-xxl                    │ image-text --> text │
-│ transformers   │ Salesforce/blip2-opt-6.7b                       │ image-text --> text │
-│ transformers   │ Salesforce/blip2-opt-2.7b                       │ image-text --> text │
-│ transformers   │ vikhyatk/moondream2                             │ image-text --> text │
-│ ultralytics    │ yolov8x                                         │ image --> objects   │
-│ ultralytics    │ yolov8m                                         │ image --> objects   │
-│ ultralytics    │ yolov8l                                         │ image --> objects   │
-│ ultralytics    │ yolov8s                                         │ image --> objects   │
-│ ultralytics    │ yolov8n                                         │ image --> objects   │
-│ ultralytics    │ yolov10x                                        │ image --> objects   │
-│ ultralytics    │ yolov10m                                        │ image --> objects   │
-│ ...            │ ...                                             │ ...                 │
-│ ...            │ ...                                             │ ...                 │
-└────────────────┴─────────────────────────────────────────────────┴─────────────────────┘
+       Available Models                                      
+┏━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Implementation ┃ Model ID                                        ┃ Input --> Output     ┃
+┡━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━┩
+│ timm           │ eva02_large_patch14_448.mim_m38m_ft_in22k_in1k  │ image --> categories │
+│ timm           │ eva02_large_patch14_448.mim_m38m_ft_in1k        │ image --> categories │
+│ timm           │ eva02_large_patch14_448.mim_in22k_ft_in22k_in1k │ image --> categories │
+│ timm           │ eva02_large_patch14_448.mim_in22k_ft_in1k       │ image --> categories │
+│ timm           │ eva02_base_patch14_448.mim_in22k_ft_in22k_in1k  │ image --> categories │
+│ timm           │ eva02_base_patch14_448.mim_in22k_ft_in1k        │ image --> categories │
+│ timm           │ eva02_small_patch14_336.mim_in22k_ft_in1k       │ image --> categories │
+│ timm           │ eva02_tiny_patch14_336.mim_in22k_ft_in1k        │ image --> categories │
+│ transformers   │ Salesforce/blip2-opt-6.7b-coco                  │ image-text --> text  │
+│ transformers   │ Salesforce/blip2-flan-t5-xxl                    │ image-text --> text  │
+│ transformers   │ Salesforce/blip2-opt-6.7b                       │ image-text --> text  │
+│ transformers   │ Salesforce/blip2-opt-2.7b                       │ image-text --> text  │
+│ transformers   │ fancyfeast/llama-joycaption-alpha-two-hf-llava  │ image-text --> text  │
+│ transformers   │ vikhyatk/moondream2                             │ image-text --> text  │
+│ transformers   │ sashakunitsyn/vlrm-blip2-opt-2.7b               │ image-text --> text  │
+│ ultralytics    │ yolov8x                                         │ image --> boxes      │
+│ ultralytics    │ yolov8m                                         │ image --> boxes      │
+│ ultralytics    │ yolov8l                                         │ image --> boxes      │
+│ ultralytics    │ yolov8s                                         │ image --> boxes      │
+│ ultralytics    │ yolov8n                                         │ image --> boxes      │
+│ ...            │ ...                                             │ ...                  │
+│ ...            │ ...                                             │ ...                  │
+└────────────────┴─────────────────────────────────────────────────┴──────────────────────┘
 ```
 
 ## 🖥️ Launch Gradio Interface
