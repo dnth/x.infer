@@ -1,6 +1,6 @@
 [project]
 name = "xinfer"
-version = "0.0.7"
+version = "0.0.8"
 dynamic = [
     "dependencies",
 ]
@@ -46,7 +46,7 @@ universal = true
 
 
 [tool.bumpversion]
-current_version = "0.0.7"
+current_version = "0.0.8"
 commit = true
 tag = true
 
