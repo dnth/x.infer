@@ -25,6 +25,17 @@
 ## 🤔 Why x.infer?
 If you'd like to run many models from different libraries without having to rewrite your inference code, x.infer is for you. It has a simple API and is easy to extend. Currently supports Transformers, Ultralytics, and TIMM.
 
+Run any supported model using the following 4 lines of code:
+
+```python
+import xinfer
+
+model = xinfer.create_model("vikhyatk/moondream2")
+model.infer(image, prompt)         # Run single inference
+model.infer_batch(images, prompts) # Run batch inference
+model.launch_gradio()              # Launch Gradio interface
+```
+
 Have a custom model? Create a class that implements the `BaseModel` interface and register it with x.infer. See [Adding New Models](#adding-new-models) for more details.
 
 ## 🌟 Key Features
