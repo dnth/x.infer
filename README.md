@@ -194,20 +194,7 @@ model = xinfer.create_model(model)
 
 
 TIMM:
-<table>
-    <thead>
-        <tr>
-            <th>Model</th>
-            <th>Usage</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><a href="https://github.com/baaivision/EVA/tree/master/EVA-02">EVA02 Series</a></td>
-            <td><code>xinfer.create_model("eva02_small_patch14_336.mim_in22k_ft_in1k")</code></td>
-        </tr>
-    </tbody>
-</table>
+All models from [TIMM](https://github.com/huggingface/pytorch-image-models) fine-tuned for ImageNet 1k are supported.
 
 > [!NOTE]
 > Wish to load an unsupported model?
