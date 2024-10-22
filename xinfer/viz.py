@@ -4,7 +4,7 @@ from .model_registry import ModelInputOutput, model_registry
 from .models import BaseModel
 
 
-def launch_gradio(model: BaseModel):
+def launch_gradio(model: BaseModel, **gradio_launch_kwargs):
     model_info = model_registry.get_model_info(model.model_id)
 
     def infer(image, prompt=None):
@@ -42,4 +42,4 @@ def launch_gradio(model: BaseModel):
             description="Upload an image to classify.",
         )
 
-    iface.launch()
+    iface.launch(**gradio_launch_kwargs)

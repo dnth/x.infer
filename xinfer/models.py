@@ -33,11 +33,11 @@ class BaseModel(ABC):
     def infer_batch(self, images: list[str], prompts: list[str]):
         pass
 
-    def launch_gradio(self):
+    def launch_gradio(self, **gradio_launch_kwargs):
         # Importing here to avoid circular import
         from .viz import launch_gradio
 
-        launch_gradio(self)
+        launch_gradio(self, **gradio_launch_kwargs)
 
     @contextmanager
     def track_inference_time(self):
