@@ -1,4 +1,5 @@
 import pytest
+import torch
 
 from xinfer.models import BaseModel
 
@@ -22,7 +23,7 @@ def base_model():
 def test_base_model_init(base_model):
     assert base_model.model_id == "test_model"
     assert base_model.device == "cpu"
-    assert base_model.dtype == "float32"
+    assert base_model.dtype == torch.float32
     assert base_model.num_inferences == 0
     assert base_model.total_inference_time == 0.0
     assert base_model.average_latency == 0.0

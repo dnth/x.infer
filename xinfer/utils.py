@@ -29,7 +29,7 @@ else:
     TimmModel = create_placeholder("TimmModel")
 
 if transformers_available:
-    from .transformers.auto import Vision2SeqModel
+    from .transformers.vision2seq import Vision2SeqModel
 else:
     Vision2SeqModel = create_placeholder("Vision2SeqModel")
 

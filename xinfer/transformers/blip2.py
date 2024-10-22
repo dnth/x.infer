@@ -1,5 +1,5 @@
 from ..model_registry import ModelInputOutput, register_model
-from .auto import Vision2SeqModel
+from .vision2seq import Vision2SeqModel
 
 
 @register_model(
