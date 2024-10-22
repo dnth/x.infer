@@ -81,7 +81,7 @@ class JoyCaption(BaseModel):
         return image, input_ids, attention_mask
 
     def infer(self, image: str, prompt: str = None, **generate_kwargs):
-        with self.stats.track_inference_time():
+        with self.track_inference_time():
             with torch.inference_mode(), torch.amp.autocast(
                 device_type=self.device, dtype=self.dtype
             ):
@@ -110,7 +110,7 @@ class JoyCaption(BaseModel):
                 clean_up_tokenization_spaces=False,
             )
             caption = caption.strip()
-        self.stats.update_inference_count(1)
+        self.update_inference_count(1)
 
         return caption
 
@@ -168,7 +168,7 @@ class JoyCaption(BaseModel):
         return images_tensor, padded_input_ids, attention_mask_tensor
 
     def infer_batch(self, images: list[str], prompts: list[str], **generate_kwargs):
-        with self.stats.track_inference_time():
+        with self.track_inference_time():
             with torch.inference_mode(), torch.amp.autocast(
                 device_type=self.device, dtype=self.dtype
             ):
@@ -202,6 +202,6 @@ class JoyCaption(BaseModel):
                 )
                 captions.append(caption.strip())
 
-        self.stats.update_inference_count(len(images))
+        self.update_inference_count(len(images))
 
         return captions

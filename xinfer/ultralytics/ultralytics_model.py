@@ -30,7 +30,7 @@ class UltralyticsModel(BaseModel):
         self.model = YOLO(self.model_id)
 
     def infer_batch(self, images: str | List[str], **kwargs) -> List[List[Dict]]:
-        with self.stats.track_inference_time():
+        with self.track_inference_time():
             half = self.dtype == torch.float16
             results = self.model.predict(
                 images, device=self.device, half=half, **kwargs
@@ -52,10 +52,10 @@ class UltralyticsModel(BaseModel):
                     }
                 )
             batch_results.append(coco_format_results)
-        self.stats.update_inference_count(len(batch_results))
+        self.update_inference_count(len(batch_results))
         return batch_results
 
     def infer(self, image: str, **kwargs) -> List[List[Dict]]:
-        with self.stats.track_inference_time():
+        with self.track_inference_time():
             results = self.infer_batch([image], **kwargs)
         return results[0]

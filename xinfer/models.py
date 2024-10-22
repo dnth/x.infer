@@ -13,8 +13,9 @@ class BaseModel(ABC):
         self.model_id = model_id
         self.device = device
         self.dtype = dtype
-
-        self.stats = ModelStats(model_id, device, dtype)
+        self.num_inferences = 0
+        self.total_inference_time = 0.0
+        self.average_latency = 0.0
 
         logger.info(f"Model: {model_id}")
         logger.info(f"Device: {device}")
@@ -38,21 +39,6 @@ class BaseModel(ABC):
 
         launch_gradio(self)
 
-
-class ModelStats:
-    def __init__(
-        self,
-        model_id: str,
-        device: str,
-        dtype: str,
-    ):
-        self.model_id = model_id
-        self.device = device
-        self.dtype = dtype
-        self.num_inferences = 0
-        self.total_inference_time = 0.0
-        self.average_latency = 0.0
-
     @contextmanager
     def track_inference_time(self):
         start_time = time.perf_counter()
@@ -72,7 +58,7 @@ class ModelStats:
 
     def print_stats(self):
         console = Console()
-        table = Table(title="Model Stats", box=box.ROUNDED)
+        table = Table(title="Model Info", box=box.ROUNDED)
         table.add_column("Attribute", style="cyan")
         table.add_column("Value", style="magenta")
 

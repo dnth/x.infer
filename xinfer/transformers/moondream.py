@@ -68,7 +68,7 @@ class Moondream(BaseModel):
         self.tokenizer = AutoTokenizer.from_pretrained(self.model_id)
 
     def infer(self, image: str, prompt: str = None, **generate_kwargs):
-        with self.stats.track_inference_time():
+        with self.track_inference_time():
             image = self.preprocess(image)
             encoded_image = self.model.encode_image(image)
             output = self.model.answer_question(
@@ -78,11 +78,11 @@ class Moondream(BaseModel):
                 **generate_kwargs,
             )
 
-        self.stats.update_inference_count(1)
+        self.update_inference_count(1)
         return output
 
     def infer_batch(self, images: list[str], prompts: list[str], **generate_kwargs):
-        with self.stats.track_inference_time():
+        with self.track_inference_time():
             images = self.preprocess(images)
             prompts = [prompt for prompt in prompts]
 
@@ -90,5 +90,5 @@ class Moondream(BaseModel):
                 images, prompts, self.tokenizer, **generate_kwargs
             )
 
-        self.stats.update_inference_count(len(images))
+        self.update_inference_count(len(images))
         return outputs

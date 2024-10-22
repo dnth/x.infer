@@ -80,19 +80,19 @@ class Vision2SeqModel(BaseModel):
         return [output.replace("\n", "").strip() for output in outputs]
 
     def infer(self, image, prompt, **generate_kwargs):
-        with self.stats.track_inference_time():
+        with self.track_inference_time():
             preprocessed_input = self.preprocess(image, prompt)
             prediction = self.predict(preprocessed_input, **generate_kwargs)
             result = self.postprocess(prediction)[0]
 
-        self.stats.update_inference_count(1)
+        self.update_inference_count(1)
         return result
 
     def infer_batch(self, images, prompts, **generate_kwargs):
-        with self.stats.track_inference_time():
+        with self.track_inference_time():
             preprocessed_input = self.preprocess(images, prompts)
             predictions = self.predict(preprocessed_input, **generate_kwargs)
             results = self.postprocess(predictions)
 
-        self.stats.update_inference_count(len(images))
+        self.update_inference_count(len(images))
         return results
