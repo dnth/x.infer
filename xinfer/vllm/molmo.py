@@ -20,8 +20,7 @@ class Molmo(BaseModel):
 
     def load_model(self, **kwargs):
         self.model = LLM(
-            # model=self.model_id,
-            model="/home/dnth/Desktop/cv-docker-images/image_captioning/molmo/molmo_7b_d_0924",
+            model=self.model_id,
             trust_remote_code=True,
             dtype=self.dtype,
             **kwargs,
