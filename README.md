@@ -243,6 +243,31 @@ model = UltralyticsModel("yolov5n6u")
 model = xinfer.create_model(model)
 ```
 
+vLLM:
+
+<table>
+    <thead>
+        <tr>
+            <th>Model</th>
+            <th>Usage</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><a href="https://huggingface.co/allenai/Molmo-72B-0924">Molmo-72B</a></td>
+            <td><code>xinfer.create_model("allenai/Molmo-72B-0924")</code></td>
+        </tr>
+        <tr>
+            <td><a href="https://huggingface.co/allenai/Molmo-7B-D-0924">Molmo-7B-D</a></td>
+            <td><code>xinfer.create_model("allenai/Molmo-7B-D-0924")</code></td>
+        </tr>
+        <tr>
+            <td><a href="https://huggingface.co/allenai/Molmo-7B-O-0924">Molmo-7B-O</a></td>
+            <td><code>xinfer.create_model("allenai/Molmo-7B-O-0924")</code></td>
+        </tr>
+    </tbody>
+</table>
+
 
 ### 🔧 Adding New Models
 
