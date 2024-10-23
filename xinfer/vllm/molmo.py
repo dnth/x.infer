@@ -7,7 +7,6 @@ from ..models import BaseModel
 
 
 @register_model("allenai/Molmo-72B-0924", "vllm", ModelInputOutput.IMAGE_TEXT_TO_TEXT)
-@register_model("allenai/MolmoE-1B-0924", "vllm", ModelInputOutput.IMAGE_TEXT_TO_TEXT)
 @register_model("allenai/Molmo-7B-O-0924", "vllm", ModelInputOutput.IMAGE_TEXT_TO_TEXT)
 @register_model("allenai/Molmo-7B-D-0924", "vllm", ModelInputOutput.IMAGE_TEXT_TO_TEXT)
 class Molmo(BaseModel):
