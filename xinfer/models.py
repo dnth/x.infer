@@ -2,8 +2,10 @@ import time
 from abc import ABC, abstractmethod
 from contextlib import contextmanager
 
+import requests
 import torch
 from loguru import logger
+from PIL import Image
 from rich import box
 from rich.console import Console
 from rich.table import Table
@@ -88,3 +90,44 @@ class BaseModel(ABC):
             f"device='{self.device}', "
             f"dtype='{self.dtype}', "
         )
+
+    def parse_images(
+        self,
+        images: str | list[str],
+    ) -> list[Image.Image]:
+        """
+        Preprocess one or more images from file paths or URLs.
+
+        Loads and converts images to RGB format from either local file paths or URLs.
+        Can handle both single image input or multiple images as a list.
+
+        Args:
+            images (Union[str, List[str]]): Either a single image path/URL as a string,
+                or a list of image paths/URLs. Accepts both local file paths and HTTP(S) URLs.
+
+        Returns:
+            List[PIL.Image.Image]: List of processed PIL Image objects in RGB format.
+        """
+
+        if not isinstance(images, list):
+            images = [images]
+
+        parsed_images = []
+        for image_path in images:
+            if not isinstance(image_path, str):
+                raise ValueError("Input must be a string (local path or URL)")
+
+            if image_path.startswith(("http://", "https://")):
+                image = Image.open(requests.get(image_path, stream=True).raw).convert(
+                    "RGB"
+                )
+            else:
+                # Assume it's a local path
+                try:
+                    image = Image.open(image_path).convert("RGB")
+                except FileNotFoundError:
+                    raise ValueError(f"Local file not found: {image_path}")
+
+            parsed_images.append(image)
+
+        return parsed_images

@@ -15,6 +15,7 @@ def soft_import(name: str):
 timm_available = soft_import("timm")
 transformers_available = soft_import("transformers")
 ultralytics_available = soft_import("ultralytics")
+vllm_available = soft_import("vllm")
 
 
 # Create placeholder classes
