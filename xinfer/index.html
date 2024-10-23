@@ -357,6 +357,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="xinfer.core.create_model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#xinfer.core.create_model--parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parameters
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -450,10 +465,42 @@
 <a id="xinfer.core.create_model"></a>
     <div class="doc doc-contents first">
 
+      <p>Create a model instance.</p>
+<h3 id="xinfer.core.create_model--parameters">Parameters<a class="headerlink" href="#xinfer.core.create_model--parameters" title="Permanent link">&para;</a></h3>
+<p>model : str | TimmModel | Vision2SeqModel | UltralyticsModel
+    The model to create.
+    TIMM, Vision2Seq, and Ultralytics models type here is to support user passing in the models directly.
+    This is useful for models not registered in the model registry.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>Eg:
+```python
+model = UltralyticsModel(&quot;yolov5n6u&quot;)
+model = xinfer.create_model(model)
+```
+</code></pre></div></td></tr></table></div>
 
         <details class="quote">
           <summary>Source code in <code>xinfer/core.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">create_model</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">TimmModel</span> <span class="o">|</span> <span class="n">Vision2SeqModel</span> <span class="o">|</span> <span class="n">UltralyticsModel</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a model instance.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    model : str | TimmModel | Vision2SeqModel | UltralyticsModel</span>
+<span class="sd">        The model to create.</span>
+<span class="sd">        TIMM, Vision2Seq, and Ultralytics models type here is to support user passing in the models directly.</span>
+<span class="sd">        This is useful for models not registered in the model registry.</span>
+
+<span class="sd">        Eg:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        model = UltralyticsModel(&quot;yolov5n6u&quot;)</span>
+<span class="sd">        model = xinfer.create_model(model)</span>
+<span class="sd">        ```</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="p">(</span><span class="n">TimmModel</span><span class="p">,</span> <span class="n">Vision2SeqModel</span><span class="p">,</span> <span class="n">UltralyticsModel</span><span class="p">)):</span>
         <span class="k">return</span> <span class="n">model</span>
     <span class="k">return</span> <span class="n">model_registry</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
