@@ -80,3 +80,11 @@ class BaseModel(ABC):
         table.add_row("Average Latency (ms)", f"{self.average_latency:.4f}")
 
         console.print(table)
+
+    def __repr__(self) -> str:
+        return (
+            f"{self.__class__.__name__}("
+            f"model_id='{self.model_id}', "
+            f"device='{self.device}', "
+            f"dtype='{self.dtype}', "
+        )
