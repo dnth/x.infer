@@ -1,5 +1,3 @@
-import requests
-from PIL import Image
 from vllm import LLM, SamplingParams
 
 from ..model_registry import ModelInputOutput, register_model
@@ -20,47 +18,6 @@ class Molmo(BaseModel):
         super().__init__(model_id, device, dtype)
         self.load_model(**kwargs)
 
-    def preprocess(
-        self,
-        images: str | list[str],
-    ) -> list[Image.Image]:
-        """
-        Preprocess one or more images from file paths or URLs.
-
-        Loads and converts images to RGB format from either local file paths or URLs.
-        Can handle both single image input or multiple images as a list.
-
-        Args:
-            images (Union[str, List[str]]): Either a single image path/URL as a string,
-                or a list of image paths/URLs. Accepts both local file paths and HTTP(S) URLs.
-
-        Returns:
-            List[PIL.Image.Image]: List of processed PIL Image objects in RGB format.
-        """
-
-        if not isinstance(images, list):
-            images = [images]
-
-        processed_images = []
-        for image_path in images:
-            if not isinstance(image_path, str):
-                raise ValueError("Input must be a string (local path or URL)")
-
-            if image_path.startswith(("http://", "https://")):
-                image = Image.open(requests.get(image_path, stream=True).raw).convert(
-                    "RGB"
-                )
-            else:
-                # Assume it's a local path
-                try:
-                    image = Image.open(image_path).convert("RGB")
-                except FileNotFoundError:
-                    raise ValueError(f"Local file not found: {image_path}")
-
-            processed_images.append(image)
-
-        return processed_images
-
     def load_model(self, **kwargs):
         self.model = LLM(
             # model=self.model_id,
@@ -71,7 +28,7 @@ class Molmo(BaseModel):
         )
 
     def infer_batch(self, images: list[str], prompts: list[str], **sampling_kwargs):
-        images = self.preprocess(images)
+        images = self.parse_images(images)
 
         sampling_params = SamplingParams(**sampling_kwargs)
         with self.track_inference_time():
@@ -90,7 +47,7 @@ class Molmo(BaseModel):
 
     def infer(self, image: str, prompt: str, **sampling_kwargs):
         with self.track_inference_time():
-            image = self.preprocess(image)
+            image = self.parse_images(image)
 
             inputs = {
                 "prompt": prompt,
