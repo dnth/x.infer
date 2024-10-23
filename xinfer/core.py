@@ -7,6 +7,22 @@ from .utils import TimmModel, UltralyticsModel, Vision2SeqModel
 
 
 def create_model(model: str | TimmModel | Vision2SeqModel | UltralyticsModel, **kwargs):
+    """
+    Create a model instance.
+
+    Parameters
+    ----------
+    model : str | TimmModel | Vision2SeqModel | UltralyticsModel
+        The model to create.
+        TIMM, Vision2Seq, and Ultralytics models type here is to support user passing in the models directly.
+        This is useful for models not registered in the model registry.
+
+        Eg:
+        ```python
+        model = UltralyticsModel("yolov5n6u")
+        model = xinfer.create_model(model)
+        ```
+    """
     if isinstance(model, (TimmModel, Vision2SeqModel, UltralyticsModel)):
         return model
     return model_registry.get_model(model, **kwargs)
