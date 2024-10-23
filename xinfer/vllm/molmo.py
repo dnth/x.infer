@@ -63,8 +63,8 @@ class Molmo(BaseModel):
 
     def load_model(self, **kwargs):
         self.model = LLM(
-            model=self.model_id,
-            # model="/home/dnth/Desktop/cv-docker-images/image_captioning/molmo/molmo_7b_d_0924",
+            # model=self.model_id,
+            model="/home/dnth/Desktop/cv-docker-images/image_captioning/molmo/molmo_7b_d_0924",
             trust_remote_code=True,
             dtype=self.dtype,
             **kwargs,
@@ -73,7 +73,6 @@ class Molmo(BaseModel):
     def infer_batch(self, images: list[str], prompts: list[str], **sampling_kwargs):
         images = self.preprocess(images)
 
-        prompt = "Describe the image."
         sampling_params = SamplingParams(**sampling_kwargs)
         with self.track_inference_time():
             batch_inputs = [
@@ -81,18 +80,17 @@ class Molmo(BaseModel):
                     "prompt": f"USER: <image>\n{prompt}\nASSISTANT:",
                     "multi_modal_data": {"image": image},
                 }
-                for image in images
+                for image, prompt in zip(images, prompts)
             ]
 
             results = self.model.generate(batch_inputs, sampling_params)
 
         self.update_inference_count(len(images))
-        return [output.outputs[0].text for output in results]
+        return [output.outputs[0].text.strip() for output in results]
 
     def infer(self, image: str, prompt: str, **sampling_kwargs):
         with self.track_inference_time():
             image = self.preprocess(image)
-            prompt = "Describe the image."
 
             inputs = {
                 "prompt": prompt,
@@ -101,6 +99,6 @@ class Molmo(BaseModel):
 
             sampling_params = SamplingParams(**sampling_kwargs)
             outputs = self.model.generate(inputs, sampling_params)
-            generated_text = outputs[0].outputs[0].text
+            generated_text = outputs[0].outputs[0].text.strip()
         self.update_inference_count(1)
         return generated_text
