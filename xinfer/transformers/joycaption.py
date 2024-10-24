@@ -13,7 +13,9 @@ from ..models import BaseModel, track_inference
     ModelInputOutput.IMAGE_TEXT_TO_TEXT,
 )
 class JoyCaption(BaseModel):
-    def __init__(self, model_id: str, device: str, dtype: str, **kwargs):
+    def __init__(
+        self, model_id: str, device: str = "cpu", dtype: str = "float32", **kwargs
+    ):
         super().__init__(model_id, device, dtype)
         self.load_model(**kwargs)
 

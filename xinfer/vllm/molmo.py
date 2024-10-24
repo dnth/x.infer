@@ -11,7 +11,7 @@ class Molmo(BaseModel):
     def __init__(
         self,
         model_id: str,
-        device: str = "cuda",
+        device: str = "cpu",
         dtype: str = "float32",
         **kwargs,
     ):
