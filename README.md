@@ -97,7 +97,7 @@ xinfer.list_models()
 │ ultralytics    │ yolov8m                                         │ image --> boxes      │
 │ ultralytics    │ yolov8l                                         │ image --> boxes      │
 │ ultralytics    │ yolov8s                                         │ image --> boxes      │
-│ ultralytics    │ yolov8n                                         │ image --> boxes      │
+│ ultralytics    │ yolov8n                                         �� image --> boxes      │
 │ ...            │ ...                                             │ ...                  │
 │ ...            │ ...                                             │ ...                  │
 └────────────────┴─────────────────────────────────────────────────┴──────────────────────┘
@@ -147,7 +147,7 @@ pip install -e .
 
 
 <details>
-<summary><strong>Transformers</strong></summary>
+<summary><img src="https://img.shields.io/badge/Transformers-yellow?style=for-the-badge&logo=huggingface&logoColor=white" alt="Transformers"></summary>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -196,7 +196,7 @@ model = xinfer.create_model(model)
 </details>
 
 <details>
-<summary><strong>TIMM</strong></summary>
+<summary><img src="https://img.shields.io/badge/TIMM-green?style=for-the-badge&logo=pytorch&logoColor=white" alt="TIMM"></summary>
 
 All models from [TIMM](https://github.com/huggingface/pytorch-image-models) fine-tuned for ImageNet 1k are supported.
 
@@ -214,7 +214,7 @@ model = xinfer.create_model(model)
 </details>
 
 <details>
-<summary><strong>Ultralytics</strong></summary>
+<summary><img src="https://img.shields.io/badge/Ultralytics-red?style=for-the-badge&logo=udacity&logoColor=white" alt="Ultralytics"></summary>
 
 <table>
     <thead>
@@ -253,7 +253,7 @@ model = xinfer.create_model(model)
 </details>
 
 <details>
-<summary><strong>vLLM</strong></summary>
+<summary><img src="https://img.shields.io/badge/vLLM-purple?style=for-the-badge&logo=v&logoColor=white" alt="vLLM"></summary>
 
 <table>
     <thead>
