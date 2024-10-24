@@ -1,7 +1,19 @@
-![Python](https://img.shields.io/badge/Python-3.10%20|%203.11%20|%203.12-brightgreen?style=for-the-badge)
-[![PyPI version](https://img.shields.io/pypi/v/xinfer.svg?style=for-the-badge&logo=pypi&logoColor=white&label=PyPI&color=blue)](https://pypi.org/project/xinfer/)
-[![Downloads](https://img.shields.io/pypi/dm/xinfer.svg?style=for-the-badge&logo=pypi&logoColor=white&label=Downloads&color=purple)](https://pypi.org/project/xinfer/)
-![License](https://img.shields.io/badge/License-Apache%202.0-green.svg?style=for-the-badge&logo=apache&logoColor=white)
+[python_badge]: https://img.shields.io/badge/Python-3.10%20|%203.11%20|%203.12-brightgreen?style=for-the-badge
+[pypi_badge]: https://img.shields.io/pypi/v/xinfer.svg?style=for-the-badge&logo=pypi&logoColor=white&label=PyPI&color=blue
+[downloads_badge]: https://img.shields.io/pypi/dm/xinfer.svg?style=for-the-badge&logo=pypi&logoColor=white&label=Downloads&color=purple
+[license_badge]: https://img.shields.io/badge/License-Apache%202.0-green.svg?style=for-the-badge&logo=apache&logoColor=white
+[transformers_badge]: https://img.shields.io/badge/Transformers-yellow?style=for-the-badge&logo=huggingface&logoColor=white
+[timm_badge]: https://img.shields.io/badge/TIMM-green?style=for-the-badge&logo=pytorch&logoColor=white
+[ultralytics_badge]: https://img.shields.io/badge/Ultralytics-red?style=for-the-badge&logo=udacity&logoColor=white
+[vllm_badge]: https://img.shields.io/badge/vLLM-purple?style=for-the-badge&logo=v&logoColor=white
+[colab_badge]: https://img.shields.io/badge/Open%20In-Colab-blue?style=for-the-badge&logo=google-colab
+[kaggle_badge]: https://img.shields.io/badge/Open%20In-Kaggle-blue?style=for-the-badge&logo=kaggle
+[back_to_top_badge]: https://img.shields.io/badge/Back_to_Top-↑-blue?style=for-the-badge
+
+![Python][python_badge]
+[![PyPI version][pypi_badge]](https://pypi.org/project/xinfer/)
+[![Downloads][downloads_badge]](https://pypi.org/project/xinfer/)
+![License][license_badge]
 
 
 <div align="center">
@@ -23,7 +35,15 @@
 
 
 ## 🤔 Why x.infer?
-If you'd like to run many models from different libraries without having to rewrite your inference code, x.infer is for you. It has a simple API and is easy to extend. Currently supports Transformers, Ultralytics, and TIMM.
+If you'd like to run many models from different libraries without having to rewrite your inference code, x.infer is for you. It has a simple API and is easy to extend. 
+
+Models supported: 
+
+![Transformers][transformers_badge]
+![TIMM][timm_badge]
+![Ultralytics][ultralytics_badge]
+![vLLM][vllm_badge]
+
 
 Run any supported model using the following 4 lines of code:
 
@@ -52,8 +72,8 @@ Have a custom model? Create a class that implements the `BaseModel` interface an
 
 Here's a quick example demonstrating how to use x.infer with a Transformers model:
 
-[![Open In Colab](https://img.shields.io/badge/Open%20In-Colab-blue?style=for-the-badge&logo=google-colab)](https://colab.research.google.com/github/dnth/x.infer/blob/main/nbs/quickstart.ipynb)
-[![Open In Kaggle](https://img.shields.io/badge/Open%20In-Kaggle-blue?style=for-the-badge&logo=kaggle)](https://kaggle.com/kernels/welcome?src=https://github.com/dnth/x.infer/blob/main/nbs/quickstart.ipynb)
+[![Open In Colab][colab_badge]](https://colab.research.google.com/github/dnth/x.infer/blob/main/nbs/quickstart.ipynb)
+[![Open In Kaggle][kaggle_badge]](https://kaggle.com/kernels/welcome?src=https://github.com/dnth/x.infer/blob/main/nbs/quickstart.ipynb)
 
 ```python
 import xinfer
@@ -327,5 +347,5 @@ class MyModel(BaseModel):
 
 <div align="right">
     <br />
-    <a href="#top"><img src="https://img.shields.io/badge/Back_to_Top-↑-blue?style=for-the-badge" alt="Back to Top" /></a>
+    <a href="#top">![Back to Top][back_to_top_badge]</a>
 </div>
