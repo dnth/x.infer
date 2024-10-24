@@ -74,11 +74,6 @@ print(xinfer.__version__)
 xinfer.list_models(interactive=True)
 ```
 
-    /home/dnth/mambaforge-pypy3/envs/xinfer/lib/python3.10/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
-      from .autonotebook import tqdm as notebook_tqdm
-    2024-10-24 15:32:04,360	INFO util.py:154 -- Missing packages: ['ipywidgets']. Run `pip install -U ipywidgets`, then restart the notebook server for rich notebook output.
-
-
     0.0.10
 
 
@@ -222,7 +217,7 @@ This is the <code>init_notebook_mode</code> cell from ITables v2.2.2<br>
 
 
 
-<table id="itables_fdee5f13_75bd_4ae7_8b0e_c9483a2c508a" class="display nowrap" data-quarto-disable-processing="true" style="table-layout:auto;width:auto;margin:auto;caption-side:bottom">
+<table id="itables_bf15d628_ac15_4f60_9970_dfa52b0f119e" class="display nowrap" data-quarto-disable-processing="true" style="table-layout:auto;width:auto;margin:auto;caption-side:bottom">
 <thead>
     <tr style="text-align: right;">
 
@@ -334,7 +329,7 @@ Loading ITables v2.2.2 from the <code>init_notebook_mode</code> cell...
 <script type="module">
     const { DataTable, jQuery: $ } = await import(window._datatables_src_for_itables_2_2_2);
 
-    document.querySelectorAll("#itables_fdee5f13_75bd_4ae7_8b0e_c9483a2c508a:not(.dataTable)").forEach(table => {
+    document.querySelectorAll("#itables_bf15d628_ac15_4f60_9970_dfa52b0f119e:not(.dataTable)").forEach(table => {
         if (!(table instanceof HTMLTableElement))
             return;
 
@@ -363,9 +358,9 @@ Since we have GPU available, let's create the model on the GPU and use `float16`
 model = xinfer.create_model("vikhyatk/moondream2", device="cuda", dtype="float16")
 ```
 
-    [32m2024-10-24 15:32:17.495[0m | [1mINFO    [0m | [36mxinfer.models[0m:[36m__init__[0m:[36m63[0m - [1mModel: vikhyatk/moondream2[0m
-    [32m2024-10-24 15:32:17.496[0m | [1mINFO    [0m | [36mxinfer.models[0m:[36m__init__[0m:[36m64[0m - [1mDevice: cuda[0m
-    [32m2024-10-24 15:32:17.496[0m | [1mINFO    [0m | [36mxinfer.models[0m:[36m__init__[0m:[36m65[0m - [1mDtype: float16[0m
+    [32m2024-10-24 16:03:25.301[0m | [1mINFO    [0m | [36mxinfer.models[0m:[36m__init__[0m:[36m63[0m - [1mModel: vikhyatk/moondream2[0m
+    [32m2024-10-24 16:03:25.301[0m | [1mINFO    [0m | [36mxinfer.models[0m:[36m__init__[0m:[36m64[0m - [1mDevice: cuda[0m
+    [32m2024-10-24 16:03:25.302[0m | [1mINFO    [0m | [36mxinfer.models[0m:[36m__init__[0m:[36m65[0m - [1mDtype: float16[0m
     PhiForCausalLM has generative capabilities, as `prepare_inputs_for_generation` is explicitly overwritten. However, it doesn't directly inherit from `GenerationMixin`. From 👉v4.50👈 onwards, `PreTrainedModel` will NOT inherit from `GenerationMixin`, and this model will lose the ability to call `generate` and other related functions.
       - If you're using `trust_remote_code=True`, you can get rid of this warning by loading the model with an auto class. See https://huggingface.co/docs/transformers/en/model_doc/auto#auto-classes
       - If you are the owner of the model architecture code, please modify your model class such that it inherits from `GenerationMixin` (after `PreTrainedModel`, otherwise you'll get an exception).
@@ -443,8 +438,8 @@ model.print_stats()
 │<span style="color: #008080; text-decoration-color: #008080"> Device                    </span>│<span style="color: #800080; text-decoration-color: #800080"> cuda                </span>│
 │<span style="color: #008080; text-decoration-color: #008080"> Dtype                     </span>│<span style="color: #800080; text-decoration-color: #800080"> torch.float16       </span>│
 │<span style="color: #008080; text-decoration-color: #008080"> Number of Inferences      </span>│<span style="color: #800080; text-decoration-color: #800080"> 2                   </span>│
-│<span style="color: #008080; text-decoration-color: #008080"> Total Inference Time (ms) </span>│<span style="color: #800080; text-decoration-color: #800080"> 2138.8748           </span>│
-│<span style="color: #008080; text-decoration-color: #008080"> Average Latency (ms)      </span>│<span style="color: #800080; text-decoration-color: #800080"> 1069.4374           </span>│
+│<span style="color: #008080; text-decoration-color: #008080"> Total Inference Time (ms) </span>│<span style="color: #800080; text-decoration-color: #800080"> 2039.9724           </span>│
+│<span style="color: #008080; text-decoration-color: #008080"> Average Latency (ms)      </span>│<span style="color: #800080; text-decoration-color: #800080"> 1019.9862           </span>│
 ╰───────────────────────────┴─────────────────────╯
 </pre>
 
