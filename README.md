@@ -97,7 +97,7 @@ xinfer.list_models()
 │ ultralytics    │ yolov8m                                         │ image --> boxes      │
 │ ultralytics    │ yolov8l                                         │ image --> boxes      │
 │ ultralytics    │ yolov8s                                         │ image --> boxes      │
-│ ultralytics    │ yolov8n                                         �� image --> boxes      │
+│ ultralytics    │ yolov8n                                          image --> boxes      │
 │ ...            │ ...                                             │ ...                  │
 │ ...            │ ...                                             │ ...                  │
 └────────────────┴─────────────────────────────────────────────────┴──────────────────────┘
@@ -306,5 +306,26 @@ class MyModel(BaseModel):
         pass
 ```
 
-```
-</rewritten_chunk>
+<div align="center">
+    <img src="https://raw.githubusercontent.com/dnth/x.infer/refs/heads/main/assets/github_banner.png" alt="x.infer" width="600"/>
+    <br />
+    <br />
+    <a href="https://dnth.github.io/x.infer" target="_blank" rel="noopener noreferrer"><strong>Explore the docs »</strong></a>
+    <br />
+    <a href="#quickstart" target="_blank" rel="noopener noreferrer">Quickstart</a>
+    ·
+    <a href="https://github.com/dnth/x.infer/issues/new?assignees=&labels=Feature+Request&projects=&template=feature_request.md" target="_blank" rel="noopener noreferrer">Feature Request</a>
+    ·
+    <a href="https://github.com/dnth/x.infer/issues/new?assignees=&labels=bug&projects=&template=bug_report.md" target="_blank" rel="noopener noreferrer">Report Bug</a>
+    ·
+    <a href="https://github.com/dnth/x.infer/discussions" target="_blank" rel="noopener noreferrer">Discussions</a>
+    ·
+    <a href="https://dicksonneoh.com/" target="_blank" rel="noopener noreferrer">About</a>
+</div>
+
+
+
+<div align="right">
+    <br />
+    <a href="#top"><img src="https://img.shields.io/badge/Back_to_Top-↑-blue?style=for-the-badge" alt="Back to Top" /></a>
+</div>
