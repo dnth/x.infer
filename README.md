@@ -181,10 +181,9 @@ pip install -e .
 </body>
 </html>
 
-> [!NOTE]
-> Wish to load an unsupported model?
-> You can load any [Vision2Seq model](https://huggingface.co/docs/transformers/main/en/model_doc/auto#transformers.AutoModelForVision2Seq) 
-> from Transformers by using the `Vision2SeqModel` class.
+
+You can also load any [Vision2Seq model](https://huggingface.co/docs/transformers/main/en/model_doc/auto#transformers.AutoModelForVision2Seq) 
+from Transformers by using the `Vision2SeqModel` class.
 
 ```python
 from xinfer.transformers import Vision2SeqModel
@@ -200,9 +199,8 @@ model = xinfer.create_model(model)
 
 All models from [TIMM](https://github.com/huggingface/pytorch-image-models) fine-tuned for ImageNet 1k are supported.
 
-> [!NOTE]
-> Wish to load an unsupported model?
-> You can load any model from TIMM by using the `TIMMModel` class.
+
+You can also load any model from TIMM by using the `TIMMModel` class.
 
 ```python
 from xinfer.timm import TimmModel
@@ -239,9 +237,8 @@ model = xinfer.create_model(model)
     </tbody>
 </table>
 
-> [!NOTE]
-> Wish to load an unsupported model?
-> You can load any model from Ultralytics by using the `UltralyticsModel` class.
+
+You can also load any model from Ultralytics by using the `UltralyticsModel` class.
 
 ```python
 from xinfer.ultralytics import UltralyticsModel
