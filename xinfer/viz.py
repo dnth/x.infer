@@ -42,4 +42,8 @@ def launch_gradio(model: BaseModel, **gradio_launch_kwargs):
             description="Upload an image to classify.",
         )
 
+    # The default height of Gradio is too small for view in jupyter notebooks
+    if "height" not in gradio_launch_kwargs:
+        gradio_launch_kwargs["height"] = 1000
+
     iface.launch(**gradio_launch_kwargs)
