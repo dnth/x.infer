@@ -199,8 +199,12 @@ model = xinfer.create_model(model)
 
 All models from [TIMM](https://github.com/huggingface/pytorch-image-models) fine-tuned for ImageNet 1k are supported.
 
+For example load a `resnet18.a1_in1k` model:
+```python
+xinfer.create_model("resnet18.a1_in1k")
+```
 
-You can also load any model from TIMM by using the `TIMMModel` class.
+You can also load any model (or a custom timm model) by using the `TIMMModel` class.
 
 ```python
 from xinfer.timm import TimmModel
