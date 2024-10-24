@@ -3,12 +3,15 @@
 [downloads_badge]: https://img.shields.io/pypi/dm/xinfer.svg?style=for-the-badge&logo=pypi&logoColor=white&label=Downloads&color=purple
 [license_badge]: https://img.shields.io/badge/License-Apache%202.0-green.svg?style=for-the-badge&logo=apache&logoColor=white
 [transformers_badge]: https://img.shields.io/badge/Transformers-yellow?style=for-the-badge&logo=huggingface&logoColor=white
-[timm_badge]: https://img.shields.io/badge/TIMM-green?style=for-the-badge&logo=pytorch&logoColor=white
+[timm_badge]: https://img.shields.io/badge/TIMM-limegreen?style=for-the-badge&logo=pytorch&logoColor=white
 [ultralytics_badge]: https://img.shields.io/badge/Ultralytics-red?style=for-the-badge&logo=udacity&logoColor=white
 [vllm_badge]: https://img.shields.io/badge/vLLM-purple?style=for-the-badge&logo=v&logoColor=white
 [colab_badge]: https://img.shields.io/badge/Open%20In-Colab-blue?style=for-the-badge&logo=google-colab
 [kaggle_badge]: https://img.shields.io/badge/Open%20In-Kaggle-blue?style=for-the-badge&logo=kaggle
 [back_to_top_badge]: https://img.shields.io/badge/Back_to_Top-↑-blue?style=for-the-badge
+[image_classification_badge]: https://img.shields.io/badge/Image%20Classification-blueviolet?style=for-the-badge
+[object_detection_badge]: https://img.shields.io/badge/Object%20Detection-coral?style=for-the-badge
+[image_to_text_badge]: https://img.shields.io/badge/Image%20to%20Text-gold?style=for-the-badge
 
 ![Python][python_badge]
 [![PyPI version][pypi_badge]](https://pypi.org/project/xinfer/)
@@ -44,6 +47,11 @@ Models supported:
 ![Ultralytics][ultralytics_badge]
 ![vLLM][vllm_badge]
 
+Tasks supported:
+
+![Image Classification][image_classification_badge]
+![Object Detection][object_detection_badge]
+![Image to Text][image_to_text_badge]
 
 Run any supported model using the following 4 lines of code:
 
@@ -349,4 +357,6 @@ class MyModel(BaseModel):
     <br />
     <a href="#top"><img src="https://img.shields.io/badge/Back_to_Top-↑-blue?style=for-the-badge" alt="Back to Top" /></a>
 </div>
+
+
 
