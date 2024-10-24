@@ -146,7 +146,9 @@ pip install -e .
 ### Supported Models
 
 
-Transformers:
+<details>
+<summary><strong>Transformers</strong></summary>
+
 <!DOCTYPE html>
 <html lang="en">
 <body>
@@ -191,9 +193,11 @@ model = Vision2SeqModel("facebook/chameleon-7b")
 model = xinfer.create_model(model)
 ```
 
+</details>
 
+<details>
+<summary><strong>TIMM</strong></summary>
 
-TIMM:
 All models from [TIMM](https://github.com/huggingface/pytorch-image-models) fine-tuned for ImageNet 1k are supported.
 
 > [!NOTE]
@@ -207,8 +211,11 @@ model = TimmModel("resnet18")
 model = xinfer.create_model(model)
 ```
 
+</details>
 
-Ultralytics:
+<details>
+<summary><strong>Ultralytics</strong></summary>
+
 <table>
     <thead>
         <tr>
@@ -243,7 +250,10 @@ model = UltralyticsModel("yolov5n6u")
 model = xinfer.create_model(model)
 ```
 
-vLLM:
+</details>
+
+<details>
+<summary><strong>vLLM</strong></summary>
 
 <table>
     <thead>
@@ -268,6 +278,7 @@ vLLM:
     </tbody>
 </table>
 
+</details>
 
 ### 🔧 Adding New Models
 
@@ -293,3 +304,6 @@ class MyModel(BaseModel):
         # Run batch inference here
         pass
 ```
+
+```
+</rewritten_chunk>
