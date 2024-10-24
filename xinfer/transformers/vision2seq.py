@@ -6,7 +6,7 @@ from transformers import (
     AutoProcessor,
 )
 
-from ..models import BaseModel
+from ..models import BaseModel, track_inference
 
 
 class Vision2SeqModel(BaseModel):
@@ -70,20 +70,18 @@ class Vision2SeqModel(BaseModel):
         outputs = self.processor.batch_decode(predictions, skip_special_tokens=True)
         return [output.replace("\n", "").strip() for output in outputs]
 
+    @track_inference
     def infer(self, image, prompt, **generate_kwargs):
-        with self.track_inference_time():
-            preprocessed_input = self.preprocess(image, prompt)
-            prediction = self.predict(preprocessed_input, **generate_kwargs)
-            result = self.postprocess(prediction)[0]
+        preprocessed_input = self.preprocess(image, prompt)
+        prediction = self.predict(preprocessed_input, **generate_kwargs)
+        result = self.postprocess(prediction)[0]
 
-        self.update_inference_count(1)
         return result
 
+    @track_inference
     def infer_batch(self, images, prompts, **generate_kwargs):
-        with self.track_inference_time():
-            preprocessed_input = self.preprocess(images, prompts)
-            predictions = self.predict(preprocessed_input, **generate_kwargs)
-            results = self.postprocess(predictions)
+        preprocessed_input = self.preprocess(images, prompts)
+        predictions = self.predict(preprocessed_input, **generate_kwargs)
+        results = self.postprocess(predictions)
 
-        self.update_inference_count(len(images))
         return results

@@ -4,7 +4,7 @@ from PIL import Image
 from transformers import AutoTokenizer, LlavaForConditionalGeneration
 
 from ..model_registry import ModelInputOutput, register_model
-from ..models import BaseModel
+from ..models import BaseModel, track_inference
 
 
 @register_model(
@@ -71,37 +71,36 @@ class JoyCaption(BaseModel):
 
         return image, input_ids, attention_mask
 
+    @track_inference
     def infer(self, image: str, prompt: str = None, **generate_kwargs):
-        with self.track_inference_time():
-            with torch.inference_mode(), torch.amp.autocast(
-                device_type=self.device, dtype=self.dtype
-            ):
-                image, input_ids, attention_mask = self.preprocess(image, prompt)
+        with torch.inference_mode(), torch.amp.autocast(
+            device_type=self.device, dtype=self.dtype
+        ):
+            image, input_ids, attention_mask = self.preprocess(image, prompt)
 
-                if "max_new_tokens" not in generate_kwargs:
-                    generate_kwargs["max_new_tokens"] = 300
+            if "max_new_tokens" not in generate_kwargs:
+                generate_kwargs["max_new_tokens"] = 300
 
-                generate_ids = self.model.generate(
-                    input_ids=input_ids.to(self.device),
-                    pixel_values=image.to(self.device),
-                    attention_mask=attention_mask.to(self.device),
-                    do_sample=True,
-                    suppress_tokens=None,
-                    use_cache=True,
-                    **generate_kwargs,
-                )[0]
+            generate_ids = self.model.generate(
+                input_ids=input_ids.to(self.device),
+                pixel_values=image.to(self.device),
+                attention_mask=attention_mask.to(self.device),
+                do_sample=True,
+                suppress_tokens=None,
+                use_cache=True,
+                **generate_kwargs,
+            )[0]
 
-            # Trim off the prompt
-            generate_ids = generate_ids[input_ids.shape[1] :]
+        # Trim off the prompt
+        generate_ids = generate_ids[input_ids.shape[1] :]
 
-            # Decode the caption
-            caption = self.tokenizer.decode(
-                generate_ids,
-                skip_special_tokens=True,
-                clean_up_tokenization_spaces=False,
-            )
-            caption = caption.strip()
-        self.update_inference_count(1)
+        # Decode the caption
+        caption = self.tokenizer.decode(
+            generate_ids,
+            skip_special_tokens=True,
+            clean_up_tokenization_spaces=False,
+        )
+        caption = caption.strip()
 
         return caption
 
@@ -158,41 +157,37 @@ class JoyCaption(BaseModel):
 
         return images_tensor, padded_input_ids, attention_mask_tensor
 
+    @track_inference
     def infer_batch(self, images: list[str], prompts: list[str], **generate_kwargs):
-        with self.track_inference_time():
-            with torch.inference_mode(), torch.amp.autocast(
-                device_type=self.device, dtype=self.dtype
-            ):
-                images, input_ids, attention_mask = self.preprocess_batch(
-                    images, prompts
-                )
+        with torch.inference_mode(), torch.amp.autocast(
+            device_type=self.device, dtype=self.dtype
+        ):
+            images, input_ids, attention_mask = self.preprocess_batch(images, prompts)
 
-                if "max_new_tokens" not in generate_kwargs:
-                    generate_kwargs["max_new_tokens"] = 300
+            if "max_new_tokens" not in generate_kwargs:
+                generate_kwargs["max_new_tokens"] = 300
 
-                generate_ids = self.model.generate(
-                    input_ids=input_ids.to(self.device),
-                    pixel_values=images.to(self.device),
-                    attention_mask=attention_mask.to(self.device),
-                    do_sample=True,
-                    suppress_tokens=None,
-                    use_cache=True,
-                    **generate_kwargs,
-                )
+            generate_ids = self.model.generate(
+                input_ids=input_ids.to(self.device),
+                pixel_values=images.to(self.device),
+                attention_mask=attention_mask.to(self.device),
+                do_sample=True,
+                suppress_tokens=None,
+                use_cache=True,
+                **generate_kwargs,
+            )
 
-            captions = []
-            for i, gen_ids in enumerate(generate_ids):
-                # Trim off the prompt
-                gen_ids = gen_ids[input_ids.shape[1] :]
+        captions = []
+        for i, gen_ids in enumerate(generate_ids):
+            # Trim off the prompt
+            gen_ids = gen_ids[input_ids.shape[1] :]
 
-                # Decode the caption
-                caption = self.tokenizer.decode(
-                    gen_ids,
-                    skip_special_tokens=True,
-                    clean_up_tokenization_spaces=False,
-                )
-                captions.append(caption.strip())
-
-        self.update_inference_count(len(images))
+            # Decode the caption
+            caption = self.tokenizer.decode(
+                gen_ids,
+                skip_special_tokens=True,
+                clean_up_tokenization_spaces=False,
+            )
+            captions.append(caption.strip())
 
         return captions

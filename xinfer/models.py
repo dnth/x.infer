@@ -1,3 +1,4 @@
+import functools
 import time
 from abc import ABC, abstractmethod
 from contextlib import contextmanager
@@ -9,6 +10,31 @@ from PIL import Image
 from rich import box
 from rich.console import Console
 from rich.table import Table
+
+
+def track_inference(func):
+    @functools.wraps(func)
+    def wrapper(self, *args, **kwargs):
+        start_time = time.perf_counter()
+        result = func(self, *args, **kwargs)
+        end_time = time.perf_counter()
+
+        inference_time = (end_time - start_time) * 1000
+        self.total_inference_time += inference_time
+
+        if func.__name__ == "infer_batch":
+            # For batch inference, increment by the number of images
+            num_inferences = len(args[0]) if args else len(kwargs.get("images", []))
+        else:
+            # For single inference, increment by 1
+            num_inferences = 1
+
+        self.num_inferences += num_inferences
+        self.average_latency = self.total_inference_time / self.num_inferences
+
+        return result
+
+    return wrapper
 
 
 class BaseModel(ABC):
@@ -50,23 +76,6 @@ class BaseModel(ABC):
         from .viz import launch_gradio
 
         launch_gradio(self, **gradio_launch_kwargs)
-
-    @contextmanager
-    def track_inference_time(self):
-        start_time = time.perf_counter()
-        try:
-            yield
-        finally:
-            end_time = time.perf_counter()
-            self.total_inference_time += (end_time - start_time) * 1000
-
-    def update_inference_count(self, count: int):
-        self.num_inferences += count
-        self.average_latency = (
-            self.total_inference_time / self.num_inferences
-            if self.num_inferences
-            else 0.0
-        )
 
     def print_stats(self):
         console = Console()

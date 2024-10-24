@@ -3,7 +3,7 @@ from typing import Dict, List
 import torch
 from ultralytics import YOLO
 
-from ..models import BaseModel
+from ..models import BaseModel, track_inference
 
 
 class UltralyticsModel(BaseModel):
@@ -16,12 +16,11 @@ class UltralyticsModel(BaseModel):
     def load_model(self, **kwargs):
         self.model = YOLO(self.model_id, **kwargs)
 
+    @track_inference
     def infer_batch(self, images: str | List[str], **kwargs) -> List[List[Dict]]:
-        with self.track_inference_time():
-            half = self.dtype == torch.float16
-            results = self.model.predict(
-                images, device=self.device, half=half, **kwargs
-            )
+        half = self.dtype == torch.float16
+        results = self.model.predict(images, device=self.device, half=half, **kwargs)
+
         batch_results = []
         for result in results:
             coco_format_results = []
@@ -38,11 +37,10 @@ class UltralyticsModel(BaseModel):
                         "class_name": result.names[int(box.cls)],
                     }
                 )
-            batch_results.append(coco_format_results)
-        self.update_inference_count(len(batch_results))
+        batch_results.append(coco_format_results)
         return batch_results
 
+    @track_inference
     def infer(self, image: str, **kwargs) -> List[List[Dict]]:
-        with self.track_inference_time():
-            results = self.infer_batch([image], **kwargs)
+        results = self.infer_batch([image], **kwargs)
         return results[0]

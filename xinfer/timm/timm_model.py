@@ -6,7 +6,7 @@ import timm
 import torch
 from PIL import Image
 
-from ..models import BaseModel
+from ..models import BaseModel, track_inference
 from .imagenet1k_classes import IMAGENET2012_CLASSES
 
 
@@ -49,9 +49,9 @@ class TimmModel(BaseModel):
 
         return images_tensor
 
+    @track_inference
     def infer(self, image: str, top_k: int = 5) -> List[Dict]:
-        with self.track_inference_time():
-            img = self.preprocess(image)
+        img = self.preprocess(image)
 
         with torch.inference_mode(), torch.amp.autocast(
             device_type=self.device, dtype=self.dtype
@@ -65,8 +65,6 @@ class TimmModel(BaseModel):
         im_classes = list(IMAGENET2012_CLASSES.values())
         class_names = [im_classes[i] for i in topk_class_indices[0]]
 
-        self.update_inference_count(1)
-
         return [
             {"class": class_name, "id": int(class_idx), "confidence": float(prob)}
             for class_name, class_idx, prob in zip(
@@ -74,9 +72,9 @@ class TimmModel(BaseModel):
             )
         ]
 
+    @track_inference
     def infer_batch(self, images: List[str], top_k: int = 5) -> List[List[Dict]]:
-        with self.track_inference_time():
-            images = self.preprocess(images)
+        images = self.preprocess(images)
 
         with torch.inference_mode(), torch.amp.autocast(
             device_type=self.device, dtype=self.dtype
@@ -88,8 +86,6 @@ class TimmModel(BaseModel):
         )
 
         im_classes = list(IMAGENET2012_CLASSES.values())
-
-        self.update_inference_count(len(images))
 
         results = []
         for i in range(len(images)):
