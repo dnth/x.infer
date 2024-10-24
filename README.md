@@ -347,5 +347,6 @@ class MyModel(BaseModel):
 
 <div align="right">
     <br />
-    <a href="#top">![Back to Top][back_to_top_badge]</a>
+    <a href="#top"><img src="https://img.shields.io/badge/Back_to_Top-↑-blue?style=for-the-badge" alt="Back to Top" /></a>
 </div>
+
