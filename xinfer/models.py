@@ -1,7 +1,6 @@
 import functools
 import time
 from abc import ABC, abstractmethod
-from contextlib import contextmanager
 
 import requests
 import torch
@@ -13,6 +12,21 @@ from rich.table import Table
 
 
 def track_inference(func):
+    """
+    Decorator to track the inference time of a model. Put this on the inference methods of a model.
+
+    Example:
+        @track_inference
+        def infer(self, image: str, prompt: str):
+            ...
+            return result
+
+        @track_inference
+        def infer_batch(self, images: list[str], prompts: list[str]):
+            ...
+            return result
+    """
+
     @functools.wraps(func)
     def wrapper(self, *args, **kwargs):
         start_time = time.perf_counter()
