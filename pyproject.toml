@@ -30,7 +30,8 @@ xinfer = "xinfer.cli:main"
 timm = ["timm"]
 ultralytics = ["ultralytics"]
 transformers = ["transformers"]
-all = ["timm", "ultralytics", "transformers"]
+vllm = ["vllm"]
+all = ["timm", "ultralytics", "transformers", "vllm"]
 
 [tool]
 [tool.setuptools.packages.find]
