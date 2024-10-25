@@ -337,6 +337,22 @@ class MyModel(BaseModel):
 
 See an example implementation of the Molmo model [here](https://github.com/dnth/x.infer/blob/main/xinfer/vllm/molmo.py).
 
+## 🤝 Contributing
+
+If you'd like to contribute, here are some ways you can help:
+
+1. **Add support for new models:** Implement new model classes following the steps in the [Adding New Models](#-adding-new-models) section.
+
+2. **Improve documentation:** Help us enhance our documentation, including this README, inline code comments, and the [official docs](https://dnth.github.io/x.infer).
+
+3. **Report bugs:** If you find a bug, please [open an issue](https://github.com/dnth/x.infer/issues/new?assignees=&labels=bug&projects=&template=bug_report.md) with a clear description and steps to reproduce.
+
+4. **Suggest enhancements:** Have ideas for new features? [Open a feature request](https://github.com/dnth/x.infer/issues/new?assignees=&labels=Feature+Request&projects=&template=feature_request.md).
+
+5. **Submit pull requests:** Feel free to fork the repository and submit pull requests for any improvements you've made.
+
+Thank you for helping make x.infer better!
+
 <div align="center">
     <img src="https://raw.githubusercontent.com/dnth/x.infer/refs/heads/main/assets/github_banner.png" alt="x.infer" width="600"/>
     <br />
