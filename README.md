@@ -176,7 +176,7 @@ pip install -e .
 
 
 <details>
-<summary><img src="https://img.shields.io/badge/Transformers-yellow?style=for-the-badge&logo=huggingface&logoColor=white" alt="Transformers"></summary>
+<summary><a href="https://github.com/huggingface/transformers"><img src="https://img.shields.io/badge/Transformers-yellow?style=for-the-badge&logo=huggingface&logoColor=white" alt="Transformers"></a></summary>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -224,7 +224,7 @@ model = xinfer.create_model(model)
 </details>
 
 <details>
-<summary><img src="https://img.shields.io/badge/TIMM-green?style=for-the-badge&logo=pytorch&logoColor=white" alt="TIMM"></summary>
+<summary><a href="https://github.com/huggingface/pytorch-image-models"><img src="https://img.shields.io/badge/TIMM-green?style=for-the-badge&logo=pytorch&logoColor=white" alt="TIMM"></a></summary>
 
 All models from [TIMM](https://github.com/huggingface/pytorch-image-models) fine-tuned for ImageNet 1k are supported.
 
@@ -245,7 +245,7 @@ model = xinfer.create_model(model)
 </details>
 
 <details>
-<summary><img src="https://img.shields.io/badge/Ultralytics-red?style=for-the-badge&logo=udacity&logoColor=white" alt="Ultralytics"></summary>
+<summary><a href="https://github.com/ultralytics/ultralytics"><img src="https://img.shields.io/badge/Ultralytics-red?style=for-the-badge&logo=udacity&logoColor=white" alt="Ultralytics"></a></summary>
 
 <table>
     <thead>
@@ -283,7 +283,7 @@ model = xinfer.create_model(model)
 </details>
 
 <details>
-<summary><img src="https://img.shields.io/badge/vLLM-purple?style=for-the-badge&logo=v&logoColor=white" alt="vLLM"></summary>
+<summary><a href="https://github.com/vllm-project/vllm"><img src="https://img.shields.io/badge/vLLM-purple?style=for-the-badge&logo=v&logoColor=white" alt="vLLM"></a></summary>
 
 <table>
     <thead>
@@ -358,6 +358,8 @@ class MyModel(BaseModel):
     <br />
     <a href="#top"><img src="https://img.shields.io/badge/Back_to_Top-↑-blue?style=for-the-badge" alt="Back to Top" /></a>
 </div>
+
+
 
 
 
