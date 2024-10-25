@@ -329,7 +329,7 @@ model = xinfer.create_model(model)
 
 For example:
 ```python
-@xinfer.register_model("my-model", "custom", ModelInputOutput.IMAGE_TEXT_TO_TEXT)
+@register_model("my-model", "custom", ModelInputOutput.IMAGE_TEXT_TO_TEXT)
 class MyModel(BaseModel):
     def load_model(self):
         # Load your model here
