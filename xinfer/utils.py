@@ -16,6 +16,7 @@ timm_available = soft_import("timm")
 transformers_available = soft_import("transformers")
 ultralytics_available = soft_import("ultralytics")
 vllm_available = soft_import("vllm")
+ollama_available = soft_import("ollama")
 
 
 # Create placeholder classes
