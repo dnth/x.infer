@@ -142,11 +142,25 @@ xinfer.list_models()
 
 ## 🖥️ Launch Gradio Interface
 
+For all models, you can launch a Gradio interface to interact with the model.
+
 ```python
 model.launch_gradio()
 ```
 
 ![Gradio Interface](https://raw.githubusercontent.com/dnth/x.infer/refs/heads/main/assets/gradio.png)
+
+You can also launch a Gradio interface with all models available.
+
+```python
+xinfer.launch_gradio_demo()
+```
+
+![Gradio Demo](https://raw.githubusercontent.com/dnth/x.infer/refs/heads/main/assets/gradio_demo.png)
+
+See [Gradio Demo](./nbs/gradio_demo.ipynb) for more details.
+
+
 
 
 ## 📦 Installation
