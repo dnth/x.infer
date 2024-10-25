@@ -6,6 +6,7 @@
 [timm_badge]: https://img.shields.io/badge/TIMM-limegreen?style=for-the-badge&logo=pytorch&logoColor=white
 [ultralytics_badge]: https://img.shields.io/badge/Ultralytics-red?style=for-the-badge&logo=udacity&logoColor=white
 [vllm_badge]: https://img.shields.io/badge/vLLM-purple?style=for-the-badge&logo=v&logoColor=white
+[ollama_badge]: https://img.shields.io/badge/Ollama-darkgreen?style=for-the-badge&logo=llama&logoColor=white
 [colab_badge]: https://img.shields.io/badge/Open%20In-Colab-blue?style=for-the-badge&logo=google-colab
 [kaggle_badge]: https://img.shields.io/badge/Open%20In-Kaggle-blue?style=for-the-badge&logo=kaggle
 [back_to_top_badge]: https://img.shields.io/badge/Back_to_Top-↑-blue?style=for-the-badge
@@ -54,6 +55,7 @@ Out of the box, x.infer supports the following frameworks:
 [![TIMM](https://img.shields.io/badge/TIMM-limegreen?style=for-the-badge&logo=pytorch&logoColor=white)](https://github.com/huggingface/pytorch-image-models)
 [![Ultralytics](https://img.shields.io/badge/Ultralytics-red?style=for-the-badge&logo=udacity&logoColor=white)](https://github.com/ultralytics/ultralytics)
 [![vLLM](https://img.shields.io/badge/vLLM-purple?style=for-the-badge&logo=v&logoColor=white)](https://github.com/vllm-project/vllm)
+[![Ollama](https://img.shields.io/badge/Ollama-darkgreen?style=for-the-badge&logo=Ollama&logoColor=white)](https://github.com/ollama/ollama)
 
 In total x.infer already supports over 1000+ models from all the above frameworks.
 
@@ -333,6 +335,25 @@ model = xinfer.create_model(model)
 
 </details>
 
+<details>
+<summary><a href="https://github.com/ollama/ollama"><img src="https://img.shields.io/badge/Ollama-darkgreen?style=for-the-badge&logo=Ollama&logoColor=white" alt="Ollama"></a></summary>
+
+<table>
+    <thead>
+        <tr>
+            <th>Model</th>
+            <th>Usage</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><a href="https://github.com/ollama/ollama">LLaVA Phi3</a></td>
+            <td><code>xinfer.create_model("ollama/llava-phi3")</code></td>
+        </tr>
+    </tbody>
+</table>
+</details>
+
 ### 🔧 Adding New Models
 
 + **Step 1:** Create a new model class that implements the `BaseModel` interface.
@@ -399,6 +420,7 @@ Thank you for helping make x.infer better!
     <br />
     <a href="#top"><img src="https://img.shields.io/badge/Back_to_Top-↑-blue?style=for-the-badge" alt="Back to Top" /></a>
 </div>
+
 
 
 
