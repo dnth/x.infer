@@ -21,7 +21,7 @@ class TimmModel(BaseModel):
         self.model = timm.create_model(self.model_id, pretrained=True, **kwargs).to(
             self.device, self.dtype
         )
-        self.model = torch.compile(self.model, mode="max-autotune")
+        # self.model = torch.compile(self.model, mode="max-autotune")
         self.model.eval()
 
     def preprocess(self, images: str | list[str]):
