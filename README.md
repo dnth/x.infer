@@ -150,7 +150,7 @@ model.launch_gradio()
 
 ![Gradio Interface](https://raw.githubusercontent.com/dnth/x.infer/refs/heads/main/assets/gradio.png)
 
-You can also launch a Gradio interface with all models available.
+You can also launch a Gradio interface with all models available in a dropdown. Pick a model, upload an image, and see the inference results.
 
 ```python
 xinfer.launch_gradio_demo()
