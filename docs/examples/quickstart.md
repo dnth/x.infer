@@ -21,26 +21,12 @@ import torch
 torch.__version__
 ```
 
-
-
-
-    '2.4.0+cu121'
-
-
-
 Also let's check if CUDA is available.
 
 
 ```python
 torch.cuda.is_available()
 ```
-
-
-
-
-    True
-
-
 
 x.infer relies on various optional dependencies like transformers, ultralytics, timm, etc.
 You don't need to install these dependencies if you don't want to. Just install x.infer with the dependencies you want.
@@ -56,6 +42,13 @@ For this example, we'll install all the dependencies.
 !pip install -Uqq "xinfer[all]"
 ```
 
+Alternatively, if you'd like to install the bleeding edge version of x.infer, uncomment the following line.
+
+
+```python
+# !pip install "git+https://github.com/dnth/x.infer.git#egg=xinfer[all]"
+```
+
 It's recommended to restart the kernel once all the dependencies are installed. Uncomment the following line to restart the kernel.
 
 
@@ -64,17 +57,24 @@ It's recommended to restart the kernel once all the dependencies are installed. 
 # get_ipython().kernel.do_shutdown(restart=True)
 ```
 
-Once completed, let's import x.infer, check the version and list all the models available.
+Once completed, let's import x.infer, check the version and list all the models available. Specifying `interactive=True` will launch an interactive table in Jupyter Notebooks.
 
 
 ```python
 import xinfer
 
 print(xinfer.__version__)
-xinfer.list_models(interactive=True)
 ```
 
     0.0.10
+
+
+
+```python
+xinfer.list_models(interactive=True)
+```
+
+    [32m2024-10-25 23:21:10.032[0m | [1mINFO    [0m | [36mxinfer.core[0m:[36mlist_models[0m:[36m55[0m - [1mShowing interactive table in Jupyter Notebook. Type in the search bar to filter the models.[0m
 
 
 
@@ -217,7 +217,7 @@ This is the <code>init_notebook_mode</code> cell from ITables v2.2.2<br>
 
 
 
-<table id="itables_9467fa67_b8b4_4ac0_a402_03f795e9781a" class="display nowrap" data-quarto-disable-processing="true" style="table-layout:auto;width:auto;margin:auto;caption-side:bottom">
+<table id="itables_12f51400_18de_4fb1_b7df_af4d978a4ae2" class="display nowrap" data-quarto-disable-processing="true" style="table-layout:auto;width:auto;margin:auto;caption-side:bottom">
 <thead>
     <tr style="text-align: right;">
 
@@ -329,7 +329,7 @@ Loading ITables v2.2.2 from the <code>init_notebook_mode</code> cell...
 <script type="module">
     const { DataTable, jQuery: $ } = await import(window._datatables_src_for_itables_2_2_2);
 
-    document.querySelectorAll("#itables_9467fa67_b8b4_4ac0_a402_03f795e9781a:not(.dataTable)").forEach(table => {
+    document.querySelectorAll("#itables_12f51400_18de_4fb1_b7df_af4d978a4ae2:not(.dataTable)").forEach(table => {
         if (!(table instanceof HTMLTableElement))
             return;
 
@@ -348,6 +348,24 @@ Loading ITables v2.2.2 from the <code>init_notebook_mode</code> cell...
 
 
 
+If you'd like to search for a specific model, you can do so by passing in the `search` parameter.
+
+
+```python
+xinfer.list_models(search="moondream")
+```
+
+
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-style: italic">                       Available Models                       </span>
+┏━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
+┃<span style="font-weight: bold"> Implementation </span>┃<span style="font-weight: bold"> Model ID            </span>┃<span style="font-weight: bold"> Input --&gt; Output    </span>┃
+┡━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
+│<span style="color: #008080; text-decoration-color: #008080"> transformers   </span>│<span style="color: #800080; text-decoration-color: #800080"> vikhyatk/moondream2 </span>│<span style="color: #008000; text-decoration-color: #008000"> image-text --&gt; text </span>│
+└────────────────┴─────────────────────┴─────────────────────┘
+</pre>
+
+
+
 You can pick any model from the list of models available.
 Let's create a model from the `vikhyatk/moondream2` model. We can optionally specify the device and dtype. By default, the model is created on the CPU and the dtype is `float32`.
 
@@ -358,9 +376,9 @@ Since we have GPU available, let's create the model on the GPU and use `float16`
 model = xinfer.create_model("vikhyatk/moondream2", device="cuda", dtype="float16")
 ```
 
-    [32m2024-10-24 16:17:09.355[0m | [1mINFO    [0m | [36mxinfer.models[0m:[36m__init__[0m:[36m63[0m - [1mModel: vikhyatk/moondream2[0m
-    [32m2024-10-24 16:17:09.356[0m | [1mINFO    [0m | [36mxinfer.models[0m:[36m__init__[0m:[36m64[0m - [1mDevice: cuda[0m
-    [32m2024-10-24 16:17:09.356[0m | [1mINFO    [0m | [36mxinfer.models[0m:[36m__init__[0m:[36m65[0m - [1mDtype: float16[0m
+    [32m2024-10-25 23:21:10.079[0m | [1mINFO    [0m | [36mxinfer.models[0m:[36m__init__[0m:[36m63[0m - [1mModel: vikhyatk/moondream2[0m
+    [32m2024-10-25 23:21:10.080[0m | [1mINFO    [0m | [36mxinfer.models[0m:[36m__init__[0m:[36m64[0m - [1mDevice: cuda[0m
+    [32m2024-10-25 23:21:10.081[0m | [1mINFO    [0m | [36mxinfer.models[0m:[36m__init__[0m:[36m65[0m - [1mDtype: float16[0m
     PhiForCausalLM has generative capabilities, as `prepare_inputs_for_generation` is explicitly overwritten. However, it doesn't directly inherit from `GenerationMixin`. From 👉v4.50👈 onwards, `PreTrainedModel` will NOT inherit from `GenerationMixin`, and this model will lose the ability to call `generate` and other related functions.
       - If you're using `trust_remote_code=True`, you can get rid of this warning by loading the model with an auto class. See https://huggingface.co/docs/transformers/en/model_doc/auto#auto-classes
       - If you are the owner of the model architecture code, please modify your model class such that it inherits from `GenerationMixin` (after `PreTrainedModel`, otherwise you'll get an exception).
@@ -383,7 +401,7 @@ Image.open(requests.get(image_url, stream=True).raw)
 
 
     
-![png](quickstart_files/quickstart_15_0.png)
+![png](quickstart_files/quickstart_20_0.png)
     
 
 
@@ -438,8 +456,8 @@ model.print_stats()
 │<span style="color: #008080; text-decoration-color: #008080"> Device                    </span>│<span style="color: #800080; text-decoration-color: #800080"> cuda                </span>│
 │<span style="color: #008080; text-decoration-color: #008080"> Dtype                     </span>│<span style="color: #800080; text-decoration-color: #800080"> torch.float16       </span>│
 │<span style="color: #008080; text-decoration-color: #008080"> Number of Inferences      </span>│<span style="color: #800080; text-decoration-color: #800080"> 2                   </span>│
-│<span style="color: #008080; text-decoration-color: #008080"> Total Inference Time (ms) </span>│<span style="color: #800080; text-decoration-color: #800080"> 2021.5498           </span>│
-│<span style="color: #008080; text-decoration-color: #008080"> Average Latency (ms)      </span>│<span style="color: #800080; text-decoration-color: #800080"> 1010.7749           </span>│
+│<span style="color: #008080; text-decoration-color: #008080"> Total Inference Time (ms) </span>│<span style="color: #800080; text-decoration-color: #800080"> 1946.4193           </span>│
+│<span style="color: #008080; text-decoration-color: #008080"> Average Latency (ms)      </span>│<span style="color: #800080; text-decoration-color: #800080"> 973.2096            </span>│
 ╰───────────────────────────┴─────────────────────╯
 </pre>
 
@@ -465,6 +483,22 @@ For convenience, you can also launch a Gradio interface to interact with the mod
 
 ```python
 model.launch_gradio()
+```
+
+    * Running on local URL:  http://127.0.0.1:7860
+    
+    To create a public link, set `share=True` in `launch()`.
+
+
+
+<div><iframe src="http://127.0.0.1:7860/" width="100%" height="1000" allow="autoplay; camera; microphone; clipboard-read; clipboard-write;" frameborder="0" allowfullscreen></iframe></div>
+
+
+Finally, you can also launch a Gradio interface to interact with all of the models available in x.infer.
+
+
+```python
+xinfer.launch_gradio_demo()
 ```
 
     * Running on local URL:  http://127.0.0.1:7861
