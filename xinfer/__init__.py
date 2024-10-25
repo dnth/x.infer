@@ -23,10 +23,14 @@ if ultralytics_available:
 if vllm_available:
     from .vllm import *
 
+
+from .viz import launch_gradio_demo
+
 __all__ = [
     "create_model",
     "list_models",
     "register_model",
     "BaseModel",
     "ModelInputOutput",
+    "launch_gradio_demo",
 ]
