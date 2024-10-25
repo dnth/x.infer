@@ -55,6 +55,8 @@ Out of the box, x.infer supports the following frameworks:
 [![Ultralytics](https://img.shields.io/badge/Ultralytics-red?style=for-the-badge&logo=udacity&logoColor=white)](https://github.com/ultralytics/ultralytics)
 [![vLLM](https://img.shields.io/badge/vLLM-purple?style=for-the-badge&logo=v&logoColor=white)](https://github.com/vllm-project/vllm)
 
+In total x.infer already supports over 1000+ models from all the above frameworks.
+
 Tasks supported:
 
 ![Image Classification][image_classification_badge]
