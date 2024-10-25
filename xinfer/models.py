@@ -68,6 +68,7 @@ class BaseModel(ABC):
             "float32": torch.float32,
             "float16": torch.float16,
             "bfloat16": torch.bfloat16,
+            "auto": torch.float32,
         }
         if dtype not in dtype_map:
             raise ValueError("dtype must be one of 'float32', 'float16', or 'bfloat16'")
@@ -75,15 +76,47 @@ class BaseModel(ABC):
 
     @abstractmethod
     def load_model(self):
-        pass
+        """
+        Load the model and any necessary components.
+
+        This method should be implemented by subclasses to initialize
+        their specific model architecture and weights.
+
+        Raises:
+            NotImplementedError: If the subclass doesn't implement this method
+        """
+        logger.info("Loading model...")
+        raise NotImplementedError("Subclass must implement load_model()")
 
     @abstractmethod
     def infer(self, image: str, prompt: str):
-        pass
+        """
+        Run inference on a single image.
+
+        Args:
+            image (str): Path or URL to the input image
+            prompt (str): Text prompt for the inference
+
+        Raises:
+            NotImplementedError: If the subclass doesn't implement this method
+        """
+        logger.info("Running single inference...")
+        raise NotImplementedError("Subclass must implement infer()")
 
     @abstractmethod
     def infer_batch(self, images: list[str], prompts: list[str]):
-        pass
+        """
+        Run inference on a batch of images.
+
+        Args:
+            images (list[str]): List of image paths or URLs
+            prompts (list[str]): List of text prompts for each image
+
+        Raises:
+            NotImplementedError: If the subclass doesn't implement this method
+        """
+        logger.info("Running batch inference...")
+        raise NotImplementedError("Subclass must implement infer_batch()")
 
     def launch_gradio(self, **gradio_launch_kwargs):
         # Importing here to avoid circular import
