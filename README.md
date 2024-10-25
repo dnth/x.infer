@@ -134,7 +134,7 @@ xinfer.list_models()
 │ ultralytics    │ yolov8m                                         │ image --> boxes      │
 │ ultralytics    │ yolov8l                                         │ image --> boxes      │
 │ ultralytics    │ yolov8s                                         │ image --> boxes      │
-│ ultralytics    │ yolov8n                                          image --> boxes      │
+│ ultralytics    │ yolov8n                                         │ image --> boxes      │
 │ ...            │ ...                                             │ ...                  │
 │ ...            │ ...                                             │ ...                  │
 └────────────────┴─────────────────────────────────────────────────┴──────────────────────┘
