@@ -28,12 +28,12 @@ def create_model(model: str | TimmModel | Vision2SeqModel | UltralyticsModel, **
     return model_registry.get_model(model, **kwargs)
 
 
-def list_models(wildcard: str = None, limit: int = 20, interactive: bool = False):
+def list_models(search: str = None, limit: int = 20, interactive: bool = False):
     import pandas as pd
 
     rows = []
     for model_info in model_registry.list_models():
-        if wildcard is None or wildcard.lower() in model_info.id.lower():
+        if search is None or search.lower() in model_info.id.lower():
             rows.append(
                 {
                     "Implementation": model_info.implementation,
@@ -52,6 +52,10 @@ def list_models(wildcard: str = None, limit: int = 20, interactive: bool = False
     if interactive:
         from itables import init_notebook_mode
 
+        logger.info(
+            "Showing interactive table in Jupyter Notebook. Type in the search bar to filter the models."
+        )
+
         init_notebook_mode(all_interactive=True)
         return pd.DataFrame(rows)
 
@@ -62,6 +66,10 @@ def list_models(wildcard: str = None, limit: int = 20, interactive: bool = False
         )
         rows.append(
             {"Implementation": "...", "Model ID": "...", "Input --> Output": "..."}
+        )
+
+        logger.info(
+            f"Showing only top {limit} models. Change the `limit` parameter to see more."
         )
 
     console = Console()
