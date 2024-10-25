@@ -42,10 +42,10 @@ If you'd like to run many models from different libraries without having to rewr
 
 Models supported: 
 
-![Transformers][transformers_badge]
-![TIMM][timm_badge]
-![Ultralytics][ultralytics_badge]
-![vLLM][vllm_badge]
+[![Transformers](https://img.shields.io/badge/Transformers-yellow?style=for-the-badge&logo=huggingface&logoColor=white)](https://github.com/huggingface/transformers)
+[![TIMM](https://img.shields.io/badge/TIMM-limegreen?style=for-the-badge&logo=pytorch&logoColor=white)](https://github.com/huggingface/pytorch-image-models)
+[![Ultralytics](https://img.shields.io/badge/Ultralytics-red?style=for-the-badge&logo=udacity&logoColor=white)](https://github.com/ultralytics/ultralytics)
+[![vLLM](https://img.shields.io/badge/vLLM-purple?style=for-the-badge&logo=v&logoColor=white)](https://github.com/vllm-project/vllm)
 
 Tasks supported:
 
@@ -154,6 +154,7 @@ x.infer can be used with multiple optional libraries. You'll just need to instal
 pip install "xinfer[transformers]"
 pip install "xinfer[ultralytics]"
 pip install "xinfer[timm]"
+pip install "xinfer[vllm]"
 ```
 
 To install all libraries, run:
@@ -357,6 +358,8 @@ class MyModel(BaseModel):
     <br />
     <a href="#top"><img src="https://img.shields.io/badge/Back_to_Top-↑-blue?style=for-the-badge" alt="Back to Top" /></a>
 </div>
+
+
 
 
 
