@@ -44,7 +44,7 @@ So, a new computer vision model just dropped last night. It's called `GPT-54o-mi
 You're excited. You want to try it out. 
 
 But it's written in a new framework, `TyPorch`, that you know nothing about.
-You don't want to spend a week learning `TyPorch` just to find out the model is not what you expected.
+You don't want to spend a weekend learning `TyPorch` just to find out the model is not what you expected.
 
 This is where x.infer comes in. It's a simple library that allows you to run inference with any computer vision model in just a few lines of code. All in Python.
 
