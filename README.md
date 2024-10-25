@@ -38,9 +38,16 @@
 
 
 ## 🤔 Why x.infer?
-If you'd like to run many models from different libraries without having to rewrite your inference code, x.infer is for you. It has a simple API and is easy to extend. 
+<!-- If you'd like to run many models from different libraries without having to rewrite your inference code, x.infer is for you. It has a simple API and is easy to extend.  -->
+So, a new computer vision model just dropped last night. It's called `GPT-54o-mini-vision-pro-max-xxxl`. It's a super cool model, open-source, open-weights, open-data, all the good stuff.
 
-Models supported: 
+You're excited. You want to try it out. But it's written in a new framework, `TyPorch`, that you know nothing about.
+
+You don't want to spend a week learning `TyPorch` just to find out the model is not what you expected.
+
+This is where x.infer comes in. It's a simple library that allows you to run any computer vision model in just a few lines of code. All in Python.
+
+Out of the box, x.infer supports the following frameworks:
 
 [![Transformers](https://img.shields.io/badge/Transformers-yellow?style=for-the-badge&logo=huggingface&logoColor=white)](https://github.com/huggingface/transformers)
 [![TIMM](https://img.shields.io/badge/TIMM-limegreen?style=for-the-badge&logo=pytorch&logoColor=white)](https://github.com/huggingface/pytorch-image-models)
@@ -73,7 +80,6 @@ Have a custom model? Create a class that implements the `BaseModel` interface an
 
 - **Unified Interface:** Interact with different machine learning models through a single, consistent API.
 - **Modular Design:** Integrate and swap out models without altering the core framework.
-- **Ease of Use:** Simplifies model loading, input preprocessing, inference execution, and output postprocessing.
 - **Extensibility:** Add support for new models and libraries with minimal code changes.
 
 ## 🚀 Quickstart
