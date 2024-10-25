@@ -406,12 +406,12 @@
 
         <details class="quote">
           <summary>Source code in <code>xinfer/core.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">list_models</span><span class="p">(</span><span class="n">wildcard</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">interactive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">list_models</span><span class="p">(</span><span class="n">search</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">interactive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
     <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
     <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">model_info</span> <span class="ow">in</span> <span class="n">model_registry</span><span class="o">.</span><span class="n">list_models</span><span class="p">():</span>
-        <span class="k">if</span> <span class="n">wildcard</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">wildcard</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">model_info</span><span class="o">.</span><span class="n">id</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">search</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">search</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">model_info</span><span class="o">.</span><span class="n">id</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
             <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
                 <span class="p">{</span>
                     <span class="s2">&quot;Implementation&quot;</span><span class="p">:</span> <span class="n">model_info</span><span class="o">.</span><span class="n">implementation</span><span class="p">,</span>
@@ -430,6 +430,10 @@
     <span class="k">if</span> <span class="n">interactive</span><span class="p">:</span>
         <span class="kn">from</span> <span class="nn">itables</span> <span class="kn">import</span> <span class="n">init_notebook_mode</span>
 
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;Showing interactive table in Jupyter Notebook. Type in the search bar to filter the models.&quot;</span>
+        <span class="p">)</span>
+
         <span class="n">init_notebook_mode</span><span class="p">(</span><span class="n">all_interactive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
 
@@ -440,6 +444,10 @@
         <span class="p">)</span>
         <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
             <span class="p">{</span><span class="s2">&quot;Implementation&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span> <span class="s2">&quot;Model ID&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span> <span class="s2">&quot;Input --&gt; Output&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">}</span>
+        <span class="p">)</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Showing only top </span><span class="si">{</span><span class="n">limit</span><span class="si">}</span><span class="s2"> models. Change the `limit` parameter to see more.&quot;</span>
         <span class="p">)</span>
 
     <span class="n">console</span> <span class="o">=</span> <span class="n">Console</span><span class="p">()</span>
