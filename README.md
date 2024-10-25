@@ -335,6 +335,8 @@ class MyModel(BaseModel):
         pass
 ```
 
+See an example implementation of the Molmo model [here](https://github.com/dnth/x.infer/blob/main/xinfer/vllm/molmo.py).
+
 <div align="center">
     <img src="https://raw.githubusercontent.com/dnth/x.infer/refs/heads/main/assets/github_banner.png" alt="x.infer" width="600"/>
     <br />
