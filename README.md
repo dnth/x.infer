@@ -68,7 +68,7 @@ Have a custom model? Create a class that implements the `BaseModel` interface an
 
 ## 🌟 Key Features
 <div align="center">
-  <img src="https://raw.githubusercontent.com/dnth/x.infer/refs/heads/main/assets/flowchart.gif" alt="x.infer" width="800"/>
+  <img src="https://raw.githubusercontent.com/dnth/x.infer/refs/heads/main/assets/flowchart.gif" alt="x.infer" width="900"/>
 </div>
 
 - **Unified Interface:** Interact with different machine learning models through a single, consistent API.
