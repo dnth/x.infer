@@ -216,24 +216,25 @@ pip install -e .
         <tbody>
             <tr>
                 <td><a href="https://huggingface.co/collections/Salesforce/blip2-models-65242f91b4c4b4a32e5cb652">BLIP2 Series</a></td>
-                <td><code>xinfer.create_model("Salesforce/blip2-opt-2.7b")</code></td>
+                <td><pre lang="python"><code>xinfer.create_model("Salesforce/blip2-opt-2.7b")</code></pre></td>
             </tr>
             <tr>
                 <td><a href="https://github.com/vikhyat/moondream">Moondream2</a></td>
-                <td><code>xinfer.create_model("vikhyatk/moondream2")</code></td>
+                <td><pre lang="python"><code>xinfer.create_model("vikhyatk/moondream2")</code></pre></td>
             </tr>
             <tr>
                 <td><a href="https://huggingface.co/sashakunitsyn/vlrm-blip2-opt-2.7b">VLRM-BLIP2</a></td>
-                <td><code>xinfer.create_model("sashakunitsyn/vlrm-blip2-opt-2.7b")</code></td>
+                <td><pre lang="python"><code>xinfer.create_model("sashakunitsyn/vlrm-blip2-opt-2.7b")</code></pre></td>
             </tr>
             <tr>
                 <td><a href="https://github.com/fpgaminer/joycaption">JoyCaption</a></td>
-                <td><code>xinfer.create_model("fancyfeast/llama-joycaption-alpha-two-hf-llava")</code></td>
+                <td><pre lang="python"><code>xinfer.create_model("fancyfeast/llama-joycaption-alpha-two-hf-llava")</code></pre></td>
             </tr>
         </tbody>
     </table>
 </body>
 </html>
+
 
 
 You can also load any [AutoModelForVision2Seq model](https://huggingface.co/docs/transformers/main/en/model_doc/auto#transformers.AutoModelForVision2Seq) 
@@ -429,6 +430,7 @@ Although x.infer is Apache 2.0 licensed, the models it supports may have their o
     <br />
     <a href="#top"><img src="https://img.shields.io/badge/Back_to_Top-↑-blue?style=for-the-badge" alt="Back to Top" /></a>
 </div>
+
 
 
 
