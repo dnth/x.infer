@@ -142,6 +142,14 @@ xinfer.list_models()
 └────────────────┴─────────────────────────────────────────────────┴──────────────────────┘
 ```
 
+If you're running in a Juypter Notebook environment, you can specify `interactive=True` to list and search supported models interactively.
+
+
+
+https://github.com/user-attachments/assets/d51cf707-2001-478c-881a-ae27f690d1bc
+
+
+
 ## 🖥️ Launch Gradio Interface
 
 For all models, you can launch a Gradio interface to interact with the model.
