@@ -399,6 +399,12 @@ If you'd like to contribute, here are some ways you can help:
 
 Thank you for helping make x.infer better!
 
+## ⚠️ Disclaimer
+
+x.infer is not affiliated with any of the libraries it supports. It is a simple wrapper that allows you to run inference with any of the supported models.
+
+Although x.infer is Apache 2.0 licensed, the models it supports may have their own licenses. Please check the individual model repositories for more details. I will not be responsible for any licenses or legal issues.
+
 <div align="center">
     <img src="https://raw.githubusercontent.com/dnth/x.infer/refs/heads/main/assets/github_banner.png" alt="x.infer" width="600"/>
     <br />
