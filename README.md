@@ -283,15 +283,15 @@ model = xinfer.create_model(model)
     <tbody>
         <tr>
             <td><a href="https://github.com/ultralytics/ultralytics">YOLOv8 Series</a></td>
-            <td><code>xinfer.create_model("yolov8n")</code></td>
+            <td><pre lang="python"><code>xinfer.create_model("yolov8n")</code></pre></td>
         </tr>
         <tr>
             <td><a href="https://github.com/ultralytics/ultralytics">YOLOv10 Series</a></td>
-            <td><code>xinfer.create_model("yolov10x")</code></td>
+            <td><pre lang="python"><code>xinfer.create_model("yolov10x")</code></pre></td>
         </tr>
         <tr>
             <td><a href="https://github.com/ultralytics/ultralytics">YOLOv11 Series</a></td>
-            <td><code>xinfer.create_model("yolov11s")</code></td>
+            <td><pre lang="python"><code>xinfer.create_model("yolov11s")</code></pre></td>
         </tr>
     </tbody>
 </table>
@@ -321,15 +321,15 @@ model = xinfer.create_model(model)
     <tbody>
         <tr>
             <td><a href="https://huggingface.co/allenai/Molmo-72B-0924">Molmo-72B</a></td>
-            <td><code>xinfer.create_model("allenai/Molmo-72B-0924")</code></td>
+            <td><pre lang="python"><code>xinfer.create_model("allenai/Molmo-72B-0924")</code></pre></td>
         </tr>
         <tr>
             <td><a href="https://huggingface.co/allenai/Molmo-7B-D-0924">Molmo-7B-D</a></td>
-            <td><code>xinfer.create_model("allenai/Molmo-7B-D-0924")</code></td>
+            <td><pre lang="python"><code>xinfer.create_model("allenai/Molmo-7B-D-0924")</code></pre></td>
         </tr>
         <tr>
             <td><a href="https://huggingface.co/allenai/Molmo-7B-O-0924">Molmo-7B-O</a></td>
-            <td><code>xinfer.create_model("allenai/Molmo-7B-O-0924")</code></td>
+            <td><pre lang="python"><code>xinfer.create_model("allenai/Molmo-7B-O-0924")</code></pre></td>
         </tr>
     </tbody>
 </table>
@@ -351,7 +351,7 @@ To use Ollama models, you'll need to install the Ollama on your machine. See [Ol
     <tbody>
         <tr>
             <td><a href="https://github.com/ollama/ollama">LLaVA Phi3</a></td>
-            <td><code>xinfer.create_model("ollama/llava-phi3")</code></td>
+            <td><pre lang="python"><code>xinfer.create_model("ollama/llava-phi3")</code></pre></td>
         </tr>
     </tbody>
 </table>
