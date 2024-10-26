@@ -399,6 +399,7 @@ If you'd like to contribute, here are some ways you can help:
 
 5. **Submit pull requests:** Feel free to fork the repository and submit pull requests for any improvements you've made.
 
+Please also see the code of conduct [here](./CODE_OF_CONDUCT.md).
 Thank you for helping make x.infer better!
 
 ## ⚠️ Disclaimer
