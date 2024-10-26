@@ -169,7 +169,10 @@ You can also launch a Gradio interface with all models available in a dropdown. 
 xinfer.launch_gradio_demo()
 ```
 
-![Gradio Demo](https://raw.githubusercontent.com/dnth/x.infer/refs/heads/main/assets/gradio_demo.png)
+
+https://github.com/user-attachments/assets/bd46f55a-573f-45b9-910f-e22bee27fd3d
+
+
 
 See [Gradio Demo](./nbs/gradio_demo.ipynb) for more details.
 
