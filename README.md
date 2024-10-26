@@ -338,8 +338,8 @@ model = xinfer.create_model(model)
 <details>
 <summary><a href="https://github.com/ollama/ollama"><img src="https://img.shields.io/badge/Ollama-darkgreen?style=for-the-badge&logo=Ollama&logoColor=white" alt="Ollama"></a></summary>
 
-> [!IMPORTANT]
-> To use Ollama models, you'll need to install the Ollama on your machine. See [Ollama Installation Guide](https://ollama.com/download) for more details.
+[!IMPORTANT]
+To use Ollama models, you'll need to install the Ollama on your machine. See [Ollama Installation Guide](https://ollama.com/download) for more details.
 
 <table>
     <thead>
@@ -355,6 +355,7 @@ model = xinfer.create_model(model)
         </tr>
     </tbody>
 </table>
+
 </details>
 
 ### 🔧 Adding New Models
@@ -404,7 +405,7 @@ Thank you for helping make x.infer better!
 
 x.infer is not affiliated with any of the libraries it supports. It is a simple wrapper that allows you to run inference with any of the supported models.
 
-Although x.infer is Apache 2.0 licensed, the models it supports may have their own licenses. Please check the individual model repositories for more details. I will not be responsible for any licenses or legal issues.
+Although x.infer is Apache 2.0 licensed, the models it supports may have their own licenses. Please check the individual model repositories for more details. I will not b
 
 <div align="center">
     <img src="https://raw.githubusercontent.com/dnth/x.infer/refs/heads/main/assets/github_banner.png" alt="x.infer" width="600"/>
