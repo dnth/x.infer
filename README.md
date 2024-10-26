@@ -158,7 +158,10 @@ For all models, you can launch a Gradio interface to interact with the model.
 model.launch_gradio()
 ```
 
-![Gradio Interface](https://raw.githubusercontent.com/dnth/x.infer/refs/heads/main/assets/gradio.png)
+
+https://github.com/user-attachments/assets/25ce31f3-c9e2-4934-b341-000a6d1b7dc4
+
+
 
 You can also launch a Gradio interface with all models available in a dropdown. Pick a model, upload an image, and see the inference results.
 
