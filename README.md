@@ -338,7 +338,8 @@ model = xinfer.create_model(model)
 <details>
 <summary><a href="https://github.com/ollama/ollama"><img src="https://img.shields.io/badge/Ollama-darkgreen?style=for-the-badge&logo=Ollama&logoColor=white" alt="Ollama"></a></summary>
 
-To use Ollama models, you'll need to install the Ollama on your machine. See [Ollama Installation Guide](https://ollama.com/download) for more details.
+> [!IMPORTANT]
+> To use Ollama models, you'll need to install the Ollama on your machine. See [Ollama Installation Guide](https://ollama.com/download) for more details.
 
 <table>
     <thead>
