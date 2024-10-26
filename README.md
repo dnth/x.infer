@@ -215,7 +215,7 @@ pip install -e .
         </thead>
         <tbody>
             <tr>
-                <td><a href="https://huggingface.co/Salesforce/blip2-opt-2.7b">BLIP2 Series</a></td>
+                <td><a href="https://huggingface.co/collections/Salesforce/blip2-models-65242f91b4c4b4a32e5cb652">BLIP2 Series</a></td>
                 <td><code>xinfer.create_model("Salesforce/blip2-opt-2.7b")</code></td>
             </tr>
             <tr>
@@ -236,7 +236,7 @@ pip install -e .
 </html>
 
 
-You can also load any [Vision2Seq model](https://huggingface.co/docs/transformers/main/en/model_doc/auto#transformers.AutoModelForVision2Seq) 
+You can also load any [AutoModelForVision2Seq model](https://huggingface.co/docs/transformers/main/en/model_doc/auto#transformers.AutoModelForVision2Seq) 
 from Transformers by using the `Vision2SeqModel` class.
 
 ```python
