@@ -252,6 +252,10 @@ pip install -e .
                 <td><a href="https://github.com/fpgaminer/joycaption">JoyCaption</a></td>
                 <td><pre lang="python"><code>xinfer.create_model("fancyfeast/llama-joycaption-alpha-two-hf-llava")</code></pre></td>
             </tr>
+            <tr>
+                <td><a href="https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct">Llama-3.2 Vision</a></td>
+                <td><pre lang="python"><code>xinfer.create_model("meta-llama/Llama-3.2-11B-Vision-Instruct")</code></pre></td>
+            </tr>
         </tbody>
     </table>
 </body>
