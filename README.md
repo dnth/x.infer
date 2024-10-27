@@ -22,6 +22,7 @@
 
 <div align="center">
     <img src="https://raw.githubusercontent.com/dnth/x.infer/refs/heads/main/assets/xinfer.jpg" alt="x.infer" width="500"/>
+    <img src="https://raw.githubusercontent.com/dnth/x.infer/refs/heads/main/assets/code_typing.gif" alt="x.infer" width="500"/>
     <br />
     <br />
     <a href="https://dnth.github.io/x.infer" target="_blank" rel="noopener noreferrer"><strong>Explore the docs »</strong></a>
@@ -35,6 +36,11 @@
     <a href="https://github.com/dnth/x.infer/discussions" target="_blank" rel="noopener noreferrer">Discussions</a>
     ·
     <a href="https://dicksonneoh.com/" target="_blank" rel="noopener noreferrer">About</a>
+</div>
+
+<div align="center">
+    <br />
+    
 </div>
 
 
