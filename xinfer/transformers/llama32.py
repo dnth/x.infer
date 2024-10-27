@@ -10,6 +10,21 @@ from ..models import BaseModel, track_inference
     "transformers",
     ModelInputOutput.IMAGE_TEXT_TO_TEXT,
 )
+@register_model(
+    "meta-llama/Llama-3.2-11B-Vision",
+    "transformers",
+    ModelInputOutput.IMAGE_TEXT_TO_TEXT,
+)
+@register_model(
+    "meta-llama/Llama-3.2-90B-Vision-Instruct",
+    "transformers",
+    ModelInputOutput.IMAGE_TEXT_TO_TEXT,
+)
+@register_model(
+    "meta-llama/Llama-3.2-90B-Vision",
+    "transformers",
+    ModelInputOutput.IMAGE_TEXT_TO_TEXT,
+)
 class Llama32(BaseModel):
     def __init__(
         self, model_id: str, device: str = "cpu", dtype: str = "float32", **kwargs
