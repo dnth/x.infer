@@ -33,3 +33,4 @@ transformers
 timm
 ultralytics
 pytest
+pytest-mock
