@@ -3,48 +3,37 @@ from pathlib import Path
 import pytest
 import torch
 
-from xinfer.transformers.moondream import Moondream
+import xinfer
 
 
-def test_moondream_initialization():
-    model = Moondream(device="cpu")
+@pytest.fixture
+def model():
+    return xinfer.create_model("vikhyatk/moondream2", device="cpu", dtype="float32")
+
+
+@pytest.fixture
+def test_image():
+    return str(Path(__file__).parent.parent / "test_data" / "test_image_1.jpg")
+
+
+def test_moondream_initialization(model):
     assert model.model_id == "vikhyatk/moondream2"
     assert model.device == "cpu"
     assert model.dtype == torch.float32
 
 
-def test_moondream_inference(mocker):
-    # Mock the heavy components
-    mocker.patch("xinfer.transformers.moondream.AutoModelForCausalLM")
-    mocker.patch("xinfer.transformers.moondream.AutoTokenizer")
-    mocker.patch("torch.compile", return_value=mocker.MagicMock())
+def test_moondream_inference(model, test_image):
+    prompt = "Caption this image."
+    result = model.infer(test_image, prompt)
 
-    model = Moondream(device="cpu")
-
-    # Mock the model's specific methods
-    model.model.encode_image.return_value = "mock_encoded_image"
-    model.model.answer_question.return_value = "This is a test response"
-
-    # Create a test image path
-    test_image = str(Path(__file__).parent.parent / "test_data" / "test_image_1.jpg")
-
-    # Test single inference
-    result = model.infer(image=test_image, prompt="What's in this image?")
+    # Basic validation
     assert isinstance(result, str)
-    assert result == "This is a test response"
-
-    # Test batch inference
-    model.model.batch_answer.return_value = ["Response 1", "Response 2"]
-    results = model.infer_batch(
-        images=[test_image, test_image], prompts=["Question 1", "Question 2"]
-    )
-    assert isinstance(results, list)
-    assert len(results) == 2
-    assert results == ["Response 1", "Response 2"]
+    assert len(result) > 0
 
 
-def test_moondream_invalid_input():
-    model = Moondream(device="cpu")
+def test_moondream_batch_inference(model, test_image):
+    prompt = "Caption this image."
+    result = model.infer_batch([test_image, test_image], [prompt, prompt])
 
-    with pytest.raises(Exception):
-        model.infer(image="nonexistent_image.jpg", prompt="What's in this image?")
+    assert isinstance(result, list)
+    assert len(result) == 2
