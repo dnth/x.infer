@@ -13,11 +13,14 @@
 [image_classification_badge]: https://img.shields.io/badge/Image%20Classification-blueviolet?style=for-the-badge
 [object_detection_badge]: https://img.shields.io/badge/Object%20Detection-coral?style=for-the-badge
 [image_to_text_badge]: https://img.shields.io/badge/Image%20to%20Text-gold?style=for-the-badge
+[os_badge]: https://img.shields.io/badge/Supported%20OS-Linux%20%7C%20macOS%20%7C%20Windows-indigo?style=for-the-badge
+
 
 ![Python][python_badge]
 [![PyPI version][pypi_badge]](https://pypi.org/project/xinfer/)
 [![Downloads][downloads_badge]](https://pypi.org/project/xinfer/)
 ![License][license_badge]
+![OS Support][os_badge]
 
 
 <div align="center">
@@ -45,12 +48,11 @@
 
 
 ## 🤔 Why x.infer?
-<!-- If you'd like to run many models from different libraries without having to rewrite your inference code, x.infer is for you. It has a simple API and is easy to extend.  -->
 So, a new computer vision model just dropped last night. It's called `GPT-54o-mini-vision-pro-max-xxxl`. It's a super cool model, open-source, open-weights, open-data, all the good stuff.
 
 You're excited. You want to try it out. 
 
-But it's written in a new framework, `TyPorch`, that you know nothing about.
+But it's written in a new framework, `TyPorch` that you know nothing about.
 You don't want to spend a weekend learning `TyPorch` just to find out the model is not what you expected.
 
 This is where x.infer comes in. 
@@ -65,7 +67,7 @@ Out of the box, x.infer supports the following frameworks:
 [![vLLM](https://img.shields.io/badge/vLLM-purple?style=for-the-badge&logo=v&logoColor=white)](https://github.com/vllm-project/vllm)
 [![Ollama](https://img.shields.io/badge/Ollama-darkgreen?style=for-the-badge&logo=Ollama&logoColor=white)](https://github.com/ollama/ollama)
 
-In total x.infer already supports over 1000+ models from all the above frameworks.
+Combined, x.infer supports over 1000+ models from all the above frameworks.
 
 Tasks supported:
 
@@ -84,7 +86,7 @@ model.infer_batch(images, prompts) # Run batch inference
 model.launch_gradio()              # Launch Gradio interface
 ```
 
-Have a custom model? Create a class that implements the `BaseModel` interface and register it with x.infer. See [Adding New Models](#adding-new-models) for more details.
+Have a custom model? Create a class that implements the `BaseModel` interface and register it with x.infer. See [🔧 Adding New Models](#-adding-new-models) for more details.
 
 ## 🌟 Key Features
 <div align="center">
@@ -158,9 +160,11 @@ https://github.com/user-attachments/assets/d51cf707-2001-478c-881a-ae27f690d1bc
 
 
 
-## 🖥️ Launch Gradio Interface
+## 🖥️ Gradio Demo for Supported Models
 
-For all models, you can launch a Gradio interface to interact with the model.
+For all supported models, you can launch a Gradio interface to interact with the model. This is useful for quickly testing the model and visualizing the results.
+
+Once the model is created, you can launch the Gradio interface with the following line of code:
 
 ```python
 model.launch_gradio()
@@ -170,8 +174,7 @@ model.launch_gradio()
 https://github.com/user-attachments/assets/25ce31f3-c9e2-4934-b341-000a6d1b7dc4
 
 
-
-You can also launch a Gradio interface with all models available in a dropdown. Pick a model, upload an image, and see the inference results.
+If you'd like to launch a Gradio interface with all models available in a dropdown, you can use the following line of code:
 
 ```python
 xinfer.launch_gradio_demo()
@@ -195,7 +198,7 @@ To install the barebones x.infer (without any optional dependencies), run:
 ```bash
 pip install xinfer
 ```
-x.infer can be used with multiple optional libraries. You'll just need to install one or more of the following:
+x.infer can be used with multiple optional dependencies. You'll just need to install one or more of the following:
 
 ```bash
 pip install "xinfer[transformers]"
@@ -204,7 +207,7 @@ pip install "xinfer[timm]"
 pip install "xinfer[vllm]"
 ```
 
-To install all libraries, run:
+To install all optional dependencies, run:
 ```bash
 pip install "xinfer[all]"
 ```
@@ -457,6 +460,7 @@ Although x.infer is Apache 2.0 licensed, the models it supports may have their o
     <br />
     <a href="#top"><img src="https://img.shields.io/badge/Back_to_Top-↑-blue?style=for-the-badge" alt="Back to Top" /></a>
 </div>
+
 
 
 
