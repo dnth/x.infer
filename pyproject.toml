@@ -29,10 +29,10 @@ xinfer = "xinfer.cli:main"
 [project.optional-dependencies]
 timm = ["timm"]
 ultralytics = ["ultralytics"]
-transformers = ["transformers"]
+transformers = ["transformers", "accelerate"]
 vllm = ["vllm"]
 ollama = ["ollama"]
-all = ["timm", "ultralytics", "transformers", "vllm", "ollama"]
+all = ["timm", "ultralytics", "transformers", "vllm", "ollama", "accelerate"]
 
 [tool]
 [tool.setuptools.packages.find]
