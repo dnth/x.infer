@@ -5,15 +5,11 @@ from ..models import BaseModel, track_inference
 
 
 @register_model(
-    "vllm/allenai/Molmo-72B-0924", "vllm", ModelInputOutput.IMAGE_TEXT_TO_TEXT
+    "vllm/microsoft/Phi-3.5-vision-instruct",
+    "vllm",
+    ModelInputOutput.IMAGE_TEXT_TO_TEXT,
 )
-@register_model(
-    "vllm/allenai/Molmo-7B-O-0924", "vllm", ModelInputOutput.IMAGE_TEXT_TO_TEXT
-)
-@register_model(
-    "vllm/allenai/Molmo-7B-D-0924", "vllm", ModelInputOutput.IMAGE_TEXT_TO_TEXT
-)
-class Molmo(BaseModel):
+class Phi35Vision(BaseModel):
     def __init__(
         self,
         model_id: str,
@@ -30,6 +26,8 @@ class Molmo(BaseModel):
             trust_remote_code=True,
             dtype=self.dtype,
             max_model_len=4096,
+            max_num_seqs=2,
+            mm_processor_kwargs={"num_crops": 16},
             **kwargs,
         )
 
@@ -40,7 +38,7 @@ class Molmo(BaseModel):
         sampling_params = SamplingParams(**sampling_kwargs)
         batch_inputs = [
             {
-                "prompt": f"USER: <image>\n{prompt}\nASSISTANT:",
+                "prompt": f"<|user|>\n<|image_1|>\n{prompt}<|end|>\n<|assistant|>\n",
                 "multi_modal_data": {"image": image},
             }
             for image, prompt in zip(images, prompts)
@@ -55,7 +53,7 @@ class Molmo(BaseModel):
         image = self.parse_images(image)
 
         inputs = {
-            "prompt": prompt,
+            "prompt": f"<|user|>\n<|image_1|>\n{prompt}<|end|>\n<|assistant|>\n",
             "multi_modal_data": {"image": image},
         }
 
