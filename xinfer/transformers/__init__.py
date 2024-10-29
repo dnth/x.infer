@@ -1,4 +1,5 @@
 from .blip2 import BLIP2
+from .florence2 import Florence2
 from .joycaption import JoyCaption
 from .llama32 import Llama32Vision, Llama32VisionInstruct
 from .moondream import Moondream
