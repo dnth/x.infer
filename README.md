@@ -364,6 +364,14 @@ model = xinfer.create_model(model)
             <td><a href="https://huggingface.co/allenai/Molmo-7B-O-0924">Molmo-7B-O</a></td>
             <td><pre lang="python"><code>xinfer.create_model("vllm/allenai/Molmo-7B-O-0924")</code></pre></td>
         </tr>
+        <tr>
+            <td><a href="https://huggingface.co/microsoft/Phi-3.5-vision-instruct">Phi-3.5-vision-instruct</a></td>
+            <td><pre lang="python"><code>xinfer.create_model("vllm/microsoft/Phi-3.5-vision-instruct")</code></pre></td>
+        </tr>
+        <tr>
+            <td><a href="https://huggingface.co/microsoft/Phi-3-vision-128k-instruct">Phi-3-vision-128k-instruct</a></td>
+            <td><pre lang="python"><code>xinfer.create_model("vllm/microsoft/Phi-3-vision-128k-instruct")</code></pre></td>
+        </tr>
     </tbody>
 </table>
 

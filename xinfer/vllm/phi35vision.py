@@ -5,6 +5,11 @@ from ..models import BaseModel, track_inference
 
 
 @register_model(
+    "vllm/microsoft/Phi-3-vision-128k-instruct",
+    "vllm",
+    ModelInputOutput.IMAGE_TEXT_TO_TEXT,
+)
+@register_model(
     "vllm/microsoft/Phi-3.5-vision-instruct",
     "vllm",
     ModelInputOutput.IMAGE_TEXT_TO_TEXT,
