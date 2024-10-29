@@ -256,8 +256,12 @@ pip install -e .
                 <td><pre lang="python"><code>xinfer.create_model("fancyfeast/llama-joycaption-alpha-two-hf-llava")</code></pre></td>
             </tr>
             <tr>
-                <td><a href="https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct">Llama-3.2 Vision</a></td>
+                <td><a href="https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct">Llama-3.2 Vision Series</a></td>
                 <td><pre lang="python"><code>xinfer.create_model("meta-llama/Llama-3.2-11B-Vision-Instruct")</code></pre></td>
+            </tr>
+            <tr>
+                <td><a href="https://huggingface.co/microsoft/Florence-2-base-ft">Florence-2 Series</a></td>
+                <td><pre lang="python"><code>xinfer.create_model("microsoft/Florence-2-base-ft")</code></pre></td>
             </tr>
         </tbody>
     </table>
