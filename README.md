@@ -124,32 +124,32 @@ xinfer.list_models()
 
 ```
        Available Models                                      
-┏━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┓
-┃ Implementation ┃ Model ID                                        ┃ Input --> Output     ┃
-┡━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━┩
-│ timm           │ eva02_large_patch14_448.mim_m38m_ft_in22k_in1k  │ image --> categories │
-│ timm           │ eva02_large_patch14_448.mim_m38m_ft_in1k        │ image --> categories │
-│ timm           │ eva02_large_patch14_448.mim_in22k_ft_in22k_in1k │ image --> categories │
-│ timm           │ eva02_large_patch14_448.mim_in22k_ft_in1k       │ image --> categories │
-│ timm           │ eva02_base_patch14_448.mim_in22k_ft_in22k_in1k  │ image --> categories │
-│ timm           │ eva02_base_patch14_448.mim_in22k_ft_in1k        │ image --> categories │
-│ timm           │ eva02_small_patch14_336.mim_in22k_ft_in1k       │ image --> categories │
-│ timm           │ eva02_tiny_patch14_336.mim_in22k_ft_in1k        │ image --> categories │
-│ transformers   │ Salesforce/blip2-opt-6.7b-coco                  │ image-text --> text  │
-│ transformers   │ Salesforce/blip2-flan-t5-xxl                    │ image-text --> text  │
-│ transformers   │ Salesforce/blip2-opt-6.7b                       │ image-text --> text  │
-│ transformers   │ Salesforce/blip2-opt-2.7b                       │ image-text --> text  │
-│ transformers   │ fancyfeast/llama-joycaption-alpha-two-hf-llava  │ image-text --> text  │
-│ transformers   │ vikhyatk/moondream2                             │ image-text --> text  │
-│ transformers   │ sashakunitsyn/vlrm-blip2-opt-2.7b               │ image-text --> text  │
-│ ultralytics    │ yolov8x                                         │ image --> boxes      │
-│ ultralytics    │ yolov8m                                         │ image --> boxes      │
-│ ultralytics    │ yolov8l                                         │ image --> boxes      │
-│ ultralytics    │ yolov8s                                         │ image --> boxes      │
-│ ultralytics    │ yolov8n                                         │ image --> boxes      │
-│ ...            │ ...                                             │ ...                  │
-│ ...            │ ...                                             │ ...                  │
-└────────────────┴─────────────────────────────────────────────────┴──────────────────────┘
+┏━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Implementation ┃ Model ID                                              ┃ Input --> Output     ┃
+┡━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━┩
+│ timm           │ timm/eva02_large_patch14_448.mim_m38m_ft_in22k_in1k   │ image --> categories │
+│ timm           │ timm/eva02_large_patch14_448.mim_m38m_ft_in1k         │ image --> categories │
+│ timm           │ timm/eva02_large_patch14_448.mim_in22k_ft_in22k_in1k  │ image --> categories │
+│ timm           │ timm/eva02_large_patch14_448.mim_in22k_ft_in1k        │ image --> categories │
+│ timm           │ timm/eva02_base_patch14_448.mim_in22k_ft_in22k_in1k   │ image --> categories │
+│ timm           │ timm/eva02_base_patch14_448.mim_in22k_ft_in1k         │ image --> categories │
+│ timm           │ timm/eva02_small_patch14_336.mim_in22k_ft_in1k        │ image --> categories │
+│ timm           │ timm/eva02_tiny_patch14_336.mim_in22k_ft_in1k         │ image --> categories │
+│ transformers   │ Salesforce/blip2-opt-6.7b-coco                        │ image-text --> text  │
+│ transformers   │ Salesforce/blip2-flan-t5-xxl                          │ image-text --> text  │
+│ transformers   │ Salesforce/blip2-opt-6.7b                             │ image-text --> text  │
+│ transformers   │ Salesforce/blip2-opt-2.7b                             │ image-text --> text  │
+│ transformers   │ fancyfeast/llama-joycaption-alpha-two-hf-llava        │ image-text --> text  │
+│ transformers   │ vikhyatk/moondream2                                   │ image-text --> text  │
+│ transformers   │ sashakunitsyn/vlrm-blip2-opt-2.7b                     │ image-text --> text  │
+│ ultralytics    │ ultralytics/yolov8x                                   │ image --> boxes      │
+│ ultralytics    │ ultralytics/yolov8m                                   │ image --> boxes      │
+│ ultralytics    │ ultralytics/yolov8l                                   │ image --> boxes      │
+│ ultralytics    │ ultralytics/yolov8s                                   │ image --> boxes      │
+│ ultralytics    │ ultralytics/yolov8n                                   │ image --> boxes      │
+│ ...            │ ...                                                   │ ...                  │
+│ ...            │ ...                                                   │ ...                  │
+└────────────────┴───────────────────────────────────────────────────────┴──────────────────────┘
 ```
 
 If you're running in a Juypter Notebook environment, you can specify `interactive=True` to list and search supported models interactively.
@@ -285,7 +285,7 @@ All models from [TIMM](https://github.com/huggingface/pytorch-image-models) fine
 
 For example load a `resnet18.a1_in1k` model:
 ```python
-xinfer.create_model("resnet18.a1_in1k")
+xinfer.create_model("timm/resnet18.a1_in1k")
 ```
 
 You can also load any model (or a custom timm model) by using the `TIMMModel` class.
@@ -312,15 +312,15 @@ model = xinfer.create_model(model)
     <tbody>
         <tr>
             <td><a href="https://github.com/ultralytics/ultralytics">YOLOv8 Series</a></td>
-            <td><pre lang="python"><code>xinfer.create_model("yolov8n")</code></pre></td>
+            <td><pre lang="python"><code>xinfer.create_model("ultralytics/yolov8n")</code></pre></td>
         </tr>
         <tr>
             <td><a href="https://github.com/ultralytics/ultralytics">YOLOv10 Series</a></td>
-            <td><pre lang="python"><code>xinfer.create_model("yolov10x")</code></pre></td>
+            <td><pre lang="python"><code>xinfer.create_model("ultralytics/yolov10x")</code></pre></td>
         </tr>
         <tr>
             <td><a href="https://github.com/ultralytics/ultralytics">YOLOv11 Series</a></td>
-            <td><pre lang="python"><code>xinfer.create_model("yolov11s")</code></pre></td>
+            <td><pre lang="python"><code>xinfer.create_model("ultralytics/yolov11s")</code></pre></td>
         </tr>
     </tbody>
 </table>
@@ -350,15 +350,15 @@ model = xinfer.create_model(model)
     <tbody>
         <tr>
             <td><a href="https://huggingface.co/allenai/Molmo-72B-0924">Molmo-72B</a></td>
-            <td><pre lang="python"><code>xinfer.create_model("allenai/Molmo-72B-0924")</code></pre></td>
+            <td><pre lang="python"><code>xinfer.create_model("vllm/allenai/Molmo-72B-0924")</code></pre></td>
         </tr>
         <tr>
             <td><a href="https://huggingface.co/allenai/Molmo-7B-D-0924">Molmo-7B-D</a></td>
-            <td><pre lang="python"><code>xinfer.create_model("allenai/Molmo-7B-D-0924")</code></pre></td>
+            <td><pre lang="python"><code>xinfer.create_model("vllm/allenai/Molmo-7B-D-0924")</code></pre></td>
         </tr>
         <tr>
             <td><a href="https://huggingface.co/allenai/Molmo-7B-O-0924">Molmo-7B-O</a></td>
-            <td><pre lang="python"><code>xinfer.create_model("allenai/Molmo-7B-O-0924")</code></pre></td>
+            <td><pre lang="python"><code>xinfer.create_model("vllm/allenai/Molmo-7B-O-0924")</code></pre></td>
         </tr>
     </tbody>
 </table>
