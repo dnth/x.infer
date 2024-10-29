@@ -8,6 +8,21 @@ from ..models import BaseModel, track_inference
 @register_model(
     "microsoft/Florence-2-large", "transformers", ModelInputOutput.IMAGE_TEXT_TO_TEXT
 )
+@register_model(
+    "microsoft/Florence-2-base",
+    "transformers",
+    ModelInputOutput.IMAGE_TEXT_TO_TEXT,
+)
+@register_model(
+    "microsoft/Florence-2-large-ft",
+    "transformers",
+    ModelInputOutput.IMAGE_TEXT_TO_TEXT,
+)
+@register_model(
+    "microsoft/Florence-2-base-ft",
+    "transformers",
+    ModelInputOutput.IMAGE_TEXT_TO_TEXT,
+)
 class Florence2(BaseModel):
     def __init__(
         self,
