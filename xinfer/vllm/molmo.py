@@ -26,9 +26,10 @@ class Molmo(BaseModel):
 
     def load_model(self, **kwargs):
         self.model = LLM(
-            model=self.model_id,
+            model=self.model_id.replace("vllm/", ""),
             trust_remote_code=True,
             dtype=self.dtype,
+            max_model_len=4096,
             **kwargs,
         )
 
