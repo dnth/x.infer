@@ -57,12 +57,15 @@ class Florence2(BaseModel):
             self.device, self.dtype
         )
 
+        if "max_new_tokens" not in generate_kwargs:
+            generate_kwargs["max_new_tokens"] = 1024
+        if "num_beams" not in generate_kwargs:
+            generate_kwargs["num_beams"] = 3
+
         with torch.inference_mode():
             generated_ids = self.model.generate(
                 input_ids=inputs["input_ids"],
                 pixel_values=inputs["pixel_values"],
-                max_new_tokens=1024,
-                num_beams=3,
                 **generate_kwargs,
             )
 
@@ -73,7 +76,7 @@ class Florence2(BaseModel):
         parsed_answers = [
             self.processor.post_process_generation(
                 text, task=prompt, image_size=(img.width, img.height)
-            )
+            ).get(prompt)
             for text, prompt, img in zip(generated_text, prompts, images)
         ]
 
