@@ -37,7 +37,7 @@ class UltralyticsModel(BaseModel):
                         "class_name": result.names[int(box.cls)],
                     }
                 )
-        batch_results.append(coco_format_results)
+            batch_results.append(coco_format_results)
         return batch_results
 
     @track_inference

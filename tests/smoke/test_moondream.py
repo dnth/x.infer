@@ -26,7 +26,6 @@ def test_moondream_inference(model, test_image):
     prompt = "Caption this image."
     result = model.infer(test_image, prompt)
 
-    # Basic validation
     assert isinstance(result, str)
     assert len(result) > 0
 
