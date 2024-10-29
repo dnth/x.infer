@@ -4,9 +4,15 @@ from ..model_registry import ModelInputOutput, register_model
 from ..models import BaseModel, track_inference
 
 
-@register_model("allenai/Molmo-72B-0924", "vllm", ModelInputOutput.IMAGE_TEXT_TO_TEXT)
-@register_model("allenai/Molmo-7B-O-0924", "vllm", ModelInputOutput.IMAGE_TEXT_TO_TEXT)
-@register_model("allenai/Molmo-7B-D-0924", "vllm", ModelInputOutput.IMAGE_TEXT_TO_TEXT)
+@register_model(
+    "vllm/allenai/Molmo-72B-0924", "vllm", ModelInputOutput.IMAGE_TEXT_TO_TEXT
+)
+@register_model(
+    "vllm/allenai/Molmo-7B-O-0924", "vllm", ModelInputOutput.IMAGE_TEXT_TO_TEXT
+)
+@register_model(
+    "vllm/allenai/Molmo-7B-D-0924", "vllm", ModelInputOutput.IMAGE_TEXT_TO_TEXT
+)
 class Molmo(BaseModel):
     def __init__(
         self,

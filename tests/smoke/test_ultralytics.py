@@ -8,7 +8,7 @@ import xinfer
 
 @pytest.fixture
 def model():
-    return xinfer.create_model("yolov8n", device="cpu", dtype="float32")
+    return xinfer.create_model("ultralytics/yolov8n", device="cpu", dtype="float32")
 
 
 @pytest.fixture
@@ -17,7 +17,7 @@ def test_image():
 
 
 def test_ultralytics_initialization(model):
-    assert model.model_id == "yolov8n"
+    assert model.model_id == "ultralytics/yolov8n"
     assert model.device == "cpu"
     assert model.dtype == torch.float32
 
