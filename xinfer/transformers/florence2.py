@@ -30,31 +30,8 @@ class Florence2(BaseModel):
 
     @track_inference
     def infer(self, image: str, prompt: str = None, **generate_kwargs) -> str:
-        image = self.parse_images(image)
-        inputs = self.processor(text=prompt, images=image, return_tensors="pt").to(
-            self.device, self.dtype
-        )
-
-        with torch.inference_mode():
-            generated_ids = self.model.generate(
-                input_ids=inputs["input_ids"],
-                pixel_values=inputs["pixel_values"],
-                max_new_tokens=1024,
-                num_beams=3,
-                **generate_kwargs,
-            )
-
-        generated_text = self.processor.batch_decode(
-            generated_ids, skip_special_tokens=False
-        )[0]
-
-        parsed_answer = self.processor.post_process_generation(
-            generated_text,
-            task=prompt,
-            image_size=(image[0].width, image[0].height),
-        )
-
-        return parsed_answer
+        output = self.infer_batch([image], [prompt], **generate_kwargs)
+        return output[0]
 
     @track_inference
     def infer_batch(
