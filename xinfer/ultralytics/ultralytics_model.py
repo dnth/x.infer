@@ -1,5 +1,4 @@
 import os
-from PIL import Image
 from typing import Dict, List
 
 import torch
@@ -60,14 +59,13 @@ class UltralyticsModel(BaseModel):
     def infer(self, image: str, **kwargs) -> List[List[Dict]]:
         results = self.infer_batch([image], **kwargs)
         return results[0]
-      
+    
     def render(self, save_path: str = './', **kwargs):
         for _, r in enumerate(self.results):
-            # plot results (such as bounding boxes, masks, keypoints, and probabilities)
-            im_bgr = r.plot()
-            im_rgb = Image.fromarray(im_bgr[..., ::-1])
+            # im_bgr = r.plot()
+            # im_rgb = Image.fromarray(im_bgr[..., ::-1])
             
-            # save results to disk
+            # plot results (such as bounding boxes, masks, keypoints, and probabilities)
             file_name = os.path.basename(r.path)
             file_name = os.path.join(save_path, file_name)
             r.save(filename=f"{file_name}")
