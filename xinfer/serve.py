@@ -14,6 +14,11 @@ class InferRequest(BaseModel):
     prompt: str
 
 
+class InferBatchRequest(BaseModel):
+    urls: list[str]
+    prompts: list[str]
+
+
 @serve.deployment(num_replicas=1, ray_actor_options={"num_gpus": 1})
 @serve.ingress(app)
 class XInferModel:
@@ -31,6 +36,14 @@ class XInferModel:
             return {"response": result}
         except Exception as e:
             return {"error": f"An error occurred: {str(e)}"}
+
+    @app.post("/infer_batch")
+    async def infer_batch(self, request: InferBatchRequest) -> list[Dict]:
+        try:
+            result = self.model.infer_batch(request.urls, request.prompts)
+            return [{"response": r} for r in result]
+        except Exception as e:
+            return [{"error": f"An error occurred: {str(e)}"}]
 
 
 def serve_model(model_id, **kwargs):
