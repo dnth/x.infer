@@ -15,11 +15,13 @@ app = FastAPI()
 class InferRequest(BaseModel):
     url: str
     prompt: str
+    kwargs: Dict = {}
 
 
 class InferBatchRequest(BaseModel):
     urls: list[str]
     prompts: list[str]
+    kwargs: Dict = {}
 
 
 @serve.deployment(num_replicas=1, ray_actor_options={"num_gpus": 1})
@@ -35,7 +37,9 @@ class XInferModel:
     @app.post("/infer")
     async def infer(self, request: InferRequest) -> Dict:
         try:
-            result = self.model.infer(request.url, prompt=request.prompt)
+            result = self.model.infer(
+                request.url, prompt=request.prompt, **request.kwargs
+            )
             return {"response": result}
         except Exception as e:
             return {"error": f"An error occurred: {str(e)}"}
@@ -43,7 +47,9 @@ class XInferModel:
     @app.post("/infer_batch")
     async def infer_batch(self, request: InferBatchRequest) -> list[Dict]:
         try:
-            result = self.model.infer_batch(request.urls, request.prompts)
+            result = self.model.infer_batch(
+                request.urls, request.prompts, **request.kwargs
+            )
             return [{"response": r} for r in result]
         except Exception as e:
             return [{"error": f"An error occurred: {str(e)}"}]
