@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from ray import serve
 
-from .model_registry import model_registry
+from .core import create_model
 
 app = FastAPI()
 
@@ -27,7 +27,7 @@ class XInferModel:
         model_id,
         **kwargs,
     ):
-        self.model = model_registry.get_model(model_id, **kwargs)
+        self.model = create_model(model_id, **kwargs)
 
     @app.post("/infer")
     async def infer(self, request: InferRequest) -> Dict:
