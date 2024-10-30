@@ -1,6 +1,9 @@
+import signal
+import sys
 from typing import Dict
 
 from fastapi import FastAPI
+from loguru import logger
 from pydantic import BaseModel
 from ray import serve
 
@@ -46,7 +49,22 @@ class XInferModel:
             return [{"error": f"An error occurred: {str(e)}"}]
 
 
+def signal_handler(signum, frame):
+    logger.info("\nReceiving shutdown signal. Cleaning up...")
+    serve.shutdown()
+    sys.exit(0)
+
+
 def serve_model(model_id, **kwargs):
+    # Register signal handlers
+    signal.signal(signal.SIGINT, signal_handler)
+    signal.signal(signal.SIGTERM, signal_handler)
+
     model_instance = XInferModel.bind(model_id, **kwargs)
 
-    serve.run(model_instance, blocking=True)
+    try:
+        serve.run(model_instance, blocking=True)
+    except KeyboardInterrupt:
+        logger.info("\nReceiving keyboard interrupt. Cleaning up...")
+        serve.shutdown()
+        sys.exit(0)
