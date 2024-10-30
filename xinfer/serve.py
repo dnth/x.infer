@@ -1,6 +1,5 @@
 import signal
 import sys
-from typing import Dict
 
 from fastapi import FastAPI
 from loguru import logger
@@ -15,16 +14,16 @@ app = FastAPI()
 class InferRequest(BaseModel):
     url: str
     prompt: str
-    kwargs: Dict = {}
+    kwargs: dict = {}
 
 
 class InferBatchRequest(BaseModel):
     urls: list[str]
     prompts: list[str]
-    kwargs: Dict = {}
+    kwargs: dict = {}
 
 
-@serve.deployment(num_replicas=1, ray_actor_options={"num_gpus": 1})
+# @serve.deployment(num_replicas=1, ray_actor_options={"num_gpus": 1})
 @serve.ingress(app)
 class XInferModel:
     def __init__(
@@ -35,7 +34,7 @@ class XInferModel:
         self.model = create_model(model_id, **kwargs)
 
     @app.post("/infer")
-    async def infer(self, request: InferRequest) -> Dict:
+    async def infer(self, request: InferRequest) -> dict:
         try:
             result = self.model.infer(
                 request.url, prompt=request.prompt, **request.kwargs
@@ -45,7 +44,7 @@ class XInferModel:
             return {"error": f"An error occurred: {str(e)}"}
 
     @app.post("/infer_batch")
-    async def infer_batch(self, request: InferBatchRequest) -> list[Dict]:
+    async def infer_batch(self, request: InferBatchRequest) -> list[dict]:
         try:
             result = self.model.infer_batch(
                 request.urls, request.prompts, **request.kwargs
@@ -61,15 +60,23 @@ def signal_handler(signum, frame):
     sys.exit(0)
 
 
-def serve_model(model_id, **kwargs):
+def serve_model(model_id: str, deployment_kwargs: dict = None, **model_kwargs):
     # Register signal handlers
     signal.signal(signal.SIGINT, signal_handler)
     signal.signal(signal.SIGTERM, signal_handler)
 
-    model_instance = XInferModel.bind(model_id, **kwargs)
+    # Set default deployment kwargs if none provided
+    deployment_kwargs = deployment_kwargs or {
+        "num_replicas": 1,
+        "ray_actor_options": {"num_gpus": 1},
+    }
+
+    deployment = serve.deployment(**deployment_kwargs)(XInferModel)
+
+    app = deployment.bind(model_id, **model_kwargs)
 
     try:
-        serve.run(model_instance, blocking=True)
+        serve.run(app, blocking=True)
     except KeyboardInterrupt:
         logger.info("\nReceiving keyboard interrupt. Cleaning up...")
         serve.shutdown()
