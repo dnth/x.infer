@@ -2,11 +2,12 @@
 
 __author__ = """Dickson Neoh"""
 __email__ = "dickson.neoh@gmail.com"
-__version__ = "0.1.3"
+__version__ = "0.2.0"
 
 from .core import create_model, list_models
 from .model_registry import ModelInputOutput, register_model
 from .models import BaseModel
+from .serve import serve_model
 from .utils import (
     ollama_available,
     timm_available,
@@ -35,4 +36,5 @@ __all__ = [
     "BaseModel",
     "ModelInputOutput",
     "launch_gradio_demo",
+    "serve_model",
 ]

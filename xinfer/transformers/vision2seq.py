@@ -25,6 +25,7 @@ class Vision2SeqModel(BaseModel):
         self.model = torch.compile(self.model, mode="max-autotune")
         self.model.eval()
 
+    # TODO: Refactor to use self.parse_images from base model
     def preprocess(
         self,
         images: str | list[str],
@@ -71,7 +72,7 @@ class Vision2SeqModel(BaseModel):
         return [output.replace("\n", "").strip() for output in outputs]
 
     @track_inference
-    def infer(self, image, prompt, **generate_kwargs):
+    def infer(self, image, prompt, **generate_kwargs) -> str:
         preprocessed_input = self.preprocess(image, prompt)
         prediction = self.predict(preprocessed_input, **generate_kwargs)
         result = self.postprocess(prediction)[0]
@@ -79,7 +80,7 @@ class Vision2SeqModel(BaseModel):
         return result
 
     @track_inference
-    def infer_batch(self, images, prompts, **generate_kwargs):
+    def infer_batch(self, images, prompts, **generate_kwargs) -> list[str]:
         preprocessed_input = self.preprocess(images, prompts)
         predictions = self.predict(preprocessed_input, **generate_kwargs)
         results = self.postprocess(predictions)
