@@ -190,6 +190,31 @@ https://github.com/user-attachments/assets/bd46f55a-573f-45b9-910f-e22bee27fd3d
 
 See [Gradio Demo](./nbs/gradio_demo.ipynb) for more details.
 
+### Serve Models
+If you're happy with your model, you can serve it with x.infer. 
+
+```python
+xinfer.serve_model("vikhyatk/moondream2")
+```
+
+This will start a FastAPI server at `http://localhost:8000` powered by [Ray Serve](https://docs.ray.io/en/latest/serve/index.html), allowing you to interact with your model through a REST API.
+
+You can also specify deployment options such as the number of replicas and GPU requirements.
+
+```python
+xinfer.serve_model(
+    "vikhyatk/moondream2",
+    device="cuda",
+    dtype="float16",
+    deployment_kwargs={
+        "num_replicas": 1, 
+        "ray_actor_options": {"num_gpus": 1}
+    }
+)
+```
+
+See [Serve Models](./nbs/serving.ipynb) for more details.
+
 ### Add Your Own Model
 
 + **Step 1:** Create a new model class that implements the `BaseModel` interface.
