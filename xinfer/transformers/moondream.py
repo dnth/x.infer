@@ -30,7 +30,7 @@ class Moondream(BaseModel):
         self.tokenizer = AutoTokenizer.from_pretrained(self.model_id)
 
     @track_inference
-    def infer(self, image: str, prompt: str = None, **generate_kwargs):
+    def infer(self, image: str, prompt: str = None, **generate_kwargs) -> str:
         image = self.parse_images(image)
         encoded_image = self.model.encode_image(image)
         output = self.model.answer_question(
@@ -43,7 +43,9 @@ class Moondream(BaseModel):
         return output
 
     @track_inference
-    def infer_batch(self, images: list[str], prompts: list[str], **generate_kwargs):
+    def infer_batch(
+        self, images: list[str], prompts: list[str], **generate_kwargs
+    ) -> list[str]:
         images = self.parse_images(images)
         prompts = [prompt for prompt in prompts]
 

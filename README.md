@@ -86,7 +86,7 @@ model.infer_batch(images, prompts) # Run batch inference
 model.launch_gradio()              # Launch Gradio interface
 ```
 
-Have a custom model? Create a class that implements the `BaseModel` interface and register it with x.infer. See [🔧 Adding New Models](#-adding-new-models) for more details.
+Have a custom model? Create a class that implements the `BaseModel` interface and register it with x.infer. See [Add Your Own Model](#add-your-own-model) for more details.
 
 ## 🌟 Key Features
 <div align="center">
@@ -117,7 +117,10 @@ model.infer(image, prompt)
 >>> An animated character with long hair and a serious expression is eating a large burger at a table, with other characters in the background.
 ```
 
-Get a list of models:
+## 🛠️ Usage
+
+### List Models
+
 ```python
 xinfer.list_models()
 ```
@@ -160,7 +163,7 @@ https://github.com/user-attachments/assets/d51cf707-2001-478c-881a-ae27f690d1bc
 
 
 
-## 🖥️ Gradio Demo for Supported Models
+### Gradio Interface
 
 For all supported models, you can launch a Gradio interface to interact with the model. This is useful for quickly testing the model and visualizing the results.
 
@@ -187,7 +190,57 @@ https://github.com/user-attachments/assets/bd46f55a-573f-45b9-910f-e22bee27fd3d
 
 See [Gradio Demo](./nbs/gradio_demo.ipynb) for more details.
 
+### Serve Model
+If you're happy with your model, you can serve it with x.infer. 
 
+```python
+xinfer.serve_model("vikhyatk/moondream2")
+```
+
+This will start a FastAPI server at `http://localhost:8000` powered by [Ray Serve](https://docs.ray.io/en/latest/serve/index.html), allowing you to interact with your model through a REST API.
+
+You can also specify deployment options such as the number of replicas and GPU requirements and host/port.
+
+```python
+xinfer.serve_model(
+    "vikhyatk/moondream2",
+    device="cuda",
+    dtype="float16",
+    host="0.0.0.0",
+    port=8000,
+    deployment_kwargs={
+        "num_replicas": 1, 
+        "ray_actor_options": {"num_gpus": 1}
+    }
+)
+```
+
+### Add Your Own Model
+
++ **Step 1:** Create a new model class that implements the `BaseModel` interface.
+
++ **Step 2:** Implement the required abstract methods `load_model`, `infer`, and `infer_batch`.
+
++ **Step 3:** Decorate your class with the `register_model` decorator, specifying the model ID, implementation, and input/output.
+
+For example:
+```python
+@register_model("my-model", "custom", ModelInputOutput.IMAGE_TEXT_TO_TEXT)
+class MyModel(BaseModel):
+    def load_model(self):
+        # Load your model here
+        pass
+
+    def infer(self, image, prompt):
+        # Run single inference 
+        pass
+
+    def infer_batch(self, images, prompts):
+        # Run batch inference here
+        pass
+```
+
+See an example implementation of the Molmo model [here](https://github.com/dnth/x.infer/blob/main/xinfer/vllm/molmo.py).
 
 
 ## 📦 Installation
@@ -219,10 +272,10 @@ cd x.infer
 pip install -e .
 ```
 
-## 🛠️ Usage
 
 
-### Supported Models
+
+## 🤖 Supported Models
 
 
 <details>
@@ -399,32 +452,7 @@ To use Ollama models, you'll need to install the Ollama on your machine. See [Ol
 
 </details>
 
-### 🔧 Adding New Models
 
-+ **Step 1:** Create a new model class that implements the `BaseModel` interface.
-
-+ **Step 2:** Implement the required abstract methods `load_model`, `infer`, and `infer_batch`.
-
-+ **Step 3:** Decorate your class with the `register_model` decorator, specifying the model ID, implementation, and input/output.
-
-For example:
-```python
-@register_model("my-model", "custom", ModelInputOutput.IMAGE_TEXT_TO_TEXT)
-class MyModel(BaseModel):
-    def load_model(self):
-        # Load your model here
-        pass
-
-    def infer(self, image, prompt):
-        # Run single inference 
-        pass
-
-    def infer_batch(self, images, prompts):
-        # Run batch inference here
-        pass
-```
-
-See an example implementation of the Molmo model [here](https://github.com/dnth/x.infer/blob/main/xinfer/vllm/molmo.py).
 
 ## 🤝 Contributing
 
