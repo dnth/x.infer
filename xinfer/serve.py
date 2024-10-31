@@ -50,8 +50,19 @@ class XInferModel:
             return [{"error": f"An error occurred: {str(e)}"}]
 
 
-def serve_model(model_id: str, deployment_kwargs: dict = None, **model_kwargs):
+def serve_model(
+    model_id: str,
+    *,  # Force keyword arguments after model_id
+    deployment_kwargs: dict = None,
+    **model_kwargs,
+):
     deployment_kwargs = deployment_kwargs or {}
+
+    # If device is cuda, automatically add GPU requirement
+    if model_kwargs.get("device") == "cuda":
+        ray_actor_options = deployment_kwargs.get("ray_actor_options", {})
+        ray_actor_options["num_gpus"] = ray_actor_options.get("num_gpus", 1)
+        deployment_kwargs["ray_actor_options"] = ray_actor_options
 
     deployment = serve.deployment(**deployment_kwargs)(XInferModel)
     app = deployment.bind(model_id, **model_kwargs)
