@@ -9,15 +9,13 @@ app = FastAPI()
 
 
 class InferRequest(BaseModel):
-    url: str
-    prompt: str
+    image: str
     infer_kwargs: dict = {}
 
 
 class InferBatchRequest(BaseModel):
-    urls: list[str]
-    prompts: list[str]
-    infer_kwargs: dict = {}
+    images: list[str]
+    infer_batch_kwargs: dict = {}
 
 
 @serve.ingress(app)
@@ -32,9 +30,7 @@ class XInferModel:
     @app.post("/infer")
     async def infer(self, request: InferRequest) -> dict:
         try:
-            result = self.model.infer(
-                request.url, prompt=request.prompt, **request.infer_kwargs
-            )
+            result = self.model.infer(request.image, **request.infer_kwargs)
             return {"response": result}
         except Exception as e:
             return {"error": f"An error occurred: {str(e)}"}
@@ -43,7 +39,7 @@ class XInferModel:
     async def infer_batch(self, request: InferBatchRequest) -> list[dict]:
         try:
             result = self.model.infer_batch(
-                request.urls, request.prompts, **request.infer_kwargs
+                request.images, **request.infer_batch_kwargs
             )
             return [{"response": r} for r in result]
         except Exception as e:
