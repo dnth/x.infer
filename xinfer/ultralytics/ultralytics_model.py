@@ -1,6 +1,7 @@
 from typing import Dict, List
 
 import torch
+
 from ultralytics import YOLO
 
 from ..models import BaseModel, track_inference
@@ -14,7 +15,7 @@ class UltralyticsModel(BaseModel):
         self.load_model(**kwargs)
 
     def load_model(self, **kwargs):
-        self.model = YOLO(self.model_id, **kwargs)
+        self.model = YOLO(self.model_id.replace("ultralytics/", ""), **kwargs)
 
     @track_inference
     def infer_batch(self, images: str | List[str], **kwargs) -> List[List[Dict]]:
