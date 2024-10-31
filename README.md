@@ -215,8 +215,6 @@ xinfer.serve_model(
 )
 ```
 
-See [Serve Models](./nbs/serving.ipynb) for more details.
-
 ### Add Your Own Model
 
 + **Step 1:** Create a new model class that implements the `BaseModel` interface.
