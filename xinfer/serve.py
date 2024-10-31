@@ -50,6 +50,8 @@ def serve_model(
     model_id: str,
     *,  # Force keyword arguments after model_id
     deployment_kwargs: dict = None,
+    host: str = "127.0.0.1",
+    port: int = 8000,
     **model_kwargs,
 ):
     deployment_kwargs = deployment_kwargs or {}
@@ -59,6 +61,8 @@ def serve_model(
         ray_actor_options = deployment_kwargs.get("ray_actor_options", {})
         ray_actor_options["num_gpus"] = ray_actor_options.get("num_gpus", 1)
         deployment_kwargs["ray_actor_options"] = ray_actor_options
+
+    serve.start(http_options={"host": host, "port": port})
 
     deployment = serve.deployment(**deployment_kwargs)(XInferModel)
     app = deployment.bind(model_id, **model_kwargs)

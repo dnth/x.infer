@@ -199,13 +199,15 @@ xinfer.serve_model("vikhyatk/moondream2")
 
 This will start a FastAPI server at `http://localhost:8000` powered by [Ray Serve](https://docs.ray.io/en/latest/serve/index.html), allowing you to interact with your model through a REST API.
 
-You can also specify deployment options such as the number of replicas and GPU requirements.
+You can also specify deployment options such as the number of replicas and GPU requirements and host/port.
 
 ```python
 xinfer.serve_model(
     "vikhyatk/moondream2",
     device="cuda",
     dtype="float16",
+    host="0.0.0.0",
+    port=8000,
     deployment_kwargs={
         "num_replicas": 1, 
         "ray_actor_options": {"num_gpus": 1}
