@@ -190,7 +190,7 @@ https://github.com/user-attachments/assets/bd46f55a-573f-45b9-910f-e22bee27fd3d
 
 See [Gradio Demo](./nbs/gradio_demo.ipynb) for more details.
 
-### Serve Models
+### Serve Model
 If you're happy with your model, you can serve it with x.infer. 
 
 ```python
