@@ -2,11 +2,11 @@
 [pypi_badge]: https://img.shields.io/pypi/v/xinfer.svg?style=for-the-badge&logo=pypi&logoColor=white&label=PyPI&color=blue
 [downloads_badge]: https://img.shields.io/pepy/dt/xinfer.svg?style=for-the-badge&logo=pypi&logoColor=white&label=Downloads&color=purple
 [license_badge]: https://img.shields.io/badge/License-Apache%202.0-green.svg?style=for-the-badge&logo=apache&logoColor=white
-[transformers_badge]: https://img.shields.io/badge/Transformers-yellow?style=for-the-badge&logo=huggingface&logoColor=white
-[timm_badge]: https://img.shields.io/badge/TIMM-limegreen?style=for-the-badge&logo=pytorch&logoColor=white
-[ultralytics_badge]: https://img.shields.io/badge/Ultralytics-red?style=for-the-badge&logo=udacity&logoColor=white
-[vllm_badge]: https://img.shields.io/badge/vLLM-purple?style=for-the-badge&logo=v&logoColor=white
-[ollama_badge]: https://img.shields.io/badge/Ollama-darkgreen?style=for-the-badge&logo=llama&logoColor=white
+[transformers_badge]: https://img.shields.io/github/stars/huggingface/transformers?style=for-the-badge&logo=huggingface&label=Transformers%20⭐&color=yellow
+[timm_badge]: https://img.shields.io/github/stars/huggingface/pytorch-image-models?style=for-the-badge&logo=pytorch&label=TIMM%20⭐&color=limegreen
+[ultralytics_badge]: https://img.shields.io/github/stars/ultralytics/ultralytics?style=for-the-badge&logo=udacity&label=Ultralytics%20⭐&color=red
+[vllm_badge]: https://img.shields.io/github/stars/vllm-project/vllm?style=for-the-badge&logo=v&label=vLLM%20⭐&color=purple
+[ollama_badge]: https://img.shields.io/github/stars/ollama/ollama?style=for-the-badge&logo=llama&label=Ollama%20⭐&color=darkgreen
 [colab_badge]: https://img.shields.io/badge/Open%20In-Colab-blue?style=for-the-badge&logo=google-colab
 [kaggle_badge]: https://img.shields.io/badge/Open%20In-Kaggle-blue?style=for-the-badge&logo=kaggle
 [back_to_top_badge]: https://img.shields.io/badge/Back_to_Top-↑-blue?style=for-the-badge
@@ -61,11 +61,11 @@ x.infer is a simple library that allows you to run inference with any computer v
 
 Out of the box, x.infer supports the following frameworks:
 
-[![Transformers](https://img.shields.io/badge/Transformers-yellow?style=for-the-badge&logo=huggingface&logoColor=white)](https://github.com/huggingface/transformers)
-[![TIMM](https://img.shields.io/badge/TIMM-limegreen?style=for-the-badge&logo=pytorch&logoColor=white)](https://github.com/huggingface/pytorch-image-models)
-[![Ultralytics](https://img.shields.io/badge/Ultralytics-red?style=for-the-badge&logo=udacity&logoColor=white)](https://github.com/ultralytics/ultralytics)
-[![vLLM](https://img.shields.io/badge/vLLM-purple?style=for-the-badge&logo=v&logoColor=white)](https://github.com/vllm-project/vllm)
-[![Ollama](https://img.shields.io/badge/Ollama-darkgreen?style=for-the-badge&logo=Ollama&logoColor=white)](https://github.com/ollama/ollama)
+[![Transformers][transformers_badge]](https://github.com/huggingface/transformers)
+[![TIMM][timm_badge]](https://github.com/huggingface/pytorch-image-models)
+[![Ultralytics][ultralytics_badge]](https://github.com/ultralytics/ultralytics)
+[![vLLM][vllm_badge]](https://github.com/vllm-project/vllm)
+[![Ollama][ollama_badge]](https://github.com/ollama/ollama)
 
 Combined, x.infer supports over 1000+ models from all the above frameworks.
 
@@ -158,7 +158,7 @@ xinfer.list_models()
        Available Models                                      
 ┏━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┓
 ┃ Implementation ┃ Model ID                                              ┃ Input --> Output     ┃
-┡━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━┩
+┡━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━��━┩
 │ timm           │ timm/eva02_large_patch14_448.mim_m38m_ft_in22k_in1k   │ image --> categories │
 │ timm           │ timm/eva02_large_patch14_448.mim_m38m_ft_in1k         │ image --> categories │
 │ timm           │ timm/eva02_large_patch14_448.mim_in22k_ft_in22k_in1k  │ image --> categories │
@@ -181,7 +181,7 @@ xinfer.list_models()
 │ ultralytics    │ ultralytics/yolov8n                                   │ image --> boxes      │
 │ ...            │ ...                                                   │ ...                  │
 │ ...            │ ...                                                   │ ...                  │
-└────────────────┴───────────────────────────────────────────────────────┴──────────────────────┘
+└────────────────┴─────────────────────────────────────────────────────────────┴──────────────────────┘
 ```
 
 If you're running in a Juypter Notebook environment, you can specify `interactive=True` to list and search supported models interactively.
@@ -315,7 +315,8 @@ See an example implementation of the Molmo model [here](https://github.com/dnth/
 
 
 <details>
-<summary><a href="https://github.com/huggingface/transformers"><img src="https://img.shields.io/badge/Transformers-yellow?style=for-the-badge&logo=huggingface&logoColor=white" alt="Transformers"></a></summary>
+<summary><a href="https://github.com/huggingface/transformers">
+<img src="https://img.shields.io/github/stars/huggingface/transformers?style=for-the-badge&logo=huggingface&label=Transformers%20⭐&color=yellow" alt="Transformers"></a></summary>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -372,7 +373,8 @@ model = xinfer.create_model(model)
 </details>
 
 <details>
-<summary><a href="https://github.com/huggingface/pytorch-image-models"><img src="https://img.shields.io/badge/TIMM-green?style=for-the-badge&logo=pytorch&logoColor=white" alt="TIMM"></a></summary>
+<summary><a href="https://github.com/huggingface/pytorch-image-models">
+<img src="https://img.shields.io/github/stars/huggingface/pytorch-image-models?style=for-the-badge&logo=pytorch&label=TIMM%20⭐&color=limegreen" alt="TIMM"></a></summary>
 
 All models from [TIMM](https://github.com/huggingface/pytorch-image-models) fine-tuned for ImageNet 1k are supported.
 
@@ -393,7 +395,8 @@ model = xinfer.create_model(model)
 </details>
 
 <details>
-<summary><a href="https://github.com/ultralytics/ultralytics"><img src="https://img.shields.io/badge/Ultralytics-red?style=for-the-badge&logo=udacity&logoColor=white" alt="Ultralytics"></a></summary>
+<summary><a href="https://github.com/ultralytics/ultralytics">
+<img src="https://img.shields.io/github/stars/ultralytics/ultralytics?style=for-the-badge&logo=udacity&label=Ultralytics%20⭐&color=red" alt="Ultralytics"></a></summary>
 
 <table>
     <thead>
@@ -439,7 +442,8 @@ model = xinfer.create_model(model)
 </details>
 
 <details>
-<summary><a href="https://github.com/vllm-project/vllm"><img src="https://img.shields.io/badge/vLLM-purple?style=for-the-badge&logo=v&logoColor=white" alt="vLLM"></a></summary>
+<summary><a href="https://github.com/vllm-project/vllm">
+<img src="https://img.shields.io/github/stars/vllm-project/vllm?style=for-the-badge&logo=v&label=vLLM%20⭐&color=purple" alt="vLLM"></a></summary>
 
 <table>
     <thead>
@@ -475,7 +479,8 @@ model = xinfer.create_model(model)
 </details>
 
 <details>
-<summary><a href="https://github.com/ollama/ollama"><img src="https://img.shields.io/badge/Ollama-darkgreen?style=for-the-badge&logo=Ollama&logoColor=white" alt="Ollama"></a></summary>
+<summary><a href="https://github.com/ollama/ollama">
+<img src="https://img.shields.io/github/stars/ollama/ollama?style=for-the-badge&logo=llama&label=Ollama%20⭐&color=darkgreen" alt="Ollama"></a></summary>
 
 To use Ollama models, you'll need to install the Ollama on your machine. See [Ollama Installation Guide](https://ollama.com/download) for more details.
 
