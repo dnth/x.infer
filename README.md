@@ -132,6 +132,7 @@ pip install "xinfer[transformers]"
 pip install "xinfer[ultralytics]"
 pip install "xinfer[timm]"
 pip install "xinfer[vllm]"
+pip install "xinfer[ollama]"
 ```
 
 To install all optional dependencies, run:
