@@ -370,16 +370,24 @@ model = xinfer.create_model(model)
     </thead>
     <tbody>
         <tr>
-            <td><a href="https://github.com/ultralytics/ultralytics">YOLOv8 Series</a></td>
+            <td><a href="https://github.com/ultralytics/ultralytics">YOLOv8 Detection Series</a></td>
             <td><pre lang="python"><code>xinfer.create_model("ultralytics/yolov8n")</code></pre></td>
         </tr>
         <tr>
-            <td><a href="https://github.com/ultralytics/ultralytics">YOLOv10 Series</a></td>
+            <td><a href="https://github.com/ultralytics/ultralytics">YOLOv10 Detection Series</a></td>
             <td><pre lang="python"><code>xinfer.create_model("ultralytics/yolov10x")</code></pre></td>
         </tr>
         <tr>
-            <td><a href="https://github.com/ultralytics/ultralytics">YOLOv11 Series</a></td>
+            <td><a href="https://github.com/ultralytics/ultralytics">YOLOv11 Detection Series</a></td>
             <td><pre lang="python"><code>xinfer.create_model("ultralytics/yolov11s")</code></pre></td>
+        </tr>
+        <tr>
+            <td><a href="https://github.com/ultralytics/ultralytics">YOLOv8 Classification Series</a></td>
+            <td><pre lang="python"><code>xinfer.create_model("ultralytics/yolov8n-cls")</code></pre></td>
+        </tr>
+        <tr>
+            <td><a href="https://github.com/ultralytics/ultralytics">YOLOv11 Classification Series</a></td>
+            <td><pre lang="python"><code>xinfer.create_model("ultralytics/yolov11s-cls")</code></pre></td>
         </tr>
     </tbody>
 </table>
