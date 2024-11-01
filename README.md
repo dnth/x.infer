@@ -315,8 +315,7 @@ See an example implementation of the Molmo model [here](https://github.com/dnth/
 
 
 <details>
-<summary><a href="https://github.com/huggingface/transformers">
-<img src="https://img.shields.io/github/stars/huggingface/transformers?style=for-the-badge&logo=huggingface&label=Transformers%20⭐&color=yellow" alt="Transformers"></a></summary>
+<summary>Transformers</summary>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -373,8 +372,7 @@ model = xinfer.create_model(model)
 </details>
 
 <details>
-<summary><a href="https://github.com/huggingface/pytorch-image-models">
-<img src="https://img.shields.io/github/stars/huggingface/pytorch-image-models?style=for-the-badge&logo=pytorch&label=TIMM%20⭐&color=limegreen" alt="TIMM"></a></summary>
+<summary>TIMM</summary>
 
 All models from [TIMM](https://github.com/huggingface/pytorch-image-models) fine-tuned for ImageNet 1k are supported.
 
@@ -395,8 +393,7 @@ model = xinfer.create_model(model)
 </details>
 
 <details>
-<summary><a href="https://github.com/ultralytics/ultralytics">
-<img src="https://img.shields.io/github/stars/ultralytics/ultralytics?style=for-the-badge&logo=udacity&label=Ultralytics%20⭐&color=red" alt="Ultralytics"></a></summary>
+<summary>Ultralytics</summary>
 
 <table>
     <thead>
@@ -442,8 +439,7 @@ model = xinfer.create_model(model)
 </details>
 
 <details>
-<summary><a href="https://github.com/vllm-project/vllm">
-<img src="https://img.shields.io/github/stars/vllm-project/vllm?style=for-the-badge&logo=v&label=vLLM%20⭐&color=purple" alt="vLLM"></a></summary>
+<summary>vLLM</summary>
 
 <table>
     <thead>
@@ -479,8 +475,7 @@ model = xinfer.create_model(model)
 </details>
 
 <details>
-<summary><a href="https://github.com/ollama/ollama">
-<img src="https://img.shields.io/github/stars/ollama/ollama?style=for-the-badge&logo=llama&label=Ollama%20⭐&color=darkgreen" alt="Ollama"></a></summary>
+<summary>Ollama</summary>
 
 To use Ollama models, you'll need to install the Ollama on your machine. See [Ollama Installation Guide](https://ollama.com/download) for more details.
 
