@@ -109,12 +109,12 @@ import xinfer
 
 model = xinfer.create_model("vikhyatk/moondream2")
 
-image = "https://raw.githubusercontent.com/vikhyat/moondream/main/assets/demo-1.jpg"
+image = "https://raw.githubusercontent.com/dnth/x.infer/main/assets/demo/00aa2580828a9009.jpg"
 prompt = "Describe this image. "
 
 model.infer(image, prompt)
 
->>> An animated character with long hair and a serious expression is eating a large burger at a table, with other characters in the background.
+>>> 'A parade with a marching band and a flag-bearing figure passes through a town, with spectators lining the street and a church steeple visible in the background.'
 ```
 
 ## 📦 Installation
@@ -252,7 +252,7 @@ curl -X 'POST' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
-  "image": "https://raw.githubusercontent.com/dnth/x.infer/refs/heads/main/assets/demo/00aa2580828a9009.jpg",
+  "image": "https://raw.githubusercontent.com/dnth/x.infer/main/assets/demo/00aa2580828a9009.jpg",
   "infer_kwargs": {"prompt": "Caption this image"}
 }'
 ```
@@ -268,7 +268,7 @@ headers = {
     "Content-Type": "application/json"
 }
 payload = {
-    "image": "https://raw.githubusercontent.com/dnth/x.infer/refs/heads/main/assets/demo/00aa2580828a9009.jpg",
+    "image": "https://raw.githubusercontent.com/dnth/x.infer/main/assets/demo/00aa2580828a9009.jpg",
     "infer_kwargs": {
         "prompt": "Caption this image"
     }
