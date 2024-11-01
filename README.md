@@ -30,7 +30,7 @@
     <br />
     <a href="https://dnth.github.io/x.infer" target="_blank" rel="noopener noreferrer"><strong>Explore the docs »</strong></a>
     <br />
-    <a href="#quickstart" target="_blank" rel="noopener noreferrer">Quickstart</a>
+    <a href="#-quickstart" target="_blank" rel="noopener noreferrer">Quickstart</a>
     ·
     <a href="https://github.com/dnth/x.infer/issues/new?assignees=&labels=Feature+Request&projects=&template=feature_request.md" target="_blank" rel="noopener noreferrer">Feature Request</a>
     ·
