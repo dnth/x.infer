@@ -117,6 +117,35 @@ model.infer(image, prompt)
 >>> An animated character with long hair and a serious expression is eating a large burger at a table, with other characters in the background.
 ```
 
+## 📦 Installation
+> [!IMPORTANT]
+> You must have [PyTorch](https://pytorch.org/get-started/locally/) installed to use x.infer.
+
+To install the barebones x.infer (without any optional dependencies), run:
+```bash
+pip install xinfer
+```
+x.infer can be used with multiple optional dependencies. You'll just need to install one or more of the following:
+
+```bash
+pip install "xinfer[transformers]"
+pip install "xinfer[ultralytics]"
+pip install "xinfer[timm]"
+pip install "xinfer[vllm]"
+```
+
+To install all optional dependencies, run:
+```bash
+pip install "xinfer[all]"
+```
+
+To install from a local directory, run:
+```bash
+git clone https://github.com/dnth/x.infer.git
+cd x.infer
+pip install -e .
+```
+
 ## 🛠️ Usage
 
 ### List Models
@@ -243,34 +272,7 @@ class MyModel(BaseModel):
 See an example implementation of the Molmo model [here](https://github.com/dnth/x.infer/blob/main/xinfer/vllm/molmo.py).
 
 
-## 📦 Installation
-> [!IMPORTANT]
-> You must have [PyTorch](https://pytorch.org/get-started/locally/) installed to use x.infer.
 
-To install the barebones x.infer (without any optional dependencies), run:
-```bash
-pip install xinfer
-```
-x.infer can be used with multiple optional dependencies. You'll just need to install one or more of the following:
-
-```bash
-pip install "xinfer[transformers]"
-pip install "xinfer[ultralytics]"
-pip install "xinfer[timm]"
-pip install "xinfer[vllm]"
-```
-
-To install all optional dependencies, run:
-```bash
-pip install "xinfer[all]"
-```
-
-To install from a local directory, run:
-```bash
-git clone https://github.com/dnth/x.infer.git
-cd x.infer
-pip install -e .
-```
 
 
 
