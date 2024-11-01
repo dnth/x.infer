@@ -244,6 +244,40 @@ xinfer.serve_model(
 )
 ```
 
+You can now query the endpoint with an image and prompt.
+
+```bash
+curl -X 'POST' \
+  'http://127.0.0.1:8000/infer' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "image": "https://raw.githubusercontent.com/dnth/x.infer/refs/heads/main/assets/demo/00aa2580828a9009.jpg",
+  "infer_kwargs": {"prompt": "Caption this image"}
+}'
+```
+
+Or in Python:
+
+```python
+import requests
+
+url = "http://127.0.0.1:8000/infer"
+headers = {
+    "accept": "application/json",
+    "Content-Type": "application/json"
+}
+payload = {
+    "image": "https://raw.githubusercontent.com/dnth/x.infer/refs/heads/main/assets/demo/00aa2580828a9009.jpg",
+    "infer_kwargs": {
+        "prompt": "Caption this image"
+    }
+}
+
+response = requests.post(url, headers=headers, json=payload)
+print(response.json())
+```
+
 ### Add Your Own Model
 
 + **Step 1:** Create a new model class that implements the `BaseModel` interface.
