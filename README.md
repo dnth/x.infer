@@ -1,6 +1,6 @@
 [python_badge]: https://img.shields.io/badge/Python-3.10%20|%203.11%20|%203.12-brightgreen?style=for-the-badge
 [pypi_badge]: https://img.shields.io/pypi/v/xinfer.svg?style=for-the-badge&logo=pypi&logoColor=white&label=PyPI&color=blue
-[downloads_badge]: https://img.shields.io/pypi/dm/xinfer.svg?style=for-the-badge&logo=pypi&logoColor=white&label=Downloads&color=purple
+[downloads_badge]: https://img.shields.io/pepy/dt/xinfer.svg?style=for-the-badge&logo=pypi&logoColor=white&label=Downloads&color=purple
 [license_badge]: https://img.shields.io/badge/License-Apache%202.0-green.svg?style=for-the-badge&logo=apache&logoColor=white
 [transformers_badge]: https://img.shields.io/badge/Transformers-yellow?style=for-the-badge&logo=huggingface&logoColor=white
 [timm_badge]: https://img.shields.io/badge/TIMM-limegreen?style=for-the-badge&logo=pytorch&logoColor=white
@@ -13,7 +13,7 @@
 [image_classification_badge]: https://img.shields.io/badge/Image%20Classification-blueviolet?style=for-the-badge
 [object_detection_badge]: https://img.shields.io/badge/Object%20Detection-coral?style=for-the-badge
 [image_to_text_badge]: https://img.shields.io/badge/Image%20to%20Text-gold?style=for-the-badge
-[os_badge]: https://img.shields.io/badge/Supported%20OS-Linux%20%7C%20macOS%20%7C%20Windows-indigo?style=for-the-badge
+[os_badge]: https://img.shields.io/badge/Tested%20on-Linux%20%7C%20macOS%20%7C%20Windows-indigo?style=for-the-badge
 
 
 ![Python][python_badge]
