@@ -1,3 +1,5 @@
+import time
+
 from fastapi import FastAPI
 from loguru import logger
 from pydantic import BaseModel
@@ -25,7 +27,10 @@ class XInferModel:
         model_id,
         **kwargs,
     ):
-        self.model = create_model(model_id, **kwargs)
+        try:
+            self.model = create_model(model_id, **kwargs)
+        except Exception as e:
+            raise RuntimeError(f"Failed to load model {model_id}: {str(e)}")
 
     @app.post("/infer")
     async def infer(self, request: InferRequest) -> dict:
@@ -44,6 +49,16 @@ class XInferModel:
             return [{"response": r} for r in result]
         except Exception as e:
             return [{"error": f"An error occurred: {str(e)}"}]
+
+    @app.get("/health")
+    async def health(self):
+        return {
+            "status": "healthy",
+            "timestamp": time.time(),
+            "model_id": self.model.model_id,
+            "device": self.model.device,
+            "dtype": str(self.model.dtype),
+        }
 
 
 def serve_model(
