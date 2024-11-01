@@ -34,3 +34,4 @@ timm
 ultralytics
 pytest
 pytest-mock
+pre-commit

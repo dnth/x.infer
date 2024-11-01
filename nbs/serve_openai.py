@@ -3,7 +3,6 @@ from io import BytesIO
 from typing import Dict, List
 
 import numpy as np
-import ray
 import requests
 import timm
 import torch
