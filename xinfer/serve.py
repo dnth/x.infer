@@ -86,6 +86,9 @@ def serve_model(
     try:
         handle = serve.run(app, blocking=blocking)
         if not blocking:
+            logger.info(
+                "Running server in non-blocking mode, remember to call serve.shutdown() to stop the server"
+            )
             return handle  # Return handle without shutting down
     except (KeyboardInterrupt, SystemExit):
         logger.info("Receiving shutdown signal. Cleaning up...")
