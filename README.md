@@ -315,13 +315,8 @@ See an example implementation of the Molmo model [here](https://github.com/dnth/
 
 
 <details>
-<summary>
-<a href="https://github.com/huggingface/transformers">
-<picture>
-<img src="https://img.shields.io/github/stars/huggingface/transformers?style=for-the-badge&logo=huggingface&label=Transformers%20⭐&color=yellow" alt="Transformers">
-</picture>
-</a>
-</summary>
+<summary><a href="https://github.com/huggingface/transformers">
+<img src="https://img.shields.io/github/stars/huggingface/transformers?style=for-the-badge&logo=huggingface&label=Transformers%20⭐&color=yellow" alt="Transformers"></a></summary>
 
 <!DOCTYPE html>
 <html lang="en">
