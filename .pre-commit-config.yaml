@@ -6,7 +6,7 @@ repos:
       # Run the linter.
       - id: ruff
         types_or: [ python, pyi ]
-        args: [ --fix ]
+        args: [ --fix, --ignore=F403,F405 ]
       # Run the formatter.
       - id: ruff-format
         types_or: [ python, pyi ]
