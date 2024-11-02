@@ -49,16 +49,6 @@ def list_models(search: str = None, limit: int = 20, interactive: bool = False):
         )
         return
 
-    if interactive:
-        from itables import init_notebook_mode
-
-        logger.info(
-            "Showing interactive table in Jupyter Notebook. Type in the search bar to filter the models."
-        )
-
-        init_notebook_mode(all_interactive=True)
-        return pd.DataFrame(rows)
-
     if len(rows) > limit:
         rows = rows[:limit]
         rows.append(
@@ -71,6 +61,16 @@ def list_models(search: str = None, limit: int = 20, interactive: bool = False):
         logger.info(
             f"Showing only top {limit} models. Change the `limit` parameter to see more."
         )
+
+    if interactive:
+        from itables import init_notebook_mode
+
+        logger.info(
+            "Showing interactive table in Jupyter Notebook. Type in the search bar to filter the models."
+        )
+
+        init_notebook_mode(all_interactive=True)
+        return pd.DataFrame(rows)
 
     console = Console()
     table = Table(title="Available Models")

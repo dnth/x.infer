@@ -67,6 +67,7 @@ def serve_model(
     deployment_kwargs: dict = None,
     host: str = "127.0.0.1",
     port: int = 8000,
+    blocking: bool = True,
     **model_kwargs,
 ):
     deployment_kwargs = deployment_kwargs or {}
@@ -83,8 +84,12 @@ def serve_model(
     app = deployment.bind(model_id, **model_kwargs)
 
     try:
-        serve.run(app, blocking=True)
+        handle = serve.run(app, blocking=blocking)
+        if not blocking:
+            logger.info(
+                "Running server in non-blocking mode, remember to call serve.shutdown() to stop the server"
+            )
+            return handle  # Return handle without shutting down
     except (KeyboardInterrupt, SystemExit):
         logger.info("Receiving shutdown signal. Cleaning up...")
-    finally:
         serve.shutdown()

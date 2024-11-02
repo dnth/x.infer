@@ -1,4 +1,4 @@
-[python_badge]: https://img.shields.io/badge/Python-3.10%20|%203.11%20|%203.12-brightgreen?style=for-the-badge
+[python_badge]: https://img.shields.io/badge/Python-3.10+-brightgreen?style=for-the-badge&logo=python&logoColor=white
 [pypi_badge]: https://img.shields.io/pypi/v/xinfer.svg?style=for-the-badge&logo=pypi&logoColor=white&label=PyPI&color=blue
 [downloads_badge]: https://img.shields.io/pepy/dt/xinfer.svg?style=for-the-badge&logo=pypi&logoColor=white&label=Downloads&color=purple
 [license_badge]: https://img.shields.io/badge/License-Apache%202.0-green.svg?style=for-the-badge&logo=apache&logoColor=white
@@ -6,14 +6,14 @@
 [timm_badge]: https://img.shields.io/github/stars/huggingface/pytorch-image-models?style=for-the-badge&logo=pytorch&label=TIMM%20⭐&color=limegreen
 [ultralytics_badge]: https://img.shields.io/github/stars/ultralytics/ultralytics?style=for-the-badge&logo=udacity&label=Ultralytics%20⭐&color=red
 [vllm_badge]: https://img.shields.io/github/stars/vllm-project/vllm?style=for-the-badge&logo=v&label=vLLM%20⭐&color=purple
-[ollama_badge]: https://img.shields.io/github/stars/ollama/ollama?style=for-the-badge&logo=llama&label=Ollama%20⭐&color=darkgreen
+[ollama_badge]: https://img.shields.io/github/stars/ollama/ollama?style=for-the-badge&logo=ollama&label=Ollama%20⭐&color=darkgreen
 [colab_badge]: https://img.shields.io/badge/Open%20In-Colab-blue?style=for-the-badge&logo=google-colab
 [kaggle_badge]: https://img.shields.io/badge/Open%20In-Kaggle-blue?style=for-the-badge&logo=kaggle
 [back_to_top_badge]: https://img.shields.io/badge/Back_to_Top-↑-blue?style=for-the-badge
 [image_classification_badge]: https://img.shields.io/badge/Image%20Classification-blueviolet?style=for-the-badge
 [object_detection_badge]: https://img.shields.io/badge/Object%20Detection-coral?style=for-the-badge
 [image_to_text_badge]: https://img.shields.io/badge/Image%20to%20Text-gold?style=for-the-badge
-[os_badge]: https://img.shields.io/badge/Tested%20on-Linux%20%7C%20macOS%20%7C%20Windows-indigo?style=for-the-badge
+[os_badge]: https://img.shields.io/badge/Tested%20on-Linux%20%7C%20macOS%20%7C%20Windows-indigo?style=for-the-badge&logo=iterm2&logoColor=white&color=indigo
 
 
 ![Python][python_badge]
@@ -57,7 +57,7 @@ You don't want to spend a weekend learning `TyPorch` just to find out the model 
 
 This is where x.infer comes in. 
 
-x.infer is a simple library that allows you to run inference with any computer vision model in just a few lines of code. All in Python.
+x.infer is a simple wrapper that allows you to run inference with any computer vision model in just a few lines of code. All in Python.
 
 Out of the box, x.infer supports the following frameworks:
 
@@ -109,12 +109,12 @@ import xinfer
 
 model = xinfer.create_model("vikhyatk/moondream2")
 
-image = "https://raw.githubusercontent.com/vikhyat/moondream/main/assets/demo-1.jpg"
+image = "https://raw.githubusercontent.com/dnth/x.infer/main/assets/demo/00aa2580828a9009.jpg"
 prompt = "Describe this image. "
 
 model.infer(image, prompt)
 
->>> An animated character with long hair and a serious expression is eating a large burger at a table, with other characters in the background.
+>>> 'A parade with a marching band and a flag-bearing figure passes through a town, with spectators lining the street and a church steeple visible in the background.'
 ```
 
 ## 📦 Installation
@@ -132,6 +132,7 @@ pip install "xinfer[transformers]"
 pip install "xinfer[ultralytics]"
 pip install "xinfer[timm]"
 pip install "xinfer[vllm]"
+pip install "xinfer[ollama]"
 ```
 
 To install all optional dependencies, run:
@@ -158,7 +159,7 @@ xinfer.list_models()
        Available Models                                      
 ┏━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┓
 ┃ Implementation ┃ Model ID                                              ┃ Input --> Output     ┃
-┡━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━��━┩
+┡━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━┩
 │ timm           │ timm/eva02_large_patch14_448.mim_m38m_ft_in22k_in1k   │ image --> categories │
 │ timm           │ timm/eva02_large_patch14_448.mim_m38m_ft_in1k         │ image --> categories │
 │ timm           │ timm/eva02_large_patch14_448.mim_in22k_ft_in22k_in1k  │ image --> categories │
@@ -252,7 +253,7 @@ curl -X 'POST' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
-  "image": "https://raw.githubusercontent.com/dnth/x.infer/refs/heads/main/assets/demo/00aa2580828a9009.jpg",
+  "image": "https://raw.githubusercontent.com/dnth/x.infer/main/assets/demo/00aa2580828a9009.jpg",
   "infer_kwargs": {"prompt": "Caption this image"}
 }'
 ```
@@ -268,7 +269,7 @@ headers = {
     "Content-Type": "application/json"
 }
 payload = {
-    "image": "https://raw.githubusercontent.com/dnth/x.infer/refs/heads/main/assets/demo/00aa2580828a9009.jpg",
+    "image": "https://raw.githubusercontent.com/dnth/x.infer/main/assets/demo/00aa2580828a9009.jpg",
     "infer_kwargs": {
         "prompt": "Caption this image"
     }
