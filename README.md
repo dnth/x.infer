@@ -57,7 +57,7 @@ You don't want to spend a weekend learning `TyPorch` just to find out the model 
 
 This is where x.infer comes in. 
 
-x.infer is a simple library that allows you to run inference with any computer vision model in just a few lines of code. All in Python.
+x.infer is a simple wrapper that allows you to run inference with any computer vision model in just a few lines of code. All in Python.
 
 Out of the box, x.infer supports the following frameworks:
 
