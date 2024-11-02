@@ -17,7 +17,7 @@
       
       
       
-      <link rel="icon" href="../assets/images/favicon.png">
+      <link rel="icon" href="../assets/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.43">
     
     
@@ -96,8 +96,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href=".." title="x.infer" class="md-header__button md-logo" aria-label="x.infer" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+  <img src="../assets/favicon.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -234,8 +233,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href=".." title="x.infer" class="md-nav__button md-logo" aria-label="x.infer" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+  <img src="../assets/favicon.png" alt="logo">
 
     </a>
     x.infer
@@ -427,16 +425,6 @@
         <span class="p">)</span>
         <span class="k">return</span>
 
-    <span class="k">if</span> <span class="n">interactive</span><span class="p">:</span>
-        <span class="kn">from</span> <span class="nn">itables</span> <span class="kn">import</span> <span class="n">init_notebook_mode</span>
-
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;Showing interactive table in Jupyter Notebook. Type in the search bar to filter the models.&quot;</span>
-        <span class="p">)</span>
-
-        <span class="n">init_notebook_mode</span><span class="p">(</span><span class="n">all_interactive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
-
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">limit</span><span class="p">:</span>
         <span class="n">rows</span> <span class="o">=</span> <span class="n">rows</span><span class="p">[:</span><span class="n">limit</span><span class="p">]</span>
         <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
@@ -449,6 +437,16 @@
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;Showing only top </span><span class="si">{</span><span class="n">limit</span><span class="si">}</span><span class="s2"> models. Change the `limit` parameter to see more.&quot;</span>
         <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">interactive</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">itables</span> <span class="kn">import</span> <span class="n">init_notebook_mode</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;Showing interactive table in Jupyter Notebook. Type in the search bar to filter the models.&quot;</span>
+        <span class="p">)</span>
+
+        <span class="n">init_notebook_mode</span><span class="p">(</span><span class="n">all_interactive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
 
     <span class="n">console</span> <span class="o">=</span> <span class="n">Console</span><span class="p">()</span>
     <span class="n">table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Available Models&quot;</span><span class="p">)</span>
