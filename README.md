@@ -6,7 +6,7 @@
 [timm_badge]: https://img.shields.io/github/stars/huggingface/pytorch-image-models?style=for-the-badge&logo=pytorch&label=TIMM%20⭐&color=limegreen
 [ultralytics_badge]: https://img.shields.io/github/stars/ultralytics/ultralytics?style=for-the-badge&logo=udacity&label=Ultralytics%20⭐&color=red
 [vllm_badge]: https://img.shields.io/github/stars/vllm-project/vllm?style=for-the-badge&logo=v&label=vLLM%20⭐&color=purple
-[ollama_badge]: https://img.shields.io/github/stars/ollama/ollama?style=for-the-badge&logo=llama&label=Ollama%20⭐&color=darkgreen
+[ollama_badge]: https://img.shields.io/github/stars/ollama/ollama?style=for-the-badge&logo=ollama&label=Ollama%20⭐&color=darkgreen
 [colab_badge]: https://img.shields.io/badge/Open%20In-Colab-blue?style=for-the-badge&logo=google-colab
 [kaggle_badge]: https://img.shields.io/badge/Open%20In-Kaggle-blue?style=for-the-badge&logo=kaggle
 [back_to_top_badge]: https://img.shields.io/badge/Back_to_Top-↑-blue?style=for-the-badge
