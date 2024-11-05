@@ -13,6 +13,8 @@ class ModelInputOutput(Enum):
     TEXT_TO_TEXT = "text --> text"
     IMAGE_TO_BOXES = "image --> boxes"
     IMAGE_TO_CATEGORIES = "image --> categories"
+    IMAGE_TO_MASKS = "image --> masks"
+    IMAGE_TO_POINTS = "image --> points"
 
 
 @dataclass
