@@ -84,12 +84,25 @@ def serve_model(
     app = deployment.bind(model_id, **model_kwargs)
 
     try:
-        handle = serve.run(app, blocking=blocking)
-        if not blocking:
+        handle = serve.run(app)
+        logger.info(f"Open FastAPI docs at http://{host}:{port}/docs")
+        import webbrowser
+
+        webbrowser.open(f"http://{host}:{port}/docs")
+
+        if blocking:
+            try:
+                while True:
+                    time.sleep(1)
+            except (KeyboardInterrupt, SystemExit):
+                logger.info("Receiving shutdown signal. Cleaning up...")
+                serve.shutdown()
+        else:
             logger.info(
                 "Running server in non-blocking mode, remember to call serve.shutdown() to stop the server"
             )
-            return handle  # Return handle without shutting down
-    except (KeyboardInterrupt, SystemExit):
-        logger.info("Receiving shutdown signal. Cleaning up...")
+            return handle
+    except Exception as e:
+        logger.error(f"Error starting server: {str(e)}")
         serve.shutdown()
+        raise
