@@ -3,11 +3,11 @@ from .ultralytics_model import UltralyticsModel
 
 
 model_configs = [
-    ("ultralytics/yolov8n", "ultralytics", ModelInputOutput.IMAGE_TO_BOXES)
-    ("ultralytics/yolov8s", "ultralytics", ModelInputOutput.IMAGE_TO_BOXES)
-    ("ultralytics/yolov8m", "ultralytics", ModelInputOutput.IMAGE_TO_BOXES)
-    ("ultralytics/yolov8l", "ultralytics", ModelInputOutput.IMAGE_TO_BOXES)
-    ("ultralytics/yolov8x", "ultralytics", ModelInputOutput.IMAGE_TO_BOXES)
+    ("ultralytics/yolov8n", "ultralytics", ModelInputOutput.IMAGE_TO_BOXES),
+    ("ultralytics/yolov8s", "ultralytics", ModelInputOutput.IMAGE_TO_BOXES),
+    ("ultralytics/yolov8m", "ultralytics", ModelInputOutput.IMAGE_TO_BOXES),
+    ("ultralytics/yolov8l", "ultralytics", ModelInputOutput.IMAGE_TO_BOXES),
+    ("ultralytics/yolov8x", "ultralytics", ModelInputOutput.IMAGE_TO_BOXES),
     ("ultralytics/yolov8n-cls", "ultralytics", ModelInputOutput.IMAGE_TO_CATEGORIES),
     ("ultralytics/yolov8s-cls", "ultralytics", ModelInputOutput.IMAGE_TO_CATEGORIES),
     ("ultralytics/yolov8m-cls", "ultralytics", ModelInputOutput.IMAGE_TO_CATEGORIES),
