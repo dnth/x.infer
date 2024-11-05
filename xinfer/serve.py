@@ -68,6 +68,7 @@ def serve_model(
     host: str = "127.0.0.1",
     port: int = 8000,
     blocking: bool = True,
+    open_api_docs: bool = True,
     **model_kwargs,
 ):
     deployment_kwargs = deployment_kwargs or {}
@@ -86,9 +87,10 @@ def serve_model(
     try:
         handle = serve.run(app)
         logger.info(f"Open FastAPI docs at http://{host}:{port}/docs")
-        import webbrowser
+        if open_api_docs:
+            import webbrowser
 
-        webbrowser.open(f"http://{host}:{port}/docs")
+            webbrowser.open(f"http://{host}:{port}/docs")
 
         if blocking:
             try:
