@@ -1,3 +1,5 @@
+import difflib
+
 from dataclasses import dataclass
 from enum import Enum
 from typing import Dict, List, Type
@@ -11,6 +13,8 @@ class ModelInputOutput(Enum):
     TEXT_TO_TEXT = "text --> text"
     IMAGE_TO_BOXES = "image --> boxes"
     IMAGE_TO_CATEGORIES = "image --> categories"
+    IMAGE_TO_MASKS = "image --> masks"
+    IMAGE_TO_POINTS = "image --> points"
 
 
 @dataclass
@@ -34,7 +38,13 @@ class ModelRegistry:
     def get_model(self, model_id: str, **kwargs) -> BaseModel:
         model_info, model_class = self._models.get(model_id, (None, None))
         if model_class is None:
-            raise ValueError(f"Unsupported model: {model_id}")
+            supported_models = list(self._models.keys())
+            similar_models = difflib.get_close_matches(model_id, supported_models, n=10, cutoff=0.6)
+            if similar_models:
+                suggestion = ', '.join(similar_models)
+                raise ValueError(f"Unsupported model: {model_id}. Suggestion model: {suggestion}。")
+            else:
+                raise ValueError(f"Unsupported model: {model_id}")
         return model_class(model_id, **kwargs)
 
     def list_models(self) -> List[ModelInfo]:
