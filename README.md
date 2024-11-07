@@ -51,7 +51,7 @@
 
 ## 🌟 Key Features
 <div align="center">
-  <img src="https://raw.githubusercontent.com/dnth/x.infer/refs/heads/main/assets/flowchart.gif" alt="x.infer" width="100%"/>
+  <img src="https://raw.githubusercontent.com/dnth/x.infer/refs/heads/main/assets/flowchart.gif" alt="x.infer"/>
 </div>
 
 
