@@ -50,14 +50,6 @@ def list_models(search: str = None, limit: int = 20, interactive: bool = False):
         return
 
     if len(rows) > limit:
-        rows = rows[:limit]
-        rows.append(
-            {"Implementation": "...", "Model ID": "...", "Input --> Output": "..."}
-        )
-        rows.append(
-            {"Implementation": "...", "Model ID": "...", "Input --> Output": "..."}
-        )
-
         logger.info(
             f"Showing only top {limit} models. Change the `limit` parameter to see more."
         )
