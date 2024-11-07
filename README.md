@@ -10,9 +10,10 @@
 [colab_badge]: https://img.shields.io/badge/Open%20In-Colab-blue?style=for-the-badge&logo=google-colab
 [kaggle_badge]: https://img.shields.io/badge/Open%20In-Kaggle-blue?style=for-the-badge&logo=kaggle
 [back_to_top_badge]: https://img.shields.io/badge/Back_to_Top-↑-blue?style=for-the-badge
-[image_classification_badge]: https://img.shields.io/badge/Image%20Classification-blueviolet?style=for-the-badge
-[object_detection_badge]: https://img.shields.io/badge/Object%20Detection-coral?style=for-the-badge
-[image_to_text_badge]: https://img.shields.io/badge/Image%20to%20Text-gold?style=for-the-badge
+[image_classification_badge]: https://img.shields.io/badge/Image%20Classification-6366f1?style=for-the-badge
+[object_detection_badge]: https://img.shields.io/badge/Object%20Detection-8b5cf6?style=for-the-badge
+[image_captioning_badge]: https://img.shields.io/badge/Image%20Captioning-a855f7?style=for-the-badge
+[vqa_badge]: https://img.shields.io/badge/Visual%20QA-d946ef?style=for-the-badge
 [os_badge]: https://img.shields.io/badge/Tested%20on-Linux%20%7C%20macOS%20%7C%20Windows-indigo?style=for-the-badge&logo=iterm2&logoColor=white&color=indigo
 
 
@@ -46,6 +47,24 @@
     
 </div>
 
+## 🌟 Key Features
+<div align="center">
+  <img src="https://raw.githubusercontent.com/dnth/x.infer/refs/heads/main/assets/flowchart.gif" alt="x.infer" width="900"/>
+</div>
+
+
+✅ Run inference with >1000+ models in 3 lines of code. \
+✅ List and search models interactively. \
+✅ Launch a Gradio interface to interact with a model. \
+✅ Serve model as a REST API endpoint with Ray Serve and FastAPI. \
+✅ Customize and add your own models with minimal code changes.
+
+Tasks supported:
+
+![Image Classification][image_classification_badge]
+![Object Detection][object_detection_badge]
+![Image Captioning][image_captioning_badge]
+![Visual QA][vqa_badge]
 
 ## 🤔 Why x.infer?
 So, a new computer vision model just dropped last night. It's called `GPT-54o-mini-vision-pro-max-xxxl`. It's a super cool model, open-source, open-weights, open-data, all the good stuff.
@@ -69,11 +88,7 @@ Out of the box, x.infer supports the following frameworks:
 
 Combined, x.infer supports over 1000+ models from all the above frameworks.
 
-Tasks supported:
 
-![Image Classification][image_classification_badge]
-![Object Detection][object_detection_badge]
-![Image to Text][image_to_text_badge]
 
 Run any supported model using the following 4 lines of code:
 
@@ -87,15 +102,6 @@ model.launch_gradio()              # Launch Gradio interface
 ```
 
 Have a custom model? Create a class that implements the `BaseModel` interface and register it with x.infer. See [Add Your Own Model](#add-your-own-model) for more details.
-
-## 🌟 Key Features
-<div align="center">
-  <img src="https://raw.githubusercontent.com/dnth/x.infer/refs/heads/main/assets/flowchart.gif" alt="x.infer" width="900"/>
-</div>
-
-- **Unified Interface:** Interact with different computer vision frameworks through a single, consistent API.
-- **Modular Design:** Integrate and swap out models without altering the core framework.
-- **Extensibility:** Add support for new models and libraries with minimal code changes.
 
 ## 🚀 Quickstart
 
