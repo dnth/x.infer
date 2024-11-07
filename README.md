@@ -15,6 +15,8 @@
 [image_captioning_badge]: https://img.shields.io/badge/Image%20Captioning-a855f7?style=for-the-badge
 [vqa_badge]: https://img.shields.io/badge/Visual%20QA-d946ef?style=for-the-badge
 [os_badge]: https://img.shields.io/badge/Tested%20on-Linux%20%7C%20macOS%20%7C%20Windows-indigo?style=for-the-badge&logo=iterm2&logoColor=white&color=indigo
+[pose_estimation_badge]: https://img.shields.io/badge/Pose%20Estimation-ec4899?style=for-the-badge
+[instance_segmentation_badge]: https://img.shields.io/badge/Instance%20Segmentation-f43f5e?style=for-the-badge
 
 
 ![Python][python_badge]
@@ -65,6 +67,8 @@ Tasks supported:
 ![Object Detection][object_detection_badge]
 ![Image Captioning][image_captioning_badge]
 ![Visual QA][vqa_badge]
+![Pose Estimation][pose_estimation_badge]
+![Instance Segmentation][instance_segmentation_badge]
 
 ## 🤔 Why x.infer?
 So, a new computer vision model just dropped last night. It's called `GPT-54o-mini-vision-pro-max-xxxl`. It's a super cool model, open-source, open-weights, open-data, all the good stuff.
@@ -162,10 +166,10 @@ xinfer.list_models()
 ```
 
 ```
-       Available Models                                      
+                                    Available Models                                      
 ┏━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┓
 ┃ Implementation ┃ Model ID                                              ┃ Input --> Output     ┃
-┡━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━┩
+┡━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━┩
 │ timm           │ timm/eva02_large_patch14_448.mim_m38m_ft_in22k_in1k   │ image --> categories │
 │ timm           │ timm/eva02_large_patch14_448.mim_m38m_ft_in1k         │ image --> categories │
 │ timm           │ timm/eva02_large_patch14_448.mim_in22k_ft_in22k_in1k  │ image --> categories │
@@ -186,9 +190,11 @@ xinfer.list_models()
 │ ultralytics    │ ultralytics/yolov8l                                   │ image --> boxes      │
 │ ultralytics    │ ultralytics/yolov8s                                   │ image --> boxes      │
 │ ultralytics    │ ultralytics/yolov8n                                   │ image --> boxes      │
+│ ultralytics    │ ultralytics/yolov8n-seg                               │ image --> masks      │
+│ ultralytics    │ ultralytics/yolov8n-pose                              │ image --> poses      │
 │ ...            │ ...                                                   │ ...                  │
 │ ...            │ ...                                                   │ ...                  │
-└────────────────┴─────────────────────────────────────────────────────────────┴──────────────────────┘
+└────────────────┴───────────────────────────────────────────────────────┴──────────────────────┘
 ```
 
 If you're running in a Juypter Notebook environment, you can specify `interactive=True` to list and search supported models interactively.
@@ -436,6 +442,14 @@ model = xinfer.create_model(model)
         <tr>
             <td><a href="https://github.com/ultralytics/ultralytics">YOLOv11 Classification Series</a></td>
             <td><pre lang="python"><code>xinfer.create_model("ultralytics/yolov11s-cls")</code></pre></td>
+        </tr>
+        <tr>
+            <td><a href="https://github.com/ultralytics/ultralytics">YOLOv8 Segmentation Series</a></td>
+            <td><pre lang="python"><code>xinfer.create_model("ultralytics/yolov8n-seg")</code></pre></td>
+        </tr>
+        <tr>
+            <td><a href="https://github.com/ultralytics/ultralytics">YOLOv8 Pose Series</a></td>
+            <td><pre lang="python"><code>xinfer.create_model("ultralytics/yolov8n-pose")</code></pre></td>
         </tr>
     </tbody>
 </table>
