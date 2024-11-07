@@ -251,7 +251,7 @@ xinfer.serve_model(
     }
 )
 ```
-
+### FastAPI Endpoint
 You can now query the endpoint with an image and prompt.
 
 ```bash
