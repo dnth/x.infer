@@ -7,14 +7,14 @@ __version__ = "0.2.1"
 from .core import create_model, list_models
 from .model_registry import ModelInputOutput, register_model
 from .models import BaseModel
-from .serve import serve_model
-from .utils import (
+from .optional_imports import (
     ollama_available,
     timm_available,
     transformers_available,
     ultralytics_available,
     vllm_available,
 )
+from .serve import serve_model
 
 if timm_available:
     from .timm import *
