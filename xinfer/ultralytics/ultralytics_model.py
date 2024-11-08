@@ -1,11 +1,11 @@
 import os
-from typing import Dict, List
 
 import torch
 
 from ultralytics import YOLO
 
 from ..models import BaseModel, track_inference
+from ..types import Category, Result
 
 
 class UltralyticsModel(BaseModel):
@@ -38,25 +38,26 @@ class UltralyticsModel(BaseModel):
         self.model = YOLO(self.model_id, **kwargs)
 
     @track_inference
-    def infer_batch(self, images: str | List[str], **kwargs) -> List[List[Dict]]:
-        half = self.dtype == torch.float16
+    def infer_batch(self, images: list[str], **kwargs) -> list[list[dict]]:
+        use_half_precision = self.dtype in [torch.float16, torch.bfloat16]
         self.results = self.model.predict(
-            images, device=self.device, half=half, **kwargs
+            images, device=self.device, half=use_half_precision, **kwargs
         )
         batch_results = []
 
         for result in self.results:
             if "cls" in self.model_id:
                 classification_results = []
-                probs = result.probs
-                classification_results.append(
-                    {
-                        "class_id": int(probs.top1),
-                        "score": float(probs.top1conf.cpu().numpy()),
-                        "class_name": result.names[int(probs.top1)],
-                    }
-                )
-                batch_results.append(classification_results)
+
+                top5_classes_idx = result.probs.top5
+                top5_classes_scores = result.probs.top5conf
+
+                for class_idx, score in zip(top5_classes_idx, top5_classes_scores):
+                    classification_results.append(
+                        Category(score=float(score), label=result.names[class_idx])
+                    )
+
+                batch_results.append(Result(categories=classification_results))
 
             elif "pose" in self.model_id:
                 keypoints_results = []
@@ -126,7 +127,7 @@ class UltralyticsModel(BaseModel):
         return batch_results
 
     @track_inference
-    def infer(self, image: str, **kwargs) -> List[Dict]:
+    def infer(self, image: str, **kwargs) -> list[dict]:
         results = self.infer_batch([image], **kwargs)
         return results[0]
 
