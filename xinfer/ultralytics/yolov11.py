@@ -22,12 +22,15 @@ model_configs = [
     # add more model refer https://github.com/ultralytics/assets/releases/
 ]
 
+
 def batch_register_model(configs):
     def decorator(cls):
         for config in configs:
             register_model(*config)(cls)
         return cls
+
     return decorator
+
 
 @batch_register_model(model_configs)
 class YOLOv11(UltralyticsModel):

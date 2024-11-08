@@ -31,7 +31,7 @@ class UltralyticsModel(BaseModel):
             13: "Left Knee",
             14: "Right Knee",
             15: "Left Ankle",
-            16: "Right Ankle"
+            16: "Right Ankle",
         }
 
     def load_model(self, **kwargs):
@@ -40,22 +40,25 @@ class UltralyticsModel(BaseModel):
     @track_inference
     def infer_batch(self, images: str | List[str], **kwargs) -> List[List[Dict]]:
         half = self.dtype == torch.float16
-        self.results = self.model.predict(images, device=self.device, half=half, **kwargs)
+        self.results = self.model.predict(
+            images, device=self.device, half=half, **kwargs
+        )
         batch_results = []
 
         for result in self.results:
-            
-            if 'cls' in self.model_id:
+            if "cls" in self.model_id:
                 classification_results = []
                 probs = result.probs
-                classification_results.append({
-                    "class_id": int(probs.top1),
-                    "score": float(probs.top1conf.cpu().numpy()),
-                    "class_name": result.names[int(probs.top1)],
-                })
+                classification_results.append(
+                    {
+                        "class_id": int(probs.top1),
+                        "score": float(probs.top1conf.cpu().numpy()),
+                        "class_name": result.names[int(probs.top1)],
+                    }
+                )
                 batch_results.append(classification_results)
 
-            elif 'pose' in self.model_id:
+            elif "pose" in self.model_id:
                 keypoints_results = []
                 keypoints = result.keypoints
                 if keypoints is not None:
@@ -66,17 +69,19 @@ class UltralyticsModel(BaseModel):
                         for i in range(len(self.pose_name)):
                             point = xy[idx][i]
                             score = conf[idx][i]
-                            detection_keypoints.append({
-                                "point": point.tolist(),
-                                "score": float(score),
-                                "name": self.pose_name.get(i, f"Keypoint {i}"),
-                            })
+                            detection_keypoints.append(
+                                {
+                                    "point": point.tolist(),
+                                    "score": float(score),
+                                    "name": self.pose_name.get(i, f"Keypoint {i}"),
+                                }
+                            )
                         keypoints_results.append(detection_keypoints)
                     batch_results.append(keypoints_results)
                 else:
                     batch_results.append([])
 
-            elif 'seg' in self.model_id:
+            elif "seg" in self.model_id:
                 segmentation_results = []
                 masks = result.masks
                 boxes = result.boxes
@@ -85,30 +90,34 @@ class UltralyticsModel(BaseModel):
                 names = [result.names[c] for c in classes]
                 if masks is not None:
                     for i in range(len(masks)):
-                        segmentation_results.append({
-                            "mask": masks.data[i].cpu().numpy(),
-                            "bbox": boxes.xyxy[i].cpu().numpy().tolist(),
-                            "category_id": classes[i],
-                            "score": scores[i],
-                            "class_name": names[i],
-                        })
+                        segmentation_results.append(
+                            {
+                                "mask": masks.data[i].cpu().numpy(),
+                                "bbox": boxes.xyxy[i].cpu().numpy().tolist(),
+                                "category_id": classes[i],
+                                "score": scores[i],
+                                "class_name": names[i],
+                            }
+                        )
                     batch_results.append(segmentation_results)
                 else:
                     batch_results.append([])
 
-            elif 'yolo' in self.model_id:
+            elif "yolo" in self.model_id:
                 detection_results = []
                 boxes = result.boxes
                 for box in boxes:
                     x1, y1, x2, y2 = box.xyxy[0].tolist()
                     width = x2 - x1
                     height = y2 - y1
-                    detection_results.append({
-                        "bbox": [x1, y1, width, height],
-                        "category_id": int(box.cls),
-                        "score": float(box.conf),
-                        "class_name": result.names[int(box.cls)],
-                    })
+                    detection_results.append(
+                        {
+                            "bbox": [x1, y1, width, height],
+                            "category_id": int(box.cls),
+                            "score": float(box.conf),
+                            "class_name": result.names[int(box.cls)],
+                        }
+                    )
                 batch_results.append(detection_results)
 
             else:
@@ -121,10 +130,10 @@ class UltralyticsModel(BaseModel):
         results = self.infer_batch([image], **kwargs)
         return results[0]
 
-    def render(self, save_path: str = './', **kwargs):
-        for _, r in enumerate(self.results): 
+    def render(self, save_path: str = "./", **kwargs):
+        for _, r in enumerate(self.results):
             # save results to disk
             file_name = os.path.basename(r.path)
             file_name = os.path.join(save_path, file_name)
             r.save(filename=f"{file_name}")
-            print (f"Saved Render Imgae to {file_name}")
+            print(f"Saved Render Imgae to {file_name}")

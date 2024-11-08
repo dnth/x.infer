@@ -39,10 +39,14 @@ class ModelRegistry:
         model_info, model_class = self._models.get(model_id, (None, None))
         if model_class is None:
             supported_models = list(self._models.keys())
-            similar_models = difflib.get_close_matches(model_id, supported_models, n=10, cutoff=0.6)
+            similar_models = difflib.get_close_matches(
+                model_id, supported_models, n=10, cutoff=0.6
+            )
             if similar_models:
-                suggestion = ', '.join(similar_models)
-                raise ValueError(f"Unsupported model: {model_id}. Suggestion model: {suggestion}。")
+                suggestion = ", ".join(similar_models)
+                raise ValueError(
+                    f"Unsupported model: {model_id}. Suggestion model: {suggestion}。"
+                )
             else:
                 raise ValueError(f"Unsupported model: {model_id}")
         return model_class(model_id, **kwargs)
