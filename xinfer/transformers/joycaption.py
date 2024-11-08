@@ -5,7 +5,7 @@ from transformers import AutoTokenizer, LlavaForConditionalGeneration
 
 from ..model_registry import register_model
 from ..models import BaseModel, track_inference
-from ..types import ModelInputOutput
+from ..types import ModelInputOutput, Result
 
 
 @register_model(
@@ -75,11 +75,11 @@ class JoyCaption(BaseModel):
         return image, input_ids, attention_mask
 
     @track_inference
-    def infer(self, image: str, prompt: str = None, **generate_kwargs):
+    def infer(self, image: str, text: str, **generate_kwargs) -> Result:
         with torch.inference_mode(), torch.amp.autocast(
             device_type=self.device, dtype=self.dtype
         ):
-            image, input_ids, attention_mask = self.preprocess(image, prompt)
+            image, input_ids, attention_mask = self.preprocess(image, text)
 
             if "max_new_tokens" not in generate_kwargs:
                 generate_kwargs["max_new_tokens"] = 300
@@ -97,15 +97,15 @@ class JoyCaption(BaseModel):
         # Trim off the prompt
         generate_ids = generate_ids[input_ids.shape[1] :]
 
-        # Decode the caption
-        caption = self.tokenizer.decode(
+        # Decode the text_output
+        text_output = self.tokenizer.decode(
             generate_ids,
             skip_special_tokens=True,
             clean_up_tokenization_spaces=False,
         )
-        caption = caption.strip()
+        text_output = text_output.strip()
 
-        return caption
+        return Result(text=text_output)
 
     def preprocess_batch(self, images: list[str], prompts: list[str]):
         processed_images = []
@@ -161,11 +161,13 @@ class JoyCaption(BaseModel):
         return images_tensor, padded_input_ids, attention_mask_tensor
 
     @track_inference
-    def infer_batch(self, images: list[str], prompts: list[str], **generate_kwargs):
+    def infer_batch(
+        self, images: list[str], texts: list[str], **generate_kwargs
+    ) -> list[Result]:
         with torch.inference_mode(), torch.amp.autocast(
             device_type=self.device, dtype=self.dtype
         ):
-            images, input_ids, attention_mask = self.preprocess_batch(images, prompts)
+            images, input_ids, attention_mask = self.preprocess_batch(images, texts)
 
             if "max_new_tokens" not in generate_kwargs:
                 generate_kwargs["max_new_tokens"] = 300
@@ -180,17 +182,17 @@ class JoyCaption(BaseModel):
                 **generate_kwargs,
             )
 
-        captions = []
+        results = []
         for i, gen_ids in enumerate(generate_ids):
             # Trim off the prompt
             gen_ids = gen_ids[input_ids.shape[1] :]
 
             # Decode the caption
-            caption = self.tokenizer.decode(
+            text_output = self.tokenizer.decode(
                 gen_ids,
                 skip_special_tokens=True,
                 clean_up_tokenization_spaces=False,
             )
-            captions.append(caption.strip())
+            results.append(Result(text=text_output.strip()))
 
-        return captions
+        return results
