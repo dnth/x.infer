@@ -27,4 +27,8 @@ class Category:
 
 @dataclass
 class Result:
-    categories: list[Category]
+    # For image classification models
+    categories: list[Category] = None
+
+    # For image-text to text models
+    text: str = None
