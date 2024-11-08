@@ -3,7 +3,7 @@ from transformers import AutoProcessor, MllamaForConditionalGeneration
 
 from ..model_registry import register_model
 from ..models import BaseModel, track_inference
-from ..types import ModelInputOutput
+from ..types import ModelInputOutput, Result
 
 
 @register_model(
@@ -32,14 +32,14 @@ class Llama32VisionInstruct(BaseModel):
         self.processor = AutoProcessor.from_pretrained(self.model_id)
 
     @track_inference
-    def infer(self, image: str, prompt: str, **generate_kwargs) -> str:
+    def infer(self, image: str, text: str, **generate_kwargs) -> Result:
         image = super().parse_images(image)
 
         # Create messages format and apply chat template
         messages = [
             {
                 "role": "user",
-                "content": [{"type": "image"}, {"type": "text", "text": prompt}],
+                "content": [{"type": "image"}, {"type": "text", "text": text}],
             }
         ]
         input_text = self.processor.apply_chat_template(
@@ -48,7 +48,11 @@ class Llama32VisionInstruct(BaseModel):
 
         # Process inputs without adding special tokens
         inputs = self.processor(
-            image, input_text, add_special_tokens=False, return_tensors="pt"
+            image,
+            input_text,
+            add_special_tokens=False,
+            return_tensors="pt",
+            padding=True,
         ).to(self.model.device)
 
         with torch.inference_mode():
@@ -58,9 +62,11 @@ class Llama32VisionInstruct(BaseModel):
         # Remove the prompt and assistant marker
         if "assistant" in decoded:
             decoded = decoded.split("assistant")[-1]
-        return decoded.strip()
+        return Result(text=decoded.strip())
 
-    def infer_batch(self, images: list[str], prompts: list[str], **generate_kwargs):
+    def infer_batch(
+        self, images: list[str], texts: list[str], **generate_kwargs
+    ) -> list[Result]:
         images = super().parse_images(images)
 
         # Create batch messages and apply chat template
@@ -71,7 +77,7 @@ class Llama32VisionInstruct(BaseModel):
                     "content": [{"type": "image"}, {"type": "text", "text": prompt}],
                 }
             ]
-            for prompt in prompts
+            for prompt in texts
         ]
         input_texts = [
             self.processor.apply_chat_template(msgs, add_generation_prompt=True)
@@ -79,7 +85,11 @@ class Llama32VisionInstruct(BaseModel):
         ]
 
         inputs = self.processor(
-            images, input_texts, add_special_tokens=False, return_tensors="pt"
+            images,
+            input_texts,
+            add_special_tokens=False,
+            return_tensors="pt",
+            padding=True,
         ).to(self.model.device)
 
         with torch.inference_mode():
@@ -87,7 +97,7 @@ class Llama32VisionInstruct(BaseModel):
 
         decoded = self.processor.batch_decode(outputs, skip_special_tokens=True)
         # Remove the prompt and assistant marker for each response
-        return [d.split("assistant")[-1].strip() for d in decoded]
+        return [Result(text=d.split("assistant")[-1].strip()) for d in decoded]
 
 
 @register_model(
@@ -102,11 +112,11 @@ class Llama32VisionInstruct(BaseModel):
 )
 class Llama32Vision(Llama32VisionInstruct):
     @track_inference
-    def infer(self, image: str, prompt: str, **generate_kwargs) -> str:
+    def infer(self, image: str, text: str, **generate_kwargs) -> Result:
         image = super().parse_images(image)
 
         # Format prompt for base vision model
-        input_text = f"<|image|><|begin_of_text|>{prompt}"
+        input_text = f"<|image|><|begin_of_text|>{text}"
 
         # Process inputs without adding special tokens
         inputs = self.processor(image, input_text, return_tensors="pt").to(
@@ -116,13 +126,13 @@ class Llama32Vision(Llama32VisionInstruct):
         with torch.inference_mode():
             output = self.model.generate(**inputs, **generate_kwargs)
 
-        return self.processor.decode(output[0], skip_special_tokens=True)
+        return Result(text=self.processor.decode(output[0], skip_special_tokens=True))
 
-    def infer_batch(self, images: list[str], prompts: list[str], **generate_kwargs):
+    def infer_batch(self, images: list[str], texts: list[str], **generate_kwargs):
         images = super().parse_images(images)
 
         # Format prompts for base vision model
-        input_texts = [f"<|image|><|begin_of_text|>{prompt}" for prompt in prompts]
+        input_texts = [f"<|image|><|begin_of_text|>{text}" for text in texts]
 
         inputs = self.processor(images, input_texts, return_tensors="pt").to(
             self.model.device
@@ -131,4 +141,7 @@ class Llama32Vision(Llama32VisionInstruct):
         with torch.inference_mode():
             outputs = self.model.generate(**inputs, **generate_kwargs)
 
-        return self.processor.batch_decode(outputs, skip_special_tokens=True)
+        return [
+            Result(text=self.processor.decode(output, skip_special_tokens=True))
+            for output in outputs
+        ]
