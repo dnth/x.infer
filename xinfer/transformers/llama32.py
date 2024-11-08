@@ -52,7 +52,6 @@ class Llama32VisionInstruct(BaseModel):
             input_text,
             add_special_tokens=False,
             return_tensors="pt",
-            # padding=True,
         ).to(self.model.device)
 
         with torch.inference_mode():
@@ -89,7 +88,7 @@ class Llama32VisionInstruct(BaseModel):
             input_texts,
             add_special_tokens=False,
             return_tensors="pt",
-            # padding=True,
+            padding=True,
         ).to(self.model.device)
 
         with torch.inference_mode():
