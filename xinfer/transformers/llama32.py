@@ -52,7 +52,7 @@ class Llama32VisionInstruct(BaseModel):
             input_text,
             add_special_tokens=False,
             return_tensors="pt",
-            padding=True,
+            # padding=True,
         ).to(self.model.device)
 
         with torch.inference_mode():
@@ -89,7 +89,7 @@ class Llama32VisionInstruct(BaseModel):
             input_texts,
             add_special_tokens=False,
             return_tensors="pt",
-            padding=True,
+            # padding=True,
         ).to(self.model.device)
 
         with torch.inference_mode():
@@ -128,7 +128,9 @@ class Llama32Vision(Llama32VisionInstruct):
 
         return Result(text=self.processor.decode(output[0], skip_special_tokens=True))
 
-    def infer_batch(self, images: list[str], texts: list[str], **generate_kwargs):
+    def infer_batch(
+        self, images: list[str], texts: list[str], **generate_kwargs
+    ) -> list[Result]:
         images = super().parse_images(images)
 
         # Format prompts for base vision model
