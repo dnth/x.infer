@@ -2,7 +2,7 @@ from vllm import LLM, SamplingParams
 
 from ..model_registry import register_model
 from ..models import BaseModel, track_inference
-from ..types import ModelInputOutput
+from ..types import ModelInputOutput, Result
 
 
 @register_model(
@@ -38,7 +38,9 @@ class Phi35Vision(BaseModel):
         )
 
     @track_inference
-    def infer_batch(self, images: list[str], prompts: list[str], **sampling_kwargs):
+    def infer_batch(
+        self, images: list[str], texts: list[str], **sampling_kwargs
+    ) -> list[Result]:
         images = self.parse_images(images)
 
         sampling_params = SamplingParams(**sampling_kwargs)
@@ -47,23 +49,23 @@ class Phi35Vision(BaseModel):
                 "prompt": f"<|user|>\n<|image_1|>\n{prompt}<|end|>\n<|assistant|>\n",
                 "multi_modal_data": {"image": image},
             }
-            for image, prompt in zip(images, prompts)
+            for image, prompt in zip(images, texts)
         ]
 
         results = self.model.generate(batch_inputs, sampling_params)
 
-        return [output.outputs[0].text.strip() for output in results]
+        return [Result(text=output.outputs[0].text.strip()) for output in results]
 
     @track_inference
-    def infer(self, image: str, prompt: str, **sampling_kwargs):
+    def infer(self, image: str, text: str, **sampling_kwargs) -> Result:
         image = self.parse_images(image)
 
         inputs = {
-            "prompt": f"<|user|>\n<|image_1|>\n{prompt}<|end|>\n<|assistant|>\n",
+            "prompt": f"<|user|>\n<|image_1|>\n{text}<|end|>\n<|assistant|>\n",
             "multi_modal_data": {"image": image},
         }
 
         sampling_params = SamplingParams(**sampling_kwargs)
         outputs = self.model.generate(inputs, sampling_params)
         generated_text = outputs[0].outputs[0].text.strip()
-        return generated_text
+        return Result(text=generated_text)
