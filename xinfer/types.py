@@ -36,12 +36,20 @@ class Box:
 
 
 @dataclass
+class Mask:
+    xy: list[list]
+
+
+@dataclass
 class Result:
     # For image classification models
     categories: list[Category] = None
 
     # For object detection models
     boxes: list[Box] = None
+
+    # For instance segmentation models
+    masks: list[Mask] = None
 
     # For image-text to text models
     text: str = None

@@ -5,7 +5,7 @@ import torch
 from ultralytics import YOLO
 
 from ..models import BaseModel, track_inference
-from ..types import Box, Category, Result
+from ..types import Box, Category, Mask, Result
 
 
 class UltralyticsModel(BaseModel):
@@ -84,25 +84,33 @@ class UltralyticsModel(BaseModel):
 
             elif "seg" in self.model_id:
                 segmentation_results = []
+                detection_results = []
                 masks = result.masks
+
                 boxes = result.boxes
                 classes = boxes.cls.cpu().numpy().astype(int).tolist()
                 scores = boxes.conf.cpu().numpy().tolist()
                 names = [result.names[c] for c in classes]
-                if masks is not None:
+
+                if masks:
                     for i in range(len(masks)):
                         segmentation_results.append(
-                            {
-                                "mask": masks.data[i].cpu().numpy(),
-                                "bbox": boxes.xyxy[i].cpu().numpy().tolist(),
-                                "category_id": classes[i],
-                                "score": scores[i],
-                                "class_name": names[i],
-                            }
+                            Mask(xy=masks.xy[i].tolist()),
                         )
-                    batch_results.append(segmentation_results)
-                else:
-                    batch_results.append([])
+                        detection_results.append(
+                            Box(
+                                x1=float(boxes.xyxy[i][0].cpu().numpy()),
+                                y1=float(boxes.xyxy[i][1].cpu().numpy()),
+                                x2=float(boxes.xyxy[i][2].cpu().numpy()),
+                                y2=float(boxes.xyxy[i][3].cpu().numpy()),
+                                score=float(boxes.conf[i].cpu().numpy()),
+                                label=names[i],
+                            ),
+                        )
+
+                batch_results.append(
+                    Result(masks=segmentation_results, boxes=detection_results)
+                )
 
             elif "yolo" in self.model_id:
                 detection_results = []
