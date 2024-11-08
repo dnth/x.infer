@@ -54,7 +54,9 @@ class Llama32VisionInstruct(BaseModel):
             return_tensors="pt",
         ).to(self.model.device)
 
-        with torch.inference_mode():
+        with torch.inference_mode(), torch.amp.autocast(
+            device_type=self.device, dtype=self.dtype
+        ):
             output = self.model.generate(**inputs, **generate_kwargs)
 
         decoded = self.processor.decode(output[0], skip_special_tokens=True)
@@ -91,7 +93,9 @@ class Llama32VisionInstruct(BaseModel):
             padding=True,
         ).to(self.model.device)
 
-        with torch.inference_mode():
+        with torch.inference_mode(), torch.amp.autocast(
+            device_type=self.device, dtype=self.dtype
+        ):
             outputs = self.model.generate(**inputs, **generate_kwargs)
 
         decoded = self.processor.batch_decode(outputs, skip_special_tokens=True)
