@@ -1,10 +1,5 @@
-from io import BytesIO
-from typing import Dict, List
-
-import requests
 import timm
 import torch
-from PIL import Image
 
 from ..models import BaseModel, track_inference
 from ..types import Category, Result
@@ -26,21 +21,7 @@ class TimmModel(BaseModel):
         self.model.eval()
 
     def preprocess(self, images: str | list[str]):
-        if not isinstance(images, list):
-            images = [images]
-
-        processed_images = []
-        for image_path in images:
-            if not isinstance(image_path, str):
-                raise ValueError("Input must be a string (local path or URL)")
-
-            if image_path.startswith(("http://", "https://")):
-                response = requests.get(image_path)
-                img = Image.open(BytesIO(response.content))
-            else:
-                img = Image.open(image_path)
-
-            processed_images.append(img)
+        processed_images = self.parse_images(images)
 
         data_config = timm.data.resolve_model_data_config(self.model)
         transforms = timm.data.create_transform(**data_config, is_training=False)
@@ -76,7 +57,7 @@ class TimmModel(BaseModel):
         )
 
     @track_inference
-    def infer_batch(self, images: List[str], top_k: int = 5) -> list[Result]:
+    def infer_batch(self, images: list[str], top_k: int = 5) -> list[Result]:
         images = self.preprocess(images)
 
         with torch.inference_mode(), torch.amp.autocast(
