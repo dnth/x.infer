@@ -26,8 +26,8 @@ class Moondream(BaseModel):
             self.model_id, trust_remote_code=True, revision=self.revision
         ).to(self.device, self.dtype)
 
-        self.model = torch.compile(self.model, mode="max-autotune")
         self.model.eval()
+        self.model = torch.compile(self.model, mode="max-autotune")
         self.tokenizer = AutoTokenizer.from_pretrained(self.model_id)
 
     @track_inference
