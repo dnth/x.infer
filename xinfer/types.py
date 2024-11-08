@@ -17,3 +17,14 @@ class ModelInfo:
     id: str
     implementation: str
     input_output: ModelInputOutput
+
+
+@dataclass
+class Category:
+    score: float
+    label: str
+
+
+@dataclass
+class Result:
+    categories: list[Category]

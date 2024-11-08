@@ -7,6 +7,7 @@ import torch
 from PIL import Image
 
 from ..models import BaseModel, track_inference
+from ..types import Category, Result
 from .imagenet1k_classes import IMAGENET2012_CLASSES
 
 
@@ -50,7 +51,7 @@ class TimmModel(BaseModel):
         return images_tensor
 
     @track_inference
-    def infer(self, image: str, top_k: int = 5) -> List[Dict]:
+    def infer(self, image: str, top_k: int = 5) -> Result:
         img = self.preprocess(image)
 
         with torch.inference_mode(), torch.amp.autocast(
@@ -59,18 +60,20 @@ class TimmModel(BaseModel):
             output = self.model(img)
 
         topk_probabilities, topk_class_indices = torch.topk(
-            output.softmax(dim=1) * 100, k=top_k
+            output.softmax(dim=1), k=top_k
         )
 
         im_classes = list(IMAGENET2012_CLASSES.values())
         class_names = [im_classes[i] for i in topk_class_indices[0]]
 
-        return [
-            {"class": class_name, "id": int(class_idx), "confidence": float(prob)}
-            for class_name, class_idx, prob in zip(
-                class_names, topk_class_indices[0], topk_probabilities[0]
-            )
-        ]
+        return Result(
+            categories=[
+                Category(score=float(prob), label=class_name)
+                for class_name, class_idx, prob in zip(
+                    class_names, topk_class_indices[0], topk_probabilities[0]
+                )
+            ]
+        )
 
     @track_inference
     def infer_batch(self, images: List[str], top_k: int = 5) -> List[List[Dict]]:
