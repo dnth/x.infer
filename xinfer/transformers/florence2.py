@@ -3,7 +3,7 @@ from transformers import AutoModelForCausalLM, AutoProcessor
 
 from ..model_registry import register_model
 from ..models import BaseModel, track_inference
-from ..types import ModelInputOutput
+from ..types import ModelInputOutput, Result
 
 
 @register_model(
@@ -45,16 +45,16 @@ class Florence2(BaseModel):
         )
 
     @track_inference
-    def infer(self, image: str, prompt: str = None, **generate_kwargs) -> str:
-        output = self.infer_batch([image], [prompt], **generate_kwargs)
-        return output[0]
+    def infer(self, image: str, text: str, **generate_kwargs) -> Result:
+        output = self.infer_batch([image], [text], **generate_kwargs)
+        return Result(text=output[0])
 
     @track_inference
     def infer_batch(
-        self, images: list[str], prompts: list[str] = None, **generate_kwargs
-    ) -> list[str]:
+        self, images: list[str], texts: list[str], **generate_kwargs
+    ) -> list[Result]:
         images = self.parse_images(images)
-        inputs = self.processor(text=prompts, images=images, return_tensors="pt").to(
+        inputs = self.processor(text=texts, images=images, return_tensors="pt").to(
             self.device, self.dtype
         )
 
@@ -78,7 +78,9 @@ class Florence2(BaseModel):
             self.processor.post_process_generation(
                 text, task=prompt, image_size=(img.width, img.height)
             ).get(prompt)
-            for text, prompt, img in zip(generated_text, prompts, images)
+            for text, prompt, img in zip(generated_text, texts, images)
         ]
 
-        return parsed_answers
+        results = [Result(text=text) for text in parsed_answers]
+
+        return results
