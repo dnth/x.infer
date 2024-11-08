@@ -1,6 +1,6 @@
-from ..model_registry import ModelInputOutput, register_model
+from ..model_registry import register_model
+from ..types import ModelInputOutput
 from .ultralytics_model import UltralyticsModel
-
 
 model_configs = [
     ("ultralytics/yolov11n", "ultralytics", ModelInputOutput.IMAGE_TO_BOXES),

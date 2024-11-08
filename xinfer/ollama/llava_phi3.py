@@ -1,7 +1,8 @@
 import ollama
 
-from ..model_registry import ModelInputOutput, register_model
+from ..model_registry import register_model
 from ..models import BaseModel
+from ..types import ModelInputOutput
 
 
 @register_model("ollama/llava-phi3", "ollama", ModelInputOutput.IMAGE_TEXT_TO_TEXT)

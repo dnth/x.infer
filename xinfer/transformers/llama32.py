@@ -1,8 +1,9 @@
 import torch
 from transformers import AutoProcessor, MllamaForConditionalGeneration
 
-from ..model_registry import ModelInputOutput, register_model
+from ..model_registry import register_model
 from ..models import BaseModel, track_inference
+from ..types import ModelInputOutput
 
 
 @register_model(

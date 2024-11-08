@@ -5,7 +5,7 @@ __email__ = "dickson.neoh@gmail.com"
 __version__ = "0.2.1"
 
 from .core import create_model, list_models
-from .model_registry import ModelInputOutput, register_model
+from .model_registry import register_model
 from .models import BaseModel
 from .optional_imports import (
     ollama_available,
@@ -15,6 +15,7 @@ from .optional_imports import (
     vllm_available,
 )
 from .serve import serve_model
+from .types import ModelInputOutput
 
 if timm_available:
     from .timm import *

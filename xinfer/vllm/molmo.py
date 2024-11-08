@@ -1,7 +1,8 @@
 from vllm import LLM, SamplingParams
 
-from ..model_registry import ModelInputOutput, register_model
+from ..model_registry import register_model
 from ..models import BaseModel, track_inference
+from ..types import ModelInputOutput
 
 
 @register_model(

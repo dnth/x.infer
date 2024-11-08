@@ -1,27 +1,8 @@
 import difflib
-
-from dataclasses import dataclass
-from enum import Enum
 from typing import Dict, List, Type
 
 from .models import BaseModel
-
-
-class ModelInputOutput(Enum):
-    IMAGE_TO_TEXT = "image --> text"
-    IMAGE_TEXT_TO_TEXT = "image-text --> text"
-    TEXT_TO_TEXT = "text --> text"
-    IMAGE_TO_BOXES = "image --> boxes"
-    IMAGE_TO_CATEGORIES = "image --> categories"
-    IMAGE_TO_MASKS = "image --> masks"
-    IMAGE_TO_POINTS = "image --> points"
-
-
-@dataclass
-class ModelInfo:
-    id: str
-    implementation: str
-    input_output: ModelInputOutput
+from .types import ModelInfo, ModelInputOutput
 
 
 class ModelRegistry:

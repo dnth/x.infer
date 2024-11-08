@@ -3,8 +3,9 @@ import torchvision.transforms.functional as TVF
 from PIL import Image
 from transformers import AutoTokenizer, LlavaForConditionalGeneration
 
-from ..model_registry import ModelInputOutput, register_model
+from ..model_registry import register_model
 from ..models import BaseModel, track_inference
+from ..types import ModelInputOutput
 
 
 @register_model(
