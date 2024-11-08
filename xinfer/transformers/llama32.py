@@ -126,7 +126,9 @@ class Llama32Vision(Llama32VisionInstruct):
             self.model.device
         )
 
-        with torch.inference_mode():
+        with torch.inference_mode(), torch.amp.autocast(
+            device_type=self.device, dtype=self.dtype
+        ):
             output = self.model.generate(**inputs, **generate_kwargs)
 
         return Result(text=self.processor.decode(output[0], skip_special_tokens=True))
@@ -143,7 +145,9 @@ class Llama32Vision(Llama32VisionInstruct):
             self.model.device
         )
 
-        with torch.inference_mode():
+        with torch.inference_mode(), torch.amp.autocast(
+            device_type=self.device, dtype=self.dtype
+        ):
             outputs = self.model.generate(**inputs, **generate_kwargs)
 
         return [
