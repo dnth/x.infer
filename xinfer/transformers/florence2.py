@@ -47,7 +47,7 @@ class Florence2(BaseModel):
     @track_inference
     def infer(self, image: str, text: str, **generate_kwargs) -> Result:
         output = self.infer_batch([image], [text], **generate_kwargs)
-        return Result(text=output[0])
+        return output[0]
 
     @track_inference
     def infer_batch(
@@ -81,6 +81,4 @@ class Florence2(BaseModel):
             for text, prompt, img in zip(generated_text, texts, images)
         ]
 
-        results = [Result(text=text) for text in parsed_answers]
-
-        return results
+        return [Result(text=text) for text in parsed_answers]
