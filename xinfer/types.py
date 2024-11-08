@@ -26,9 +26,22 @@ class Category:
 
 
 @dataclass
+class Box:
+    x1: float
+    y1: float
+    x2: float
+    y2: float
+    score: float
+    label: str
+
+
+@dataclass
 class Result:
     # For image classification models
     categories: list[Category] = None
+
+    # For object detection models
+    boxes: list[Box] = None
 
     # For image-text to text models
     text: str = None

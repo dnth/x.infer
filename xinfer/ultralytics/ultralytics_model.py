@@ -5,7 +5,7 @@ import torch
 from ultralytics import YOLO
 
 from ..models import BaseModel, track_inference
-from ..types import Category, Result
+from ..types import Box, Category, Result
 
 
 class UltralyticsModel(BaseModel):
@@ -38,7 +38,7 @@ class UltralyticsModel(BaseModel):
         self.model = YOLO(self.model_id, **kwargs)
 
     @track_inference
-    def infer_batch(self, images: list[str], **kwargs) -> list[list[dict]]:
+    def infer_batch(self, images: list[str], **kwargs) -> list[Result]:
         use_half_precision = self.dtype in [torch.float16, torch.bfloat16]
         self.results = self.model.predict(
             images, device=self.device, half=use_half_precision, **kwargs
@@ -108,18 +108,17 @@ class UltralyticsModel(BaseModel):
                 detection_results = []
                 boxes = result.boxes
                 for box in boxes:
-                    x1, y1, x2, y2 = box.xyxy[0].tolist()
-                    width = x2 - x1
-                    height = y2 - y1
                     detection_results.append(
-                        {
-                            "bbox": [x1, y1, width, height],
-                            "category_id": int(box.cls),
-                            "score": float(box.conf),
-                            "class_name": result.names[int(box.cls)],
-                        }
+                        Box(
+                            x1=float(box.xyxy[0][0].cpu().numpy()),
+                            y1=float(box.xyxy[0][1].cpu().numpy()),
+                            x2=float(box.xyxy[0][2].cpu().numpy()),
+                            y2=float(box.xyxy[0][3].cpu().numpy()),
+                            score=float(box.conf.cpu().numpy()),
+                            label=result.names[int(box.cls.cpu().numpy())],
+                        )
                     )
-                batch_results.append(detection_results)
+                batch_results.append(Result(boxes=detection_results))
 
             else:
                 raise ValueError(f"Unsupported model_type: {self.model_type}")
