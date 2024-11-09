@@ -273,7 +273,7 @@ curl -X 'POST' \
   -H 'Content-Type: application/json' \
   -d '{
   "image": "https://raw.githubusercontent.com/dnth/x.infer/main/assets/demo/00aa2580828a9009.jpg",
-  "infer_kwargs": {"prompt": "Caption this image"}
+  "infer_kwargs": {"text": "Caption this image"}
 }'
 ```
 
@@ -290,7 +290,7 @@ headers = {
 payload = {
     "image": "https://raw.githubusercontent.com/dnth/x.infer/main/assets/demo/00aa2580828a9009.jpg",
     "infer_kwargs": {
-        "prompt": "Caption this image"
+        "text": "Caption this image"
     }
 }
 
