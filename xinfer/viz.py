@@ -1,4 +1,7 @@
+import json
+
 import gradio as gr
+from PIL import Image, ImageDraw
 
 from .core import create_model
 from .model_registry import model_registry
@@ -74,6 +77,43 @@ def launch_gradio_demo():
         "dtype": None,
     }
 
+    def visualize_predictions(image_path, result_dict):
+        """Draw bounding boxes and masks on the image."""
+        # Open image and convert to RGBA to support transparency
+        image = Image.open(image_path).convert("RGBA")
+
+        # Create a transparent overlay for the masks
+        overlay = Image.new("RGBA", image.size, (0, 0, 0, 0))
+        draw = ImageDraw.Draw(overlay)
+
+        # Draw boxes if present
+        if "boxes" in result_dict:
+            for box in result_dict["boxes"]:
+                x1, y1, x2, y2 = box["x1"], box["y1"], box["x2"], box["y2"]
+                label = box["label"]
+                score = box["score"]
+
+                # Draw rectangle
+                draw.rectangle([x1, y1, x2, y2], outline="red", width=2)
+
+                # Draw label with score
+                label_text = f"{label}: {score:.2f}"
+                draw.text((x1, y1 - 10), label_text, fill="red")
+
+        # Draw masks if present
+        if "masks" in result_dict:
+            for mask in result_dict["masks"]:
+                # Convert list of [x,y] coordinates to flat list for polygon drawing
+                xy_flat = [coord for point in mask["xy"] for coord in point]
+
+                draw.polygon(xy_flat, outline="blue", fill=(0, 0, 255, 100))
+
+        # Composite the original image with the overlay
+        result_image = Image.alpha_composite(image, overlay)
+
+        # Convert back to RGB for display
+        return result_image.convert("RGB")
+
     def load_model_and_infer(model_id, image, text, device, dtype):
         # Check if we need to load a new model
         if (
@@ -101,9 +141,18 @@ def launch_gradio_demo():
                 result = model.infer(image, text)
             else:
                 result = model.infer(image)
-            return str(result)
+
+            # Check if result contains boxes or masks
+            try:
+                result_dict = json.loads(str(result))
+                if "boxes" in result_dict or "masks" in result_dict:
+                    return visualize_predictions(image, result_dict), str(result)
+            except json.JSONDecodeError:
+                pass
+
+            return None, str(result)
         except Exception as e:
-            return f"Error during inference: {str(e)}"
+            return None, f"Error during inference: {str(e)}"
 
     def requires_text_prompt(model_info):
         return model_info.input_output == ModelInputOutput.IMAGE_TEXT_TO_TEXT
@@ -139,7 +188,10 @@ def launch_gradio_demo():
                 run_button = gr.Button("Run Inference", variant="primary")
 
         # Results section
-        output = gr.Textbox(label="Result", lines=5)
+        with gr.Row():
+            output_text = gr.Textbox(label="Result", lines=5)
+
+        output_image = gr.Image(label="Visualization")
 
         def update_prompt_visibility(model_id):
             model_info = model_registry.get_model_info(model_id)
@@ -160,7 +212,7 @@ def launch_gradio_demo():
                 device_dropdown,
                 dtype_dropdown,
             ],
-            outputs=[output],
+            outputs=[output_image, output_text],
         )
 
     demo.launch(height=1000)
