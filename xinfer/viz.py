@@ -78,11 +78,9 @@ def launch_gradio_demo():
     }
 
     def visualize_predictions(image_path, result_dict):
-        """Draw bounding boxes and masks on the image."""
-        # Open image and convert to RGBA to support transparency
+        """Draw bounding boxes, masks, and poses on the image."""
+        # Open image and convert to RGBA
         image = Image.open(image_path).convert("RGBA")
-
-        # Create a transparent overlay for the masks
         overlay = Image.new("RGBA", image.size, (0, 0, 0, 0))
         draw = ImageDraw.Draw(overlay)
 
@@ -92,26 +90,78 @@ def launch_gradio_demo():
                 x1, y1, x2, y2 = box["x1"], box["y1"], box["x2"], box["y2"]
                 label = box["label"]
                 score = box["score"]
-
-                # Draw rectangle
                 draw.rectangle([x1, y1, x2, y2], outline="red", width=2)
-
-                # Draw label with score
                 label_text = f"{label}: {score:.2f}"
                 draw.text((x1, y1 - 10), label_text, fill="red")
 
         # Draw masks if present
         if "masks" in result_dict:
             for mask in result_dict["masks"]:
-                # Convert list of [x,y] coordinates to flat list for polygon drawing
                 xy_flat = [coord for point in mask["xy"] for coord in point]
+                draw.polygon(xy_flat, outline="blue", fill=(0, 0, 255, 32))
 
-                draw.polygon(xy_flat, outline="blue", fill=(0, 0, 255, 100))
+        # Draw poses if present
+        if "poses" in result_dict:
+            for pose in result_dict["poses"]:
+                keypoints = pose["keypoints"][0]  # First set of keypoints
+                scores = pose["scores"][0]
+
+                # Draw each keypoint as a circle
+                for i, (x, y) in enumerate(keypoints):
+                    score = scores[i]
+                    if (
+                        score > 0.3 and x > 0 and y > 0
+                    ):  # Only draw if confidence > 0.3 and position is valid
+                        # Draw a more visible point
+                        radius = 5
+                        draw.ellipse(
+                            [x - radius, y - radius, x + radius, y + radius],
+                            fill=(255, 0, 0, 255),  # Solid red
+                            outline=(255, 255, 255, 255),  # White outline
+                        )
+
+                # Define connections for skeleton visualization
+                # Example connections (you can modify these based on your needs)
+                connections = [
+                    (5, 6),  # shoulders
+                    (5, 7),  # left arm
+                    (6, 8),  # right arm
+                    (7, 9),  # left forearm
+                    (8, 10),  # right forearm
+                    (5, 11),  # left torso
+                    (6, 12),  # right torso
+                    (11, 13),  # left thigh
+                    (12, 14),  # right thigh
+                    (13, 15),  # left leg
+                    (14, 16),  # right leg
+                ]
+
+                # Draw lines between connected keypoints
+                for start_idx, end_idx in connections:
+                    start_point = keypoints[start_idx]
+                    end_point = keypoints[end_idx]
+                    start_score = scores[start_idx]
+                    end_score = scores[end_idx]
+
+                    if (
+                        start_score > 0.3
+                        and end_score > 0.3
+                        and all(start_point)
+                        and all(end_point)
+                    ):  # Check if points are valid
+                        draw.line(
+                            [
+                                start_point[0],
+                                start_point[1],
+                                end_point[0],
+                                end_point[1],
+                            ],
+                            fill=(255, 165, 0, 255),  # Solid orange
+                            width=3,
+                        )
 
         # Composite the original image with the overlay
         result_image = Image.alpha_composite(image, overlay)
-
-        # Convert back to RGB for display
         return result_image.convert("RGB")
 
     def load_model_and_infer(model_id, image, text, device, dtype):
@@ -142,10 +192,14 @@ def launch_gradio_demo():
             else:
                 result = model.infer(image)
 
-            # Check if result contains boxes or masks
+            # Check if result contains boxes, masks, or poses
             try:
                 result_dict = json.loads(str(result))
-                if "boxes" in result_dict or "masks" in result_dict:
+                if (
+                    "boxes" in result_dict
+                    or "masks" in result_dict
+                    or "poses" in result_dict
+                ):
                     return visualize_predictions(image, result_dict), str(result)
             except json.JSONDecodeError:
                 pass
