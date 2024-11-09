@@ -9,7 +9,7 @@ TEST_DATA_DIR = Path(__file__).parent.parent / "test_data"
 
 @pytest.fixture
 def model():
-    return xinfer.create_model("timm/resnet18.a1_in1k", device="cuda", dtype="float16")
+    return xinfer.create_model("timm/resnet18.a1_in1k")
 
 
 @pytest.fixture
