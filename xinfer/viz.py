@@ -88,7 +88,14 @@ def launch_gradio_demo():
         gr.Markdown("# x.infer Gradio Demo")
 
         with gr.Row():
-            # Left column: Input controls
+            with gr.Column(scale=1):
+                image_input = gr.Image(type="filepath", label="Input Image", height=400)
+
+                # Add examples
+                gr.Examples(
+                    examples=example_images, inputs=image_input, label="Example Images"
+                )
+
             with gr.Column(scale=1):
                 model_dropdown = gr.Dropdown(
                     choices=available_models, label="Select a model"
@@ -107,15 +114,8 @@ def launch_gradio_demo():
                 )
                 run_button = gr.Button("Run Inference", variant="primary")
 
-            # Right column: Image input
-            with gr.Column(scale=1):
-                image_input = gr.Image(type="filepath", label="Input Image", height=400)
-
         # Results section
         output = gr.Textbox(label="Result", lines=5)
-
-        # Add examples
-        gr.Examples(examples=example_images, inputs=image_input, label="Example Images")
 
         def update_prompt_visibility(model_id):
             model_info = model_registry.get_model_info(model_id)
