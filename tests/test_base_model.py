@@ -1,10 +1,10 @@
 import pytest
 import torch
 
-from xinfer.models import BaseModel
+from xinfer.models import BaseXInferModel
 
 
-class MockModel(BaseModel):
+class MockModel(BaseXInferModel):
     def load_model(self):
         pass
 

@@ -1,6 +1,7 @@
 import timm
 
-from ..model_registry import ModelInputOutput, register_model
+from ..model_registry import register_model
+from ..types import ModelInputOutput
 from .timm_model import TimmModel
 
 

@@ -5,16 +5,17 @@ __email__ = "dickson.neoh@gmail.com"
 __version__ = "0.2.1"
 
 from .core import create_model, list_models
-from .model_registry import ModelInputOutput, register_model
-from .models import BaseModel
-from .serve import serve_model
-from .utils import (
+from .model_registry import register_model
+from .models import BaseXInferModel
+from .optional_imports import (
     ollama_available,
     timm_available,
     transformers_available,
     ultralytics_available,
     vllm_available,
 )
+from .serve import serve_model
+from .types import ModelInputOutput
 
 if timm_available:
     from .timm import *
@@ -33,7 +34,7 @@ __all__ = [
     "create_model",
     "list_models",
     "register_model",
-    "BaseModel",
+    "BaseXInferModel",
     "ModelInputOutput",
     "launch_gradio_demo",
     "serve_model",

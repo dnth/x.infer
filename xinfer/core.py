@@ -3,7 +3,7 @@ from rich.console import Console
 from rich.table import Table
 
 from .model_registry import model_registry
-from .utils import TimmModel, UltralyticsModel, Vision2SeqModel
+from .optional_imports import TimmModel, UltralyticsModel, Vision2SeqModel
 
 
 def create_model(model: str | TimmModel | Vision2SeqModel | UltralyticsModel, **kwargs):

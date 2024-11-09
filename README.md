@@ -105,7 +105,7 @@ model.infer_batch(images, prompts) # Run batch inference
 model.launch_gradio()              # Launch Gradio interface
 ```
 
-Have a custom model? Create a class that implements the `BaseModel` interface and register it with x.infer. See [Add Your Own Model](#add-your-own-model) for more details.
+Have a custom model? Create a class that implements the `BaseXInferModel` interface and register it with x.infer. See [Add Your Own Model](#add-your-own-model) for more details.
 
 ## 🚀 Quickstart
 
@@ -273,7 +273,7 @@ curl -X 'POST' \
   -H 'Content-Type: application/json' \
   -d '{
   "image": "https://raw.githubusercontent.com/dnth/x.infer/main/assets/demo/00aa2580828a9009.jpg",
-  "infer_kwargs": {"prompt": "Caption this image"}
+  "infer_kwargs": {"text": "Caption this image"}
 }'
 ```
 
@@ -290,7 +290,7 @@ headers = {
 payload = {
     "image": "https://raw.githubusercontent.com/dnth/x.infer/main/assets/demo/00aa2580828a9009.jpg",
     "infer_kwargs": {
-        "prompt": "Caption this image"
+        "text": "Caption this image"
     }
 }
 
@@ -300,7 +300,7 @@ print(response.json())
 
 ### Add Your Own Model
 
-+ **Step 1:** Create a new model class that implements the `BaseModel` interface.
++ **Step 1:** Create a new model class that implements the `BaseXInferModel` interface.
 
 + **Step 2:** Implement the required abstract methods `load_model`, `infer`, and `infer_batch`.
 
@@ -309,7 +309,7 @@ print(response.json())
 For example:
 ```python
 @register_model("my-model", "custom", ModelInputOutput.IMAGE_TEXT_TO_TEXT)
-class MyModel(BaseModel):
+class MyModel(BaseXInferModel):
     def load_model(self):
         # Load your model here
         pass

@@ -1,16 +1,12 @@
-from io import BytesIO
-from typing import Dict, List
-
-import requests
 import timm
 import torch
-from PIL import Image
 
-from ..models import BaseModel, track_inference
+from ..models import BaseXInferModel, track_inference
+from ..types import Category, Result
 from .imagenet1k_classes import IMAGENET2012_CLASSES
 
 
-class TimmModel(BaseModel):
+class TimmModel(BaseXInferModel):
     def __init__(
         self, model_id: str, device: str = "cpu", dtype: str = "float32", **kwargs
     ):
@@ -25,21 +21,7 @@ class TimmModel(BaseModel):
         self.model.eval()
 
     def preprocess(self, images: str | list[str]):
-        if not isinstance(images, list):
-            images = [images]
-
-        processed_images = []
-        for image_path in images:
-            if not isinstance(image_path, str):
-                raise ValueError("Input must be a string (local path or URL)")
-
-            if image_path.startswith(("http://", "https://")):
-                response = requests.get(image_path)
-                img = Image.open(BytesIO(response.content))
-            else:
-                img = Image.open(image_path)
-
-            processed_images.append(img)
+        processed_images = self.parse_images(images)
 
         data_config = timm.data.resolve_model_data_config(self.model)
         transforms = timm.data.create_transform(**data_config, is_training=False)
@@ -50,7 +32,7 @@ class TimmModel(BaseModel):
         return images_tensor
 
     @track_inference
-    def infer(self, image: str, top_k: int = 5) -> List[Dict]:
+    def infer(self, image: str, top_k: int = 5) -> Result:
         img = self.preprocess(image)
 
         with torch.inference_mode(), torch.amp.autocast(
@@ -59,21 +41,23 @@ class TimmModel(BaseModel):
             output = self.model(img)
 
         topk_probabilities, topk_class_indices = torch.topk(
-            output.softmax(dim=1) * 100, k=top_k
+            output.softmax(dim=1), k=top_k
         )
 
         im_classes = list(IMAGENET2012_CLASSES.values())
         class_names = [im_classes[i] for i in topk_class_indices[0]]
 
-        return [
-            {"class": class_name, "id": int(class_idx), "confidence": float(prob)}
-            for class_name, class_idx, prob in zip(
-                class_names, topk_class_indices[0], topk_probabilities[0]
-            )
-        ]
+        return Result(
+            categories=[
+                Category(score=float(prob), label=class_name)
+                for class_name, class_idx, prob in zip(
+                    class_names, topk_class_indices[0], topk_probabilities[0]
+                )
+            ]
+        )
 
     @track_inference
-    def infer_batch(self, images: List[str], top_k: int = 5) -> List[List[Dict]]:
+    def infer_batch(self, images: list[str], top_k: int = 5) -> list[Result]:
         images = self.preprocess(images)
 
         with torch.inference_mode(), torch.amp.autocast(
@@ -82,7 +66,7 @@ class TimmModel(BaseModel):
             output = self.model(images)
 
         topk_probabilities, topk_class_indices = torch.topk(
-            output.softmax(dim=1) * 100, k=top_k
+            output.softmax(dim=1), k=top_k
         )
 
         im_classes = list(IMAGENET2012_CLASSES.values())
@@ -90,12 +74,14 @@ class TimmModel(BaseModel):
         results = []
         for i in range(len(images)):
             class_names = [im_classes[idx] for idx in topk_class_indices[i]]
-            image_results = [
-                {"class": class_name, "id": int(class_idx), "confidence": float(prob)}
-                for class_name, class_idx, prob in zip(
-                    class_names, topk_class_indices[i], topk_probabilities[i]
-                )
-            ]
+            image_results = Result(
+                categories=[
+                    Category(score=float(prob), label=class_name)
+                    for class_name, class_idx, prob in zip(
+                        class_names, topk_class_indices[i], topk_probabilities[i]
+                    )
+                ]
+            )
             results.append(image_results)
 
         return results

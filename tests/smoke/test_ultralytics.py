@@ -4,6 +4,7 @@ import pytest
 import torch
 
 import xinfer
+from xinfer.types import Box, Result
 
 
 @pytest.fixture
@@ -23,43 +24,42 @@ def test_ultralytics_initialization(model):
 
 
 def test_ultralytics_inference(model, test_image):
-    # Test if there is boxes and scores in the first element of the result
-    result = model.infer(test_image)[0]
+    result = model.infer(test_image)
 
-    assert isinstance(result, dict)
-    assert "bbox" in result
-    assert "score" in result
-    assert "class_name" in result
-    assert "category_id" in result
+    assert isinstance(result, Result)
+    assert result.boxes is not None
+    assert len(result.boxes) > 0
 
-    # Test bbox format and values
-    assert isinstance(result["bbox"], list)
-    assert len(result["bbox"]) == 4  # [x, y, width, height]
-    assert all(isinstance(coord, float) for coord in result["bbox"])
-    assert all(coord >= 0 for coord in result["bbox"])
+    # Test first box format and values
+    box = result.boxes[0]
+    assert isinstance(box, Box)
+    assert isinstance(box.x1, float)
+    assert isinstance(box.y1, float)
+    assert isinstance(box.x2, float)
+    assert isinstance(box.y2, float)
+    assert isinstance(box.score, float)
+    assert isinstance(box.label, str)
+    assert 0 <= box.score <= 1
+    assert all(coord >= 0 for coord in [box.x1, box.y1, box.x2, box.y2])
 
 
 def test_ultralytics_batch_inference(model, test_image):
-    result = model.infer_batch([test_image, test_image])
+    results = model.infer_batch([test_image, test_image])
 
-    assert isinstance(result, list)
-    assert len(result) == 2
+    assert isinstance(results, list)
+    assert len(results) == 2
 
     # Verify structure of each batch result
-    for batch_result in result:
-        assert isinstance(batch_result, list)
-        # Check each detection in the batch
-        for detection in batch_result:
-            assert isinstance(detection, dict)
-            assert "bbox" in detection
-            assert "score" in detection
-            assert "class_name" in detection
-            assert "category_id" in detection
+    for batch_result in results:
+        assert isinstance(batch_result, Result)
+        assert batch_result.boxes is not None
 
-            # Verify data types and value ranges
-            assert isinstance(detection["bbox"], list)
-            assert len(detection["bbox"]) == 4  # [x, y, width, height]
-            assert isinstance(detection["score"], float)
-            assert 0 <= detection["score"] <= 1  # Score should be between 0 and 1
-            assert isinstance(detection["class_name"], str)
-            assert isinstance(detection["category_id"], int)
+        # Check each detection in the batch
+        for box in batch_result.boxes:
+            assert isinstance(box, Box)
+            assert isinstance(box.score, float)
+            assert 0 <= box.score <= 1
+            assert isinstance(box.label, str)
+            assert all(
+                isinstance(coord, float) for coord in [box.x1, box.y1, box.x2, box.y2]
+            )

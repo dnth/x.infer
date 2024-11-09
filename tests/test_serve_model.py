@@ -11,7 +11,7 @@ def test_serve_model():
 
 def test_serve_model_custom_deployment():
     """Test model serving with custom deployment options"""
-    deployment_kwargs = {"num_replicas": 2, "ray_actor_options": {"num_cpus": 2}}
+    deployment_kwargs = {"num_replicas": 1, "ray_actor_options": {"num_cpus": 1}}
     handle = serve_model(
         "vikhyatk/moondream2",
         deployment_kwargs=deployment_kwargs,

@@ -86,7 +86,7 @@ model.infer_batch(images, prompts) # Run batch inference
 model.launch_gradio()              # Launch Gradio interface
 ```
 
-Have a custom model? Create a class that implements the `BaseModel` interface and register it with x.infer. See [Add Your Own Model](#add-your-own-model) for more details.
+Have a custom model? Create a class that implements the `BaseXInferModel` interface and register it with x.infer. See [Add Your Own Model](#add-your-own-model) for more details.
 
 ## 🌟 Key Features
 <div align="center">

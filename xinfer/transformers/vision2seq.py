@@ -1,15 +1,14 @@
-import requests
 import torch
-from PIL import Image
 from transformers import (
     AutoModelForVision2Seq,
     AutoProcessor,
 )
 
-from ..models import BaseModel, track_inference
+from ..models import BaseXInferModel, track_inference
+from ..types import Result
 
 
-class Vision2SeqModel(BaseModel):
+class Vision2SeqModel(BaseXInferModel):
     def __init__(
         self, model_id: str, device: str = "cpu", dtype: str = "float32", **kwargs
     ):
@@ -22,43 +21,18 @@ class Vision2SeqModel(BaseModel):
             self.device, self.dtype
         )
 
-        self.model = torch.compile(self.model, mode="max-autotune")
         self.model.eval()
+        self.model = torch.compile(self.model, mode="max-autotune")
 
-    # TODO: Refactor to use self.parse_images from base model
     def preprocess(
         self,
         images: str | list[str],
-        prompts: str | list[str],
+        texts: str | list[str],
     ):
-        if not isinstance(images, list):
-            images = [images]
-        if not isinstance(prompts, list):
-            prompts = [prompts]
-
-        if len(images) != len(prompts):
-            raise ValueError("The number of images and prompts must be the same")
-
-        processed_images = []
-        for image_path in images:
-            if not isinstance(image_path, str):
-                raise ValueError("Input must be a string (local path or URL)")
-
-            if image_path.startswith(("http://", "https://")):
-                image = Image.open(requests.get(image_path, stream=True).raw).convert(
-                    "RGB"
-                )
-            else:
-                # Assume it's a local path
-                try:
-                    image = Image.open(image_path).convert("RGB")
-                except FileNotFoundError:
-                    raise ValueError(f"Local file not found: {image_path}")
-
-            processed_images.append(image)
+        processed_images = self.parse_images(images)
 
         return self.processor(
-            images=processed_images, text=prompts, return_tensors="pt"
+            images=processed_images, text=texts, return_tensors="pt", padding=True
         ).to(self.device, self.dtype)
 
     def predict(self, preprocessed_input, **generate_kwargs):
@@ -72,17 +46,19 @@ class Vision2SeqModel(BaseModel):
         return [output.replace("\n", "").strip() for output in outputs]
 
     @track_inference
-    def infer(self, image, prompt, **generate_kwargs) -> str:
-        preprocessed_input = self.preprocess(image, prompt)
+    def infer(self, image: str, text: str, **generate_kwargs) -> Result:
+        preprocessed_input = self.preprocess(image, text)
         prediction = self.predict(preprocessed_input, **generate_kwargs)
         result = self.postprocess(prediction)[0]
 
-        return result
+        return Result(text=result)
 
     @track_inference
-    def infer_batch(self, images, prompts, **generate_kwargs) -> list[str]:
-        preprocessed_input = self.preprocess(images, prompts)
+    def infer_batch(
+        self, images: list[str], texts: list[str], **generate_kwargs
+    ) -> list[Result]:
+        preprocessed_input = self.preprocess(images, texts)
         predictions = self.predict(preprocessed_input, **generate_kwargs)
         results = self.postprocess(predictions)
 
-        return results
+        return [Result(text=result) for result in results]
