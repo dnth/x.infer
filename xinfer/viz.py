@@ -1,11 +1,9 @@
-import json
-
 import gradio as gr
 
 from .core import create_model
 from .model_registry import model_registry
 from .models import BaseModel
-from .types import ModelInputOutput, Result
+from .types import ModelInputOutput
 
 
 def launch_gradio(model: BaseModel, **gradio_launch_kwargs):
