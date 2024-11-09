@@ -1,3 +1,4 @@
+import inspect
 import time
 from typing import List, Literal, Optional
 
@@ -95,23 +96,33 @@ class XInferModel:
         try:
             # Extract the image URL and prompt from the OpenAI format
             message = request.messages[-1]["content"]
+            infer_kwargs = {}
 
             # Handle both string and list format messages
             if isinstance(message, list):
-                # Extract image and text from OpenAI vision format
+                # Extract image URL
                 image_url = next(
                     m["image_url"] for m in message if m["type"] == "image_url"
                 )
-                prompt = next(m["text"] for m in message if m["type"] == "text")
+
+                # Get all text items and add them as kwargs
+                text_items = [m for m in message if m["type"] == "text"]
+                if text_items:
+                    # Use the text content as the first non-image kwarg that the model expects
+                    model_params = list(
+                        inspect.signature(self.model.infer).parameters.keys()
+                    )
+                    if len(model_params) > 1:  # if there are params other than 'image'
+                        first_kwarg = model_params[
+                            1
+                        ]  # get the first kwarg after 'image'
+                        infer_kwargs[first_kwarg] = text_items[0]["text"]
             else:
                 # For text-only messages, we'll need to handle this case based on your requirements
                 raise ValueError("Image URL is required in the message")
 
-            # Call the model's infer method directly
-            result = self.model.infer(
-                image=image_url,
-                text=prompt,
-            )
+            # Call the model's infer method with kwargs
+            result = self.model.infer(image=image_url, **infer_kwargs)
 
             response = ChatCompletionResponse(
                 model=self.model.model_id,
