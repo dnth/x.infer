@@ -61,14 +61,12 @@ def launch_gradio_demo():
     """
     available_models = [model.id for model in model_registry.list_models()]
 
-    # Add example image URLs
     example_images = [
         "https://raw.githubusercontent.com/dnth/x.infer/refs/heads/main/assets/demo/000b9c365c9e307a.jpg",
         "https://raw.githubusercontent.com/dnth/x.infer/refs/heads/main/assets/demo/00aa2580828a9009.jpg",
         "https://raw.githubusercontent.com/dnth/x.infer/refs/heads/main/assets/demo/0a6ee446579d2885.jpg",
     ]
 
-    # Add this at the beginning of the Blocks context, before the UI elements
     model_cache = {
         "current_model": None,
         "model_id": None,
