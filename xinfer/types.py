@@ -1,5 +1,7 @@
-from dataclasses import dataclass
+import json
+from dataclasses import asdict, dataclass
 from enum import Enum
+from typing import Any, Dict, List, Optional
 
 
 class ModelInputOutput(Enum):
@@ -63,3 +65,11 @@ class Result:
 
     # For image-text to text models
     text: str = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        """Convert Result object to a dictionary, removing None values"""
+        return {k: v for k, v in asdict(self).items() if v is not None}
+
+    def __str__(self) -> str:
+        """String representation of the Result"""
+        return json.dumps(self.to_dict(), indent=2)

@@ -5,7 +5,7 @@ import gradio as gr
 from .core import create_model
 from .model_registry import model_registry
 from .models import BaseModel
-from .types import ModelInputOutput
+from .types import ModelInputOutput, Result
 
 
 def launch_gradio(model: BaseModel, **gradio_launch_kwargs):
@@ -18,11 +18,7 @@ def launch_gradio(model: BaseModel, **gradio_launch_kwargs):
             else:
                 result = model.infer(image)
 
-            # Convert result to string if it's not already
-            if isinstance(result, str):
-                return result
-            else:
-                return json.dumps(result, indent=2)
+            return str(result)
         except Exception as e:
             return f"Error during inference: {str(e)}"
 
@@ -74,26 +70,24 @@ def launch_gradio_demo():
         "https://raw.githubusercontent.com/dnth/x.infer/refs/heads/main/assets/demo/0a6ee446579d2885.jpg",
     ]
 
-    def load_model_and_infer(model_id, image, prompt, device, dtype):
+    def load_model_and_infer(model_id, image, text, device, dtype):
         model = create_model(model_id, device=device, dtype=dtype)
         model_info = model_registry.get_model_info(model_id)
 
         try:
             if model_info.input_output == ModelInputOutput.IMAGE_TEXT_TO_TEXT:
-                result = model.infer(image, prompt)
+                result = model.infer(image, text)
             elif model_info.input_output in [
                 ModelInputOutput.IMAGE_TO_BOXES,
                 ModelInputOutput.IMAGE_TO_CATEGORIES,
+                ModelInputOutput.IMAGE_TO_POINTS,
+                ModelInputOutput.IMAGE_TO_MASKS,
             ]:
                 result = model.infer(image)
             else:
                 return "Unsupported model type"
 
-            # Convert result to string if it's not already
-            if isinstance(result, str):
-                return result
-            else:
-                return json.dumps(result, indent=2)
+            return str(result)
         except Exception as e:
             return f"Error during inference: {str(e)}"
 
