@@ -28,7 +28,7 @@ class JoyCaption(BaseModel):
         self.model.eval()
 
     def preprocess(self, image: str, prompt: str = None):
-        image = Image.open(image).convert("RGB")
+        image = self.parse_images(image)[0]
         image = TVF.resize(image, (384, 384), Image.LANCZOS)
         image = TVF.pil_to_tensor(image)
 
@@ -113,7 +113,7 @@ class JoyCaption(BaseModel):
         attention_masks = []
 
         for image, prompt in zip(images, prompts):
-            image = Image.open(image).convert("RGB")
+            image = self.parse_images(image)[0]
             image = TVF.resize(image, (384, 384), Image.LANCZOS)
             image = TVF.pil_to_tensor(image)
             image = image / 255.0
