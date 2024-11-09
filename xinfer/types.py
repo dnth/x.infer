@@ -40,14 +40,6 @@ class Mask:
     xy: list[list]
 
 
-# @dataclass
-# class KeyPoint:
-#     x: float
-#     y: float
-#     score: float
-#     label: str
-
-
 @dataclass
 class Pose:
     keypoints: list[list[float]]
