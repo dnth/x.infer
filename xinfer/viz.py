@@ -68,8 +68,34 @@ def launch_gradio_demo():
         "https://raw.githubusercontent.com/dnth/x.infer/refs/heads/main/assets/demo/0a6ee446579d2885.jpg",
     ]
 
+    # Add this at the beginning of the Blocks context, before the UI elements
+    model_cache = {
+        "current_model": None,
+        "model_id": None,
+        "device": None,
+        "dtype": None,
+    }
+
     def load_model_and_infer(model_id, image, text, device, dtype):
-        model = create_model(model_id, device=device, dtype=dtype)
+        # Check if we need to load a new model
+        if (
+            model_cache["model_id"] != model_id
+            or model_cache["device"] != device
+            or model_cache["dtype"] != dtype
+        ):
+            model = create_model(model_id, device=device, dtype=dtype)
+            # Update cache
+            model_cache.update(
+                {
+                    "current_model": model,
+                    "model_id": model_id,
+                    "device": device,
+                    "dtype": dtype,
+                }
+            )
+        else:
+            model = model_cache["current_model"]
+
         model_info = model_registry.get_model_info(model_id)
 
         try:
@@ -98,7 +124,9 @@ def launch_gradio_demo():
 
             with gr.Column(scale=1):
                 model_dropdown = gr.Dropdown(
-                    choices=available_models, label="Select a model"
+                    choices=available_models,
+                    label="Select a model",
+                    value="vikhyatk/moondream2",
                 )
                 with gr.Row():
                     device_dropdown = gr.Dropdown(
@@ -109,7 +137,7 @@ def launch_gradio_demo():
                         label="Dtype",
                         value="float16",
                     )
-                prompt_input = gr.Textbox(label="Text Prompt", visible=False)
+                prompt_input = gr.Textbox(label="Text Prompt", visible=True)
                 run_button = gr.Button("Run Inference", variant="primary")
 
         # Results section
