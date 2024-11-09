@@ -4,7 +4,7 @@ import torch
 
 from ultralytics import YOLO
 
-from ..models import BaseModel, track_inference
+from ..models import BaseXInferModel, track_inference
 from ..types import Box, Category, Mask, Pose, Result
 
 COCO_KEYPOINT_LABELS = [
@@ -28,7 +28,7 @@ COCO_KEYPOINT_LABELS = [
 ]
 
 
-class UltralyticsModel(BaseModel):
+class UltralyticsModel(BaseXInferModel):
     def __init__(
         self, model_id: str, device: str = "cpu", dtype: str = "float32", **kwargs
     ):

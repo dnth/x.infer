@@ -2,7 +2,7 @@ import torch
 from transformers import AutoModelForCausalLM, AutoProcessor
 
 from ..model_registry import register_model
-from ..models import BaseModel, track_inference
+from ..models import BaseXInferModel, track_inference
 from ..types import ModelInputOutput, Result
 
 
@@ -24,7 +24,7 @@ from ..types import ModelInputOutput, Result
     "transformers",
     ModelInputOutput.IMAGE_TEXT_TO_TEXT,
 )
-class Florence2(BaseModel):
+class Florence2(BaseXInferModel):
     def __init__(
         self,
         model_id: str,

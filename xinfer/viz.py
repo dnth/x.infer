@@ -2,11 +2,11 @@ import gradio as gr
 
 from .core import create_model
 from .model_registry import model_registry
-from .models import BaseModel
+from .models import BaseXInferModel
 from .types import ModelInputOutput
 
 
-def launch_gradio(model: BaseModel, **gradio_launch_kwargs):
+def launch_gradio(model: BaseXInferModel, **gradio_launch_kwargs):
     model_info = model_registry.get_model_info(model.model_id)
 
     def infer(image, prompt=None):

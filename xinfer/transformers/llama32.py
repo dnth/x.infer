@@ -2,7 +2,7 @@ import torch
 from transformers import AutoProcessor, MllamaForConditionalGeneration
 
 from ..model_registry import register_model
-from ..models import BaseModel, track_inference
+from ..models import BaseXInferModel, track_inference
 from ..types import ModelInputOutput, Result
 
 
@@ -16,7 +16,7 @@ from ..types import ModelInputOutput, Result
     "transformers",
     ModelInputOutput.IMAGE_TEXT_TO_TEXT,
 )
-class Llama32VisionInstruct(BaseModel):
+class Llama32VisionInstruct(BaseXInferModel):
     def __init__(
         self, model_id: str, device: str = "cpu", dtype: str = "float32", **kwargs
     ):

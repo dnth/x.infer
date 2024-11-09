@@ -4,11 +4,11 @@ from transformers import (
     AutoProcessor,
 )
 
-from ..models import BaseModel, track_inference
+from ..models import BaseXInferModel, track_inference
 from ..types import Result
 
 
-class Vision2SeqModel(BaseModel):
+class Vision2SeqModel(BaseXInferModel):
     def __init__(
         self, model_id: str, device: str = "cpu", dtype: str = "float32", **kwargs
     ):

@@ -1,12 +1,12 @@
 import timm
 import torch
 
-from ..models import BaseModel, track_inference
+from ..models import BaseXInferModel, track_inference
 from ..types import Category, Result
 from .imagenet1k_classes import IMAGENET2012_CLASSES
 
 
-class TimmModel(BaseModel):
+class TimmModel(BaseXInferModel):
     def __init__(
         self, model_id: str, device: str = "cpu", dtype: str = "float32", **kwargs
     ):

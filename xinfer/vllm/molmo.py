@@ -1,7 +1,7 @@
 from vllm import LLM, SamplingParams
 
 from ..model_registry import register_model
-from ..models import BaseModel, track_inference
+from ..models import BaseXInferModel, track_inference
 from ..types import ModelInputOutput, Result
 
 
@@ -14,7 +14,7 @@ from ..types import ModelInputOutput, Result
 @register_model(
     "vllm/allenai/Molmo-7B-D-0924", "vllm", ModelInputOutput.IMAGE_TEXT_TO_TEXT
 )
-class Molmo(BaseModel):
+class Molmo(BaseXInferModel):
     def __init__(
         self,
         model_id: str,

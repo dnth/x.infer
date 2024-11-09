@@ -51,7 +51,7 @@ def track_inference(func):
     return wrapper
 
 
-class BaseModel(ABC):
+class BaseXInferModel(ABC):
     def __init__(self, model_id: str, device: str, dtype: str):
         self.model_id = model_id
         self.device = device

@@ -1,12 +1,12 @@
 import ollama
 
 from ..model_registry import register_model
-from ..models import BaseModel
+from ..models import BaseXInferModel
 from ..types import ModelInputOutput, Result
 
 
 @register_model("ollama/llava-phi3", "ollama", ModelInputOutput.IMAGE_TEXT_TO_TEXT)
-class LLaVAPhi3(BaseModel):
+class LLaVAPhi3(BaseXInferModel):
     def __init__(
         self,
         model_id: str = "llava-phi3",

@@ -2,14 +2,14 @@ import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 from ..model_registry import register_model
-from ..models import BaseModel, track_inference
+from ..models import BaseXInferModel, track_inference
 from ..types import ModelInputOutput, Result
 
 
 @register_model(
     "vikhyatk/moondream2", "transformers", ModelInputOutput.IMAGE_TEXT_TO_TEXT
 )
-class Moondream(BaseModel):
+class Moondream(BaseXInferModel):
     def __init__(
         self,
         model_id: str = "vikhyatk/moondream2",

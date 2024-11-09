@@ -1,7 +1,7 @@
 from vllm import LLM, SamplingParams
 
 from ..model_registry import register_model
-from ..models import BaseModel, track_inference
+from ..models import BaseXInferModel, track_inference
 from ..types import ModelInputOutput, Result
 
 
@@ -15,7 +15,7 @@ from ..types import ModelInputOutput, Result
     "vllm",
     ModelInputOutput.IMAGE_TEXT_TO_TEXT,
 )
-class Phi35Vision(BaseModel):
+class Phi35Vision(BaseXInferModel):
     def __init__(
         self,
         model_id: str,
