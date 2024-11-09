@@ -1,8 +1,9 @@
 import time
+from typing import List, Literal, Optional
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from loguru import logger
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from ray import serve
 
 from .core import create_model
@@ -18,6 +19,33 @@ class InferRequest(BaseModel):
 class InferBatchRequest(BaseModel):
     images: list[str]
     infer_batch_kwargs: dict = {}
+
+
+class ChatCompletionRequest(BaseModel):
+    model: str
+    messages: List[dict]
+    temperature: Optional[float] = 0.7
+    top_p: Optional[float] = 1.0
+    n: Optional[int] = 1
+    stream: Optional[bool] = False
+    max_tokens: Optional[int] = None
+    presence_penalty: Optional[float] = 0
+    frequency_penalty: Optional[float] = 0
+
+
+class ChatCompletionResponse(BaseModel):
+    id: str = Field(default_factory=lambda: f"chatcmpl-{time.time_ns()}")
+    object: Literal["chat.completion"] = "chat.completion"
+    created: int = Field(default_factory=lambda: int(time.time()))
+    model: str
+    choices: List[dict]
+    usage: dict = Field(
+        default_factory=lambda: {
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+        }
+    )
 
 
 @serve.ingress(app)
@@ -59,6 +87,45 @@ class XInferModel:
             "device": self.model.device,
             "dtype": str(self.model.dtype),
         }
+
+    @app.post("/v1/chat/completions")
+    async def chat_completions(
+        self, request: ChatCompletionRequest
+    ) -> ChatCompletionResponse:
+        try:
+            # Extract the image URL and prompt from the OpenAI format
+            message = request.messages[-1]["content"]
+
+            # Handle both string and list format messages
+            if isinstance(message, list):
+                # Extract image and text from OpenAI vision format
+                image_url = next(
+                    m["image_url"] for m in message if m["type"] == "image_url"
+                )
+                prompt = next(m["text"] for m in message if m["type"] == "text")
+            else:
+                # For text-only messages, we'll need to handle this case based on your requirements
+                raise ValueError("Image URL is required in the message")
+
+            # Call the model's infer method directly
+            result = self.model.infer(
+                image=image_url,
+                text=prompt,
+            )
+
+            response = ChatCompletionResponse(
+                model=self.model.model_id,
+                choices=[
+                    {
+                        "index": 0,
+                        "message": {"role": "assistant", "content": result},
+                        "finish_reason": "stop",
+                    }
+                ],
+            )
+            return response
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}")
 
 
 def serve_model(
