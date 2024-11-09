@@ -73,21 +73,16 @@ def launch_gradio_demo():
         model_info = model_registry.get_model_info(model_id)
 
         try:
-            if model_info.input_output == ModelInputOutput.IMAGE_TEXT_TO_TEXT:
+            if requires_text_prompt(model_info):
                 result = model.infer(image, text)
-            elif model_info.input_output in [
-                ModelInputOutput.IMAGE_TO_BOXES,
-                ModelInputOutput.IMAGE_TO_CATEGORIES,
-                ModelInputOutput.IMAGE_TO_POINTS,
-                ModelInputOutput.IMAGE_TO_MASKS,
-            ]:
-                result = model.infer(image)
             else:
-                return "Unsupported model type"
-
+                result = model.infer(image)
             return str(result)
         except Exception as e:
             return f"Error during inference: {str(e)}"
+
+    def requires_text_prompt(model_info):
+        return model_info.input_output == ModelInputOutput.IMAGE_TEXT_TO_TEXT
 
     with gr.Blocks() as demo:
         gr.Markdown("# x.infer Gradio Demo")
