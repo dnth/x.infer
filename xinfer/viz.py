@@ -109,9 +109,7 @@ def launch_gradio_demo():
                         label="Dtype",
                         value="float16",
                     )
-                prompt_input = gr.Textbox(
-                    label="Prompt (for image-text to text models)", visible=False
-                )
+                prompt_input = gr.Textbox(label="Text Prompt", visible=False)
                 run_button = gr.Button("Run Inference", variant="primary")
 
         # Results section
