@@ -5,7 +5,27 @@ import torch
 from ultralytics import YOLO
 
 from ..models import BaseModel, track_inference
-from ..types import Box, Category, Mask, Result
+from ..types import Box, Category, Mask, Pose, Result
+
+COCO_KEYPOINT_LABELS = [
+    "Nose",
+    "Left Eye",
+    "Right Eye",
+    "Left Ear",
+    "Right Ear",
+    "Left Shoulder",
+    "Right Shoulder",
+    "Left Elbow",
+    "Right Elbow",
+    "Left Wrist",
+    "Right Wrist",
+    "Left Hip",
+    "Right Hip",
+    "Left Knee",
+    "Right Knee",
+    "Left Ankle",
+    "Right Ankle",
+]
 
 
 class UltralyticsModel(BaseModel):
@@ -14,25 +34,6 @@ class UltralyticsModel(BaseModel):
     ):
         super().__init__(model_id, device, dtype)
         self.load_model(**kwargs)
-        self.pose_name = {
-            0: "Nose",
-            1: "Left Eye",
-            2: "Right Eye",
-            3: "Left Ear",
-            4: "Right Ear",
-            5: "Left Shoulder",
-            6: "Right Shoulder",
-            7: "Left Elbow",
-            8: "Right Elbow",
-            9: "Left Wrist",
-            10: "Right Wrist",
-            11: "Left Hip",
-            12: "Right Hip",
-            13: "Left Knee",
-            14: "Right Knee",
-            15: "Left Ankle",
-            16: "Right Ankle",
-        }
 
     def load_model(self, **kwargs):
         self.model = YOLO(self.model_id, **kwargs)
@@ -60,27 +61,19 @@ class UltralyticsModel(BaseModel):
                 batch_results.append(Result(categories=classification_results))
 
             elif "pose" in self.model_id:
-                keypoints_results = []
-                keypoints = result.keypoints
-                if keypoints is not None:
-                    xy = keypoints.xy.cpu().numpy()
-                    conf = keypoints.conf.cpu().numpy()
-                    for idx in range(len(xy)):
-                        detection_keypoints = []
-                        for i in range(len(self.pose_name)):
-                            point = xy[idx][i]
-                            score = conf[idx][i]
-                            detection_keypoints.append(
-                                {
-                                    "point": point.tolist(),
-                                    "score": float(score),
-                                    "name": self.pose_name.get(i, f"Keypoint {i}"),
-                                }
-                            )
-                        keypoints_results.append(detection_keypoints)
-                    batch_results.append(keypoints_results)
-                else:
-                    batch_results.append([])
+                pose_results = []
+                pose_keypoints = result.keypoints
+
+                for person_points in pose_keypoints:
+                    pose_results.append(
+                        Pose(
+                            keypoints=person_points.xy.cpu().numpy().tolist(),
+                            scores=person_points.conf.cpu().numpy().tolist(),
+                            labels=COCO_KEYPOINT_LABELS,
+                        )
+                    )
+
+                batch_results.append(Result(poses=pose_results))
 
             elif "seg" in self.model_id:
                 segmentation_results = []
@@ -89,7 +82,7 @@ class UltralyticsModel(BaseModel):
 
                 boxes = result.boxes
                 classes = boxes.cls.cpu().numpy().astype(int).tolist()
-                scores = boxes.conf.cpu().numpy().tolist()
+                # scores = boxes.conf.cpu().numpy().tolist()
                 names = [result.names[c] for c in classes]
 
                 if masks:

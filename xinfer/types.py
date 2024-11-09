@@ -40,6 +40,21 @@ class Mask:
     xy: list[list]
 
 
+# @dataclass
+# class KeyPoint:
+#     x: float
+#     y: float
+#     score: float
+#     label: str
+
+
+@dataclass
+class Pose:
+    keypoints: list[list[float]]
+    scores: list[float]
+    labels: list[str]
+
+
 @dataclass
 class Result:
     # For image classification models
@@ -50,6 +65,9 @@ class Result:
 
     # For instance segmentation models
     masks: list[Mask] = None
+
+    # For pose estimation models
+    poses: list[Pose] = None
 
     # For image-text to text models
     text: str = None
