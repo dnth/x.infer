@@ -530,7 +530,7 @@ To use Ollama models, you'll need to install the Ollama on your machine. See [Ol
 
 If you'd like to contribute, here are some ways you can help:
 
-1. **Add support for new models:** Implement new model classes following the steps in the [Adding New Models](#-adding-new-models) section.
+1. **Add new models:** Implement new model classes following the steps in the [Adding New Models](#-adding-new-models) section.
 
 2. **Improve documentation:** Help us enhance our documentation, including this README, inline code comments, and the [official docs](https://dnth.github.io/x.infer).
 
@@ -538,7 +538,7 @@ If you'd like to contribute, here are some ways you can help:
 
 4. **Suggest enhancements:** Have ideas for new features? [Open a feature request](https://github.com/dnth/x.infer/issues/new?assignees=&labels=Feature+Request&projects=&template=feature_request.md).
 
-5. **Submit pull requests:** Feel free to fork the repository and submit pull requests for any improvements you've made.
+5. **Financial support:** Please consider sponsoring the project to support continued development.
 
 Please also see the code of conduct [here](./CODE_OF_CONDUCT.md).
 Thank you for helping make x.infer better!
