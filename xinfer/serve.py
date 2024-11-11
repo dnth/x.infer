@@ -98,27 +98,21 @@ class XInferModel:
             message = request.messages[-1]["content"]
             infer_kwargs = {}
 
-            # Handle both string and list format messages
             if isinstance(message, list):
                 # Extract image URL
                 image_url = next(
                     m["image_url"] for m in message if m["type"] == "image_url"
                 )
 
-                # Get all text items and add them as kwargs
-                text_items = [m for m in message if m["type"] == "text"]
-                if text_items:
-                    # Use the text content as the first non-image kwarg that the model expects
-                    model_params = list(
-                        inspect.signature(self.model.infer).parameters.keys()
-                    )
-                    if len(model_params) > 1:  # if there are params other than 'image'
-                        first_kwarg = model_params[
-                            1
-                        ]  # get the first kwarg after 'image'
-                        infer_kwargs[first_kwarg] = text_items[0]["text"]
+                # Extract infer_kwargs if present
+                infer_kwargs_item = next(
+                    (m["infer_kwargs"] for m in message if m["type"] == "infer_kwargs"),
+                    None,
+                )
+                if infer_kwargs_item:
+                    infer_kwargs.update(infer_kwargs_item)
+
             else:
-                # For text-only messages, we'll need to handle this case based on your requirements
                 raise ValueError("Image URL is required in the message")
 
             # Call the model's infer method with kwargs
