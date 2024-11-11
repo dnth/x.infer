@@ -298,6 +298,39 @@ response = requests.post(url, headers=headers, json=payload)
 print(response.json())
 ```
 
+x.infer endpoint is also compatible with the OpenAI chat completions API format.
+
+```python
+from openai import OpenAI
+
+client = OpenAI(
+    api_key="dummy",
+    base_url="http://127.0.0.1:8000/v1"
+)
+
+response = client.chat.completions.create(
+    model="vikhyatk/moondream2",
+    messages=[
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "image_url",
+                    "image_url": "https://raw.githubusercontent.com/dnth/x.infer/main/assets/demo/00aa2580828a9009.jpg"
+                },
+                {
+                    "type": "text",
+                    "text": "Caption this image"
+                }
+            ]
+        }
+    ]
+)
+
+print(response.choices[0].message.content)
+```
+
+
 ### Add Your Own Model
 
 + **Step 1:** Create a new model class that implements the `BaseXInferModel` interface.
