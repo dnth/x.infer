@@ -51,7 +51,7 @@
 
 ## 🌟 Key Features
 <div align="center">
-  <img src="https://raw.githubusercontent.com/dnth/x.infer/refs/heads/main/assets/flowchart.gif" alt="x.infer"/>
+  <img src="https://raw.githubusercontent.com/dnth/x.infer/refs/heads/main/assets/flowchart.gif" alt="x.infer" width="850"/>
 </div>
 
 
@@ -298,6 +298,39 @@ response = requests.post(url, headers=headers, json=payload)
 print(response.json())
 ```
 
+x.infer endpoint is also compatible with the OpenAI chat completions API format.
+
+```python
+from openai import OpenAI
+
+client = OpenAI(
+    api_key="dummy",
+    base_url="http://127.0.0.1:8000/v1"
+)
+
+response = client.chat.completions.create(
+    model="vikhyatk/moondream2",
+    messages=[
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "image_url",
+                    "image_url": "https://raw.githubusercontent.com/dnth/x.infer/main/assets/demo/00aa2580828a9009.jpg"
+                },
+                {
+                    "type": "text",
+                    "text": "Caption this image"
+                }
+            ]
+        }
+    ]
+)
+
+print(response.choices[0].message.content)
+```
+
+
 ### Add Your Own Model
 
 + **Step 1:** Create a new model class that implements the `BaseXInferModel` interface.
@@ -530,7 +563,7 @@ To use Ollama models, you'll need to install the Ollama on your machine. See [Ol
 
 If you'd like to contribute, here are some ways you can help:
 
-1. **Add support for new models:** Implement new model classes following the steps in the [Adding New Models](#-adding-new-models) section.
+1. **Add new models:** Implement new model classes following the steps in the [Adding New Models](#-adding-new-models) section.
 
 2. **Improve documentation:** Help us enhance our documentation, including this README, inline code comments, and the [official docs](https://dnth.github.io/x.infer).
 
@@ -538,7 +571,7 @@ If you'd like to contribute, here are some ways you can help:
 
 4. **Suggest enhancements:** Have ideas for new features? [Open a feature request](https://github.com/dnth/x.infer/issues/new?assignees=&labels=Feature+Request&projects=&template=feature_request.md).
 
-5. **Submit pull requests:** Feel free to fork the repository and submit pull requests for any improvements you've made.
+5. **Financial support:** Please consider sponsoring the project to support continued development.
 
 Please also see the code of conduct [here](./CODE_OF_CONDUCT.md).
 Thank you for helping make x.infer better!
