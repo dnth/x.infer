@@ -2,7 +2,7 @@
 
 __author__ = """Dickson Neoh"""
 __email__ = "dickson.neoh@gmail.com"
-__version__ = "0.3.0"
+__version__ = "0.3.1"
 
 from .core import create_model, list_models
 from .model_registry import register_model
