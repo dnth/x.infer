@@ -3,9 +3,17 @@ import importlib
 
 def soft_import(name: str):
     try:
-        importlib.import_module(name)
-        return True
-    except ModuleNotFoundError as e:
+        module = importlib.import_module(name)
+        # Verify the module is actually loaded and has a real file path
+        if (
+            module
+            and hasattr(module, "__file__")
+            and module.__file__ is not None
+            and "site-packages" in str(module.__file__)
+        ):
+            return True
+        return False
+    except (ModuleNotFoundError, ImportError) as e:
         if str(e) != f"No module named '{name}'":
             raise e
         return False
