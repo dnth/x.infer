@@ -7556,7 +7556,7 @@ packages:
   name: xinfer
   version: 0.3.1
   path: .
-  sha256: 54522158af7635fb7a60dad976198f7810b346e2b4d2a48ac18dcc42f1fde92c
+  sha256: d25952212a7b80b9905be7727d5343350c95616cf5cafb1863324b880637cb95
   requires_dist:
   - loguru
   - rich>=13.9.4,<14
@@ -7565,6 +7565,7 @@ packages:
   - ray[serve]>=2.38.0,<3
   - fastapi>=0.115.5,<0.116
   - timm>=1.0.11,<2
+  - gradio
   - timm ; extra == 'timm'
   - ultralytics ; extra == 'ultralytics'
   - transformers ; extra == 'transformers'

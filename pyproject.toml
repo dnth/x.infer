@@ -5,7 +5,7 @@ description = "A unified interface to run inference on machine learning librarie
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-    "loguru", "rich>=13.9.4,<14", "requests>=2.32.3,<3", "pillow>=10.4.0,<11", "ray[serve]>=2.38.0,<3", "fastapi>=0.115.5,<0.116", "timm>=1.0.11,<2",
+    "loguru", "rich>=13.9.4,<14", "requests>=2.32.3,<3", "pillow>=10.4.0,<11", "ray[serve]>=2.38.0,<3", "fastapi>=0.115.5,<0.116", "timm>=1.0.11,<2", "gradio",
 ]
 keywords = [
     "xinfer",
@@ -86,5 +86,4 @@ default = { solve-group = "default" }
 [tool.pixi.dependencies]
 pytorch = ">=2.2.0,<3"
 python = "3.11.*"
-gradio = ">=5.1.0,<6"
 torchvision = ">=0.19.1,<0.20"
