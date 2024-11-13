@@ -59,6 +59,7 @@
 ✅ List and search models interactively. \
 ✅ Launch a Gradio interface to interact with a model. \
 ✅ Serve model as a REST API endpoint with Ray Serve and FastAPI. \
+✅ OpenAI chat completions API compatible. \
 ✅ Customize and add your own models with minimal code changes.
 
 Tasks supported:
@@ -298,7 +299,14 @@ response = requests.post(url, headers=headers, json=payload)
 print(response.json())
 ```
 
+### OpenAI chat completions API
 x.infer endpoint is also compatible with the OpenAI chat completions API format.
+
+You'll have to install the `openai` package to use this feature.
+
+```bash
+pip install openai
+```
 
 ```python
 from openai import OpenAI
