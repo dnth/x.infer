@@ -46,7 +46,36 @@
 
 <div align="center">
     <br />
-    
+    <table>
+        <tr>
+            <td align="center">
+                <a href="#-key-features">🌟 Features</a>
+            </td>
+            <td align="center">
+                <a href="#-why-xinfer">🤔 Why x.infer?</a>
+            </td>
+            <td align="center">
+                <a href="#-quickstart">🚀 Quickstart</a>
+            </td>
+            <td align="center">
+                <a href="#-installation">📦 Installation</a>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                <a href="#%EF%B8%8F-usage">🛠️ Usage</a>
+            </td>
+            <td align="center">
+                <a href="#-supported-models">🤖 Models</a>
+            </td>
+            <td align="center">
+                <a href="#-contributing">🤝 Contributing</a>
+            </td>
+            <td align="center">
+                <a href="#%EF%B8%8F-disclaimer">⚠️ Disclaimer</a>
+            </td>
+        </tr>
+    </table>
 </div>
 
 ## 🌟 Key Features
