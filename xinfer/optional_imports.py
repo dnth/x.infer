@@ -9,7 +9,10 @@ def soft_import(name: str):
             module
             and hasattr(module, "__file__")
             and module.__file__ is not None
-            and "site-packages" in str(module.__file__)
+            and (
+                "site-packages" in str(module.__file__)
+                or "dist-packages" in str(module.__file__)
+            )
         ):
             return True
         return False
