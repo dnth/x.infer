@@ -13,7 +13,8 @@ dependencies = [
     "fastapi>=0.115.5,<0.116",
     "timm>=1.0.11,<2",
     "gradio>=5.5.0,<6",
-    "itables>=2.2.3,<3",
+    "itables>=2.2.3,<3", 
+    "einops>=0.8.0,<0.9",
 ]
 keywords = ["xinfer"]
 license = { text = "Apache Software License 2.0" }
