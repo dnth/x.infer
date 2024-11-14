@@ -7851,7 +7851,7 @@ packages:
   name: xinfer
   version: 0.3.1
   path: .
-  sha256: f910b2cd5ab5c4a0f25ea0e2fa73af7056d20ca4173c0fa6fd7c7adf7dc1fd2e
+  sha256: d6152cc99c1c76015dd6737792097b41d30f40702171e2a04f850c8a2ab77a1a
   requires_dist:
   - loguru
   - rich>=13.9.4,<14

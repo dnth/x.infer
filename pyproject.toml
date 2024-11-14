@@ -1,7 +1,7 @@
 [project]
 name = "xinfer"
 version = "0.3.1"
-description = "A unified interface to run inference on machine learning libraries."
+description = "Framework agnostic computer vision inference. Run 1000+ models by changing only one line of code. Supports models from transformers, timm, ultralytics, vllm, ollama and your custom model."
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
