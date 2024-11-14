@@ -12,7 +12,7 @@ dependencies = [
     "ray[serve]>=2.38.0,<3",
     "fastapi>=0.115.5,<0.116",
     "timm>=1.0.11,<2",
-    "gradio",
+    "gradio>=5.5.0,<6",
     "itables>=2.2.3,<3",
 ]
 keywords = ["xinfer"]
