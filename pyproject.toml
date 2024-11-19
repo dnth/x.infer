@@ -32,12 +32,12 @@ classifiers = [
 xinfer = "xinfer.cli:main"
 
 [project.optional-dependencies]
-timm = ["timm"]
 ultralytics = ["ultralytics"]
 transformers = ["transformers", "accelerate"]
-vllm = ["vllm"]
+vllm = ["vllm", "triton"]
 ollama = ["ollama"]
-all = ["timm", "ultralytics", "transformers", "vllm", "ollama", "accelerate"]
+all = ["ultralytics", "transformers", "vllm", "ollama", "accelerate"]
+
 [tool.setuptools.packages.find]
 include = ["xinfer*"]
 exclude = ["docs*"]
@@ -75,14 +75,15 @@ requires = ["setuptools>=64", "setuptools_scm>=8"]
 build-backend = "setuptools.build_meta"
 
 [tool.pixi.project]
-channels = ["conda-forge"]
-platforms = ["linux-64", "osx-arm64"]
+channels = ["conda-forge", "nvidia", "pytorch"]
+platforms = ["linux-64"]
 
 [tool.pixi.pypi-dependencies]
 xinfer = { path = ".", editable = true }
 
 [tool.pixi.environments]
 default = { solve-group = "default" }
+cuda = { solve-group = "cuda" }
 
 [tool.pixi.tasks]
 
@@ -90,3 +91,8 @@ default = { solve-group = "default" }
 pytorch = ">=2.2.0,<3"
 python = "3.11.*"
 torchvision = ">=0.19.1,<0.20"
+
+
+
+[system-requirements]
+cuda = "12.4"  # Specify the desired CUDA version
