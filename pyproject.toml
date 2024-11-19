@@ -36,7 +36,7 @@ ultralytics = ["ultralytics"]
 transformers = ["transformers", "accelerate"]
 vllm = ["vllm", "triton"]
 ollama = ["ollama"]
-all = ["ultralytics", "transformers", "vllm", "ollama", "accelerate"]
+all = ["ultralytics", "transformers", "vllm", "ollama", "accelerate", "triton"]
 
 [tool.setuptools.packages.find]
 include = ["xinfer*"]
