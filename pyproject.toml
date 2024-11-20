@@ -1,6 +1,6 @@
 [project]
 name = "xinfer"
-version = "0.3.1"
+version = "0.3.2"
 description = "Framework agnostic computer vision inference. Run 1000+ models by changing only one line of code. Supports models from transformers, timm, ultralytics, vllm, ollama and your custom model."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -47,7 +47,7 @@ universal = true
 
 
 [tool.bumpversion]
-current_version = "0.3.1"
+current_version = "0.3.2"
 commit = true
 tag = true
 
