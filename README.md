@@ -442,6 +442,10 @@ See an example implementation of the Molmo model [here](https://github.com/dnth/
                 <td><a href="https://huggingface.co/microsoft/Florence-2-base-ft">Florence-2 Series</a></td>
                 <td><pre lang="python"><code>xinfer.create_model("microsoft/Florence-2-base-ft")</code></pre></td>
             </tr>
+            <tr>
+                <td><a href="https://huggingface.co/Qwen/Qwen2-VL-2B-Instruct">Qwen2-VL Series</a></td>
+                <td><pre lang="python"><code>xinfer.create_model("Qwen/Qwen2-VL-2B-Instruct")</code></pre></td>
+            </tr>
         </tbody>
     </table>
 </body>
