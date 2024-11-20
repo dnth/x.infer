@@ -1,19 +1,24 @@
 [project]
 name = "xinfer"
 version = "0.3.1"
-dynamic = [
-    "dependencies",
-]
-description = "A unified interface to run inference on machine learning libraries."
+description = "Framework agnostic computer vision inference. Run 1000+ models by changing only one line of code. Supports models from transformers, timm, ultralytics, vllm, ollama and your custom model."
 readme = "README.md"
 requires-python = ">=3.10"
-keywords = [
-    "xinfer",
+dependencies = [
+    "loguru",
+    "rich>=13.9.4,<14",
+    "requests>=2.32.3,<3",
+    "pillow>=10.4.0,<11",
+    "ray[serve]>=2.38.0,<3",
+    "fastapi>=0.115.5,<0.116",
+    "timm>=1.0.11,<2",
+    "gradio>=5.5.0,<6",
+    "itables>=2.2.3,<3", 
+    "einops>=0.8.0,<0.9",
 ]
-license = {text = "Apache Software License 2.0"}
-authors = [
-  {name = "Dickson Neoh", email = "dickson.neoh@gmail.com"},
-]
+keywords = ["xinfer"]
+license = { text = "Apache Software License 2.0" }
+authors = [{ name = "Dickson Neoh", email = "dickson.neoh@gmail.com" }]
 classifiers = [
     "Intended Audience :: Developers",
     "License :: OSI Approved :: Apache Software License",
@@ -27,21 +32,15 @@ classifiers = [
 xinfer = "xinfer.cli:main"
 
 [project.optional-dependencies]
-timm = ["timm"]
 ultralytics = ["ultralytics"]
 transformers = ["transformers", "accelerate"]
-vllm = ["vllm"]
+vllm = ["vllm", "triton"]
 ollama = ["ollama"]
-all = ["timm", "ultralytics", "transformers", "vllm", "ollama", "accelerate"]
+all = ["ultralytics", "transformers", "vllm", "ollama", "accelerate", "triton"]
 
-[tool]
 [tool.setuptools.packages.find]
 include = ["xinfer*"]
 exclude = ["docs*"]
-
-[tool.setuptools.dynamic]
-dependencies = {file = ["requirements.txt"]}
-
 
 [tool.distutils.bdist_wheel]
 universal = true
@@ -64,9 +63,7 @@ replace = '__version__ = "{new_version}"'
 
 
 [tool.flake8]
-exclude = [
-    "docs",
-]
+exclude = ["docs"]
 max-line-length = 88
 
 
@@ -76,3 +73,26 @@ Homepage = "https://github.com/dnth/xinfer"
 [build-system]
 requires = ["setuptools>=64", "setuptools_scm>=8"]
 build-backend = "setuptools.build_meta"
+
+[tool.pixi.project]
+channels = ["conda-forge", "nvidia", "pytorch"]
+platforms = ["linux-64"]
+
+[tool.pixi.pypi-dependencies]
+xinfer = { path = ".", editable = true }
+
+[tool.pixi.environments]
+default = { solve-group = "default" }
+cuda = { solve-group = "cuda" }
+
+[tool.pixi.tasks]
+
+[tool.pixi.dependencies]
+pytorch = ">=2.2.0,<3"
+python = "3.11.*"
+torchvision = ">=0.19.1,<0.20"
+
+
+
+[system-requirements]
+cuda = "12.4"  # Specify the desired CUDA version
