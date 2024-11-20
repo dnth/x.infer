@@ -11,6 +11,46 @@ from ..types import ModelInputOutput, Result
     "transformers",
     ModelInputOutput.IMAGE_TEXT_TO_TEXT,
 )
+@register_model(
+    "Qwen/Qwen2-VL-7B-Instruct",
+    "transformers",
+    ModelInputOutput.IMAGE_TEXT_TO_TEXT,
+)
+@register_model(
+    "Qwen/Qwen2-VL-7B-Instruct-AWQ",
+    "transformers",
+    ModelInputOutput.IMAGE_TEXT_TO_TEXT,
+)
+@register_model(
+    "Qwen/Qwen2-VL-7B-Instruct-GPTQ-Int4",
+    "transformers",
+    ModelInputOutput.IMAGE_TEXT_TO_TEXT,
+)
+@register_model(
+    "Qwen/Qwen2-VL-7B-Instruct-GPTQ-Int8",
+    "transformers",
+    ModelInputOutput.IMAGE_TEXT_TO_TEXT,
+)
+@register_model(
+    "Qwen/Qwen2-VL-72B-Instruct",
+    "transformers",
+    ModelInputOutput.IMAGE_TEXT_TO_TEXT,
+)
+@register_model(
+    "Qwen/Qwen2-VL-2B-Instruct-AWQ",
+    "transformers",
+    ModelInputOutput.IMAGE_TEXT_TO_TEXT,
+)
+@register_model(
+    "Qwen/Qwen2-VL-2B-Instruct-GPTQ-Int4",
+    "transformers",
+    ModelInputOutput.IMAGE_TEXT_TO_TEXT,
+)
+@register_model(
+    "Qwen/Qwen2-VL-2B-Instruct-GPTQ-Int8",
+    "transformers",
+    ModelInputOutput.IMAGE_TEXT_TO_TEXT,
+)
 class Qwen2VL(BaseXInferModel):
     def __init__(
         self, model_id: str, device: str = "cpu", dtype: str = "float32", **kwargs
@@ -70,7 +110,7 @@ class Qwen2VL(BaseXInferModel):
 
     @track_inference
     def infer_batch(
-        self, images: list[str], texts: list[str], **generate_kwargs
+        self, images: list[str], text: str, **generate_kwargs
     ) -> list[Result]:
         images = super().parse_images(images)
 
@@ -88,7 +128,7 @@ class Qwen2VL(BaseXInferModel):
                     ],
                 }
             ]
-            for text in texts
+            for _ in range(len(images))
         ]
 
         # Apply chat template to all conversations
