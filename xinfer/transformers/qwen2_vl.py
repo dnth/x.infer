@@ -12,6 +12,21 @@ from ..types import ModelInputOutput, Result
     ModelInputOutput.IMAGE_TEXT_TO_TEXT,
 )
 @register_model(
+    "Qwen/Qwen2-VL-2B-Instruct-AWQ",
+    "transformers",
+    ModelInputOutput.IMAGE_TEXT_TO_TEXT,
+)
+@register_model(
+    "Qwen/Qwen2-VL-2B-Instruct-GPTQ-Int4",
+    "transformers",
+    ModelInputOutput.IMAGE_TEXT_TO_TEXT,
+)
+@register_model(
+    "Qwen/Qwen2-VL-2B-Instruct-GPTQ-Int8",
+    "transformers",
+    ModelInputOutput.IMAGE_TEXT_TO_TEXT,
+)
+@register_model(
     "Qwen/Qwen2-VL-7B-Instruct",
     "transformers",
     ModelInputOutput.IMAGE_TEXT_TO_TEXT,
@@ -37,17 +52,17 @@ from ..types import ModelInputOutput, Result
     ModelInputOutput.IMAGE_TEXT_TO_TEXT,
 )
 @register_model(
-    "Qwen/Qwen2-VL-2B-Instruct-AWQ",
+    "Qwen/Qwen2-VL-72B-Instruct-AWQ",
     "transformers",
     ModelInputOutput.IMAGE_TEXT_TO_TEXT,
 )
 @register_model(
-    "Qwen/Qwen2-VL-2B-Instruct-GPTQ-Int4",
+    "Qwen/Qwen2-VL-72B-Instruct-GPTQ-Int4",
     "transformers",
     ModelInputOutput.IMAGE_TEXT_TO_TEXT,
 )
 @register_model(
-    "Qwen/Qwen2-VL-2B-Instruct-GPTQ-Int8",
+    "Qwen/Qwen2-VL-72B-Instruct-GPTQ-Int8",
     "transformers",
     ModelInputOutput.IMAGE_TEXT_TO_TEXT,
 )
