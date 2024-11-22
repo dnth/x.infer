@@ -478,45 +478,39 @@ in docstrings, or even on the web in blog posts, articles, and such.</p>
 </li>
 <li>
 <p>Clone your fork locally:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>git@github.com:your_name_here/xinfer.git
-</code></pre></div></td></tr></table></div>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>git@github.com:your_name_here/xinfer.git
+</code></pre></div>
 </li>
 <li>
 <p>Install your local copy into a virtualenv. Assuming you have
     virtualenvwrapper installed, this is how you set up your fork for
     local development:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>$<span class="w"> </span>mkvirtualenv<span class="w"> </span>xinfer
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>mkvirtualenv<span class="w"> </span>xinfer
 $<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>xinfer/
 $<span class="w"> </span>python<span class="w"> </span>setup.py<span class="w"> </span>develop
-</code></pre></div></td></tr></table></div>
+</code></pre></div>
 </li>
 <li>
 <p>Create a branch for local development:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>name-of-your-bugfix-or-feature
-</code></pre></div></td></tr></table></div>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>name-of-your-bugfix-or-feature
+</code></pre></div>
 <p>Now you can make your changes locally.</p>
 </li>
 <li>
 <p>When you're done making changes, check that your changes pass flake8
     and the tests, including testing other Python versions with tox:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>$<span class="w"> </span>flake8<span class="w"> </span>xinfer<span class="w"> </span>tests
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>flake8<span class="w"> </span>xinfer<span class="w"> </span>tests
 $<span class="w"> </span>python<span class="w"> </span>setup.py<span class="w"> </span><span class="nb">test</span><span class="w"> </span>or<span class="w"> </span>pytest
 $<span class="w"> </span>tox
-</code></pre></div></td></tr></table></div>
+</code></pre></div>
 <p>To get flake8 and tox, just pip install them into your virtualenv.</p>
 </li>
 <li>
 <p>Commit your changes and push your branch to GitHub:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>.
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>.
 $<span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Your detailed description of your changes.&quot;</span>
 $<span class="w"> </span>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>name-of-your-bugfix-or-feature
-</code></pre></div></td></tr></table></div>
+</code></pre></div>
 </li>
 <li>
 <p>Submit a pull request through the GitHub website.</p>

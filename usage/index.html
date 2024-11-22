@@ -380,21 +380,14 @@
 
 <h1 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h1>
 <p>To use xinfer in a project:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span> <span class="nn">xinfer</span>
-</code></pre></div></td></tr></table></div>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">xinfer</span>
+</code></pre></div>
 <h2 id="listing-available-models">Listing Available Models<a class="headerlink" href="#listing-available-models" title="Permanent link">&para;</a></h2>
 <p>You can list the available models using the <code>list_models()</code> function:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">xinfer</span><span class="o">.</span><span class="n">list_models</span><span class="p">()</span>
-</code></pre></div></td></tr></table></div>
+<div class="highlight"><pre><span></span><code><span class="n">xinfer</span><span class="o">.</span><span class="n">list_models</span><span class="p">()</span>
+</code></pre></div>
 <p>This will display a table of available models and their backends and input/output types.</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span>
-<span class="normal">6</span>
-<span class="normal">7</span>
-<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code>                             Available Models                             
+<div class="highlight"><pre><span></span><code>                             Available Models                             
 ┏━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
 ┃ Backend      ┃ Model ID                          ┃ Input/Output        ┃
 ┡━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
@@ -402,20 +395,10 @@
 │ transformers │ sashakunitsyn/vlrm-blip2-opt-2.7b │ image-text --&gt; text │
 │ transformers │ vikhyatk/moondream2               │ image-text --&gt; text │
 └──────────────┴───────────────────────────────────┴─────────────────────┘
-</code></pre></div></td></tr></table></div>
+</code></pre></div>
 <h2 id="loading-and-using-a-model">Loading and Using a Model<a class="headerlink" href="#loading-and-using-a-model" title="Permanent link">&para;</a></h2>
 <p>You can load and use any of the available models. Here's an example using the Moondream2 model:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Instantiate a Transformers model</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># Instantiate a Transformers model</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">xinfer</span><span class="o">.</span><span class="n">create_model</span><span class="p">(</span><span class="s2">&quot;vikhyatk/moondream2&quot;</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;transformers&quot;</span><span class="p">)</span>
 
 <span class="c1"># Input data</span>
@@ -426,20 +409,16 @@
 <span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">inference</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">prompt</span><span class="p">,</span> <span class="n">max_new_tokens</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div>
 <p>This will produce a description of the image, such as:
 "An animated character with long hair and a serious expression is eating a large burger at a table, with other characters in the background."</p>
 <p>You can use the same pattern for other models like BLIP2 or VLRM-finetuned BLIP2:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># For BLIP2</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># For BLIP2</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">xinfer</span><span class="o">.</span><span class="n">create_model</span><span class="p">(</span><span class="s2">&quot;Salesforce/blip2-opt-2.7b&quot;</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;transformers&quot;</span><span class="p">)</span>
 
 <span class="c1"># For VLRM-finetuned BLIP2</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">xinfer</span><span class="o">.</span><span class="n">create_model</span><span class="p">(</span><span class="s2">&quot;sashakunitsyn/vlrm-blip2-opt-2.7b&quot;</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;transformers&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div>
 <p>Use the models in the same way as demonstrated with the Moondream2 model.</p>
 
 
