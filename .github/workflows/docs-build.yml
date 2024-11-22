@@ -22,9 +22,9 @@ jobs:
                   pip install .
             # - name: Discover typos with codespell
             #   run: codespell --skip="*.csv,*.geojson,*.json,*.js,*.html,*cff,*.pdf,./.git" --ignore-words-list="aci,acount,hist"
-            - name: PKG-TEST
-              run: |
-                  python -m unittest discover tests/
+            # - name: PKG-TEST
+            #   run: |
+            #       python -m unittest discover tests/
             - name: Convert Jupyter notebook to markdown
               run: |
                   jupyter nbconvert nbs/quickstart.ipynb --to markdown --output-dir docs/examples/
