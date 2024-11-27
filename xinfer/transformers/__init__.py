@@ -6,6 +6,7 @@ from .joycaption import JoyCaption
 from .llama32 import Llama32Vision, Llama32VisionInstruct
 from .moondream import Moondream
 from .qwen2_vl import Qwen2VL
+from .smolvlm import SmolVLM
 from .vision2seq import Vision2SeqModel
 from .vlrm_blip2 import VLRMBlip2
 
